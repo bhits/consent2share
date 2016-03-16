@@ -1,0 +1,66 @@
+uaadatabase:
+  image: mysql:5.7
+  volumes:
+    - /c/Users/java/mysql/uaa:/var/lib/mysql
+  environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: uaa  
+  ports:
+    - "3306:3306"
+
+pcmdatabase:
+  image: mysql:5.7
+  volumes:
+    - /c/Users/java/mysql/pcm:/var/lib/mysql
+  environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: pcm  
+  ports:
+    - "3307:3306"
+
+plsdatabase:
+  image: mysql:5.7
+  volumes:
+    - /c/Users/java/mysql/pls:/var/lib/mysql
+  environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: npi  
+  ports:
+    - "3308:3306"
+
+uaa:
+  image: uaa
+  volumes:
+    - /c/Users/java:/java 
+  ports:
+    - "8443:8443"
+  links:
+    - uaadatabase
+
+pls:
+  image: pls
+  volumes:
+    - /c/Users/java:/java 
+  ports:
+    - "8453:8443"
+  links:
+    - plsdatabase
+
+pcm:
+  image: pcm
+  volumes:
+    - /c/Users/java:/java 
+  ports:
+    - "8446:8446"
+  links:
+    - uaa
+    - pcmdatabase
+    - pls
+ 
+pp-ui:
+  image: pp-ui
+  volumes:
+    - /c/Users/java:/java 
+  ports:
+    - "8444:8444"
+ 
