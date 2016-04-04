@@ -1,66 +1,150 @@
-uaadatabase:
+uaa.mhc.com:
+  image: uaa
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "8443:8443"
+  links:
+    - uaa-db.mhc.com
+uaa-db.mhc.com:
   image: mysql:5.7
   volumes:
     - /c/Users/java/mysql/uaa:/var/lib/mysql
   environment:
       MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: uaa  
+      MYSQL_DATABASE: uaa
   ports:
     - "3306:3306"
-
-pcmdatabase:
+pcm.mhc.com:
+  image: pcm
+  volumes:
+    - /c/Users/java:/java
+  links:
+    - uaa.mhc.com
+    - pcm-db.mhc.com
+    - pls.mhc.com
+    - discovery-server.mhc.com
+pcm-db.mhc.com:
   image: mysql:5.7
   volumes:
     - /c/Users/java/mysql/pcm:/var/lib/mysql
   environment:
       MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: pcm  
+      MYSQL_DATABASE: pcm
   ports:
     - "3307:3306"
-
-plsdatabase:
+pls.mhc.com:
+  image: pls
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "8453:8443"
+    - "8080:8080"
+  links:
+    - pls-db.mhc.com
+pls-db.mhc.com:
   image: mysql:5.7
   volumes:
     - /c/Users/java/mysql/pls:/var/lib/mysql
   environment:
       MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: npi  
+      MYSQL_DATABASE: npi
   ports:
     - "3308:3306"
-
-uaa:
-  image: uaa
-  volumes:
-    - /c/Users/java:/java 
-  ports:
-    - "8443:8443"
-  links:
-    - uaadatabase
-
-pls:
-  image: pls
-  volumes:
-    - /c/Users/java:/java 
-  ports:
-    - "8453:8443"
-  links:
-    - plsdatabase
-
-pcm:
-  image: pcm
-  volumes:
-    - /c/Users/java:/java 
-  ports:
-    - "8446:8446"
-  links:
-    - uaa
-    - pcmdatabase
-    - pls
- 
-pp-ui:
+pp-ui.mhc.com:
   image: pp-ui
   volumes:
-    - /c/Users/java:/java 
+    - /c/Users/java:/java
+  links:
+    - discovery-server.mhc.com
+admin-ui.mhc.com:
+  image: admin-portal-ui
+  volumes:
+    - /c/Users/java:/java
+  links:
+    - discovery-server.mhc.com
+dss.mhc.com:
+  image: dss
+  volumes:
+    - /c/Users/java:/java
+  links:
+    - discovery-server.mhc.com
+try-policy.mhc.com:
+  image: try-policy:latest
+  volumes:
+    - /c/Users/java:/java
+  links:
+    - discovery-server.mhc.com
+phr.mhc.com:
+  image: phr
+  volumes:
+    - /c/Users/java:/java
+  links:
+    - phr-db.mhc.com
+    - redis.mhc.com
+    - discovery-server.mhc.com
+    - iexhub.mhc.com
+phr-db.mhc.com:
+  image: mysql:5.7
+  volumes:
+    - /c/Users/java/mysql/phr:/var/lib/mysql
+  environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: phr
   ports:
-    - "8444:8444"
- 
+    - "3309:3306"
+redis.mhc.com:
+  image: redis
+  ports:
+    - "6379:6379"
+iexhub.mhc.com:
+  image: iexhub
+  ports:
+    - "8454:8443"
+  volumes:
+    - /c/Users/java:/java
+    - /c/Users/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
+    - /c/Users/java/MHC_PROPS/iexhub/temp:/temp
+patient-registration.mhc.com:
+  image: patient-registration
+  volumes:
+    - /c/Users/java:/java
+  links:
+    - discovery-server.mhc.com
+    - uaa.mhc.com
+patient-user-db.mhc.com:
+  image: mysql:5.7
+  volumes:
+    - /c/Users/java/mysql/patient-user:/var/lib/mysql
+  environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: patient-user
+  ports:
+    - "3310:3306"
+patient-user.mhc.com:
+  image: patient-user
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "8452:8452"
+  links:
+    - discovery-server.mhc.com
+    - patient-user-db.mhc.com
+    - uaa.mhc.com
+discovery-server.mhc.com:
+  image: discovery-server
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "8761:8761"
+edge-server.mhc.com:
+  image: edge-server
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "80:80"
+    - "443:443"
+  links:
+    - discovery-server.mhc.com
+    - pls.mhc.com
+    - uaa.mhc.com
