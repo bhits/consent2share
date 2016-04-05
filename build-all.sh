@@ -1,4 +1,4 @@
-#!run in git bash
+#! /bin/bash
 
 cd admin-portal-ui/server;                          mvn clean package -Pdocker docker:build; cd -; 
 cd discovery-server/discovery-server;               mvn clean package docker:build; cd -; 
