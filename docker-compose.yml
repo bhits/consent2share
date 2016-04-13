@@ -83,7 +83,7 @@ phr.mhc.com:
     - phr-db.mhc.com
     - redis.mhc.com
     - discovery-server.mhc.com
-    #- iexhub.mhc.com
+    - iexhub.mhc.com
 phr-db.mhc.com:
   image: mysql:5.7
   volumes:
@@ -97,14 +97,14 @@ redis.mhc.com:
   image: redis
   ports:
     - "6379:6379"
-# iexhub.mhc.com:
-  # image: iexhub
-  # ports:
-    # - "8454:8443"
-  # volumes:
-    # - /c/Users/java:/java
-    # - /c/Users/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
-    # - /c/Users/java/MHC_PROPS/iexhub/temp:/temp
+ iexhub.mhc.com:
+   image: iexhub
+   ports:
+     - "8454:8443"
+   volumes:
+     - /c/Users/java:/java
+     - /c/Users/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
+     - /c/Users/java/MHC_PROPS/iexhub/temp:/temp
 patient-registration.mhc.com:
   image: patient-registration
   volumes:
