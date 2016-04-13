@@ -1,5 +1,5 @@
 #! /bin/bash
-
+cd ..;
 cd admin-portal-ui/server;                          mvn clean package -Pdocker docker:build; cd -; 
 cd discovery-server/discovery-server;               mvn clean package docker:build; cd -; 
 cd dss-api/dss;                             		mvn clean package docker:build; cd -; 
