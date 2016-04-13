@@ -97,7 +97,7 @@ redis.mhc.com:
   image: redis
   ports:
     - "6379:6379"
- iexhub.mhc.com:
+iexhub.mhc.com:
    image: iexhub
    ports:
      - "8454:8443"
