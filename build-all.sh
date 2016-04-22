@@ -7,7 +7,8 @@ cd edge-server/edge-server;                  		mvn clean package docker:build; c
 cd patient-portal-ui/server;                        mvn clean package -Pdocker docker:build; cd -; 
 cd patient-user-api/patient-user;                   mvn clean package docker:build; cd -; 
 cd pcm-api/pcm;                             		mvn clean package docker:build; cd -; 
-cd phr-api/phr;                  					mvn clean package docker:build; cd -; 
+cd phr-api/phr;                  					mvn clean package docker:build; cd -;
+cd pls-api/pls;                             	    mvn clean package; cd -;
 cd pls-api/pls/web;                             	mvn clean package docker:build; cd -; 
 cd registration-api/registration;                  	mvn clean package docker:build; cd -; 
 cd try-policy-api/tryPolicy;                        mvn clean package docker:build; cd -; 

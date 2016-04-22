@@ -8,13 +8,17 @@ uaa.mhc.com:
     - uaa-db.mhc.com
 uaa-db.mhc.com:
   image: mysql:5.7
-  volumes:
-    - /c/Users/java/mysql/uaa:/var/lib/mysql
+  volumes_from:
+    - uaa-db-data.mhc.com
   environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: uaa
   ports:
     - "3306:3306"
+uaa-db-data.mhc.com:
+  image: busybox
+  volumes:
+    - /c/Users/java/mysql/uaa:/var/lib/mysql
 pcm.mhc.com:
   image: pcm
   volumes:
@@ -24,15 +28,20 @@ pcm.mhc.com:
     - pcm-db.mhc.com
     - pls.mhc.com
     - discovery-server.mhc.com
+    - clamd.mhc.com
 pcm-db.mhc.com:
   image: mysql:5.7
-  volumes:
-    - /c/Users/java/mysql/pcm:/var/lib/mysql
+  volumes_from:
+    - pcm-db-data.mhc.com
   environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: pcm
   ports:
     - "3307:3306"
+pcm-db-data.mhc.com:
+  image: busybox
+  volumes:
+    - /c/Users/java/mysql/pcm:/var/lib/mysql
 pls.mhc.com:
   image: pls
   volumes:
@@ -44,13 +53,17 @@ pls.mhc.com:
     - pls-db.mhc.com
 pls-db.mhc.com:
   image: mysql:5.7
-  volumes:
-    - /c/Users/java/mysql/pls:/var/lib/mysql
+  volumes_from:
+    - pls-db-data.mhc.com
   environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: npi
   ports:
     - "3308:3306"
+pls-db-data.mhc.com:
+  image: busybox
+  volumes:
+    - /c/Users/java/mysql/pls:/var/lib/mysql
 pp-ui.mhc.com:
   image: pp-ui
   volumes:
@@ -86,17 +99,23 @@ phr.mhc.com:
     - iexhub.mhc.com
 phr-db.mhc.com:
   image: mysql:5.7
-  volumes:
-    - /c/Users/java/mysql/phr:/var/lib/mysql
+  volumes_from:
+    - phr-db-data.mhc.com
   environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: phr
   ports:
     - "3309:3306"
+phr-db-data.mhc.com:
+  image: busybox
+  volumes:
+    - /c/Users/java/mysql/phr:/var/lib/mysql
 redis.mhc.com:
   image: redis
   ports:
     - "6379:6379"
+clamd.mhc.com:
+  image: dinkel/clamavd
 iexhub.mhc.com:
    image: iexhub
    ports:
@@ -114,13 +133,17 @@ patient-registration.mhc.com:
     - uaa.mhc.com
 patient-user-db.mhc.com:
   image: mysql:5.7
-  volumes:
-    - /c/Users/java/mysql/patient-user:/var/lib/mysql
+  volumes_from:
+    - patient-user-data.mhc.com
   environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: patient-user
   ports:
     - "3310:3306"
+patient-user-data.mhc.com:
+  image: busybox
+  volumes:
+    - /c/Users/java/mysql/patient-user:/var/lib/mysql
 patient-user.mhc.com:
   image: patient-user
   volumes:
