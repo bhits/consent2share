@@ -1,5 +1,5 @@
 uaa.mhc.com:
-  image: uaa
+  image: bhits/uaa
   volumes:
     - /c/Users/java:/java
   ports:
@@ -20,7 +20,7 @@ uaa-db-data.mhc.com:
   volumes:
     - /c/Users/java/mysql/uaa:/var/lib/mysql
 pcm.mhc.com:
-  image: pcm
+  image: bhits/pcm
   volumes:
     - /c/Users/java:/java
   links:
@@ -43,7 +43,7 @@ pcm-db-data.mhc.com:
   volumes:
     - /c/Users/java/mysql/pcm:/var/lib/mysql
 pls.mhc.com:
-  image: pls
+  image: bhits/pls
   volumes:
     - /c/Users/java:/java
   ports:
@@ -65,31 +65,31 @@ pls-db-data.mhc.com:
   volumes:
     - /c/Users/java/mysql/pls:/var/lib/mysql
 pp-ui.mhc.com:
-  image: pp-ui
+  image: bhits/pp-ui
   volumes:
     - /c/Users/java:/java
   links:
     - discovery-server.mhc.com
 admin-ui.mhc.com:
-  image: admin-portal-ui
+  image: bhits/admin-portal-ui
   volumes:
     - /c/Users/java:/java
   links:
     - discovery-server.mhc.com
 dss.mhc.com:
-  image: dss
+  image: bhits/dss
   volumes:
     - /c/Users/java:/java
   links:
     - discovery-server.mhc.com
 try-policy.mhc.com:
-  image: try-policy:latest
+  image: bhits/try-policy
   volumes:
     - /c/Users/java:/java
   links:
     - discovery-server.mhc.com
 phr.mhc.com:
-  image: phr
+  image: bhits/phr
   volumes:
     - /c/Users/java:/java
   links:
@@ -117,7 +117,7 @@ redis.mhc.com:
 clamd.mhc.com:
   image: dinkel/clamavd
 iexhub.mhc.com:
-   image: iexhub
+   image: bhits/iexhub
    ports:
      - "8454:8443"
    volumes:
@@ -125,7 +125,7 @@ iexhub.mhc.com:
      - /c/Users/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
      - /c/Users/java/MHC_PROPS/iexhub/temp:/temp
 patient-registration.mhc.com:
-  image: patient-registration
+  image: bhits/patient-registration
   volumes:
     - /c/Users/java:/java
   links:
@@ -145,7 +145,7 @@ patient-user-data.mhc.com:
   volumes:
     - /c/Users/java/mysql/patient-user:/var/lib/mysql
 patient-user.mhc.com:
-  image: patient-user
+  image: bhits/patient-user
   volumes:
     - /c/Users/java:/java
   ports:
@@ -155,13 +155,13 @@ patient-user.mhc.com:
     - patient-user-db.mhc.com
     - uaa.mhc.com
 discovery-server.mhc.com:
-  image: discovery-server
+  image: bhits/discovery-server
   volumes:
     - /c/Users/java:/java
   ports:
     - "8761:8761"
 edge-server.mhc.com:
-  image: edge-server
+  image: bhits/edge-server
   volumes:
     - /c/Users/java:/java
   ports:

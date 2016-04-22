@@ -13,4 +13,4 @@ cd pls-api/pls/web;                             	mvn clean package docker:build;
 cd registration-api/registration;                  	mvn clean package docker:build; cd -; 
 cd try-policy-api/tryPolicy;                        mvn clean package docker:build; cd -; 
 cd iexhub/iexhub;                                   mvn clean package docker:build; cd -; 
-cd uaa;											    ./gradlew clean install; cp uaa/build/libs/*.war docker/uaa.war; cd docker; docker build -t uaa .; rm uaa.war;
+cd uaa;											    ./gradlew clean install; cp uaa/build/libs/*.war docker/uaa.war; cd docker; docker build -t bhits/uaa .; rm uaa.war;
