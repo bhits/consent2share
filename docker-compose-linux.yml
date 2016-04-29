@@ -1,5 +1,5 @@
 uaa.mhc.com:
-  image: bhits/uaa
+  image: "bhits/uaa"
   volumes:
     - /usr/local/java:/java
   ports:
@@ -23,6 +23,8 @@ pcm.mhc.com:
   image: bhits/pcm
   volumes:
     - /usr/local/java:/java
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/pcm/"
   links:
     - uaa.mhc.com
     - pcm-db.mhc.com
@@ -43,7 +45,7 @@ pcm-db-data.mhc.com:
   volumes:
     - /usr/local/java/mysql/pcm:/var/lib/mysql
 pls.mhc.com:
-  image: bhits/pls
+  image: "bhits/pls"
   volumes:
     - /usr/local/java:/java
   ports:
@@ -65,31 +67,33 @@ pls-db-data.mhc.com:
   volumes:
     - /usr/local/java/mysql/pls:/var/lib/mysql
 pp-ui.mhc.com:
-  image: bhits/pp-ui
+  image: "bhits/pp-ui"
   volumes:
     - /usr/local/java:/java
   links:
     - discovery-server.mhc.com
 admin-ui.mhc.com:
-  image: bhits/admin-portal-ui
+  image: "bhits/admin-portal-ui"
   volumes:
     - /usr/local/java:/java
   links:
     - discovery-server.mhc.com
 dss.mhc.com:
-  image: bhits/dss
+  image: "bhits/dss"
   volumes:
     - /usr/local/java:/java
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/dss/"
   links:
     - discovery-server.mhc.com
 try-policy.mhc.com:
-  image: bhits/try-policy
+  image: "bhits/try-policy"
   volumes:
     - /usr/local/java:/java
   links:
     - discovery-server.mhc.com
 phr.mhc.com:
-  image: bhits/phr
+  image: "bhits/phr"
   volumes:
     - /usr/local/java:/java
   links:
@@ -117,20 +121,26 @@ redis.mhc.com:
 clamd.mhc.com:
   image: dinkel/clamavd
 iexhub.mhc.com:
-   image: bhits/iexhub
+   image: "bhits/iexhub"
    ports:
      - "8454:8443"
+     - "8000:8000"
+   environment:
+     CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
    volumes:
      - /usr/local/java:/java
      - /usr/local/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
      - /usr/local/java/MHC_PROPS/iexhub/temp:/temp
+     - /usr/local/java/MHC_LOGS/iexhub/results:/results
+     - /usr/local/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
 patient-registration.mhc.com:
-  image: bhits/patient-registration
+  image: "bhits/patient-registration"
   volumes:
     - /usr/local/java:/java
   links:
     - discovery-server.mhc.com
     - uaa.mhc.com
+    - iexhub.mhc.com
 patient-user-db.mhc.com:
   image: mysql:5.7
   volumes_from:
@@ -145,11 +155,11 @@ patient-user-data.mhc.com:
   volumes:
     - /usr/local/java/mysql/patient-user:/var/lib/mysql
 patient-user.mhc.com:
-  image: bhits/patient-user
+  image: "bhits/patient-user"
   volumes:
     - /usr/local/java:/java
   environment:
-    spring.config.location: "file:/java/MHC_PROPS/patient-user/"    
+    spring.config.location: "file:/java/MHC_PROPS/patient-user/"
   ports:
     - "8452:8452"
   links:
@@ -157,13 +167,13 @@ patient-user.mhc.com:
     - patient-user-db.mhc.com
     - uaa.mhc.com
 discovery-server.mhc.com:
-  image: bhits/discovery-server
+  image: "bhits/discovery-server"
   volumes:
     - /usr/local/java:/java
   ports:
     - "8761:8761"
 edge-server.mhc.com:
-  image: bhits/edge-server
+  image: "bhits/edge-server"
   volumes:
     - /usr/local/java:/java
   ports:
