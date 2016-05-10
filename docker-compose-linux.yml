@@ -183,3 +183,25 @@ edge-server.mhc.com:
     - discovery-server.mhc.com
     - pls.mhc.com
     - uaa.mhc.com
+openempi.mhc.com:
+  image: bhits/openempi
+  volumes:
+    - /usr/local/java:/java
+  ports:
+    - "8456:8443"
+  links:
+    - openempi-db
+openempi-db:
+  image: bhits/openempi-db
+  environment:
+    POSTGRES_USER: openempi
+    POSTGRES_PASSWORD: openempi
+    POSTGRES_DB: openempi
+  ports:
+    - "5432:5432"
+guvnor.mhc.com:
+  image: bhits/guvnor
+  volumes:
+    - /usr/local/java:/java
+  ports:
+    - "8457:8443"
