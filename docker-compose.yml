@@ -90,6 +90,13 @@ try-policy.mhc.com:
     - discovery-server.mhc.com
 phr.mhc.com:
   image: bhits/phr
+  entrypoint:
+    ["java","-agentlib:jdwp=transport=dt_socket,address=8000,suspend=n,server=y","-jar","/phr.jar","--spring.profiles.active=docker"]
+  ports:
+    - "8445:8445"
+    - "8002:8000"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/phr/"
   volumes:
     - /c/Users/java:/java
   links:
@@ -120,12 +127,22 @@ iexhub.mhc.com:
    image: bhits/iexhub
    ports:
      - "8454:8443"
+     - "8000:8000"
+   environment:
+     CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
    volumes:
      - /c/Users/java:/java
      - /c/Users/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
      - /c/Users/java/MHC_PROPS/iexhub/temp:/temp
+     - /c/Users/java/MHC_LOGS/iexhub/results:/results
+     - /c/Users/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
 patient-registration.mhc.com:
   image: bhits/patient-registration
+  entrypoint:
+    ["java","-agentlib:jdwp=transport=dt_socket,address=8000,suspend=n,server=y","-jar","/patient-registration.jar","--spring.profiles.active=docker"]
+  ports:
+    - "8448:8448"
+    - "8005:8000"
   volumes:
     - /c/Users/java:/java
   links:
