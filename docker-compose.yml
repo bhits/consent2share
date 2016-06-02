@@ -21,6 +21,10 @@ uaa-db-data.mhc.com:
     - /c/Users/java/mysql/uaa:/var/lib/mysql
 pcm.mhc.com:
   image: bhits/pcm
+  ports:
+    - "8446:8446"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/pcm/"
   volumes:
     - /c/Users/java:/java
   links:
@@ -49,6 +53,8 @@ pls.mhc.com:
   ports:
     - "8453:8443"
     - "8080:8080"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/pls/"
   links:
     - pls-db.mhc.com
 pls-db.mhc.com:
@@ -78,6 +84,10 @@ admin-ui.mhc.com:
     - discovery-server.mhc.com
 dss.mhc.com:
   image: bhits/dss
+  ports:
+    - "8450:8450"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/dss/"
   volumes:
     - /c/Users/java:/java
   links:
@@ -132,8 +142,9 @@ iexhub.mhc.com:
      CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
    volumes:
      - /c/Users/java:/java
-     - /c/Users/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
+     - /c/Users/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/test
      - /c/Users/java/MHC_PROPS/iexhub/temp:/temp
+     - /c/Users/java/MHC_PROPS/iexhub/temp/output:/temp/output
      - /c/Users/java/MHC_LOGS/iexhub/results:/results
      - /c/Users/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
 patient-registration.mhc.com:
