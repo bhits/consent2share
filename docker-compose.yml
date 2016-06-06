@@ -52,8 +52,9 @@ pls.mhc.com:
     - /c/Users/java:/java
   ports:
     - "8453:8443"
-    - "8080:8080"
+    - "8007:8007"
   environment:
+    CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8007
     spring.config.location: "file:/java/MHC_PROPS/pls/"
   links:
     - pls-db.mhc.com
@@ -154,11 +155,14 @@ patient-registration.mhc.com:
   ports:
     - "8448:8448"
     - "8005:8000"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/patient-registration/"
   volumes:
     - /c/Users/java:/java
   links:
     - discovery-server.mhc.com
     - uaa.mhc.com
+    - iexhub.mhc.com
 patient-user-db.mhc.com:
   image: mysql:5.7
   volumes_from:
@@ -178,6 +182,8 @@ patient-user.mhc.com:
     - /c/Users/java:/java
   ports:
     - "8452:8452"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/patient-user/"
   links:
     - discovery-server.mhc.com
     - patient-user-db.mhc.com
