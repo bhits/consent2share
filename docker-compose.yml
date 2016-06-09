@@ -21,8 +21,11 @@ uaa-db-data.mhc.com:
     - /c/Users/java/mysql/uaa:/var/lib/mysql
 pcm.mhc.com:
   image: bhits/pcm
+  entrypoint:
+    ["java","-agentlib:jdwp=transport=dt_socket,address=8000,suspend=n,server=y","-jar","/pcm.jar","--spring.profiles.active=docker"]
   ports:
     - "8446:8446"
+    - "8006:8000"
   environment:
     spring.config.location: "file:/java/MHC_PROPS/pcm/"
   volumes:
