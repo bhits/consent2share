@@ -96,6 +96,7 @@ dss.mhc.com:
     - /c/Users/java:/java
   links:
     - discovery-server.mhc.com
+    - document-validator.mhc.com
 try-policy.mhc.com:
   image: bhits/try-policy
   volumes:
@@ -208,3 +209,10 @@ edge-server.mhc.com:
     - discovery-server.mhc.com
     - pls.mhc.com
     - uaa.mhc.com
+document-validator.mhc.com:
+  image: bhits/document-validator
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "8461:8443"
+    - "8460:8080"

@@ -87,6 +87,7 @@ dss.mhc.com:
     spring.config.location: "file:/java/MHC_PROPS/dss/"
   links:
     - discovery-server.mhc.com
+    - document-validator.mhc.com
 try-policy.mhc.com:
   image: "bhits/try-policy"
   volumes:
@@ -211,3 +212,10 @@ guvnor.mhc.com:
     - /usr/local/java:/java
   ports:
     - "8457:8443"
+document-validator.mhc.com:
+  image: bhits/document-validator
+  volumes:
+    - /usr/local/java:/java
+  ports:
+    - "8461:8443"
+    - "8460:8080"
