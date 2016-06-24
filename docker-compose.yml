@@ -216,3 +216,24 @@ document-validator.mhc.com:
   ports:
     - "8461:8443"
     - "8460:8080"
+context-handler.mhc.com:
+  image: bhits/context-handler
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "8454:8454"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/context-handler/"
+  links:
+    - discovery-server.mhc.com
+    - pcm-db.mhc.com
+pep.mhc.com:
+  image: bhits/pep
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "8455:8455"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/pep/"
+  links:
+    - discovery-server.mhc.com
