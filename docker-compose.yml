@@ -141,7 +141,7 @@ clamd.mhc.com:
 iexhub.mhc.com:
    image: bhits/iexhub
    ports:
-     - "8454:8443"
+     - "8456:8443"
      - "8000:8000"
    environment:
      CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
@@ -220,8 +220,11 @@ context-handler.mhc.com:
   image: bhits/context-handler
   volumes:
     - /c/Users/java:/java
+  entrypoint:
+    ["java","-agentlib:jdwp=transport=dt_socket,address=8000,suspend=n,server=y","-jar","/contextHandler.jar","--spring.profiles.active=docker"]
   ports:
     - "8454:8454"
+    - "8010:8000"
   environment:
     spring.config.location: "file:/java/MHC_PROPS/context-handler/"
   links:
