@@ -1,7 +1,10 @@
 #! /bin/bash
 cd ..;
 cd admin-portal-ui/server;                          mvn clean package -Pdocker docker:build; cd -; 
-cd discovery-server/discovery-server;               mvn clean package docker:build; cd -; 
+cd discovery-server/discovery-server;               mvn clean package docker:build; cd -;
+cd document-validator/document-validator;           mvn clean package docker:build; cd -;
+cd context-handler/context-handler;                 mvn clean package docker:build; cd -;
+cd pep-api/pep;                                     mvn clean package docker:build; cd -;
 cd dss-api/dss;                             		mvn clean package docker:build; cd -; 
 cd edge-server/edge-server;                  		mvn clean package docker:build; cd -; 
 cd patient-portal-ui/server;                        mvn clean package -Pdocker docker:build; cd -; 
