@@ -141,7 +141,7 @@ clamd.mhc.com:
 iexhub.mhc.com:
    image: bhits/iexhub
    ports:
-     - "8454:8443"
+     - "8456:8443"
      - "8000:8000"
    environment:
      CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
@@ -216,3 +216,27 @@ document-validator.mhc.com:
   ports:
     - "8461:8443"
     - "8460:8080"
+context-handler.mhc.com:
+  image: bhits/context-handler
+  volumes:
+    - /c/Users/java:/java
+  entrypoint:
+    ["java","-agentlib:jdwp=transport=dt_socket,address=8000,suspend=n,server=y","-jar","/contextHandler.jar","--spring.profiles.active=docker"]
+  ports:
+    - "8454:8454"
+    - "8010:8000"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/context-handler/"
+  links:
+    - discovery-server.mhc.com
+    - pcm-db.mhc.com
+pep.mhc.com:
+  image: bhits/pep
+  volumes:
+    - /c/Users/java:/java
+  ports:
+    - "8455:8455"
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/pep/"
+  links:
+    - discovery-server.mhc.com
