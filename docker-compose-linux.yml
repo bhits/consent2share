@@ -1,9 +1,10 @@
 uaa.mhc.com:
-  image: "bhits/uaa"
+  image: "bhits/uaa:3.1.0"
   volumes:
     - /usr/local/java:/java
   ports:
     - "8443:8443"
+  mem_limit: 1500m
   links:
     - uaa-db.mhc.com
 uaa-db.mhc.com:
@@ -20,12 +21,14 @@ uaa-db-data.mhc.com:
   volumes:
     - /usr/local/java/mysql/uaa:/var/lib/mysql
 pcm.mhc.com:
-  image: bhits/pcm
+  image: "bhits/pcm:1.11.0"
   volumes:
     - /usr/local/java:/java
   environment:
     spring.config.location: "file:/java/MHC_PROPS/pcm/"
     TZ: "US/Eastern"
+  entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/pcm.jar","--spring.profiles.active=docker"]
+  mem_limit: 1500m
   links:
     - uaa.mhc.com
     - pcm-db.mhc.com
@@ -46,7 +49,7 @@ pcm-db-data.mhc.com:
   volumes:
     - /usr/local/java/mysql/pcm:/var/lib/mysql
 pls.mhc.com:
-  image: "bhits/pls"
+  image: "bhits/pls:1.6.0"
   volumes:
     - /usr/local/java:/java
   ports:
@@ -58,46 +61,64 @@ pls-db.mhc.com:
   image: mysql:5.7
   volumes_from:
     - pls-db-data.mhc.com
+  mem_limit: 1000m
   environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: npi
   ports:
     - "3308:3306"
+  volumes:
+    - /usr/local/java/MHC_PROPS/pls:/usr/local/pls
+    - /usr/local/java/MHC_PROPS/pls/sql:/usr/local/pls/sql
 pls-db-data.mhc.com:
   image: busybox
   volumes:
     - /usr/local/java/mysql/pls:/var/lib/mysql
+    - /usr/local/java/MHC_PROPS/pls:/usr/local/pls
+    - /usr/local/java/MHC_PROPS/pls/sql:/usr/local/pls/sql
 pp-ui.mhc.com:
-  image: "bhits/pp-ui"
+  image: "bhits/pp-ui:0.13.0"
   volumes:
     - /usr/local/java:/java
+  mem_limit: 1000m
   links:
     - discovery-server.mhc.com
 admin-ui.mhc.com:
-  image: "bhits/admin-portal-ui"
+  image: "bhits/admin-portal-ui:0.6.0"
   volumes:
     - /usr/local/java:/java
+  mem_limit: 1000m
   links:
     - discovery-server.mhc.com
 dss.mhc.com:
-  image: "bhits/dss"
+  image: "bhits/dss:1.6.0"
   volumes:
     - /usr/local/java:/java
+  entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/dss.jar","--spring.profiles.active=docker"]
+  mem_limit: 1500m
   environment:
     spring.config.location: "file:/java/MHC_PROPS/dss/"
   links:
     - discovery-server.mhc.com
+    - guvnor.mhc.com
     - document-validator.mhc.com
 try-policy.mhc.com:
-  image: "bhits/try-policy"
+  image: "bhits/try-policy:1.7.0"
   volumes:
     - /usr/local/java:/java
+  entrypoint: ["java","-Xms128m","-Xmx256m","-XX:PermSize=32m","-XX:MaxPermSize=64m","-Xss1m","-jar","/tryPolicy.jar","--spring.profiles.active=docker"]
+  mem_limit: 1000m
   links:
     - discovery-server.mhc.com
 phr.mhc.com:
-  image: "bhits/phr"
+  image: "bhits/phr:1.11.0"
   volumes:
     - /usr/local/java:/java
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/phr/"
+    logging.level.org.springframework.security: "debug"
+  entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/phr.jar","--spring.profiles.active=docker"]
+  mem_limit: 1500m
   links:
     - phr-db.mhc.com
     - redis.mhc.com
@@ -123,23 +144,28 @@ redis.mhc.com:
 clamd.mhc.com:
   image: dinkel/clamavd
 iexhub.mhc.com:
-   image: "bhits/iexhub"
-   ports:
-     - "8454:8443"
-     - "8000:8000"
-   environment:
-     CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
-   volumes:
-     - /usr/local/java:/java
-     - /usr/local/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/test
-     - /usr/local/java/MHC_PROPS/iexhub/temp:/temp
-     - /usr/local/java/MHC_PROPS/iexhub/temp/output:/temp/output
-     - /usr/local/java/MHC_LOGS/iexhub/results:/results
-     - /usr/local/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
-patient-registration.mhc.com:
-  image: "bhits/patient-registration"
+  image: "bhits/iexhub:0.2.0"
+  ports:
+    - "8454:8443"
+    - "8000:8000"
+  environment:
+    CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
+  mem_limit: 4000m
   volumes:
     - /usr/local/java:/java
+    - /usr/local/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
+    - /usr/local/java/MHC_PROPS/iexhub/temp:/temp
+    - /usr/local/java/MHC_PROPS/iexhub/temp/output:/temp/output
+    - /usr/local/java/MHC_LOGS/iexhub/results:/results
+    - /usr/local/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
+  links:
+    - openempi.mhc.com
+patient-registration.mhc.com:
+  image: "bhits/patient-registration:1.8.0"
+  volumes:
+    - /usr/local/java:/java
+  entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/patient-registration.jar","--spring.profiles.active=docker"]
+  mem_limit: 1500m
   links:
     - discovery-server.mhc.com
     - uaa.mhc.com
@@ -158,9 +184,11 @@ patient-user-data.mhc.com:
   volumes:
     - /usr/local/java/mysql/patient-user:/var/lib/mysql
 patient-user.mhc.com:
-  image: "bhits/patient-user"
+  image: "bhits/patient-user:0.6.0"
   volumes:
     - /usr/local/java:/java
+  entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/patient-user.jar","--spring.profiles.active=mysql,docker"]
+  mem_limit: 1000m
   environment:
     spring.config.location: "file:/java/MHC_PROPS/patient-user/"
   ports:
@@ -170,34 +198,42 @@ patient-user.mhc.com:
     - patient-user-db.mhc.com
     - uaa.mhc.com
 discovery-server.mhc.com:
-  image: "bhits/discovery-server"
+  image: "bhits/discovery-server:0.3.0"
   volumes:
     - /usr/local/java:/java
+  entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/discovery-server.jar","--spring.profiles.active=ssl,docker"]
+  mem_limit: 1500m
   ports:
     - "8761:8761"
 edge-server.mhc.com:
-  image: "bhits/edge-server"
+  image: "bhits/edge-server:0.4.0"
   volumes:
     - /usr/local/java:/java
+  entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/edge-server.jar","--spring.profiles.active=ssl,eureka-ssl,docker"]
+  mem_limit: 1500m
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/edge-server/"
   ports:
     - "80:80"
     - "443:443"
-  environment:
-    spring.config.location: "file:/java/MHC_PROPS/edge-server/"
   links:
     - discovery-server.mhc.com
     - pls.mhc.com
+    - openempi.mhc.com
+    - guvnor.mhc.com
     - uaa.mhc.com
+    - document-validator.mhc.com
+    - document-validator-r1.mhc.com
 openempi.mhc.com:
-  image: bhits/openempi
+  image: bhits/openempi:2.2.9
   volumes:
     - /usr/local/java:/java
   ports:
-    - "8456:8443"
+    - "8456:8080"
   links:
     - openempi-db
 openempi-db:
-  image: bhits/openempi-db
+  image: bhits/openempi-db:2.2.9
   environment:
     POSTGRES_USER: openempi
     POSTGRES_PASSWORD: openempi
@@ -207,15 +243,40 @@ openempi-db:
   ports:
     - "5432:5432"
 guvnor.mhc.com:
-  image: bhits/guvnor
+  image: bhits/guvnor:5.5.0
   volumes:
     - /usr/local/java:/java
   ports:
     - "8457:8443"
 document-validator.mhc.com:
-  image: bhits/document-validator
+  image: bhits/document-validator:0.2.0
   volumes:
     - /usr/local/java:/java
   ports:
     - "8461:8443"
     - "8460:8080"
+document-validator-r1.mhc.com:
+  image: bhits/document-validator-r1:latest
+  volumes:
+    - /usr/local/java:/java
+pep.mhc.com:
+  image: bhits/pep:1.0.0
+  volumes:
+    - /usr/local/java:/java
+  entrypoint: ["java","-Xms128m","-Xmx256m","-XX:PermSize=32m","-XX:MaxPermSize=64m","-Xss1m","-jar","/pep.jar","--spring.profiles.active=docker"]
+  mem_limit: 1000m
+  links:
+    - discovery-server.mhc.com
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/pep/"
+context-handler.mhc.com:
+  image: bhits/context-handler:1.0.0
+  volumes:
+    - /usr/local/java:/java
+  entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/contextHandler.jar","--spring.profiles.active=docker"]
+  mem_limit: 1000m
+  links:
+    - discovery-server.mhc.com
+    - pcm-db.mhc.com
+  environment:
+    spring.config.location: "file:/java/MHC_PROPS/context-handler/"
