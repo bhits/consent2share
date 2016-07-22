@@ -2,7 +2,6 @@
 cd ..;
 cd admin-portal-ui/server;                          mvn clean package -Pdocker docker:build; cd -; 
 cd discovery-server/discovery-server;               mvn clean package docker:build; cd -;
-cd document-validator/document-validator;           mvn clean package docker:build; cd -;
 cd context-handler/context-handler;                 mvn clean package docker:build; cd -;
 cd pep-api/pep;                                     mvn clean package docker:build; cd -;
 cd dss-api/dss;                             		mvn clean package docker:build; cd -; 
@@ -17,5 +16,5 @@ cd registration-api/registration;                  	mvn clean package docker:bui
 cd try-policy-api/tryPolicy;                        mvn clean package docker:build; cd -;
 cd context-handler/context-handler;                 mvn clean package docker:build; cd -;
 cd pep-api/pep;                                     mvn clean package docker:build; cd -;
-cd iexhub/iexhub;                                   mvn clean package docker:build; cd -;
+cd iexhub-fork/iexhub;                              mvn clean package docker:build; cd -;
 cd uaa;											    ./gradlew clean install; cp uaa/build/libs/*.war docker/uaa.war; cd docker; docker build -t bhits/uaa .; rm uaa.war;
