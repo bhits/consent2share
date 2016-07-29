@@ -17,7 +17,7 @@ uaa-db-data.mhc.com:
   volumes:
     - /usr/local/java/mysql/uaa:/var/lib/mysql
 pcm.mhc.com:
-  image: "bhits/pcm:1.13.0"
+  image: "bhits/pcm:1.14.0-SNAPSHOT"
   volumes:
     - /usr/local/java:/java
   environment:
@@ -76,7 +76,7 @@ admin-ui.mhc.com:
   links:
     - discovery-server.mhc.com
 dss.mhc.com:
-  image: "bhits/dss:1.7.0"
+  image: "bhits/dss:1.8.0-SNAPSHOT"
   volumes:
     - /usr/local/java:/java
   entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/dss.jar","--spring.profiles.active=docker"]
@@ -117,8 +117,6 @@ phr-db.mhc.com:
   environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: phr
-  ports:
-    - "3306:3306"
 phr-db-data.mhc.com:
   image: busybox
   volumes:
@@ -128,10 +126,10 @@ redis.mhc.com:
 clamd.mhc.com:
   image: dinkel/clamavd
 iexhub.mhc.com:
-  image: "bhits/iexhub:0.2.0"
+  image: "bhits/iexhub:0.3.0-SNAPSHOT"
   restart: always
   environment:
-    CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
+    CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000 -Dlog4j.configuration=file:/java/MHC_PROPS/iexhub/temp/log4j.properties
   mem_limit: 4000m
   volumes:
     - /usr/local/java:/java
