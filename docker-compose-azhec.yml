@@ -97,7 +97,7 @@ try-policy.mhc.com:
   links:
     - discovery-server.mhc.com
 phr.mhc.com:
-  image: "bhits/phr:1.12.0"
+  image: "bhits/phr:1.13.0-SNAPSHOT"
   volumes:
     - /usr/local/java:/java
   environment:
@@ -139,7 +139,7 @@ iexhub.mhc.com:
     - /usr/local/java/MHC_LOGS/iexhub/results:/results
     - /usr/local/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
 patient-registration.mhc.com:
-  image: "bhits/patient-registration:1.9.0"
+  image: "bhits/patient-registration:1.10.0-SNAPSHOT"
   environment:
     spring.config.location: "file:/java/MHC_PROPS/patient-registration/"
   volumes:
@@ -180,7 +180,7 @@ discovery-server.mhc.com:
   entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/discovery-server.jar","--spring.profiles.active=ssl,docker"]
   mem_limit: 1500m
 edge-server.mhc.com:
-  image: "bhits/edge-server:0.5.0"
+  image: "bhits/edge-server:0.6.0-SNAPSHOT"
   volumes:
     - /usr/local/java:/java
   entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/edge-server.jar","--spring.profiles.active=ssl,eureka-ssl,docker"]
@@ -210,7 +210,7 @@ document-validator-r1.mhc.com:
   volumes:
     - /usr/local/java:/java
 pep.mhc.com:
-  image: bhits/pep:1.1.0
+  image: bhits/pep:1.2.1-SNAPSHOT
   volumes:
     - /usr/local/java:/java
   entrypoint: ["java","-Xms128m","-Xmx256m","-XX:PermSize=32m","-XX:MaxPermSize=64m","-Xss1m","-jar","/pep.jar","--spring.profiles.active=docker"]
@@ -219,6 +219,7 @@ pep.mhc.com:
     - discovery-server.mhc.com
   environment:
     spring.config.location: "file:/java/MHC_PROPS/pep/"
+    logging.level.gov.samhsa.c2s.pep: debug
 context-handler.mhc.com:
   image: bhits/context-handler:1.1.0
   volumes:
