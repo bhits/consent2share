@@ -89,7 +89,7 @@ dss.mhc.com:
     - document-validator.mhc.com
     - document-validator-r1.mhc.com
 try-policy.mhc.com:
-  image: "bhits/try-policy:1.8.0"
+  image: "bhits/try-policy:1.8.1-SNAPSHOT"
   volumes:
     - /usr/local/java:/java
   entrypoint: ["java","-Xms128m","-Xmx256m","-XX:PermSize=32m","-XX:MaxPermSize=64m","-Xss1m","-jar","/tryPolicy.jar","--spring.profiles.active=docker"]
