@@ -21,7 +21,7 @@ services:
     volumes:
       - /usr/local/java/mysql/uaa:/var/lib/mysql
   pcm.mhc.com:
-    image: "bhits/pcm:1.14.0-SNAPSHOT"
+    image: "bhits/pcm:1.13.0"
     volumes:
       - /usr/local/java:/java
     environment:
@@ -70,7 +70,7 @@ services:
       - /usr/local/java/mysql/pls:/var/lib/mysql
       - /usr/local/java/MHC_PROPS/pls/init-db:/docker-entrypoint-initdb.d
   pp-ui.mhc.com:
-    image: "bhits/pp-ui:0.14.0"
+    image: "bhits/pp-ui:0.15.0"
     volumes:
       - /usr/local/java:/java
     mem_limit: 1000m
@@ -78,7 +78,7 @@ services:
       - discovery-server.mhc.com
     restart: always
   admin-ui.mhc.com:
-    image: "bhits/admin-portal-ui:0.7.0"
+    image: "bhits/admin-portal-ui:0.8.0"
     volumes:
       - /usr/local/java:/java
     mem_limit: 1000m
@@ -86,7 +86,7 @@ services:
       - discovery-server.mhc.com
     restart: always
   dss.mhc.com:
-    image: "bhits/dss:1.8.0-SNAPSHOT"
+    image: "bhits/dss:1.8.0"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/dss.jar","--spring.profiles.active=docker"]
@@ -100,7 +100,7 @@ services:
       - document-validator-r1.mhc.com
     restart: always
   try-policy.mhc.com:
-    image: "bhits/try-policy:1.8.1-SNAPSHOT"
+    image: "bhits/try-policy:1.8.0"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Xms128m","-Xmx256m","-XX:PermSize=32m","-XX:MaxPermSize=64m","-Xss1m","-jar","/tryPolicy.jar","--spring.profiles.active=docker"]
@@ -109,7 +109,7 @@ services:
       - discovery-server.mhc.com
     restart: always
   phr.mhc.com:
-    image: "bhits/phr:1.13.0-SNAPSHOT"
+    image: "bhits/phr:1.13.0"
     volumes:
       - /usr/local/java:/java
     environment:
@@ -156,7 +156,7 @@ services:
       - /usr/local/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
     restart: always
   patient-registration.mhc.com:
-    image: "bhits/patient-registration:1.10.0-SNAPSHOT"
+    image: "bhits/patient-registration:1.9.0"
     environment:
       spring.config.location: "file:/java/MHC_PROPS/patient-registration/"
     volumes:
@@ -201,7 +201,7 @@ services:
     mem_limit: 1500m
     restart: always
   edge-server.mhc.com:
-    image: "bhits/edge-server:0.6.0-SNAPSHOT"
+    image: "bhits/edge-server:0.6.0"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/edge-server.jar","--spring.profiles.active=ssl,eureka-ssl,docker"]
@@ -225,17 +225,17 @@ services:
       - /usr/local/java:/java
     restart: always
   document-validator.mhc.com:
-    image: bhits/document-validator-ccda-r2:0.3.0
+    image: bhits/document-validator-ccda-r2:0.4.0
     volumes:
       - /usr/local/java:/java
     restart: always
   document-validator-r1.mhc.com:
-    image: bhits/document-validator-ccda-r1:0.3.0
+    image: bhits/document-validator-ccda-r1:0.4.0
     volumes:
       - /usr/local/java:/java
     restart: always
   pep.mhc.com:
-    image: bhits/pep:1.2.1-SNAPSHOT
+    image: bhits/pep:1.2.0
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Xms128m","-Xmx256m","-XX:PermSize=32m","-XX:MaxPermSize=64m","-Xss1m","-jar","/pep.jar","--spring.profiles.active=docker"]
@@ -247,7 +247,7 @@ services:
       logging.level.gov.samhsa.c2s.pep: debug
     restart: always
   context-handler.mhc.com:
-    image: bhits/context-handler:1.1.0
+    image: bhits/context-handler:1.2.0
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/contextHandler.jar","--spring.profiles.active=docker"]
