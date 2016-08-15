@@ -156,7 +156,7 @@ services:
       - /usr/local/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
     restart: always
   patient-registration.mhc.com:
-    image: "bhits/patient-registration:1.9.0"
+    image: "bhits/patient-registration:1.10.0"
     environment:
       spring.config.location: "file:/java/MHC_PROPS/patient-registration/"
     volumes:
