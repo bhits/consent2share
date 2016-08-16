@@ -86,7 +86,7 @@ services:
       - discovery-server.mhc.com
     restart: always
   dss.mhc.com:
-    image: "bhits/dss:1.8.0"
+    image: "bhits/dss:1.9.0-SNAPSHOT"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/dss.jar","--spring.profiles.active=docker"]
