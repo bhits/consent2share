@@ -204,7 +204,7 @@ services:
     mem_limit: 1500m
     restart: always
   edge-server.mhc.com:
-    image: "bhits/edge-server:0.7.0-SNAPSHOT"
+    image: "bhits/edge-server:0.7.1-SNAPSHOT"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/edge-server.jar","--spring.profiles.active=ssl,eureka-ssl,docker"]
