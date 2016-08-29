@@ -1,284 +1,284 @@
 version: '2'
 services:
-  uaa.mhc.com:
+  uaa.c2s.com:
     image: "bhits/uaa:3.4.2-SNAPSHOT"
     volumes:
       - /usr/local/java:/java
     mem_limit: 1500m
     links:
-      - uaa-db.mhc.com
+      - uaa-db.c2s.com
     restart: always
-  uaa-db.mhc.com:
+  uaa-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - uaa-db-data.mhc.com
+      - uaa-db-data.c2s.com
     environment:
         MYSQL_ROOT_PASSWORD: admin
         MYSQL_DATABASE: uaa
     restart: always
-  uaa-db-data.mhc.com:
+  uaa-db-data.c2s.com:
     image: busybox
     volumes:
       - /usr/local/java/mysql/uaa:/var/lib/mysql
-  pcm.mhc.com:
+  pcm.c2s.com:
     image: "bhits/pcm:1.13.0"
     volumes:
       - /usr/local/java:/java
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/pcm/"
+      spring.config.location: "file:/java/C2S_PROPS/pcm/"
       TZ: "US/Eastern"
     entrypoint: ["java","-Xms512m","-Xmx700m","-XX:PermSize=512m","-XX:MaxPermSize=128m","-Xss1m","-jar","/pcm.jar","--spring.profiles.active=docker"]
     mem_limit: 2000m
     links:
-      - uaa.mhc.com
-      - pcm-db.mhc.com
-      - pls.mhc.com
-      - discovery-server.mhc.com
-      - clamd.mhc.com
+      - uaa.c2s.com
+      - pcm-db.c2s.com
+      - pls.c2s.com
+      - discovery-server.c2s.com
+      - clamd.c2s.com
     restart: always
-  pcm-db.mhc.com:
+  pcm-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - pcm-db-data.mhc.com
+      - pcm-db-data.c2s.com
     environment:
         MYSQL_ROOT_PASSWORD: admin
         MYSQL_DATABASE: pcm
     restart: always
-  pcm-db-data.mhc.com:
+  pcm-db-data.c2s.com:
     image: busybox
     volumes:
       - /usr/local/java/mysql/pcm:/var/lib/mysql
-  pls.mhc.com:
+  pls.c2s.com:
     image: "bhits/pls:1.6.0"
     volumes:
       - /usr/local/java:/java
     links:
-      - pls-db.mhc.com
+      - pls-db.c2s.com
     restart: always
-  pls-db.mhc.com:
+  pls-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - pls-db-data.mhc.com
+      - pls-db-data.c2s.com
     mem_limit: 1000m
     environment:
         MYSQL_ROOT_PASSWORD: admin
         MYSQL_DATABASE: npi
     restart: always
-  pls-db-data.mhc.com:
+  pls-db-data.c2s.com:
     image: busybox
     volumes:
       - /usr/local/java/mysql/pls:/var/lib/mysql
-      - /usr/local/java/MHC_PROPS/pls/init-db:/docker-entrypoint-initdb.d
-  pp-ui.mhc.com:
+      - /usr/local/java/C2S_PROPS/pls/init-db:/docker-entrypoint-initdb.d
+  pp-ui.c2s.com:
     image: "bhits/pp-ui:0.16.0-SNAPSHOT"
     volumes:
       - /usr/local/java:/java
     mem_limit: 1000m
     links:
-      - discovery-server.mhc.com
+      - discovery-server.c2s.com
     restart: always
-  admin-ui.mhc.com:
+  admin-ui.c2s.com:
     image: "bhits/admin-portal-ui:0.8.0"
     volumes:
       - /usr/local/java:/java
     mem_limit: 1000m
     links:
-      - discovery-server.mhc.com
+      - discovery-server.c2s.com
     restart: always
-  dss.mhc.com:
+  dss.c2s.com:
     image: "bhits/dss:1.9.1-SNAPSHOT"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/dss.jar","--spring.profiles.active=docker"]
     mem_limit: 1500m
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/dss/"
+      spring.config.location: "file:/java/C2S_PROPS/dss/"
     links:
-      - discovery-server.mhc.com
-      - guvnor.mhc.com
-      - document-validator.mhc.com
-      - document-validator-r1.mhc.com
-      - audit-service.mhc.com
+      - discovery-server.c2s.com
+      - guvnor.c2s.com
+      - document-validator.c2s.com
+      - document-validator-r1.c2s.com
+      - audit-service.c2s.com
     restart: always
-  try-policy.mhc.com:
+  try-policy.c2s.com:
     image: "bhits/try-policy:1.9.0-SNAPSHOT"
     volumes:
       - /usr/local/java:/java
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/try-policy/"
+      spring.config.location: "file:/java/C2S_PROPS/try-policy/"
     entrypoint: ["java","-Xms128m","-Xmx256m","-XX:PermSize=32m","-XX:MaxPermSize=64m","-Xss1m","-jar","/tryPolicy.jar","--spring.profiles.active=docker"]
     mem_limit: 1000m
     links:
-      - discovery-server.mhc.com
+      - discovery-server.c2s.com
     restart: always
-  phr.mhc.com:
+  phr.c2s.com:
     image: "bhits/phr:1.13.0"
     volumes:
       - /usr/local/java:/java
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/phr/"
+      spring.config.location: "file:/java/C2S_PROPS/phr/"
       logging.level.org.springframework.security: "debug"
     entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/phr.jar","--spring.profiles.active=docker"]
     mem_limit: 1500m
     links:
-      - phr-db.mhc.com
-      - redis.mhc.com
-      - discovery-server.mhc.com
-      - iexhub.mhc.com
+      - phr-db.c2s.com
+      - redis.c2s.com
+      - discovery-server.c2s.com
+      - iexhub.c2s.com
     restart: always
-  phr-db.mhc.com:
+  phr-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - phr-db-data.mhc.com
+      - phr-db-data.c2s.com
     environment:
         MYSQL_ROOT_PASSWORD: admin
         MYSQL_DATABASE: phr
     restart: always
-  phr-db-data.mhc.com:
+  phr-db-data.c2s.com:
     image: busybox
     volumes:
       - /usr/local/java/mysql/phr:/var/lib/mysql
-  redis.mhc.com:
+  redis.c2s.com:
     image: redis
     restart: always
-  clamd.mhc.com:
+  clamd.c2s.com:
     image: dinkel/clamavd
     restart: always
-  iexhub.mhc.com:
+  iexhub.c2s.com:
     image: "bhits/iexhub:0.3.0-SNAPSHOT"
     restart: always
     environment:
-      CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000 -Dlog4j.configuration=file:/java/MHC_PROPS/iexhub/temp/log4j.properties
+      CATALINA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000 -Dlog4j.configuration=file:/java/C2S_PROPS/iexhub/temp/log4j.properties
     mem_limit: 4000m
     volumes:
       - /usr/local/java:/java
-      - /usr/local/java/MHC_PROPS/iexhub/test:/usr/local/tomcat/bin/test
-      - /usr/local/java/MHC_PROPS/iexhub/temp:/temp
-      - /usr/local/java/MHC_PROPS/iexhub/temp/output:/temp/output
-      - /usr/local/java/MHC_LOGS/iexhub/results:/results
-      - /usr/local/java/MHC_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
+      - /usr/local/java/C2S_PROPS/iexhub/test:/usr/local/tomcat/bin/test
+      - /usr/local/java/C2S_PROPS/iexhub/temp:/temp
+      - /usr/local/java/C2S_PROPS/iexhub/temp/output:/temp/output
+      - /usr/local/java/C2S_LOGS/iexhub/results:/results
+      - /usr/local/java/C2S_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
     restart: always
-  patient-registration.mhc.com:
+  patient-registration.c2s.com:
     image: "bhits/patient-registration:1.10.0"
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/patient-registration/"
+      spring.config.location: "file:/java/C2S_PROPS/patient-registration/"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/patient-registration.jar","--spring.profiles.active=docker"]
     mem_limit: 1500m
     links:
-      - discovery-server.mhc.com
-      - uaa.mhc.com
-      - iexhub.mhc.com
+      - discovery-server.c2s.com
+      - uaa.c2s.com
+      - iexhub.c2s.com
     restart: always
-  patient-user-db.mhc.com:
+  patient-user-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - patient-user-data.mhc.com
+      - patient-user-data.c2s.com
     environment:
         MYSQL_ROOT_PASSWORD: admin
         MYSQL_DATABASE: patient-user
     restart: always
-  patient-user-data.mhc.com:
+  patient-user-data.c2s.com:
     image: busybox
     volumes:
       - /usr/local/java/mysql/patient-user:/var/lib/mysql
-  patient-user.mhc.com:
+  patient-user.c2s.com:
     image: "bhits/patient-user:0.8.0-SNAPSHOT"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/patient-user.jar","--spring.profiles.active=mysql,docker"]
     mem_limit: 1000m
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/patient-user/"
+      spring.config.location: "file:/java/C2S_PROPS/patient-user/"
     links:
-      - discovery-server.mhc.com
-      - patient-user-db.mhc.com
-      - uaa.mhc.com
+      - discovery-server.c2s.com
+      - patient-user-db.c2s.com
+      - uaa.c2s.com
     restart: always
-  discovery-server.mhc.com:
+  discovery-server.c2s.com:
     image: "bhits/discovery-server:0.3.0"
     volumes:
       - /usr/local/java:/java
-    entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/discovery-server.jar","--spring.profiles.active=ssl,docker"]
+    entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/c2s.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/discovery-server.jar","--spring.profiles.active=ssl,docker"]
     mem_limit: 1500m
     restart: always
-  edge-server.mhc.com:
+  edge-server.c2s.com:
     image: "bhits/edge-server:0.7.0-SNAPSHOT"
     volumes:
       - /usr/local/java:/java
-    entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/edge-server.jar","--spring.profiles.active=ssl,eureka-ssl,docker"]
+    entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/c2s.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/edge-server.jar","--spring.profiles.active=ssl,eureka-ssl,docker"]
     mem_limit: 1500m
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/edge-server/"
+      spring.config.location: "file:/java/C2S_PROPS/edge-server/"
     ports:
       - "80:80"
       - "443:443"
     links:
-      - discovery-server.mhc.com
-      - pls.mhc.com
-      - guvnor.mhc.com
-      - uaa.mhc.com
-      - document-validator.mhc.com
-      - document-validator-r1.mhc.com
+      - discovery-server.c2s.com
+      - pls.c2s.com
+      - guvnor.c2s.com
+      - uaa.c2s.com
+      - document-validator.c2s.com
+      - document-validator-r1.c2s.com
     restart: always
-  guvnor.mhc.com:
-    image: bhits/mhc-guvnor:5.5.0
+  guvnor.c2s.com:
+    image: bhits/c2s-guvnor:5.5.0
     volumes:
       - /usr/local/java:/java
     restart: always
-  document-validator.mhc.com:
+  document-validator.c2s.com:
     image: bhits/document-validator-ccda-r2:0.4.0
     volumes:
       - /usr/local/java:/java
     restart: always
-  document-validator-r1.mhc.com:
+  document-validator-r1.c2s.com:
     image: bhits/document-validator-ccda-r1:0.4.0
     volumes:
       - /usr/local/java:/java
     restart: always
-  pep.mhc.com:
+  pep.c2s.com:
     image: bhits/pep:1.2.0
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Xms128m","-Xmx256m","-XX:PermSize=32m","-XX:MaxPermSize=64m","-Xss1m","-jar","/pep.jar","--spring.profiles.active=docker"]
     mem_limit: 1000m
     links:
-      - discovery-server.mhc.com
+      - discovery-server.c2s.com
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/pep/"
+      spring.config.location: "file:/java/C2S_PROPS/pep/"
       logging.level.gov.samhsa.c2s.pep: debug
     restart: always
-  context-handler.mhc.com:
+  context-handler.c2s.com:
     image: bhits/context-handler:1.2.0
     volumes:
       - /usr/local/java:/java
-    entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/mhc.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/contextHandler.jar","--spring.profiles.active=docker"]
+    entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/c2s.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/contextHandler.jar","--spring.profiles.active=docker"]
     mem_limit: 1000m
     links:
-      - discovery-server.mhc.com
-      - pcm-db.mhc.com
-      - audit-service.mhc.com
+      - discovery-server.c2s.com
+      - pcm-db.c2s.com
+      - audit-service.c2s.com
     environment:
-      spring.config.location: "file:/java/MHC_PROPS/context-handler/"
+      spring.config.location: "file:/java/C2S_PROPS/context-handler/"
     restart: always
-  audit-service-db.mhc.com:
+  audit-service-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - audit-service-db-data.mhc.com
+      - audit-service-db-data.c2s.com
     environment:
         MYSQL_ROOT_PASSWORD: admin
         MYSQL_DATABASE: audit
     restart: always
-  audit-service-db-data.mhc.com:
+  audit-service-db-data.c2s.com:
     image: busybox
     volumes:
       - /usr/local/java/mysql/audit-service:/var/lib/mysql
-      - /usr/local/java/MHC_PROPS/audit-service/init-db:/docker-entrypoint-initdb.d
-  audit-service.mhc.com:
+      - /usr/local/java/C2S_PROPS/audit-service/init-db:/docker-entrypoint-initdb.d
+  audit-service.c2s.com:
     image: bhits/audit-service:0.5
     volumes:
       - /usr/local/java:/java
     links:
-      - audit-service-db.mhc.com
+      - audit-service-db.c2s.com
     restart: always
