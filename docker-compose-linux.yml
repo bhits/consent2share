@@ -223,6 +223,9 @@ services:
     restart: always
   discovery-server.c2s.com:
     image: "bhits/discovery-server:0.3.0"
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/discovery-server/"
+      TZ: "US/Eastern"
     volumes:
       - /usr/local/java:/java
     entrypoint: ["java","-Djavax.net.ssl.trustStore=/java/keystore/c2s.keystore","-Djavax.net.ssl.trustStorePassword=changeit","-Xms256m","-Xmx512m","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Xss1m","-jar","/discovery-server.jar","--spring.profiles.active=ssl,docker"]
