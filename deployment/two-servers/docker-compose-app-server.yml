@@ -1,0 +1,240 @@
+version: '2'
+services:
+  admin-ui.c2s.com:
+    image: bhits/admin-portal-ui:0.9.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    links:
+      - discovery-server.c2s.com
+    restart: always
+
+  audit-service.c2s.com:
+    image: bhits/audit-service:0.5
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    restart: always
+
+  clamd.c2s.com:
+    image: dinkel/clamavd
+    restart: always
+
+  discovery-server.c2s.com:
+    image: bhits/discovery-server:0.4.0
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/discovery-server/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1500m
+    restart: always
+
+  document-validator-ccda-r1.c2s.com:
+    image: bhits/document-validator-ccda-r1:0.5.0
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1500m
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    restart: always
+
+  document-validator-ccda-r2.c2s.com:
+    image: bhits/document-validator-ccda-r2:0.5.0
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1500m
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    restart: always
+
+  dss.c2s.com:
+    image: bhits/dss:1.9.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1500m
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/dss/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    links:
+      - discovery-server.c2s.com
+      - guvnor.c2s.com
+      - document-validator-ccda-r1.c2s.com
+      - document-validator-ccda-r2.c2s.com
+    restart: always
+
+  edge-server.c2s.com:
+    image: bhits/edge-server:0.7.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1500m
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/edge-server/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    command: --spring.profiles.active=ssl,eureka-ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - discovery-server.c2s.com
+      - pls.c2s.com
+      - guvnor.c2s.com
+      - uaa.c2s.com
+      - document-validator-ccda-r1.c2s.com
+      - document-validator-ccda-r2.c2s.com
+    restart: always
+
+  guvnor.c2s.com:
+    image: bhits/c2s-guvnor:5.5.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    environment:
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    restart: always
+
+  iexhub.c2s.com:
+    image: bhits/iexhub-fork:0.2.0
+    environment:
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 4000m
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/usr/local/tomcat/bin/test
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/temp:/temp
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/temp/output:/temp/output
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/test:/usr/local/tomcat/test
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results:/results
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
+    restart: always
+
+  pcm.c2s.com:
+    image: bhits/pcm:1.14.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/pcm/"
+      TZ: "US/Eastern"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 2000m
+    links:
+      - uaa.c2s.com
+      - pls.c2s.com
+      - discovery-server.c2s.com
+      - clamd.c2s.com
+    restart: always
+
+  phr.c2s.com:
+    image: bhits/phr:1.14.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/phr/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      logging.level.org.springframework.security: "debug"
+    mem_limit: 1500m
+    links:
+      - redis.c2s.com
+      - discovery-server.c2s.com
+      - iexhub.c2s.com
+    restart: always
+
+  pls.c2s.com:
+    image: bhits/pls:1.7.0
+    environment:
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1200m
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    restart: always
+
+  pp-ui.c2s.com:
+    image: bhits/pp-ui:0.16.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1000m
+    links:
+      - discovery-server.c2s.com
+    restart: always
+
+  redis.c2s.com:
+    image: redis
+    restart: always
+
+  try-policy.c2s.com:
+    image: bhits/try-policy:1.9.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    links:
+      - discovery-server.c2s.com
+    restart: always
+
+  patient-registration.c2s.com:
+    image: bhits/patient-registration:1.10.0
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/patient-registration/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1500m
+    links:
+      - discovery-server.c2s.com
+      - uaa.c2s.com
+      - iexhub.c2s.com
+    restart: always
+
+  patient-user.c2s.com:
+    image: bhits/patient-user:0.8.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1000m
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/patient-user/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    command: --spring.profiles.active=mysql
+    links:
+      - discovery-server.c2s.com
+      - uaa.c2s.com
+    restart: always
+
+  pep.c2s.com:
+    image: bhits/pep:1.3.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1000m
+    links:
+      - discovery-server.c2s.com
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/pep/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    restart: always
+
+  context-handler.c2s.com:
+    image: bhits/context-handler:1.3.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1000m
+    links:
+      - discovery-server.c2s.com
+      - audit-service.c2s.com
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/context-handler/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    restart: always
+
+  uaa.c2s.com:
+    image: bhits/uaa:3.4.1
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1500m
+    restart: always
+
