@@ -1,7 +1,7 @@
 version: '2'
 services:
   admin-ui.c2s.com:
-    image: bhits/admin-portal-ui:0.9.0
+    image: bhits/admin-portal-ui:0.11.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     environment:
@@ -26,8 +26,26 @@ services:
     image: dinkel/clamavd
     restart: always
 
+  context-handler.c2s.com:
+    image: bhits/context-handler:1.5.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1000m
+    links:
+      - discovery-server.c2s.com
+      - pcm-db.c2s.com
+      - audit-service.c2s.com
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/context-handler/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    restart: always
+
+  redis.c2s.com:
+    image: redis
+    restart: always
+
   discovery-server.c2s.com:
-    image: bhits/discovery-server:0.4.0
+    image: bhits/discovery-server:0.6.0
     environment:
       spring.config.location: "file:/java/C2S_PROPS/discovery-server/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
@@ -37,7 +55,7 @@ services:
     restart: always
 
   document-validator-ccda-r1.c2s.com:
-    image: bhits/document-validator-ccda-r1:0.5.0
+    image: bhits/document-validator-ccda-r1:0.7.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1500m
@@ -46,7 +64,7 @@ services:
     restart: always
 
   document-validator-ccda-r2.c2s.com:
-    image: bhits/document-validator-ccda-r2:0.5.0
+    image: bhits/document-validator-ccda-r2:0.7.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1500m
@@ -55,7 +73,7 @@ services:
     restart: always
 
   dss.c2s.com:
-    image: bhits/dss:1.9.0
+    image: bhits/dss:1.11.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     mem_limit: 1500m
@@ -71,7 +89,7 @@ services:
     restart: always
 
   edge-server.c2s.com:
-    image: bhits/edge-server:0.7.0
+    image: bhits/edge-server:0.9.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     mem_limit: 1500m
@@ -86,6 +104,7 @@ services:
       - discovery-server.c2s.com
       - pls.c2s.com
       - guvnor.c2s.com
+      - openempi.c2s.com
       - uaa.c2s.com
       - document-validator-ccda-r1.c2s.com
       - document-validator-ccda-r2.c2s.com
@@ -105,6 +124,8 @@ services:
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 4000m
+    links:
+      - openempi.c2s.com
     volumes:
       - ${C2S_BASE_PATH}/java:/java
       - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/usr/local/tomcat/bin/test
@@ -115,8 +136,48 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
     restart: always
 
+  openempi.c2s.com:
+    image: bhits/openempi:2.2.9
+    volumes:
+      - /usr/local/java:/java
+    environment:
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    links:
+      - openempi-db.c2s.com
+    restart: always
+
+  patient-registration.c2s.com:
+    image: bhits/patient-registration:1.13.0
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/patient-registration/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1500m
+    links:
+      - discovery-server.c2s.com
+      - uaa.c2s.com
+      - iexhub.c2s.com
+    restart: always
+
+  patient-user.c2s.com:
+    image: bhits/patient-user:0.10.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1000m
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/patient-user/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    command: --spring.profiles.active=mysql
+    links:
+      - discovery-server.c2s.com
+      - patient-user-db.c2s.com
+      - uaa.c2s.com
+    restart: always
+
   pcm.c2s.com:
-    image: bhits/pcm:1.14.0
+    image: bhits/pcm:1.16.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     environment:
@@ -132,8 +193,20 @@ services:
       - clamd.c2s.com
     restart: always
 
+  pep.c2s.com:
+    image: bhits/pep:1.5.0
+    volumes:
+      - ${C2S_BASE_PATH}/java:/java
+    mem_limit: 1000m
+    links:
+      - discovery-server.c2s.com
+    environment:
+      spring.config.location: "file:/java/C2S_PROPS/pep/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    restart: always
+
   phr.c2s.com:
-    image: bhits/phr:1.14.0
+    image: bhits/phr:1.16.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     environment:
@@ -149,7 +222,7 @@ services:
     restart: always
 
   pls.c2s.com:
-    image: bhits/pls:1.7.0
+    image: bhits/pls:1.9.0
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1200m
@@ -160,20 +233,16 @@ services:
     restart: always
 
   pp-ui.c2s.com:
-    image: bhits/pp-ui:0.16.0
+    image: bhits/pp-ui:0.18.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     mem_limit: 1000m
     links:
       - discovery-server.c2s.com
-    restart: always
-
-  redis.c2s.com:
-    image: redis
     restart: always
 
   try-policy.c2s.com:
-    image: bhits/try-policy:1.9.0
+    image: bhits/try-policy:1.11.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     environment:
@@ -181,61 +250,6 @@ services:
     mem_limit: 1000m
     links:
       - discovery-server.c2s.com
-    restart: always
-
-  patient-registration.c2s.com:
-    image: bhits/patient-registration:1.10.0
-    environment:
-      spring.config.location: "file:/java/C2S_PROPS/patient-registration/"
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    volumes:
-      - ${C2S_BASE_PATH}/java:/java
-    mem_limit: 1500m
-    links:
-      - discovery-server.c2s.com
-      - uaa.c2s.com
-      - iexhub.c2s.com
-    restart: always
-
-  patient-user.c2s.com:
-    image: bhits/patient-user:0.8.0
-    volumes:
-      - ${C2S_BASE_PATH}/java:/java
-    mem_limit: 1000m
-    environment:
-      spring.config.location: "file:/java/C2S_PROPS/patient-user/"
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    command: --spring.profiles.active=mysql
-    links:
-      - discovery-server.c2s.com
-      - patient-user-db.c2s.com
-      - uaa.c2s.com
-    restart: always
-
-  pep.c2s.com:
-    image: bhits/pep:1.3.0
-    volumes:
-      - ${C2S_BASE_PATH}/java:/java
-    mem_limit: 1000m
-    links:
-      - discovery-server.c2s.com
-    environment:
-      spring.config.location: "file:/java/C2S_PROPS/pep/"
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    restart: always
-
-  context-handler.c2s.com:
-    image: bhits/context-handler:1.3.0
-    volumes:
-      - ${C2S_BASE_PATH}/java:/java
-    mem_limit: 1000m
-    links:
-      - discovery-server.c2s.com
-      - pcm-db.c2s.com
-      - audit-service.c2s.com
-    environment:
-      spring.config.location: "file:/java/C2S_PROPS/context-handler/"
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     restart: always
 
   uaa.c2s.com:
@@ -264,6 +278,18 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/audit-service:/var/lib/mysql
       - ${C2S_BASE_PATH}/java/C2S_PROPS/audit-service/init-db:/docker-entrypoint-initdb.d
+
+  openempi-db.c2s.com:
+    image: bhits/openempi-db:2.2.9
+    environment:
+      POSTGRES_USER: openempi
+      POSTGRES_PASSWORD: openempi
+      POSTGRES_DB: openempi
+    volumes:
+      - /usr/local/java/postgresql:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    restart: always
 
   patient-user-db.c2s.com:
     image: mysql:5.7

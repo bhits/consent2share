@@ -95,3 +95,15 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/audit-service:/var/lib/mysql
       - ${C2S_BASE_PATH}/java/C2S_PROPS/audit-service/init-db:/docker-entrypoint-initdb.d
+
+  openempi-db.c2s.com:
+    image: bhits/openempi-db:2.2.9
+    environment:
+      POSTGRES_USER: openempi
+      POSTGRES_PASSWORD: openempi
+      POSTGRES_DB: openempi
+    volumes:
+      - /usr/local/java/postgresql:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    restart: always
