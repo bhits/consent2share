@@ -1,14 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>C2S Github Welcome</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="css/c2s_stylesheet.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="padding-top: 50px;">
+<div class="container-fluid">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="color: white;" href="#">Consent2Share</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Technical<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="technical/terminology.html">Terminology</a></li>
+                            <li><a href="technical/securityPrivacy.html">Securtiy and Privacy</a></li>
+                            <li><a href="technical/implementerSupport.html">Implemeter Support</a></li>
+                            <li><a href="technical/currentRelease.html">Current Release</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Documentation<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="documentation/userGuides.html">User Guides</a></li>
+                            <li><a href="documentation/additionalDocs.html">Additional Documents</a></li>
+                            <li><a href="documentation/faq.html">FAQs</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Use Cases<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="use-cases/commonUseCases.html">Common Use Cases</a></li>
+                            <li><a href="use-cases/workflow.html">Workflow</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Financial<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="financial/cost.html">Cost</a></li>
+                            <li><a href="financial/funding.html">Funding</a></li>
+                            <li><a href="financial/teamComposition.html">Team Composition</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Options<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="options/createAccount.html">Create Account</a></li>
+                            <li><a href="documentation/faq.html">FAQs</a></li>
+                            <li><a href="options/contactUs.html">Contact Us</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="options/signIn.html">Sign In</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
     <div class="row">
         <div class="col-sm-12 white p-t-sm p-b-sm navy-blue">
             <h1 class="m-n">Welcome to Consent2Share on Github!</h1>
         </div>
     </div>
+    <div class="row m-t-sm">
+        <div class="col-sm-3">
+            <div style="padding: 10px; border-radius: 4px;">
+                <div>
+                    <h3 class="m-t-xs m-b-xs"><span class="fa fa-bullhorn fa-2x fa-pull-left text-orange"
+                                                    aria-hidden="true"></span>
+                        Announcements & News!</h3>
+                    <p class="font-size12 italic">Click on the links below for more information.</p>
+                </div>
+                <div class="m-t-md">
+                    <h5 class="m-t-sm text-dark-red">Current Release.</h5>
+                    <div class="list-group">
+                        <a type="button" href="technical/currentRelease.html"
+                           class="list-group-item list-group-item-success">Version
+                            X.3.1</a>
+                    </div>
+
+                    <h5 class="m-t-xs text-dark-red">Recent News!</h5>
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-warning">Release Version X.1 Coming
+                            Soon!
+                        </button>
+                        <button type="button" class="list-group-item">Updated Documentation for Installation</button>
+                        <button type="button" class="list-group-item list-group-item-warning">New Use Cases.</button>
+                        <button type="button" class="list-group-item">C2S implemented in 2 new States!</button>
+                    </div>
+
+                    <h5 class="m-t-xs text-dark-red">Upcoming Events!</h5>
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-warning">Baltimore Tech Convention
+                            - Januaury 2017
+                        </button>
+                        <button type="button" class="list-group-item">CES Show - MARCH 2017</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 contentBorderLeft p-b">
+            <div class="row">
+                <div class="col-sm-11">
+                    <h2 class="m-t-sm">New to Consent2Share?</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                        id est laborum.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="technical/terminology.html">
+                                <div class="p-sm mainLinks">
+
+                                    <div class="center text-navy-blue">
+                                            <span class="fa-stack fa-2x">
+                                                <i class="fa fa-circle fa-stack-2x quicklink"></i>
+                                                <i class="fa fa-file-word-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <h4 class="m-t-xs">Terminology</h4>
+                                    </div>
+                                    <div>
+                                        Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+                                        consequat
+                                        massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
+                                        arcu.
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4">
+                            <a href="technical/securityPrivacy.html">
+                                <div class="p-sm mainLinks">
+                                    <div class="center text-navy-blue">
+                                            <span class="fa-stack fa-2x">
+                                                <i class="fa fa-circle fa-stack-2x quicklink"></i>
+                                                <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <h4 class="m-t-xs">Security and Privacy</h4>
+                                    </div>
+                                    <div>
+                                        Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+                                        Aenean leo ligula, porttitor eu, consequat vitae.
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4">
+                            <a href="technical/implementerSupport.html">
+                                <div class="p-sm mainLinks">
+                                    <div class="center text-navy-blue">
+                                            <span class="fa-stack fa-2x">
+                                                <i class="fa fa-circle fa-stack-2x quicklink"></i>
+                                                <i class="fa fa-cog fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <h4 class="m-t-xs">Implementer support</h4>
+                                    </div>
+
+                                    <div>
+                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+                                        amet
+                                        adipiscing sem neque sed ipsum.
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="documentation/userGuides.html">
+                                <div class="p-sm mainLinks">
+                                    <div class="center text-navy-blue">
+                                            <span class="fa-stack fa-2x">
+                                                <i class="fa fa-circle fa-stack-2x quicklink"></i>
+                                                <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <h4 class="m-t-xs">User Guide</h4>
+                                    </div>
+
+                                    <div>
+                                        Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+                                        consequat
+                                        massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
+                                        arcu.
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <a href="financial/cost.html">
+                                <div class="p-sm mainLinks">
+                                    <div class="center text-navy-blue">
+                                            <span class="fa-stack fa-2x">
+                                                <i class="fa fa-circle fa-stack-2x quicklink"></i>
+                                                <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <h4 class="m-t-xs">Financial</h4>
+                                    </div>
+                                    <div>
+                                        Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+                                        Aenean
+                                        leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-4">
+                            <a href="use-cases/commonUseCases.html">
+                                <div class="p-sm mainLinks">
+                                    <div class="center text-navy-blue">
+                                            <span class="fa-stack fa-2x">
+                                                <i class="fa fa-circle fa-stack-2x quicklink"></i>
+                                                <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <h4 class="m-t-xs">User Cases</h4>
+                                    </div>
+
+                                    <div>
+                                        Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit
+                                        amet
+                                        adipiscing sem neque sed ipsum.
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t">
+                <div class="col-sm-11">
+                    <h4>Additional Information</h4>
+                    <p>Ad enim tation comprehensam mea. Vero erant iudico in ius, eum elit persius recteque in. Id per
+                        suas zril posidonium,
+                        vidit perpetua appellantur his ne. Has mucius admodum adipisci ex. Sit mundi adolescens in, pro
+                        definiebas incorrupte ex,
+                        vix cu pericula similique. At probo nemore platonem mei, ex est everti dolorum nonumes.
+                        Solet dicam ius ne, veritus mentitum antiopam qui eu. Appetere praesent persecuti pri cu,
+                        appetere prodesset nec ut,
+                        vis sale platonem eu. Et usu nusquam phaedrum accusamus.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="text-muted m-t m-l font-size12 v-alignMiddle">Copyright&copy;2016</p>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
