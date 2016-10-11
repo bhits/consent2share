@@ -174,13 +174,17 @@ Please see the [release page](../../releases) for current releases.
 
 ## Development Guide
 
-Please check the release notes from the [release page](../../releases) for the documentation.
+Please see the release notes from the [release page](../../releases) for the documentation.
 
 ## Deployment Guide
 
-Please check the release notes from the [release page](../../releases) for the documentation.
+Please see the release notes from the [release page](../../releases) for the documentation.
 
 ## Docker
+
+BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a C2S Infrastructure using *Docker* and *Docker Compose*.
+
+Additionally, each source code repository also contain `README` instructions and a `Dockerfile` for building Docker images from the source code.
 
 [//]: # (## Coding Style Guide)
 
