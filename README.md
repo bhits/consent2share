@@ -34,7 +34,7 @@ The technology stack used for Consent2Share includes, but not limited to:
 
 Consent2Share employs a microservice architecture which makes it highly scalable and resilient. Majority of C2S microservices are implemented as [Spring Boot](http://projects.spring.io/spring-boot/) applications and utilize several [Spring Cloud](http://projects.spring.io/spring-cloud/) projects including [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) and [Spring Cloud Security](http://cloud.spring.io/spring-cloud-security/).
 
-[C2S Technical Blueprint](docs/c2s-technical-blueprint-v1.9.pdf) can be used as a good reference that shows the big picture of C2S architecture, the technical components, and the high level interaction between them.
+*C2S Technical Blueprint* can be used as a good reference that shows the big picture of C2S architecture, the technical components, and the high level interaction between them. Please see the documents in [release page](../../releases) for the applicable version of *C2S Technical Blueprint* document.
 
 The C2S components can be grouped as the following:
 
@@ -170,15 +170,15 @@ As mentioned in the previous sections, Consent2Share is an umbrella project that
 
 The versions that can be found at Git tags in `<MajorVersion>.<MinorVersion>.<IncrementalVersion>` format represents the independent version of that specific component. The Consent2Share system version is also tagged in each repository with `c2s-` prefix *(Example: `c2s-<MajorVersion>.<MinorVersion>.<IncrementalVersion>`)*.
 
-Please see the [release page](/releases) for current releases.
+Please see the [release page](../../releases) for current releases.
 
 ## Development Guide
 
-Please check the release notes from the [release page](/releases) for the documentation.
+Please check the release notes from the [release page](../../releases) for the documentation.
 
 ## Deployment Guide
 
-Please check the release notes from the [release page](/releases) for the documentation.
+Please check the release notes from the [release page](../../releases) for the documentation.
 
 ## Docker
 
