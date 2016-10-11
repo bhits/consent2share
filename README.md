@@ -38,6 +38,10 @@ Consent2Share employs a microservice architecture which makes it highly scalable
 
 The C2S components can be grouped as the following:
 
+### Common Libraries
+
+The C2S has a set of common libraries that are being used across the microservices. These libraries mostly contain basic utility functions. The complex domain features are implemented as microservices as described in the following sections. **The common libraries are needed to be built and installed to the local maven repository before building any other C2S microservices in order to prevent any dependency resolution issues.**
+
 ### User Interfaces
 
 C2S currently offers 2 User Interfaces: Patient Portal UI and Admin Portal UI.
@@ -122,7 +126,7 @@ Source Code Repository: [https://github.com/bhits/edge-server](https://github.co
 
 #### Discovery Server
 
-The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates the Consent2Share (C2S) microservices to dynamically discovery each other and promotes the scalability of C2S system. It provides the following:
+The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates the Consent2Share (C2S) microservices to dynamically discover each other and promotes the scalability of C2S system. It provides the following:
 
 + Registry of Consent2Share (C2S) service instances,
 + Provides means for C2S service instances to register, de-register and query instances with the registry,
@@ -152,11 +156,29 @@ C2S uses [JBoss Drools Guvnor](https://docs.jboss.org/drools/release/5.5.0.Final
 
 ## Security
 
+C2S uses [OAuth2](https://tools.ietf.org/html/rfc6749), [OpenID Connect](http://openid.net/specs/openid-connect-core-1_0.html), [JSON Web Token (JWT)](https://jwt.io/) and [SCIM](https://tools.ietf.org/html/rfc7644) for authorization, authentication and identity management. [CloudFoundry User Account and Authentication (UAA) Server](https://github.com/cloudfoundry/uaa) implementation is currently being used and tested with C2S as the authorization server.
+
+The [Edge Server](#edge-server) is being used as the entry point from public access and acts as a *reverse proxy* to the OAuth2 resource servers. The security is delegated to the resource servers that are exposed by the [Edge Server](#edge-server), therefore **one should exercise great caution when configuring the routes to the microservices. The endpoints that contain sensitive information and do not implement a form of security MUST NOT BE exposed through Edge Server.**
+
+### DISCLAIMER
+
+**It is strongly encouraged that your program’s Information Security Manager (or equivalent) reviews the security practices as it applies to your implementation of the Consent2Share application in your unique situation. The Substance Abuse and Mental Health Services Administration and its contractor FEi Systems are not liable for any risks experienced.**
+
 ## Releases
+
+As mentioned in the previous sections, Consent2Share is an umbrella project that consists of many microservices. Each microservice and infrastructure component has its own independent source code repository, version, and release cycle. The release of Consent2Share as a whole system is basically a set of tested and compatible microservice releases and the supporting documentation.
+
+The versions that can be found at Git tags in `<MajorVersion>.<MinorVersion>.<IncrementalVersion>` format represents the independent version of that specific component. The Consent2Share system version is also tagged in each repository with `c2s-` prefix *(Example: `c2s-<MajorVersion>.<MinorVersion>.<IncrementalVersion>`)*.
+
+Please see the [release page](/releases) for current releases.
 
 ## Development Guide
 
+Please check the release notes from the [release page](/releases) for the documentation.
+
 ## Deployment Guide
+
+Please check the release notes from the [release page](/releases) for the documentation.
 
 ## Docker
 
