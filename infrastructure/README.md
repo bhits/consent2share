@@ -21,7 +21,7 @@ Add the following lines in `c2s-docker.sh` by replacing `***` with customized pa
 `export AUDIT_DB_PASSWORD=***`		
 `export C2S_BASE_PATH=/usr/local`
 
-Update APIs database properties using customized password.
+Update pls and audit-service APIs database properties using customized password.
 
 ## Deployment	
 
@@ -46,7 +46,7 @@ This option is separated APIs on application server and database on database ser
 
 ## Development
 
-This docker compose file is designed to let developer run consent2share application. 	
+This docker compose file is designed to run consent2share application on developer machine. 	
 
 Compared to the deployment one-server option, this one doesn't set any memory constraints on docker containers because developer's machine may has limited memory on docker-machine. 
 
@@ -55,12 +55,21 @@ Compared to the deployment one-server option, this one doesn't set any memory co
 ### build-all.sh
 This script is used to build all consent2share APIs' docker images on local machine.
 After clone the c2s-runner repository under the same workspace with other consent2share APIs repositories. Run `build-all.sh` in `git bash` or `terminal/command line` after navigate to `scripts` folder.
+Run `docker images` to check all created docker images.
 
 ### publish-dockerhub.sh
 
 This script is used to tag docker images and publish to the dockerhub. Image tag is same as pom.xml version number in each APIs.
 
 ## Reference 
-For more detail, please refer `C2S deployment guide` and APIs `README.md` file in each repository. 
+For more detail, please refer `C2S deployment guide` and APIs' `README.md` file in each repository. 
+
+## Contact
+
+If you have any questions, comments, or concerns please see [Consent2Share]() project site.
+
+## Report Issues
+
+Please use [GitHub Issues](https://github.com/bhits/phr-api/issues) page to report issues.
 
 

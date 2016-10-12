@@ -30,6 +30,7 @@ services:
       - audit-service.c2s.com
     environment:
       spring.config.location: "file:/java/C2S_PROPS/context-handler/"
+      spring.datasource.password: ${PCM_DB_PASSWORD}
     restart: always
 
   redis.c2s.com:
@@ -135,6 +136,7 @@ services:
       - ${C2S_BASE_PATH}/java:/java
     environment:
       spring.config.location: "file:/java/C2S_PROPS/patient-user/"
+      spring.datasource.password: ${PATIENT_USER_DB_PASSWORD}
     command: --spring.profiles.active=mysql
     links:
       - discovery-server.c2s.com
@@ -149,6 +151,7 @@ services:
     environment:
       spring.config.location: "file:/java/C2S_PROPS/pcm/"
       TZ: "US/Eastern"
+      spring.datasource.password: ${PCM_DB_PASSWORD}
     links:
       - uaa.c2s.com
       - pcm-db.c2s.com
@@ -174,6 +177,7 @@ services:
     environment:
       spring.config.location: "file:/java/C2S_PROPS/phr/"
       logging.level.org.springframework.security: "debug"
+      spring.datasource.password: ${PHR_DB_PASSWORD}
     links:
       - phr-db.c2s.com
       - redis.c2s.com
@@ -209,6 +213,8 @@ services:
     image: bhits/uaa:3.4.1
     volumes:
       - ${C2S_BASE_PATH}/java:/java
+    environment:
+      UAA_DB_PASSWORD: ${UAA_DB_PASSWORD}
     links:
       - uaa-db.c2s.com
     restart: always

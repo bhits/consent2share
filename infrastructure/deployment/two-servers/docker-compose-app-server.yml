@@ -3,6 +3,7 @@ services:
   admin-ui.c2s.com:
     image: bhits/admin-portal-ui:0.11.0
     volumes:
+    volumes:
       - ${C2S_BASE_PATH}/java:/java
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
@@ -35,6 +36,7 @@ services:
     environment:
       spring.config.location: "file:/java/C2S_PROPS/context-handler/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      spring.datasource.password: ${PCM_DB_PASSWORD}
     restart: always
 
   redis.c2s.com:
@@ -164,6 +166,7 @@ services:
     environment:
       spring.config.location: "file:/java/C2S_PROPS/patient-user/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      spring.datasource.password: ${PATIENT_USER_DB_PASSWORD}
     command: --spring.profiles.active=mysql
     links:
       - discovery-server.c2s.com
@@ -178,6 +181,7 @@ services:
       spring.config.location: "file:/java/C2S_PROPS/pcm/"
       TZ: "US/Eastern"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      spring.datasource.password: ${PCM_DB_PASSWORD}
     mem_limit: 2000m
     links:
       - uaa.c2s.com
@@ -206,6 +210,7 @@ services:
       spring.config.location: "file:/java/C2S_PROPS/phr/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       logging.level.org.springframework.security: "debug"
+      spring.datasource.password: ${PHR_DB_PASSWORD}
     mem_limit: 1500m
     links:
       - redis.c2s.com
@@ -248,5 +253,6 @@ services:
       - ${C2S_BASE_PATH}/java:/java
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      UAA_DB_PASSSWORD: {UAA_DB_PASSWORD}
     mem_limit: 1500m
     restart: always
