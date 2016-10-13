@@ -1,6 +1,6 @@
 # Consent2Share
 
-Consent2Share (C2S) is an open source software application sponsored by the U.S. Substance Abuse and Mental Health Administration (SAMHSA) which is designed to support Behavioral Health integration with health information exchanges (HIEs). Behavioral healthcare, which includes substance abuse and mental health treatment services and providers, face special privacy regulations that can make the exchange of health care information with other providers more difficult than in other areas of healthcare.
+Consent2Share (C2S) is an open source software application sponsored by the U.S. Substance Abuse and Mental Health Administration (SAMHSA) which is designed to support behavioral health integration with health information exchanges (HIEs). Behavioral healthcare, which includes substance abuse and mental health treatment services and providers, faces special privacy regulations that can make the exchange of health care information with other providers more strict than in other areas of healthcare.
 
 Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) which was sponsored and defined by the U.S. Office of the National Coordinator for Health Information Technology (ONC). The implementation of DS4P concepts and standards will allow patients receiving behavioral health treatment to share their health information through the nation’s HIEs while providing improved protection of their privacy.
 
@@ -40,7 +40,7 @@ The C2S components can be grouped as the following:
 
 ### User Interfaces
 
-C2S currently offers two User Interfaces: Patient Portal UI and Admin Portal UI.
+C2S currently offers two user interfaces: the Patient Portal UI and the Admin Portal UI.
 
 #### Patient Portal UI
 
@@ -60,7 +60,7 @@ The backend of C2S consists of many microservices that are small yet focused on 
 
 #### Patient Registration API
 
-The Patient Registration (patient-registration) API is a component of Consent2Share (C2S) that manages the patient account creation process and persists patient demographics in Patient Health Record (PHR) API domain. If it is configured, it also registers the patient demographics to Health Information Exchange (HIE) via Information Exchange Hub (IExHub).
+The Patient Registration (patient-registration) API is a component of C2S that manages the patient account creation process and persists patient demographics in Patient Health Record (PHR) API domain. If it is configured, it also registers the patient demographics to Health Information Exchange (HIE) via Information Exchange Hub (IExHub).
 
 Source Code Repository: [https://github.com/bhits/registration-api](https://github.com/bhits/registration-api)
 
@@ -84,7 +84,7 @@ Source Code Repository: [https://github.com/bhits/try-policy-api](https://github
 
 #### Patient Health Record API
 
-The Patient Health Record (PHR) API is responsible for storing patient identities in the C2S domain, and for serving patient health records from an HIE via the Information Exchange Hub (IExHub). Currently, only patient demographics and C2S Medical Record Numbers (MRN) are persisted in PHR domain.
+The Patient Health Record (PHR) API is responsible for storing patient identities in the C2S domain, and for serving patient health records from an HIE via an Information Exchange Hub (IExHub). Currently, only patient demographics and C2S Medical Record Numbers (MRN) are persisted in PHR domain.
 
 Source Code Repository: [https://github.com/bhits/phr-api](https://github.com/bhits/phr-api)
 
@@ -114,7 +114,7 @@ Source Code Repository: [https://github.com/bhits/iexhub](https://github.com/bhi
 
 ### Supporting Infrastructure Services
 
-C2S uses [Eureka](https://github.com/Netflix/eureka) and [Zuul](https://github.com/Netflix/zuul) via [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) project to facilitate microservice orchestration, dynamic service discovery, load balancing, security and server side routing. There are two major supporting infrastructure services in C2S based on these projects: Edge Server (Zuul) and Discovery Server (Eureka).
+C2S uses [Eureka](https://github.com/Netflix/eureka) and [Zuul](https://github.com/Netflix/zuul) via [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) project to facilitate microservice orchestration, dynamic service discovery, load balancing, security, and server side routing. There are two major supporting infrastructure services in C2S based on these projects: Edge Server (Zuul) and Discovery Server (Eureka).
 
 #### Edge Server
 
@@ -122,9 +122,9 @@ Source Code Repository: [https://github.com/bhits/edge-server](https://github.co
 
 #### Discovery Server
 
-The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates the Consent2Share (C2S) microservices to dynamically discover each other and promotes the scalability of C2S system. It provides the following:
+The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates the C2S microservices to dynamically discover each other and promotes the scalability of C2S system. It provides the following:
 
-+ Registry of Consent2Share (C2S) service instances,
++ Registry of C2S service instances,
 + Provides means for C2S service instances to register, de-register and query instances with the registry,
 + Registry propagation to other C2S microservice (Eureka client) and Discovery Server (Eureka server cluster) instances
 
@@ -138,17 +138,17 @@ C2S uses several third-party open source services for authentication, authorizat
 
 C2S uses UAA for authentication, authorization, issuing tokens for client applications, and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
 
-C2S currently uses a fork of UAA project. This fork is fundamentally same as original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes, and a few test users including an admin user in UAA. This fork can be found at [https://github.com/bhits/uaa](https://github.com/bhits/uaa).
+C2S currently uses a fork of UAA project. This fork is fundamentally the same as the original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes, and a few test users including an admin user in UAA. This fork can be found at [https://github.com/bhits/uaa](https://github.com/bhits/uaa).
 
 #### Logback Audit
 
 C2S uses [Logback Audit](http://audit.qos.ch/) as a centralized audit repository in backend services, particularly in Access Control Service components. Logback Audit can be configured to use relational databases for persistence.
 
-C2S currently uses a fork of Logback Audit project. This fork is fundamentally same as original Logback Audit implementation, but it has some dependency version updates and column size modifications in the database tables. It also includes a SQL script for database creation and a generated Audit Service project that can be built and deployed on an application server like [Apache Tomcat](http://tomcat.apache.org/). This fork can be found at [https://github.com/bhits/logback-audit](https://github.com/bhits/logback-audit).
+C2S currently uses a fork of Logback Audit project. This fork is fundamentally the same asthe  original Logback Audit implementation, but it has some dependency version updates and column size modifications in the database tables. It also includes a SQL script for database creation and a generated Audit Service project that can be built and deployed on an application server such as [Apache Tomcat](http://tomcat.apache.org/). This fork can be found at [https://github.com/bhits/logback-audit](https://github.com/bhits/logback-audit).
 
 #### JBoss Drools Guvnor
 
-C2S uses [JBoss Drools Guvnor](https://docs.jboss.org/drools/release/5.5.0.Final/drools-guvnor-docs/html_single/) as a user interface and a versioned repository for business rules of its Business Rule Management System (BRMS). Guvnor also offers a guided editor while creating/editing rules, versioning, and Quality Assurance (QA) support for testing and validating the changes to the business rules. The [Document Segmentation Service (DSS) API](#document-segmentation-service-api) uses the [JBoss Drools Expert](https://docs.jboss.org/drools/release/5.4.0.Final/drools-expert-docs/html_single/) to run the business rules that are retrieved from the Guvnor instance with given arguments in a *Document Segmentation* request context. These rules and the execution result of them are used as *Tagging Directives* and they drive the *Document Tagging* phase of *Document Segmentation Service*.
+C2S uses [JBoss Drools Guvnor](https://docs.jboss.org/drools/release/5.5.0.Final/drools-guvnor-docs/html_single/) as a user interface and a versioned repository for business rules of its Business Rule Management System (BRMS). Guvnor also offers a guided editor while creating/editing rules, versioning, and Quality Assurance (QA) support for testing and validating the changes to the business rules. The [Document Segmentation Service (DSS) API](#document-segmentation-service-api) uses the [JBoss Drools Expert](https://docs.jboss.org/drools/release/5.4.0.Final/drools-expert-docs/html_single/) to run the business rules that are retrieved from the Guvnor instance with given arguments in a *Document Segmentation* request context. These rules and the execution result are used as *Tagging Directives* and they drive the *Document Tagging* phase of *Document Segmentation Service*.
 
 ## Security
 
@@ -162,7 +162,7 @@ For simplicity in development and testing environments, SSL is **NOT** enabled b
 
 ### UAA Private and Public Keys
 
-The C2S microservices that are also configured as *OAuth2 Resource Servers* use a public key to verify the signature of the JWT Token provided in the `Authorization` header. This token is generated and signed by UAA using the UAA  private key.
+The C2S microservices that are also configured as *OAuth2 Resource Servers* use a public key to verify the signature of the JWT Token provided in the `Authorization` header. This token is generated and signed by UAA using the UAA private key.
 
 These keys need to be securely generated and configured in production environments. The properties that are used to configure the keys:
 
@@ -193,7 +193,7 @@ Additionally,  there are other sub-projects listed in the below:
 
 ### Common Libraries
 
-The C2S has a set of common libraries that are being used across the microservices. These libraries mostly contain basic utility functions.
+The C2S application has a set of common libraries that are being used across the microservices. These libraries mostly contain basic utility functions.
 
 Source Code Repository: [https://github.com/bhits/common-libraries](https://github.com/bhits/common-libraries)
 
@@ -213,7 +213,7 @@ Spring Boot App Runner is developed to run Spring Boot applications that are pac
 2. Add/Remove instance configurations to/from existing applications
 3. Get the current state of deployed applications and instances
 
-Spring Boot App Runner persists the binaries, application and instance configurations on a configured file system location. This application itself is packaged in `war` format and can be deployed on an application server such as [Apache Tomcat](http://tomcat.apache.org/). During shutdown and startup, it shuts down all current applications and instances, and start them back up again using previously persisted state.
+Spring Boot App Runner persists the binaries, application, and instance configurations on a configured file system location. This application itself is packaged in `war` format and can be deployed on an application server such as [Apache Tomcat](http://tomcat.apache.org/). During shutdown and startup, it shuts down all current applications and instances, and start them back up again using previously persisted state.
 
 Source Code Repository: [https://github.com/bhits/spring-boot-app-runner](https://github.com/bhits/spring-boot-app-runner)
 
@@ -221,9 +221,9 @@ Source Code Repository: [https://github.com/bhits/spring-boot-app-runner](https:
 
 ## Releases
 
-As mentioned in the previous sections, Consent2Share is an umbrella project that consists of many microservices. Each microservice and infrastructure component has its own independent source code repository, version, and release cycle. The release of Consent2Share as a whole system is basically a set of tested and compatible microservice releases and the supporting documentation.
+As mentioned in the previous sections, C2S is an umbrella project that consists of many microservices. Each microservice and infrastructure component has its own independent source code repository, version, and release cycle. The release of Consent2Share as a whole system is basically a set of tested and compatible microservice releases and the supporting documentation.
 
-The versions that can be found at Git tags in `<MajorVersion>.<MinorVersion>.<IncrementalVersion>` format represents the independent version of that specific component. The Consent2Share system version is also tagged in each repository with `c2s-` prefix *(Example: `c2s-<MajorVersion>.<MinorVersion>.<IncrementalVersion>`)*.
+The versions that can be found at Git tags in `<MajorVersion>.<MinorVersion>.<IncrementalVersion>` format represents the independent version of that specific component. The C2S system version is also tagged in each repository with `c2s-` prefix *(Example: `c2s-<MajorVersion>.<MinorVersion>.<IncrementalVersion>`)*.
 
 Please see the [release page](../../releases) for current releases.
 
@@ -237,7 +237,7 @@ Please see [release page](../../releases) to download the document.
 
 ## Infrastructure Using Docker
 
-BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a Consent2Share running instance and related infrastructure using *Docker* and *Docker Compose*.
+BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a C2S running instance and related infrastructure using *Docker* and *Docker Compose*.
 
 Additionally, each source code repository also contains `README.md` instructions and a `Dockerfile` for building Docker images from the source code.
 
