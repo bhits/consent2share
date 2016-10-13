@@ -33,7 +33,11 @@ Consent2Share 2.0.0 requires:
 * Edge Server v0.9.0: [https://github.com/bhits/edge-server/releases/tag/0.9.0](https://github.com/bhits/edge-server/releases/tag/0.9.0)
 * Discovery Server v0.5.0: [https://github.com/bhits/discovery-server/releases/tag/0.5.0](https://github.com/bhits/discovery-server/releases/tag/0.5.0)
 * CloudFoundry User Account and Authentication (UAA) Server v3.4.1: [https://github.com/bhits/uaa/releases/tag/task5-azhec](https://github.com/bhits/uaa/releases/tag/task5-azhec)
+* Logback Audit v0.0.0: [https://github.com/bhits/logback-audit/releases/tag/0.0.0](https://github.com/bhits/logback-audit/releases/tag/0.0.0)
 * Common Libraries v1.7.0: [https://github.com/bhits/common-libraries/releases/tag/1.7.0](https://github.com/bhits/common-libraries/releases/tag/1.7.0)
+* Dockerized Java Jar Runner
+* Dockerized OpenEMPI
+* Dockerized JBoss Drools Guvnor
 
 
 [//]: # (The followings are commented out full template for Release Notes, for each new release, using this)
