@@ -3,16 +3,15 @@
 
 ### Features
 
-* **Patient Registration:** collect patient demographic and register patient in Consent2Share and HIE (if connected)
-* **Security:** use OAuth 2.0 and OpenID Connect for authentication and authorization
-* **Provider Management:** allow patients to search providers and mange their providers
-* **Consent Management:** allow patients to create, sign and revoke consent policies that determine the level of
-privacy applied to the patient’s health record when it is shared between providers
-* **Try Policy:** allow patients to try-their-policy against their medical record or a sample medical record in order to view the segmented medical record
-* **Value Set Management:** provide API to determine sensitivity categories for medical record entries
-* **Data Segmentation:** handle the segmentation of a patient’s sensitive health information per their consent
-* **View PHI:** allow patients to view medical records/health information retrieved from HIE (if connected)
-* **Document Validation:** provide API to validate C32, CCDA R1 and 2.1 documents based on schema and/or schematron rules
+* **Patient Registration:** Collect patient demographic and register patient in Consent2Share and HIE (if connected)
+* **Security:** Use OAuth 2.0 and OpenID Connect for authentication and authorization
+* **Provider Management:** Allow patients to search providers and mange their providers
+* **Consent Management:** Allow patients to create, sign, and revoke consent policies that determine the level of privacy applied to the patient’s health record when it is shared between providers
+* **Try Policy:** Allow patients to Try Their Policy against their medical record or a sample medical record in order to view the segmented medical record
+* **Value Set Management:** Provide an API to determine sensitivity categories for medical record entries
+* **Data Segmentation:** Handle the segmentation of patients’ sensitive health information according to their consent
+* **View PHI:** Allow patients to view medical records and health information retrieved from an HIE (if connected)
+* **Document Validation:** Provide an API to validate C32, C-CDA R1 and 2.1 documents based on schema and/or schematron rules
 
 ### NOTES:
 
