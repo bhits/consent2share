@@ -32,15 +32,11 @@ The technology stack used for Consent2Share includes, but not limited to:
 
 ## Architecture
 
-Consent2Share employs a microservice architecture which makes it highly scalable and resilient. Majority of C2S microservices are implemented as [Spring Boot](http://projects.spring.io/spring-boot/) applications and utilize several [Spring Cloud](http://projects.spring.io/spring-cloud/) projects including [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) and [Spring Cloud Security](http://cloud.spring.io/spring-cloud-security/).
+Consent2Share employs a [Microservices Architecture](http://martinfowler.com/articles/microservices.html) which makes it highly scalable and resilient. Majority of C2S microservices are implemented as [Spring Boot](http://projects.spring.io/spring-boot/) applications and utilize several [Spring Cloud](http://projects.spring.io/spring-cloud/) projects including [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) and [Spring Cloud Security](http://cloud.spring.io/spring-cloud-security/).
 
-*C2S Technical Blueprint* can be used as a good reference that shows the big picture of C2S architecture, the technical components, and the high level interaction between them. Please see the documents in [release page](../../releases) for the applicable version of *C2S Technical Blueprint* document.
+*C2S Technical Blueprint* can be used as a good reference that shows the big picture of C2S architecture, the technical components, and the high level interaction between them. Please see the documents in the [release page](../../releases) for the applicable version of *C2S Technical Blueprint* document.
 
 The C2S components can be grouped as the following:
-
-### Common Libraries
-
-The C2S has a set of common libraries that are being used across the microservices. These libraries mostly contain basic utility functions. The complex domain features are implemented as microservices as described in the following sections. **The common libraries are needed to be built and installed to the local maven repository before building any other C2S microservices in order to prevent any dependency resolution issues.**
 
 ### User Interfaces
 
@@ -48,19 +44,19 @@ C2S currently offers 2 User Interfaces: Patient Portal UI and Admin Portal UI.
 
 #### Patient Portal UI
 
-The Patient Portal UI (patient-portal-ui) is a patient user interface module of Consent2share (C2S) used by the patient to manage his or her health information. The patients can use this application to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions.
+The Patient Portal UI (patient-portal-ui) is a patient user interface component of Consent2share (C2S) used by the patient to manage his or her health information and consent. The patients can use this application to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions.
 
 Source Code Repository: [https://github.com/bhits/patient-portal-ui](https://github.com/bhits/patient-portal-ui)
 
 #### Admin Portal UI
 
-The Admin Portal UI (admin-portal-ui) is an administrative user interface module of the Consent2Share (C2S) used to create and manage patient accounts. Administrative staff can use this to log in, visit their home page, create patient accounts, and manage patient information.
+The Admin Portal UI (admin-portal-ui) is an administrative user interface component of the Consent2Share (C2S) used to create and manage patient accounts. Administrative staff can use this to log in, visit their home page, create patient accounts, and manage patient information.
 
 Source Code Repository: [https://github.com/bhits/admin-portal-ui](https://github.com/bhits/admin-portal-ui)
 
 ### Microservices
 
-The backend of C2S consists of many microservices that are small yet focused on certain domain areas. Some of these microservices also have persistence using [MySQL](https://www.mysql.com/) and are responsible for enforcing the specific domain rules.
+The backend of C2S consists of many microservices that are small yet focused on certain domain areas. These microservices provide RESTful API for external access. Some of these microservices also have persistence using [MySQL](https://www.mysql.com/).
 
 #### Patient Registration API
 
@@ -142,7 +138,7 @@ C2S uses several third-party open source services for authentication, authorizat
 
 C2S uses UAA for authentication, authorization, issuing tokens for client applications and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
 
-C2S currently uses a fork of UAA project. This fork is fundamentally same as original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes and an admin user in UAA. This fork can be found at [https://github.com/bhits/uaa](https://github.com/bhits/uaa).
+C2S currently uses a fork of UAA project. This fork is fundamentally same as original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes and a few test users including an admin user in UAA. This fork can be found at [https://github.com/bhits/uaa](https://github.com/bhits/uaa).
 
 #### Logback Audit
 
@@ -160,9 +156,68 @@ C2S uses [OAuth2](https://tools.ietf.org/html/rfc6749), [OpenID Connect](http://
 
 The [Edge Server](#edge-server) is being used as the entry point from public access and acts as a *reverse proxy* to the OAuth2 resource servers. The security is delegated to the resource servers that are exposed by the [Edge Server](#edge-server), therefore **one should exercise great caution when configuring the routes to the microservices. The endpoints that contain sensitive information and do not implement a form of security MUST NOT BE exposed through Edge Server.**
 
+### SSL
+
+For simplicity in development and testing environments, SSL is **NOT** enabled by default configurations in C2S components. Please follow the instructions given on particular microservice documentations for enabling SSL. Also, please be mindful for overriding the target endpoints in the default configurations to use `https` for SSL enabled services.
+
+### UAA Private and Public Keys
+
+The C2S microservices that are also configured as *OAuth2 Resource Servers* use a public key to verify the signature of the JWT Token provided in the `Authorization` header. This token is generated and signed by UAA using the UAA  private key.
+
+These keys need to be securely generated and configured in production environments. The properties that are used to configure the keys:
+
+In C2S microservices:
+
++ `security.oauth2.resource.jwt.key-value`: public key
+
+In UAA:
+
++ `jwt.token.verification-key`: public key
++ `jwt.token.signing-key`: private key
+
+Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
+
 ### DISCLAIMER
 
-**It is strongly encouraged that your program’s Information Security Manager (or equivalent) reviews the security practices as it applies to your implementation of the Consent2Share application in your unique situation. The Substance Abuse and Mental Health Services Administration and its contractor FEi Systems are not liable for any risks experienced.**
+**It is strongly encouraged that your program’s Information Security Manager (or equivalent) reviews the security practices as it applies to your implementation of the Consent2Share application in your unique situation. The Substance Abuse and Mental Health Services Administration and BHITS Development Team are not liable for any risks experienced.**
+
+## Sub Projects and Git Repositories
+
+Consent2Share is an umbrella project which has several sub projects. 
+
+In [User Interfaces](#user-interfaces), [Microservices](#microservices) and [Supporting Infrastructure Services](#supporting-infrastructure-services) sections, we listed all services used in Consent2Share. Each of these services is a sub project and has its own Git repository. 
+
+Also UAA and Logback Audit listed in [Third-party Services](#third-party-services) section are sub projects as well and have their own Git repository.  
+
+Additionally,  there are other sub projects listed in the below:
+
+### Common Libraries
+
+The C2S has a set of common libraries that are being used across the microservices. These libraries mostly contain basic utility functions. The complex domain features are implemented as microservices as described in the previous sections.
+
+Source Code Repository: [https://github.com/bhits/common-libraries](https://github.com/bhits/common-libraries)
+
+**NOTE: The common libraries are needed to be built and installed to the local Maven repository or deployed to Maven repository used in your enterprise development environment before building any other C2S microservices in order to prevent any dependency resolution issues.**
+
+### Spring Boot App Runner
+
+Spring Boot App Runner is developed to run Spring Boot applications that are packaged as `jar` in development and test environments that do not have Docker engine available. It provides RESTful APIs to:
+
+1. Deploy/Undeploy applications including binaries that are packaged as `jar`
+2. Add/Remove instance configurations to/from existing applications
+3. Get the current state of deployed applications and instances
+
+Spring Boot App Runner persists the binaries, application and instance configurations on a configured file system location. This application itself is packaged in `war` format and can be deployed on an application server like [Apache Tomcat](http://tomcat.apache.org/). During shutdown and startup, it shuts down all current applications and instances, and start them back up again using previously persisted state.
+
+Source Code Repository: [https://github.com/bhits/spring-boot-app-runner](https://github.com/bhits/spring-boot-app-runner)
+
+**NOTE: This application can be used for development and testing purposes, but it is NOT meant for and MUST NOT be used in production environments.**
+
+### Java Jar Runner
+
+This project only contains a `Dockerfile` and an `entrypoint.sh` script to build a base Docker image for all other C2S microservices that are implemented as Spring Boot applications. This image is essentially based on an [`opendk`](https://hub.docker.com/_/openjdk/) Docker image and supports certain environment variables for configuration and runs a configured `jar` file at startup.
+
+Source Code Repository: [https://github.com/bhits/java-jar-runner](https://github.com/bhits/java-jar-runner)
 
 ## Releases
 
@@ -174,17 +229,17 @@ Please see the [release page](../../releases) for current releases.
 
 ## Development Guide
 
-Please see the release notes from the [release page](../../releases) for the documentation.
+Please see [release page](../../releases) to download the document.
 
 ## Deployment Guide
 
-Please see the release notes from the [release page](../../releases) for the documentation.
+Please see [release page](../../releases) to download the document.
 
-## Docker
+## Infrastructure Using Docker
 
-BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a C2S Infrastructure using *Docker* and *Docker Compose*.
+BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a Consent2Share running instance and related infrastructure using *Docker* and *Docker Compose*.
 
-Additionally, each source code repository also contain `README` instructions and a `Dockerfile` for building Docker images from the source code.
+Additionally, each source code repository also contains `README.md` instructions and a `Dockerfile` for building Docker images from the source code.
 
 [//]: # (## Coding Style Guide)
 
