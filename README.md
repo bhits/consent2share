@@ -1,8 +1,8 @@
 # Consent2Share
 
-Consent2Share (C2S) is an open source software application sponsored by the U.S. Substance Abuse and Mental Health Administration (SAMHSA) which is designed to support Behavioral Health’s integration with Health Information Exchanges (HIE).  Behavioral Healthcare includes Substance Abuse and Mental Health treatment and providers in these domains of care face special privacy regulations which can make the exchange of health care information with other providers more difficult than in other areas of healthcare.
+Consent2Share (C2S) is an open source software application sponsored by the U.S. Substance Abuse and Mental Health Administration (SAMHSA) which is designed to support Behavioral Health integration with health information exchanges (HIEs). Behavioral healthcare, which includes substance abuse and mental health treatment services and providers, face special privacy regulations that can make the exchange of health care information with other providers more difficult than in other areas of healthcare.
 
-Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) which was sponsored and defined by the U.S. Office of the National Coordinator for Health Information Technology (ONC).  The implementation of DS4P concepts and standards will allow patients receiving behavioral health treatment to share their health information through the nation’s HIE’s while providing improved protection of their privacy.
+Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) which was sponsored and defined by the U.S. Office of the National Coordinator for Health Information Technology (ONC). The implementation of DS4P concepts and standards will allow patients receiving behavioral health treatment to share their health information through the nation’s HIEs while providing improved protection of their privacy.
 
 ## Technology Stack
 
@@ -32,25 +32,25 @@ The technology stack used for Consent2Share includes, but not limited to:
 
 ## Architecture
 
-Consent2Share employs a [Microservices Architecture](http://martinfowler.com/articles/microservices.html) which makes it highly scalable and resilient. Majority of C2S microservices are implemented as [Spring Boot](http://projects.spring.io/spring-boot/) applications and utilize several [Spring Cloud](http://projects.spring.io/spring-cloud/) projects including [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) and [Spring Cloud Security](http://cloud.spring.io/spring-cloud-security/).
+C2S employs a [Microservices Architecture](http://martinfowler.com/articles/microservices.html) which makes it highly scalable and resilient. The majority of C2S microservices are implemented as [Spring Boot](http://projects.spring.io/spring-boot/) applications and utilize several [Spring Cloud](http://projects.spring.io/spring-cloud/) projects including [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) and [Spring Cloud Security](http://cloud.spring.io/spring-cloud-security/).
 
-*C2S Technical Blueprint* can be used as a good reference that shows the big picture of C2S architecture, the technical components, and the high level interaction between them. Please see the documents in the [release page](../../releases) for the applicable version of *C2S Technical Blueprint* document.
+The *C2S Technical Blueprint* can be used as a good reference that shows the big picture of C2S architecture, the technical components, and the high level interaction among  them. Please see the documents in the [release page](../../releases) for the applicable version of *C2S Technical Blueprint* document.
 
 The C2S components can be grouped as the following:
 
 ### User Interfaces
 
-C2S currently offers 2 User Interfaces: Patient Portal UI and Admin Portal UI.
+C2S currently offers two User Interfaces: Patient Portal UI and Admin Portal UI.
 
 #### Patient Portal UI
 
-The Patient Portal UI (patient-portal-ui) is a patient user interface component of Consent2share (C2S) used by the patient to manage his or her health information and consent. The patients can use this application to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions.
+The Patient Portal UI (patient-portal-ui) is a patient user interface component of C2S used by the patient to manage his or her health information and consent. Patients can use this application to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions they have made.
 
 Source Code Repository: [https://github.com/bhits/patient-portal-ui](https://github.com/bhits/patient-portal-ui)
 
 #### Admin Portal UI
 
-The Admin Portal UI (admin-portal-ui) is an administrative user interface component of the Consent2Share (C2S) used to create and manage patient accounts. Administrative staff can use this to log in, visit their home page, create patient accounts, and manage patient information.
+The Admin Portal UI (admin-portal-ui) is an administrative user interface component of C2S used to create and manage patient accounts. Administrative staff can use this to log in, visit their home page, create patient accounts, and manage patient information.
 
 Source Code Repository: [https://github.com/bhits/admin-portal-ui](https://github.com/bhits/admin-portal-ui)
 
@@ -84,7 +84,7 @@ Source Code Repository: [https://github.com/bhits/try-policy-api](https://github
 
 #### Patient Health Record API
 
-The Patient Health Record (PHR) API is responsible for storing patient identities in the Consent2Share (C2S) domain, and for serving patient health records from Health Information Exchange (HIE) via Information Exchange Hub (IExHub). Currently, only patient demographics and C2S Medical Record Numbers (MRN) are persisted in PHR domain.
+The Patient Health Record (PHR) API is responsible for storing patient identities in the C2S domain, and for serving patient health records from an HIE via the Information Exchange Hub (IExHub). Currently, only patient demographics and C2S Medical Record Numbers (MRN) are persisted in PHR domain.
 
 Source Code Repository: [https://github.com/bhits/phr-api](https://github.com/bhits/phr-api)
 
@@ -132,13 +132,13 @@ Source Code Repository: [https://github.com/bhits/discovery-server](https://gith
 
 ### Third-party Services
 
-C2S uses several third-party open source services for authentication, authorization, business rules management and auditing.
+C2S uses several third-party open source services for authentication, authorization, business rules management, and auditing.
 
 #### CloudFoundry User Account and Authentication (UAA) Server
 
-C2S uses UAA for authentication, authorization, issuing tokens for client applications and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
+C2S uses UAA for authentication, authorization, issuing tokens for client applications, and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
 
-C2S currently uses a fork of UAA project. This fork is fundamentally same as original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes and a few test users including an admin user in UAA. This fork can be found at [https://github.com/bhits/uaa](https://github.com/bhits/uaa).
+C2S currently uses a fork of UAA project. This fork is fundamentally same as original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes, and a few test users including an admin user in UAA. This fork can be found at [https://github.com/bhits/uaa](https://github.com/bhits/uaa).
 
 #### Logback Audit
 
@@ -152,7 +152,7 @@ C2S uses [JBoss Drools Guvnor](https://docs.jboss.org/drools/release/5.5.0.Final
 
 ## Security
 
-C2S uses [OAuth2](https://tools.ietf.org/html/rfc6749), [OpenID Connect](http://openid.net/specs/openid-connect-core-1_0.html), [JSON Web Token (JWT)](https://jwt.io/) and [SCIM](https://tools.ietf.org/html/rfc7644) for authorization, authentication and identity management. [CloudFoundry User Account and Authentication (UAA) Server](https://github.com/cloudfoundry/uaa) implementation is currently being used and tested with C2S as the authorization server.
+C2S uses [OAuth2](https://tools.ietf.org/html/rfc6749), [OpenID Connect](http://openid.net/specs/openid-connect-core-1_0.html), [JSON Web Token (JWT)](https://jwt.io/) and [SCIM](https://tools.ietf.org/html/rfc7644) for authorization, authentication, and identity management. [CloudFoundry User Account and Authentication (UAA) Server](https://github.com/cloudfoundry/uaa) implementation is currently being used and tested with C2S as the authorization server.
 
 The [Edge Server](#edge-server) is being used as the entry point from public access and acts as a *reverse proxy* to the OAuth2 resource servers. The security is delegated to the resource servers that are exposed by the [Edge Server](#edge-server), therefore **one should exercise great caution when configuring the routes to the microservices. The endpoints that contain sensitive information and do not implement a form of security MUST NOT BE exposed through Edge Server.**
 
@@ -183,13 +183,13 @@ Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and
 
 ## Sub Projects and Git Repositories
 
-Consent2Share is an umbrella project which has several sub projects. 
+Consent2Share is an umbrella project which has several sub-projects. 
 
-In [User Interfaces](#user-interfaces), [Microservices](#microservices) and [Supporting Infrastructure Services](#supporting-infrastructure-services) sections, we listed all services used in Consent2Share. Each of these services is a sub project and has its own Git repository. 
+In [User Interfaces](#user-interfaces), [Microservices](#microservices) and [Supporting Infrastructure Services](#supporting-infrastructure-services) sections, we listed all services used in Consent2Share. Each of these services is a sub-project and has its own Git repository. 
 
-Also UAA and Logback Audit listed in [Third-party Services](#third-party-services) section are sub projects as well and have their own Git repository.  
+Also UAA and Logback Audit listed in [Third-party Services](#third-party-services) section are sub-projects as well and have their own Git repository.  
 
-Additionally,  there are other sub projects listed in the below:
+Additionally,  there are other sub-projects listed in the below:
 
 ### Common Libraries
 
@@ -197,7 +197,7 @@ The C2S has a set of common libraries that are being used across the microservic
 
 Source Code Repository: [https://github.com/bhits/common-libraries](https://github.com/bhits/common-libraries)
 
-**NOTE: The common libraries are needed to be built and installed to the local Maven repository or deployed to Maven repository used in your enterprise development environment before building any other C2S microservices in order to prevent any dependency resolution issues.**
+**NOTE: The common libraries need to be built and installed to the local Maven repository or deployed to the Maven repository used in your enterprise development environment before building any other C2S microservices, in order to prevent any dependency resolution issues.**
 
 ### Spring Boot App Runner
 
@@ -207,7 +207,7 @@ Spring Boot App Runner is developed to run Spring Boot applications that are pac
 2. Add/Remove instance configurations to/from existing applications
 3. Get the current state of deployed applications and instances
 
-Spring Boot App Runner persists the binaries, application and instance configurations on a configured file system location. This application itself is packaged in `war` format and can be deployed on an application server like [Apache Tomcat](http://tomcat.apache.org/). During shutdown and startup, it shuts down all current applications and instances, and start them back up again using previously persisted state.
+Spring Boot App Runner persists the binaries, application and instance configurations on a configured file system location. This application itself is packaged in `war` format and can be deployed on an application server such as [Apache Tomcat](http://tomcat.apache.org/). During shutdown and startup, it shuts down all current applications and instances, and start them back up again using previously persisted state.
 
 Source Code Repository: [https://github.com/bhits/spring-boot-app-runner](https://github.com/bhits/spring-boot-app-runner)
 
