@@ -158,7 +158,7 @@ The [Edge Server](#edge-server) is being used as the entry point from public acc
 
 ### SSL
 
-For simplicity in development and testing environments, SSL is **NOT** enabled by default configurations in C2S components. Please follow the instructions given on particular microservice documentations for enabling SSL. Also, please be mindful for overriding the target endpoints in the default configurations to use `https` for SSL enabled services.
+For simplicity in development and testing environments, SSL is **NOT** enabled by default in configurations in C2S components. Please follow the instructions given in particular microservice documentations for enabling SSL if needed to do so in your particular deployment environment. Also, please be mindful for overriding the target endpoints in the default configurations to use `https` for SSL enabled services.
 
 ### UAA Private and Public Keys
 
@@ -185,19 +185,25 @@ Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and
 
 Consent2Share is an umbrella project which has several sub-projects. 
 
-In [User Interfaces](#user-interfaces), [Microservices](#microservices) and [Supporting Infrastructure Services](#supporting-infrastructure-services) sections, we listed all services used in Consent2Share. Each of these services is a sub-project and has its own Git repository. 
+In [User Interfaces](#user-interfaces), [Microservices](#microservices) and [Supporting Infrastructure Services](#supporting-infrastructure-services) sections, we listed services/UIs used in Consent2Share. Each of these services is a sub-project and has its own Git repository. 
 
-Also UAA and Logback Audit listed in [Third-party Services](#third-party-services) section are sub-projects as well and have their own Git repository.  
+Also UAA and Logback Audit listed in [Third-party Services](#third-party-services) section are sub-projects as well and have their own Git repositories.  
 
 Additionally,  there are other sub-projects listed in the below:
 
 ### Common Libraries
 
-The C2S has a set of common libraries that are being used across the microservices. These libraries mostly contain basic utility functions. The complex domain features are implemented as microservices as described in the previous sections.
+The C2S has a set of common libraries that are being used across the microservices. These libraries mostly contain basic utility functions.
 
 Source Code Repository: [https://github.com/bhits/common-libraries](https://github.com/bhits/common-libraries)
 
 **NOTE: The common libraries need to be built and installed to the local Maven repository or deployed to the Maven repository used in your enterprise development environment before building any other C2S microservices, in order to prevent any dependency resolution issues.**
+
+### Java Jar Runner
+
+This project only contains a `Dockerfile` and an `entrypoint.sh` script to build a base Docker image for all other C2S microservices that are implemented as Spring Boot applications. This image is essentially based on an [`opendk`](https://hub.docker.com/_/openjdk/) Docker image and supports certain environment variables for configuration and runs a configured `jar` file at startup.
+
+Source Code Repository: [https://github.com/bhits/java-jar-runner](https://github.com/bhits/java-jar-runner)
 
 ### Spring Boot App Runner
 
@@ -212,12 +218,6 @@ Spring Boot App Runner persists the binaries, application and instance configura
 Source Code Repository: [https://github.com/bhits/spring-boot-app-runner](https://github.com/bhits/spring-boot-app-runner)
 
 **NOTE: This application can be used for development and testing purposes, but it is NOT meant for and MUST NOT be used in production environments.**
-
-### Java Jar Runner
-
-This project only contains a `Dockerfile` and an `entrypoint.sh` script to build a base Docker image for all other C2S microservices that are implemented as Spring Boot applications. This image is essentially based on an [`opendk`](https://hub.docker.com/_/openjdk/) Docker image and supports certain environment variables for configuration and runs a configured `jar` file at startup.
-
-Source Code Repository: [https://github.com/bhits/java-jar-runner](https://github.com/bhits/java-jar-runner)
 
 ## Releases
 
