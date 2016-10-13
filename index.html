@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link href="css/c2s_stylesheet.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -48,7 +48,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="documentation/userGuides.html">User Guides</a></li>
                             <li><a href="documentation/additionalDocs.html">Additional Documents</a></li>
-                            <li><a href="documentation/faq.html">FAQs</a></li>
+                            <!--<li><a href="documentation/faq.html">FAQs</a></li>-->
                         </ul>
                     </li>
 
@@ -70,17 +70,14 @@
                             <li><a href="financial/teamComposition.html">Team Composition</a></li>
                         </ul>
                     </li>
+                    <li class="">
+                        <a href="contactUs.html"><span class="">Contact Us</span></a>
+                    </li>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Options<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="options/createAccount.html">Create Account</a></li>
-                            <li><a href="documentation/faq.html">FAQs</a></li>
-                            <li><a href="options/contactUs.html">Contact Us</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="options/signIn.html">Sign In</a></li>
-                        </ul>
+                    <li class="">
+                        <a href="#">
+                            <div class="menuBorderLeft"><span class="m-r-md m-l-md">Github</span></div>
+                        </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -88,7 +85,7 @@
     </nav>
     <div class="row">
         <div class="col-sm-12 white p-t-sm p-b-sm navy-blue">
-            <h1 class="m-n">Welcome to Consent2Share on Github!</h1>
+            <h1 class="h1_responsive m-n">Welcome to the Consent2Share Github Site!</h1>
         </div>
     </div>
     <div class="row m-t-sm">
@@ -98,34 +95,52 @@
                     <h3 class="m-t-xs m-b-xs"><span class="fa fa-bullhorn fa-2x fa-pull-left text-orange"
                                                     aria-hidden="true"></span>
                         Announcements & News!</h3>
-                    <p class="font-size12 italic">Click on the links below for more information.</p>
+                    <p class="font-size12 m-t-sm italic">Click on the links below for more information.</p>
                 </div>
                 <div class="m-t-md">
                     <h5 class="m-t-sm text-dark-red">Current Release.</h5>
                     <div class="list-group">
                         <a type="button" href="technical/currentRelease.html"
-                           class="list-group-item list-group-item-success">Version
-                            X.3.1</a>
+                           class="list-group-item list-group-item-success">Version 2.0
+                        </a>
                     </div>
 
                     <h5 class="m-t-xs text-dark-red">Recent News!</h5>
-                    <div class="list-group">
-                        <button type="button" class="list-group-item list-group-item-warning">Release Version X.1 Coming
-                            Soon!
-                        </button>
-                        <button type="button" class="list-group-item">Updated Documentation for Installation</button>
-                        <button type="button" class="list-group-item list-group-item-warning">New Use Cases.</button>
-                        <button type="button" class="list-group-item">C2S implemented in 2 new States!</button>
-                    </div>
+                    <!--<div class="list-group">-->
+                        <!--<div type="button" class="list-group-item list-group-item-warning">SAMHSA releases version-->
+                            <!--2.0 on GitHub-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;<button type="button" class="list-group-item">Updated Documentation for Installation</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button type="button" class="list-group-item list-group-item-warning">New Use Cases.</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button type="button" class="list-group-item">C2S implemented in 2 new States!</button>&ndash;&gt;-->
+                    <!--</div>-->
 
-                    <h5 class="m-t-xs text-dark-red">Upcoming Events!</h5>
-                    <div class="list-group">
-                        <button type="button" class="list-group-item list-group-item-warning">Baltimore Tech Convention
-                            - Januaury 2017
-                        </button>
-                        <button type="button" class="list-group-item">CES Show - MARCH 2017</button>
+                    <!--<h5 class="m-t-xs text-dark-red">Upcoming Events!</h5>-->
+                    <!--<div class="list-group">-->
+                    <!--<button type="button" class="list-group-item list-group-item-warning">Baltimore Tech Convention-->
+                    <!-- - Januaury 2017-->
+                    <!--</button>-->
+                    <!--<button type="button" class="list-group-item">CES Show - MARCH 2017</button>-->
+                    <!--</div>-->
+
+                    <div class="panel-group m-t-xs" id="rn_accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <div class="panel-title font-size14">
+                                        SAMHSA releases Version 2.0 on Github!
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    Additional information about Release Version 2.0 may be found here.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="col-sm-9 contentBorderLeft p-b">
@@ -215,7 +230,7 @@
                                                 <i class="fa fa-circle fa-stack-2x quicklink"></i>
                                                 <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
                                             </span>
-                                        <h4 class="m-t-xs">User Guide</h4>
+                                        <h4 class="m-t-xs">Documentation</h4>
                                     </div>
 
                                     <div>
@@ -291,7 +306,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <p class="text-muted m-t m-l font-size12 v-alignMiddle">Copyright&copy;2016</p>
+                <p class="pull-right text-muted m-t m-r font-size12 v-alignMiddle">Copyright&copy;2016</p>
+                <div class="m-t font-size12"><strong>SAMHSA</strong> &#183 877-SAMHSA-7 &#183 800-487-4889 (TDD)</div>
+            </div>
+            <div>
+
             </div>
         </div>
     </div>
