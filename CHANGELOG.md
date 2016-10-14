@@ -36,8 +36,8 @@ Consent2Share 2.0.0 requires:
 * Logback Audit v0.0.0: [https://github.com/bhits/logback-audit/releases/tag/0.0.0](https://github.com/bhits/logback-audit/releases/tag/0.0.0)
 * Common Libraries v1.7.0: [https://github.com/bhits/common-libraries/releases/tag/1.7.0](https://github.com/bhits/common-libraries/releases/tag/1.7.0)
 * Dockerized Java Jar Runner
-* Dockerized OpenEMPI
-* Dockerized JBoss Drools Guvnor
+* Dockerized OpenEMPI: [https://github.com/bhits/dockerized-openempi/releases/tag/1.7.0](https://github.com/bhits/dockerized-openempi/releases/tag/1.7.0)
+* Dockerized JBoss Drools Guvnor: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/1.7.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/1.7.0)
 
 
 [//]: # (The followings are commented out full template for Release Notes, for each new release, using this)
