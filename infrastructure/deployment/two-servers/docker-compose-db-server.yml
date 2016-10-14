@@ -71,7 +71,7 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PATIENT_USER_DB_PASSWORD}
         MYSQL_DATABASE: patient-user
-    ports:
+     ports:
       - "3310:3306"
     restart: always
 

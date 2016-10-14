@@ -167,6 +167,8 @@ services:
       spring.config.location: "file:/java/C2S_PROPS/patient-user/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PATIENT_USER_DB_PASSWORD}
+      C2S_DB_HOST: ${C2S_DB_HOST}
+      C2S_DB_PORT: 3310
     command: --spring.profiles.active=mysql
     links:
       - discovery-server.c2s.com
@@ -182,6 +184,8 @@ services:
       TZ: "US/Eastern"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PCM_DB_PASSWORD}
+      C2S_DB_HOST: ${C2S_DB_HOST}
+      C2S_DB_PORT: 3307
     mem_limit: 2000m
     links:
       - uaa.c2s.com
@@ -211,6 +215,8 @@ services:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       logging.level.org.springframework.security: "debug"
       spring.datasource.password: ${PHR_DB_PASSWORD}
+      C2S_DB_HOST: ${C2S_DB_HOST}
+      C2S_DB_PORT: 3309
     mem_limit: 1500m
     links:
       - redis.c2s.com
