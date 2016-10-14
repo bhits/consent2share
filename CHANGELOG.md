@@ -5,11 +5,11 @@
 
 * **Patient Registration:** Collect patient demographic and register patient in Consent2Share and HIE (if connected)
 * **Security:** Use OAuth 2.0 and OpenID Connect for authentication and authorization
-* **Provider Management:** Allow patients to search providers and mange their providers
+* **Provider Management:** Allow patients to search, delete, and manage their providers
 * **Consent Management:** Allow patients to create, sign, and revoke consent policies that determine the level of privacy applied to the patient’s health record when it is shared between providers
-* **Try Policy:** Allow patients to Try Their Policy against their medical record or a sample medical record in order to view the segmented medical record
+* **Try Policy:** : Allow patients to use the Try My Policy tool against a medical record in order to view the effects of their consent directive segmentation choices
 * **Value Set Management:** Provide an API to determine sensitivity categories for medical record entries
-* **Data Segmentation:** Handle the segmentation of patients’ sensitive health information according to their consent
+* **Data Segmentation:** Handle the segmentation of patients’ sensitive health information according to their consent directive
 * **View PHI:** Allow patients to view medical records and health information retrieved from an HIE (if connected)
 * **Document Validation:** Provide an API to validate C32, C-CDA R1 and 2.1 documents based on schema and/or schematron rules
 
@@ -36,8 +36,8 @@ Consent2Share 2.0.0 requires:
 * Logback Audit v0.0.0: [https://github.com/bhits/logback-audit/releases/tag/0.0.0](https://github.com/bhits/logback-audit/releases/tag/0.0.0)
 * Common Libraries v1.7.0: [https://github.com/bhits/common-libraries/releases/tag/1.7.0](https://github.com/bhits/common-libraries/releases/tag/1.7.0)
 * Dockerized Java Jar Runner
-* Dockerized OpenEMPI
-* Dockerized JBoss Drools Guvnor
+* Dockerized OpenEMPI: [https://github.com/bhits/dockerized-openempi/releases/tag/1.7.0](https://github.com/bhits/dockerized-openempi/releases/tag/1.7.0)
+* Dockerized JBoss Drools Guvnor: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/1.7.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/1.7.0)
 
 
 [//]: # (The followings are commented out full template for Release Notes, for each new release, using this)
