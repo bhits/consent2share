@@ -88,7 +88,7 @@ services:
     restart: always
 
   edge-server.c2s.com:
-    image: bhits/edge-server:0.9.0
+    image: bhits/edge-server:0.10.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     mem_limit: 1500m
@@ -159,7 +159,7 @@ services:
     restart: always
 
   patient-user.c2s.com:
-    image: bhits/patient-user:0.10.0
+    image: bhits/patient-user:0.11.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     mem_limit: 1000m
@@ -176,7 +176,7 @@ services:
     restart: always
 
   pcm.c2s.com:
-    image: bhits/pcm:1.16.0
+    image: bhits/pcm:1.17.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     environment:
@@ -207,7 +207,7 @@ services:
     restart: always
 
   phr.c2s.com:
-    image: bhits/phr:1.16.0
+    image: bhits/phr:1.17.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     environment:
@@ -260,5 +260,11 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       UAA_DB_PASSSWORD: {UAA_DB_PASSWORD}
+      C2S_APP_HOST: ${C2S_APP_HOST}
+      C2S_APP_PORT: ${C2S_APP_PORT}
+      C2S_DB_HOST: ${C2S_DB_HOST}
+      C2S_DB_PORT: 3306
+      UAA_PUBLIC_KEY: ${UAA_PUBLIC_KEY}
+      UAA_PRIVATE_KEY: ${UAA_PRIVATE_KEY}
     mem_limit: 1500m
     restart: always

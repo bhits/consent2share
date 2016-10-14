@@ -90,7 +90,7 @@ services:
     restart: always
 
   edge-server.c2s.com:
-    image: bhits/edge-server:0.9.0
+    image: bhits/edge-server:0.10.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     mem_limit: 1500m
@@ -163,7 +163,7 @@ services:
     restart: always
 
   patient-user.c2s.com:
-    image: bhits/patient-user:0.10.0
+    image: bhits/patient-user:0.11.0
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     mem_limit: 1000m
@@ -263,6 +263,10 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       UAA_DB_PASSWORD: ${UAA_DB_PASSWORD}
+      C2S_APP_HOST: ${C2S_APP_HOST}
+      C2S_APP_PORT: ${C2S_APP_PORT}
+      C2S_DB_HOST: uaa-db.c2s.com
+      C2S_DB_PORT: 3306
     mem_limit: 1500m
     links:
       - uaa-db.c2s.com
