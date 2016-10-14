@@ -5,11 +5,11 @@
 
 * **Patient Registration:** Collect patient demographic and register patient in Consent2Share and HIE (if connected)
 * **Security:** Use OAuth 2.0 and OpenID Connect for authentication and authorization
-* **Provider Management:** Allow patients to search providers and mange their providers
+* **Provider Management:** Allow patients to search, delete, and manage their providers
 * **Consent Management:** Allow patients to create, sign, and revoke consent policies that determine the level of privacy applied to the patient’s health record when it is shared between providers
-* **Try Policy:** Allow patients to Try Their Policy against their medical record or a sample medical record in order to view the segmented medical record
+* **Try Policy:** : Allow patients to use the Try My Policy tool against a medical record in order to view the effects of their consent directive segmentation choices
 * **Value Set Management:** Provide an API to determine sensitivity categories for medical record entries
-* **Data Segmentation:** Handle the segmentation of patients’ sensitive health information according to their consent
+* **Data Segmentation:** Handle the segmentation of patients’ sensitive health information according to their consent directive
 * **View PHI:** Allow patients to view medical records and health information retrieved from an HIE (if connected)
 * **Document Validation:** Provide an API to validate C32, C-CDA R1 and 2.1 documents based on schema and/or schematron rules
 
