@@ -226,7 +226,7 @@ services:
     image: bhits/pls:1.9.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
-     environment:
+    environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1200m
     volumes:
@@ -263,7 +263,7 @@ services:
       C2S_APP_PORT: ${C2S_APP_PORT}
       C2S_DB_HOST: ${C2S_DB_HOST}
       C2S_DB_PORT: 3306
-      UAA_PUBLIC_KEY: ${UAA_PUBLIC_KEY}
-      UAA_PRIVATE_KEY: ${UAA_PRIVATE_KEY}
+    #  UAA_PUBLIC_KEY: ${UAA_PUBLIC_KEY}
+    #  UAA_PRIVATE_KEY: ${UAA_PRIVATE_KEY}
     mem_limit: 1500m
     restart: always

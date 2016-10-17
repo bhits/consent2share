@@ -57,7 +57,7 @@ services:
     restart: always
 
   document-validator-ccda-r1.c2s.com:
-    image: bhits/document-validator-ccda-r1:0.7.0
+    image: bhits/document-validator-ccda-r1:0.8.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
     mem_limit: 1500m
@@ -66,7 +66,7 @@ services:
     restart: always
 
   document-validator-ccda-r2.c2s.com:
-    image: bhits/document-validator-ccda-r2:0.7.0
+    image: bhits/document-validator-ccda-r2:0.8.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r2:/java/C2S_LOGS/document-validator-ccda-r2
     environment:
