@@ -156,22 +156,6 @@ body.mini-navbar .nav-header {
   cursor: pointer;
   background-color: #fffac0;
 }
-.row-striped:nth-of-type(odd) {
-  background-color: #f9f9f9;
-}
-.row-striped.alternateGrays:nth-of-type(even) {
-  background-color: #e4e4e4;
-}
-.row-striped.alternateGrays:last-of-type {
-  margin-bottom: 0;
-}
-.row-striped:last-of-type {
-  margin-bottom: 20px;
-  border-bottom: #b3b3b3 thin solid;
-}
-.row-striped:hover {
-  background-color: #fffac0 !important;
-}
 .currentPast-button label.active:first-of-type,
 .currentPast-button label.active:last-of-type {
   background-color: #256357;
@@ -913,6 +897,15 @@ a {
 a:hover {
   text-decoration: none;
 }
+a:hover.fileLink h4 {
+  font-weight: 600;
+}
+a:hover.fileLink h4 > .fa {
+  font-size: 20px;
+}
+a:hover .fileDetails {
+  font-weight: 500;
+}
 a:hover .mainLinks {
   background-color: #ecf1f2;
 }
@@ -921,6 +914,25 @@ a:hover .quicklink {
 }
 a:hover .medGrayBorder-thin {
   border-color: #cccccc;
+}
+.row-striped {
+  border-radius: 4px;
+}
+.row-striped:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+.row-striped:last-of-type {
+  margin-bottom: 20px;
+  border-bottom: #b3b3b3 thin solid;
+}
+.row-striped:hover {
+  background-color: #fffac0 !important;
+}
+.row-striped.alternateGrays:nth-of-type(even) {
+  background-color: #e4e4e4;
+}
+.row-striped.alternateGrays:last-of-type {
+  margin-bottom: 0;
 }
 .menuBorderLeft {
   border-left: thin solid gray;
@@ -1093,6 +1105,12 @@ body.ng-scope.pace-done.grey {
 }
 .center {
   text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
 }
 .pre-wrap {
   white-space: pre-wrap;
