@@ -72,7 +72,7 @@ services:
     restart: always
 
   dss.c2s.com:
-    image: bhits/dss:1.11.0
+    image: bhits/dss:1.13.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/dss:/java/C2S_LOGS/dss
     mem_limit: 1500m
@@ -88,14 +88,16 @@ services:
     restart: always
 
   edge-server.c2s.com:
-    image: bhits/edge-server:0.10.0
+    image: bhits/edge-server:0.11.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/edge-server:/java/C2S_LOGS/edge-server
+      - ${C2S_BASE_PATH}/java/keystore/edge-server.keystore:/java/keystore/edge-server.keystore
     mem_limit: 1500m
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/edge-server/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    command: --spring.profiles.active=ssl --server.ssl.key-store=/java/keystore/edge-server.keystore
+      server.ssl.key-store: /java/keystore/edge-server.keystore
+      server.ssl.key-store-password: changeit
+    command: --spring.profiles.active=ssl
     ports:
       - "80:80"
       - "443:443"
@@ -158,24 +160,28 @@ services:
     restart: always
 
   patient-user.c2s.com:
-    image: bhits/patient-user:0.11.0
+    image: bhits/patient-user:0.12.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-user:/java/C2S_LOGS/patient-user
     mem_limit: 1000m
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/patient-user/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PATIENT_USER_DB_PASSWORD}
       C2S_DB_HOST: ${C2S_DB_HOST}
       C2S_DB_PORT: 3310
-    command: --spring.profiles.active=mysql
+      C2S_APP_HOST: ${C2S_APP_HOST}
+      spring.mail.host: ${UAA_SMTP_HOST}
+      spring.mail.port: ${UAA_SMTP_PORT}
+      spring.mail.username: ${UAA_SMTP_USER}
+      spring.mail.password: ${UAA_SMTP_PASSWORD}
+      spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
     links:
       - discovery-server.c2s.com
       - uaa.c2s.com
     restart: always
 
   pcm.c2s.com:
-    image: bhits/pcm:1.17.0
+    image: bhits/pcm:1.18.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pcm:/java/C2S_LOGS/pcm
     environment:
@@ -185,6 +191,11 @@ services:
       spring.datasource.password: ${PCM_DB_PASSWORD}
       C2S_DB_HOST: ${C2S_DB_HOST}
       C2S_DB_PORT: 3307
+      spring.mail.host: ${UAA_SMTP_HOST}
+      spring.mail.port: ${UAA_SMTP_PORT}
+      spring.mail.username: ${UAA_SMTP_USER}
+      spring.mail.password: ${UAA_SMTP_PASSWORD}
+      spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
     mem_limit: 2000m
     links:
       - uaa.c2s.com
@@ -243,7 +254,7 @@ services:
     restart: always
 
   try-policy.c2s.com:
-    image: bhits/try-policy:1.11.0
+    image: bhits/try-policy:1.13.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/try-policy:/java/C2S_LOGS/try-policy
     environment:
@@ -256,6 +267,7 @@ services:
     image: bhits/uaa:3.4.1
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/uaa:/java/C2S_LOGS/uaa
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/uaa/uaa.yml:/java/C2S_PROPS/uaa/uaa.yml
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       UAA_DB_PASSSWORD: ${UAA_DB_PASSWORD}
@@ -263,7 +275,11 @@ services:
       C2S_APP_PORT: ${C2S_APP_PORT}
       C2S_DB_HOST: ${C2S_DB_HOST}
       C2S_DB_PORT: 3306
-    #  UAA_PUBLIC_KEY: ${UAA_PUBLIC_KEY}
+      UAA_SMTP_HOST: ${UAA_SMTP_HOST}
+      UAA_SMTP_PORT: ${UAA_SMTP_PORT}
+      UAA_SMTP_USER: ${UAA_SMTP_USER}
+      UAA_SMTP_PASSWORD: ${UAA_SMTP_PASSWORD}
+     #  UAA_PUBLIC_KEY: ${UAA_PUBLIC_KEY}
     #  UAA_PRIVATE_KEY: ${UAA_PRIVATE_KEY}
     mem_limit: 1500m
     restart: always
