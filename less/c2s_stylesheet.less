@@ -107,8 +107,14 @@ a:hover {
 
   .menuBorderLeft {
     border-left: thin solid gray;
+    @media (max-width : 768px) {
+      border-left: none;
+    }
   }
 
+  .border-bottom-lightGray-thin {
+    border-bottom: thin solid @pp-light-gray;
+  }
 
 
   /* Color Variables */
@@ -171,7 +177,7 @@ a:hover {
 
   /* Font Colors */
   .text-white {
-    color: #fff;
+    color: #fff !important;
   }
   .text-black {
     color: #000 !important;

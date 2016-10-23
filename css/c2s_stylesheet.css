@@ -945,6 +945,14 @@ a:hover .medGrayBorder-thin {
 .menuBorderLeft {
   border-left: thin solid gray;
 }
+@media (max-width: 768px) {
+  .menuBorderLeft {
+    border-left: none;
+  }
+}
+.border-bottom-lightGray-thin {
+  border-bottom: thin solid #E4E4E4;
+}
 /* Color Variables */
 .light-gray {
   color: #E4E4E4;
@@ -978,7 +986,7 @@ a:hover .medGrayBorder-thin {
 /* End of Color Variables */
 /* Font Colors */
 .text-white {
-  color: #fff;
+  color: #fff !important;
 }
 .text-black {
   color: #000 !important;
