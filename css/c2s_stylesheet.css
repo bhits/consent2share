@@ -876,6 +876,12 @@ body {
   /* Set the fixed height of the footer here */
   height: 50px;
   background-color: #f5f5f5;
+  font-size: 12px;
+}
+@media (max-width: 768px) {
+  .footer {
+    font-size: 10.2px;
+  }
 }
 @media (min-width: 769px) and (max-width: 991px) {
   .h1_responsive {
