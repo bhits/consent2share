@@ -6,6 +6,7 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
     environment:
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1000m
     links:
@@ -36,6 +37,7 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PCM_DB_PASSWORD}
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     restart: always
 
   redis.c2s.com:
@@ -46,6 +48,7 @@ services:
     image: bhits/discovery-server:0.6.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/discovery-server:/java/C2S_LOGS/discovery-server
     mem_limit: 1500m
@@ -77,8 +80,8 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/dss:/java/C2S_LOGS/dss
     mem_limit: 1500m
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/dss/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     links:
       - discovery-server.c2s.com
       - guvnor.c2s.com
@@ -97,6 +100,7 @@ services:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       server.ssl.key-store: /java/keystore/edge-server.keystore
       server.ssl.key-store-password: changeit
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     command: --spring.profiles.active=ssl
     ports:
       - "80:80"
@@ -121,7 +125,7 @@ services:
     restart: always
 
   iexhub.c2s.com:
-    image: bhits/iexhub-fork:0.2.0
+    image: bhits/iexhub-fork:0.3.0
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 4000m
@@ -150,6 +154,7 @@ services:
     image: bhits/patient-registration:1.13.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-registration:/java/C2S_LOGS/patient-registration
     mem_limit: 1500m
@@ -175,6 +180,7 @@ services:
       spring.mail.username: ${UAA_SMTP_USER}
       spring.mail.password: ${UAA_SMTP_PASSWORD}
       spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     links:
       - discovery-server.c2s.com
       - uaa.c2s.com
@@ -185,7 +191,6 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pcm:/java/C2S_LOGS/pcm
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/pcm/"
       TZ: "US/Eastern"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PCM_DB_PASSWORD}
@@ -196,6 +201,7 @@ services:
       spring.mail.username: ${UAA_SMTP_USER}
       spring.mail.password: ${UAA_SMTP_PASSWORD}
       spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 2000m
     links:
       - uaa.c2s.com
@@ -212,8 +218,8 @@ services:
     links:
       - discovery-server.c2s.com
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/pep/"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     restart: always
 
   phr.c2s.com:
@@ -226,6 +232,7 @@ services:
       spring.datasource.password: ${PHR_DB_PASSWORD}
       C2S_DB_HOST: ${C2S_DB_HOST}
       C2S_DB_PORT: 3309
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1500m
     links:
       - redis.c2s.com
@@ -248,6 +255,8 @@ services:
     image: bhits/pp-ui:0.18.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pp-ui:/java/C2S_LOGS/pp-ui
+    environment:
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1000m
     links:
       - discovery-server.c2s.com
@@ -259,6 +268,7 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/try-policy:/java/C2S_LOGS/try-policy
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1000m
     links:
       - discovery-server.c2s.com
@@ -272,14 +282,12 @@ services:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       UAA_DB_PASSSWORD: ${UAA_DB_PASSWORD}
       C2S_APP_HOST: ${C2S_APP_HOST}
-      C2S_APP_PORT: ${C2S_APP_PORT}
+      C2S_APP_PORT: 80
       C2S_DB_HOST: ${C2S_DB_HOST}
       C2S_DB_PORT: 3306
       UAA_SMTP_HOST: ${UAA_SMTP_HOST}
       UAA_SMTP_PORT: ${UAA_SMTP_PORT}
       UAA_SMTP_USER: ${UAA_SMTP_USER}
       UAA_SMTP_PASSWORD: ${UAA_SMTP_PASSWORD}
-     #  UAA_PUBLIC_KEY: ${UAA_PUBLIC_KEY}
-    #  UAA_PRIVATE_KEY: ${UAA_PRIVATE_KEY}
     mem_limit: 1500m
     restart: always
