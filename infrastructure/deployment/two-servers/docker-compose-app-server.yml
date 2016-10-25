@@ -134,8 +134,7 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/config-template:/java/C2S_PROPS/logback-audit/config-template
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      audit.datasource.url: jdbc:mysql://${C2S_DB_HOST}:3311/audit?autoReconnect=true)
-      audit.listen.port: 9630
+      CATALINA_OPTS: -Daudit.datasource.url=jdbc:mysql://${C2S_DB_HOST}:3311/audit?autoReconnect=true -Daudit.datasource.username=root -Daudit.datasource.password=${AUDIT_DB_PASSWORD} -Daudit.listen.port=9630
     mem_limit: 1000m
     restart: always
 
