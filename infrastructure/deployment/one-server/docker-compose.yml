@@ -1,7 +1,7 @@
 version: '2'
 services:
-  admin-ui.c2s.com:
-    image: bhits/admin-portal-ui:0.11.0
+  admin-portal-ui.c2s.com:
+    image: bhits/admin-portal-ui:0.14.0
     volumes:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
@@ -12,40 +12,26 @@ services:
     links:
       - discovery-server.c2s.com
     restart: always
-
-  audit-service.c2s.com:
-    image: bhits/audit-service:0.5
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/audit-service:/java/C2S_LOGS/audit-service
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1000m
-    restart: always
-
   clamd.c2s.com:
     image: dinkel/clamavd
     restart: always
 
   context-handler.c2s.com:
-    image: bhits/context-handler:1.5.0
+    image: bhits/context-handler:1.8.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/context-handler:/java/C2S_LOGS/context-handler
     mem_limit: 1000m
     links:
       - discovery-server.c2s.com
-      - audit-service.c2s.com
+      - logback-audit-server.c2s.com
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PCM_DB_PASSWORD}
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     restart: always
 
-  redis.c2s.com:
-    image: redis
-    restart: always
-
   discovery-server.c2s.com:
-    image: bhits/discovery-server:0.6.0
+    image: bhits/discovery-server:0.8.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
@@ -55,18 +41,18 @@ services:
     restart: always
 
   document-validator-ccda-r1.c2s.com:
-    image: bhits/document-validator-ccda-r1:0.8.0
+    image: bhits/document-validator-ccda-r1:0.9.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
     environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m9
     mem_limit: 1500m
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     restart: always
 
   document-validator-ccda-r2.c2s.com:
-    image: bhits/document-validator-ccda-r2:0.8.0
+    image: bhits/document-validator-ccda-r2:0.9.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1500m
@@ -87,7 +73,7 @@ services:
       - guvnor.c2s.com
       - document-validator-ccda-r1.c2s.com
       - document-validator-ccda-r2.c2s.com
-      - audit-service.c2s.com
+      - logback-audit-server.c2s.com
     restart: always
 
   edge-server.c2s.com:
@@ -141,20 +127,33 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
     restart: always
 
+  logback-audit-server.c2s.com:
+    image: bhits/logback-audit-server:0.6.1
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/logback-audit:/java/C2S_LOGS/logback-audit
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/config-template:/java/C2S_PROPS/logback-audit/config-template
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      audit.datasource.url: jdbc:mysql://${C2S_DB_HOST}:3311/audit?autoReconnect=true)
+      audit.listen.port: 9630
+    mem_limit: 1000m
+    restart: always
+
   openempi.c2s.com:
     image: bhits/openempi:2.2.9
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/openempi:/java/C2S_LOGS/openempi
     environment:
-      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m -Djdbc.url=jdbc\:postgresql\://${C2S_DB_HOST}\:5432/openempi
     mem_limit: 1000m
     restart: always
 
   patient-registration.c2s.com:
-    image: bhits/patient-registration:1.13.0
+    image: bhits/patient-registration:1.15.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+      hie-connection.fhir.enabled: ${HIE_CONNECTION_ENABLE}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-registration:/java/C2S_LOGS/patient-registration
     mem_limit: 1500m
@@ -211,7 +210,7 @@ services:
     restart: always
 
   pep.c2s.com:
-    image: bhits/pep:1.5.0
+    image: bhits/pep:1.7.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pep:/java/C2S_LOGS/pep
     mem_limit: 1000m
@@ -223,7 +222,7 @@ services:
     restart: always
 
   phr.c2s.com:
-    image: bhits/phr:1.17.0
+    image: bhits/phr:1.18.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/phr:/java/C2S_LOGS/phr
     environment:
@@ -241,7 +240,7 @@ services:
     restart: always
 
   pls.c2s.com:
-    image: bhits/pls:1.9.0
+    image: bhits/pls:1.11.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
     environment:
@@ -252,7 +251,7 @@ services:
     restart: always
 
   pp-ui.c2s.com:
-    image: bhits/pp-ui:0.18.0
+    image: bhits/pp-ui:0.20.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pp-ui:/java/C2S_LOGS/pp-ui
     environment:
@@ -260,6 +259,10 @@ services:
     mem_limit: 1000m
     links:
       - discovery-server.c2s.com
+    restart: always
+
+  redis.c2s.com:
+    image: redis
     restart: always
 
   try-policy.c2s.com:
@@ -273,6 +276,7 @@ services:
     links:
       - discovery-server.c2s.com
     restart: always
+
   uaa.c2s.com:
     image: bhits/uaa:3.4.1
     volumes:
@@ -293,71 +297,34 @@ services:
     restart: always
 
 # Database setup
-version: '2'
-services:
-  uaa-db.c2s.com:
+
+  logback-audit-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - uaa-db-data.c2s.com
+      - logback-audit-db-data.c2s.com
     environment:
-        MYSQL_ROOT_PASSWORD: ${UAA_DB_PASSWORD}
-        MYSQL_DATABASE: uaa
-    ports:
-      - "3306:3306"
-    restart: always
+      audit.datasource.username: audit
+      audit.datasource.password: ${AUDIT_DB_PASSWORD}
+     ports:
+      - "3311:3306"
 
-  uaa-db-data.c2s.com:
+  logback-audit-db-data.c2s.com:
     image: busybox
     volumes:
-      - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
+      - ${C2S_BASE_PATH}/java/mysql/logback-audit:/var/lib/mysql
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/init-db:/docker-entrypoint-initdb.d
 
-  pcm-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - pcm-db-data.c2s.com
+  openempi-db.c2s.com:
+    image: bhits/openempi-db:2.2.9
     environment:
-        MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
-        MYSQL_DATABASE: pcm
-    ports:
-      - "3307:3306"
-    restart: always
-
-  pcm-db-data.c2s.com:
-    image: busybox
+      POSTGRES_USER: openempi
+      POSTGRES_PASSWORD: openempi
+      POSTGRES_DB: openempi
     volumes:
-      - ${C2S_BASE_PATH}/java/mysql/pcm:/var/lib/mysql
-  pls-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - pls-db-data.c2s.com
-    environment:
-        MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
-        MYSQL_DATABASE: npi
+      - /usr/local/java/postgresql:/var/lib/postgresql
     ports:
-      - "3308:3306"
+      - "5432:5432"
     restart: always
-
-  pls-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/docker-entrypoint-initdb.d
-
-  phr-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - phr-db-data.c2s.com
-    environment:
-        MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
-        MYSQL_DATABASE: phr
-    ports:
-      - "3309:3306"
-    restart: always
-
-  phr-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/phr:/var/lib/mysql
 
   patient-user-db.c2s.com:
     image: mysql:5.7
@@ -375,30 +342,70 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/patient-user:/var/lib/mysql
 
-  audit-service-db.c2s.com:
+  pcm-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - audit-service-db-data.c2s.com
+      - pcm-db-data.c2s.com
     environment:
-        MYSQL_ROOT_PASSWORD: ${AUDIT_DB_PASSWORD}
-        MYSQL_DATABASE: audit
+        MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
+        MYSQL_DATABASE: pcm
     ports:
-      - "3311:3306"
+      - "3307:3306"
+    restart: always
 
-  audit-service-db-data.c2s.com:
+  pcm-db-data.c2s.com:
     image: busybox
     volumes:
-      - ${C2S_BASE_PATH}/java/mysql/audit-service:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/audit-service/init-db:/docker-entrypoint-initdb.d
+      - ${C2S_BASE_PATH}/java/mysql/pcm:/var/lib/mysql
 
-  openempi-db.c2s.com:
-    image: bhits/openempi-db:2.2.9
+  phr-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - phr-db-data.c2s.com
     environment:
-      POSTGRES_USER: openempi
-      POSTGRES_PASSWORD: openempi
-      POSTGRES_DB: openempi
-    volumes:
-      - /usr/local/java/postgresql:/var/lib/postgresql
+        MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
+        MYSQL_DATABASE: phr
     ports:
-      - "5432:5432"
+      - "3309:3306"
     restart: always
+
+  phr-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/phr:/var/lib/mysql
+
+  pls-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - pls-db-data.c2s.com
+    environment:
+        MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
+        MYSQL_DATABASE: npi
+    ports:
+      - "3308:3306"
+    restart: always
+
+  pls-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/docker-entrypoint-initdb.d
+
+  uaa-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - uaa-db-data.c2s.com
+    environment:
+        MYSQL_ROOT_PASSWORD: ${UAA_DB_PASSWORD}
+        MYSQL_DATABASE: uaa
+    ports:
+      - "3306:3306"
+    restart: always
+
+  uaa-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
+
+
+

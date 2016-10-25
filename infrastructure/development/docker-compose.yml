@@ -1,82 +1,93 @@
 version: '2'
 services:
-  admin-ui.c2s.com:
-    image: bhits/admin-portal-ui:0.11.0
+  admin-portal-ui.c2s.com:
+    image: bhits/admin-portal-ui:0.14.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
+    environment:
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
     links:
       - discovery-server.c2s.com
     restart: always
-
-  audit-service.c2s.com:
-    image: bhits/audit-service:0.5
-    volumes:
-      - ${C2S_BASE_PATH}/java:/java
-    links:
-      - audit-service-db.c2s.com
-    restart: always
-
   clamd.c2s.com:
     image: dinkel/clamavd
     restart: always
 
   context-handler.c2s.com:
-    image: bhits/context-handler:1.5.0
+    image: bhits/context-handler:1.8.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/context-handler:/java/C2S_LOGS/context-handler
+    mem_limit: 1000m
     links:
       - discovery-server.c2s.com
-      - pcm-db.c2s.com
-      - audit-service.c2s.com
+      - logback-audit-server.c2s.com
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/context-handler/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PCM_DB_PASSWORD}
-    restart: always
-
-  redis.c2s.com:
-    image: redis
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     restart: always
 
   discovery-server.c2s.com:
-    image: bhits/discovery-server:0.6.0
+    image: bhits/discovery-server:0.8.0
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/discovery-server/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/discovery-server:/java/C2S_LOGS/discovery-server
+    mem_limit: 1500m
     restart: always
 
   document-validator-ccda-r1.c2s.com:
-    image: bhits/document-validator-ccda-r1:0.7.0
+    image: bhits/document-validator-ccda-r1:0.9.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m9
+    mem_limit: 1500m
     volumes:
       - ${C2S_BASE_PATH}/java:/java
     restart: always
 
   document-validator-ccda-r2.c2s.com:
-    image: bhits/document-validator-ccda-r2:0.7.0
+    image: bhits/document-validator-ccda-r2:0.9.0
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1500m
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r2:/java/C2S_LOGS/document-validator-ccda-r2
     restart: always
 
   dss.c2s.com:
-    image: bhits/dss:1.11.0
+    image: bhits/dss:1.13.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/dss:/java/C2S_LOGS/dss
+    mem_limit: 1500m
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/dss/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     links:
       - discovery-server.c2s.com
       - guvnor.c2s.com
       - document-validator-ccda-r1.c2s.com
       - document-validator-ccda-r2.c2s.com
-      - audit-service.c2s.com
+      - logback-audit-server.c2s.com
     restart: always
 
   edge-server.c2s.com:
-    image: bhits/edge-server:0.9.0
+    image: bhits/edge-server:0.11.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/edge-server:/java/C2S_LOGS/edge-server
+      - ${C2S_BASE_PATH}/java/keystore/edge-server.keystore:/java/keystore/edge-server.keystore
+    mem_limit: 1500m
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/edge-server/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      server.ssl.key-store: /java/keystore/edge-server.keystore
+      server.ssl.key-store-password: changeit
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+    command: --spring.profiles.active=ssl
     ports:
       - "80:80"
       - "443:443"
@@ -93,11 +104,17 @@ services:
   guvnor.c2s.com:
     image: bhits/c2s-guvnor:5.5.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/guvnor:/java/C2S_LOGS/guvnor
+    environment:
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
     restart: always
 
   iexhub.c2s.com:
-    image: bhits/iexhub-fork:0.2.0
+    image: bhits/iexhub-fork:0.3.0
+    environment:
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 4000m
     links:
       - openempi.c2s.com
     volumes:
@@ -110,20 +127,36 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
     restart: always
 
+  logback-audit-server.c2s.com:
+    image: bhits/logback-audit-server:0.6.1
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/logback-audit:/java/C2S_LOGS/logback-audit
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/config-template:/java/C2S_PROPS/logback-audit/config-template
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      audit.datasource.url: jdbc:mysql://${C2S_DB_HOST}:3311/audit?autoReconnect=true)
+      audit.listen.port: 9630
+    mem_limit: 1000m
+    restart: always
+
   openempi.c2s.com:
     image: bhits/openempi:2.2.9
     volumes:
-      - /usr/local/java:/java
-    links:
-      - openempi-db.c2s.com
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/openempi:/java/C2S_LOGS/openempi
+    environment:
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m -Djdbc.url=jdbc\:postgresql\://${C2S_DB_HOST}\:5432/openempi
+    mem_limit: 1000m
     restart: always
 
   patient-registration.c2s.com:
-    image: bhits/patient-registration:1.13.0
+    image: bhits/patient-registration:1.15.0
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/patient-registration/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+      hie-connection.fhir.enabled: ${HIE_CONNECTION_ENABLE}
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-registration:/java/C2S_LOGS/patient-registration
+    mem_limit: 1500m
     links:
       - discovery-server.c2s.com
       - uaa.c2s.com
@@ -131,80 +164,115 @@ services:
     restart: always
 
   patient-user.c2s.com:
-    image: bhits/patient-user:0.10.0
+    image: bhits/patient-user:0.12.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-user:/java/C2S_LOGS/patient-user
+    mem_limit: 1000m
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/patient-user/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PATIENT_USER_DB_PASSWORD}
-    command: --spring.profiles.active=mysql
+      C2S_DB_HOST: ${C2S_DB_HOST}
+      C2S_DB_PORT: 3310
+      C2S_APP_HOST: ${C2S_APP_HOST}
+      spring.mail.host: ${UAA_SMTP_HOST}
+      spring.mail.port: ${UAA_SMTP_PORT}
+      spring.mail.username: ${UAA_SMTP_USER}
+      spring.mail.password: ${UAA_SMTP_PASSWORD}
+      spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     links:
       - discovery-server.c2s.com
-      - patient-user-db.c2s.com
       - uaa.c2s.com
     restart: always
 
   pcm.c2s.com:
-    image: bhits/pcm:1.16.0
+    image: bhits/pcm:1.18.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/pcm:/java/C2S_LOGS/pcm
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/pcm/"
       TZ: "US/Eastern"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PCM_DB_PASSWORD}
+      C2S_DB_HOST: ${C2S_DB_HOST}
+      C2S_DB_PORT: 3307
+      spring.mail.host: ${UAA_SMTP_HOST}
+      spring.mail.port: ${UAA_SMTP_PORT}
+      spring.mail.username: ${UAA_SMTP_USER}
+      spring.mail.password: ${UAA_SMTP_PASSWORD}
+      spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+    mem_limit: 2000m
     links:
       - uaa.c2s.com
-      - pcm-db.c2s.com
       - pls.c2s.com
       - discovery-server.c2s.com
       - clamd.c2s.com
     restart: always
 
   pep.c2s.com:
-    image: bhits/pep:1.5.0
+    image: bhits/pep:1.7.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/pep:/java/C2S_LOGS/pep
+    mem_limit: 1000m
     links:
       - discovery-server.c2s.com
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/pep/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     restart: always
 
   phr.c2s.com:
-    image: bhits/phr:1.16.0
+    image: bhits/phr:1.18.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/phr:/java/C2S_LOGS/phr
     environment:
-      spring.config.location: "file:/java/C2S_PROPS/phr/"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       logging.level.org.springframework.security: "debug"
       spring.datasource.password: ${PHR_DB_PASSWORD}
+      C2S_DB_HOST: ${C2S_DB_HOST}
+      C2S_DB_PORT: 3309
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+    mem_limit: 1500m
     links:
-      - phr-db.c2s.com
       - redis.c2s.com
       - discovery-server.c2s.com
       - iexhub.c2s.com
     restart: always
 
   pls.c2s.com:
-    image: bhits/pls:1.9.0
+    image: bhits/pls:1.11.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
+    environment:
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1200m
     volumes:
       - ${C2S_BASE_PATH}/java:/java
-    links:
-      - pls-db.c2s.com
     restart: always
 
   pp-ui.c2s.com:
-    image: bhits/pp-ui:0.18.0
+    image: bhits/pp-ui:0.20.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/pp-ui:/java/C2S_LOGS/pp-ui
+    environment:
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+    mem_limit: 1000m
     links:
       - discovery-server.c2s.com
     restart: always
 
+  redis.c2s.com:
+    image: redis
+    restart: always
+
   try-policy.c2s.com:
-    image: bhits/try-policy:1.11.0
+    image: bhits/try-policy:1.13.0
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/try-policy:/java/C2S_LOGS/try-policy
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+    mem_limit: 1000m
     links:
       - discovery-server.c2s.com
     restart: always
@@ -212,28 +280,39 @@ services:
   uaa.c2s.com:
     image: bhits/uaa:3.4.1
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/uaa:/java/C2S_LOGS/uaa
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/uaa/uaa.yml:/java/C2S_PROPS/uaa/uaa.yml
     environment:
-      UAA_DB_PASSWORD: ${UAA_DB_PASSWORD}
-    links:
-      - uaa-db.c2s.com
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      UAA_DB_PASSSWORD: ${UAA_DB_PASSWORD}
+      C2S_APP_HOST: ${C2S_APP_HOST}
+      C2S_APP_PORT: 80
+      C2S_DB_HOST: ${C2S_DB_HOST}
+      C2S_DB_PORT: 3306
+      UAA_SMTP_HOST: ${UAA_SMTP_HOST}
+      UAA_SMTP_PORT: ${UAA_SMTP_PORT}
+      UAA_SMTP_USER: ${UAA_SMTP_USER}
+      UAA_SMTP_PASSWORD: ${UAA_SMTP_PASSWORD}
+    mem_limit: 1500m
     restart: always
 
 # Database setup
-  audit-service-db.c2s.com:
+
+  logback-audit-db.c2s.com:
     image: mysql:5.7
     volumes_from:
-      - audit-service-db-data.c2s.com
+      - logback-audit-db-data.c2s.com
     environment:
-        MYSQL_ROOT_PASSWORD: ${AUDIT_DB_PASSWORD}
-        MYSQL_DATABASE: audit
-    restart: always
+      audit.datasource.username: audit
+      audit.datasource.password: ${AUDIT_DB_PASSWORD}
+     ports:
+      - "3311:3306"
 
-  audit-service-db-data.c2s.com:
+  logback-audit-db-data.c2s.com:
     image: busybox
     volumes:
-      - ${C2S_BASE_PATH}/java/mysql/audit-service:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/audit-service/init-db:/docker-entrypoint-initdb.d
+      - ${C2S_BASE_PATH}/java/mysql/logback-audit:/var/lib/mysql
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/init-db:/docker-entrypoint-initdb.d
 
   openempi-db.c2s.com:
     image: bhits/openempi-db:2.2.9
@@ -254,6 +333,8 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PATIENT_USER_DB_PASSWORD}
         MYSQL_DATABASE: patient-user
+     ports:
+      - "3310:3306"
     restart: always
 
   patient-user-data.c2s.com:
@@ -268,6 +349,8 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
         MYSQL_DATABASE: pcm
+    ports:
+      - "3307:3306"
     restart: always
 
   pcm-db-data.c2s.com:
@@ -282,6 +365,8 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
         MYSQL_DATABASE: phr
+    ports:
+      - "3309:3306"
     restart: always
 
   phr-db-data.c2s.com:
@@ -296,6 +381,8 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
         MYSQL_DATABASE: npi
+    ports:
+      - "3308:3306"
     restart: always
 
   pls-db-data.c2s.com:
@@ -311,9 +398,14 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${UAA_DB_PASSWORD}
         MYSQL_DATABASE: uaa
+    ports:
+      - "3306:3306"
     restart: always
 
   uaa-db-data.c2s.com:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
+
+
+
