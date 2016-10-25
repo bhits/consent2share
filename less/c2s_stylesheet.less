@@ -53,6 +53,7 @@ body {
 
 }
   @footer-font-size: 13px;
+  @email-font-size: 15px;
 
 .h1_responsive {
   @media (min-width : 769px) and (max-width : 991px) {
@@ -63,14 +64,21 @@ body {
   }
 }
 
-
-
 a {
   text-decoration: none;
   color:black;
   &.fileLink {color: @pp-dark-red;}
   .fileDetails {color: @pp-dark-blue;}
-
+  &.emailLink {
+    color: @pp-navy-blue;
+    font-size:@email-font-size;
+    &:hover {
+      color: @pp-strong-blue;
+      font-weight: 600;
+      font-size: ((@email-font-size*1.1));
+      > .fa {font-size:@email-font-size*1.1;}
+      }
+  }
 }
 
 //a:hover {text-decoration: none;}
@@ -78,15 +86,35 @@ a {
     border-radius: 8px;
 }
 
+//a:hover {
+//  text-decoration: none;
+//  &.fileLink {
+//    h4 {
+//      color: @pp-highlight-red;
+//      font-weight: 600;
+//      & > .fa {font-size:20px;}
+//    }
+//    .fileDetails {font-weight: 500;
+//      color: @pp-navbar-dark-blue;
+//    }
+//}
+
+
+
 a:hover {
   text-decoration: none;
-  &.fileLink h4 {
-    color: @pp-highlight-red;
-    font-weight: 600;
-    & > .fa {font-size:20px;}
-  }
-  .fileDetails {font-weight: 500;
-    color: @pp-navbar-dark-blue;
+  &.fileLink {
+    h4, span {
+      color: @pp-highlight-red;
+      font-weight: 600;
+      & > .fa {
+        font-size: 20px;
+      }
+    }
+    .fileDetails {
+      font-weight: 500;
+      color: @pp-navbar-dark-blue;
+    }
   }
 
   .mainLinks {

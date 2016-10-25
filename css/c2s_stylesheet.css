@@ -903,20 +903,34 @@ a.fileLink {
 a .fileDetails {
   color: #50687F;
 }
+a.emailLink {
+  color: #005d98;
+  font-size: 15px;
+}
+a.emailLink:hover {
+  color: #0088CC;
+  font-weight: 600;
+  font-size: 16.5px;
+}
+a.emailLink:hover > .fa {
+  font-size: 16.5px;
+}
 .mainLinks {
   border-radius: 8px;
 }
 a:hover {
   text-decoration: none;
 }
-a:hover.fileLink h4 {
+a:hover.fileLink h4,
+a:hover.fileLink span {
   color: #db0202;
   font-weight: 600;
 }
-a:hover.fileLink h4 > .fa {
+a:hover.fileLink h4 > .fa,
+a:hover.fileLink span > .fa {
   font-size: 20px;
 }
-a:hover .fileDetails {
+a:hover.fileLink .fileDetails {
   font-weight: 500;
   color: #293846;
 }
