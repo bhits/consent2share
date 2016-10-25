@@ -60,11 +60,13 @@ The backend of C2S consists of many microservices that are small yet focused on 
 
 #### Patient Registration API
 
-The Patient Registration (patient-registration) API is a component of C2S that manages the patient account creation process and persists patient demographics in Patient Health Record (PHR) API domain. If it is configured, it also registers the patient demographics to Health Information Exchange (HIE) via Information Exchange Hub (IExHub).
+The Patient Registration (registration) API is a component of C2S that manages the patient account creation process and persists patient demographics in Patient Health Record (PHR) API domain. If it is configured, it also registers the patient demographics to Health Information Exchange (HIE) via Information Exchange Hub (IExHub).
 
 Source Code Repository: [https://github.com/bhits/registration-api](https://github.com/bhits/registration-api)
 
 #### Patient User API
+
+The Patient User (patient-user) API is responsible for managing the patient user creation process, including user creation and activation, user scope management, email token generation, and extracting existing user profile from the Patient Health Record API (PHR) in the C2S application.
 
 Source Code Repository: [https://github.com/bhits/patient-user-api](https://github.com/bhits/patient-user-api)
 
@@ -79,6 +81,8 @@ The Provider Lookup Service (PLS) API is responsible for storing provider inform
 Source Code Repository: [https://github.com/bhits/pls-api](https://github.com/bhits/pls-api)
 
 #### Try My Policy API
+
+Try My Policy (try-policy) API is a service that enables patients to preview the redacted version of their uploaded clinical document based on the privacy preferences of the consent. Try My Policy calls the [Document Segmentation Service (DSS) API](https://github.com/bhits/dss-api) to (1) segment the patient's clinical document, in the template prescribed by C-CDA-R1, C-CDA-R2, and HITSP C32, and (2) highlight the sections that will be removed in accordance to the patient's consent. Try My Policy transforms the response from DSS into a full XHTML file and provides the Base 64 encoded file in the response JSON. This API is currently utilized in the Patient Portal UI for patients to try their policies on their uploaded documents.
 
 Source Code Repository: [https://github.com/bhits/try-policy-api](https://github.com/bhits/try-policy-api)
 
@@ -117,6 +121,8 @@ Source Code Repository: [https://github.com/bhits/iexhub](https://github.com/bhi
 C2S uses [Eureka](https://github.com/Netflix/eureka) and [Zuul](https://github.com/Netflix/zuul) via [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) project to facilitate microservice orchestration, dynamic service discovery, load balancing, security, and server side routing. There are two major supporting infrastructure services in C2S based on these projects: Edge Server (Zuul) and Discovery Server (Eureka).
 
 #### Edge Server
+
+The Edge Server acts as a gatekeeper to the outside world. It keeps unauthorized external requests from passing through. It uses *[Spring Cloud Zuul](https://spring.io/guides/gs/routing-and-filtering/)* as a routing framework, which serves as an entry point to the C2S microservices landscape. Zuul uses *[Spring Cloud Ribbon](https://spring.io/guides/gs/client-side-load-balancing/)* to lookup available services, and routes the external request to an appropriate service instance, facilitating Dynamic Routing and Load Balancing.
 
 Source Code Repository: [https://github.com/bhits/edge-server](https://github.com/bhits/edge-server)
 
