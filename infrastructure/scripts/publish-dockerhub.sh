@@ -7,6 +7,7 @@ docker tag bhits/document-validator-ccda-r2 bhits/document-validator-ccda-r2:0.9
 docker tag bhits/dss bhits/dss:1.13.0;
 docker tag bhits/edge-server bhits/edge-server:0.11.0;
 docker tag bhits/iexhub-fork bhits/iexhub-fork:0.3.0;
+docker tag bhits/logback-audit-server bhits/logback-audit-server:0.6.1
 docker tag bhits/patient-registration bhits/patient-registration:1.15.0;
 docker tag bhits/patient-user bhits/patient-user:0.12.0;
 docker tag bhits/pcm bhits/pcm:1.18.0;
@@ -26,6 +27,7 @@ docker push bhits/document-validator-ccda-r2 bhits/document-validator-ccda-r2:0.
 docker push bhits/dss bhits/dss:1.13.0;
 docker push bhits/edge-server bhits/edge-server:0.11.0;
 docker push bhits/iexhub-fork bhits/iexhub-fork:0.3.0;
+docker push bhits/logback-audit-server:0.6.1
 docker push bhits/patient-registration bhits/patient-registration:1.15.0;
 docker push bhits/patient-user bhits/patient-user:0.12.0;
 docker push bhits/pcm bhits/pcm:1.18.0;
@@ -47,6 +49,7 @@ docker push bhits/document-validator-ccda-r2;
 docker push bhits/dss;
 docker push bhits/edge-server;
 docker push bhits/iexhub-fork;
+docker push bhits/logback-audit-server
 docker push bhits/patient-user;
 docker push bhits/patient-registration;
 docker push bhits/pcm;
