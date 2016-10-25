@@ -134,8 +134,7 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/config-template:/java/C2S_PROPS/logback-audit/config-template
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      audit.datasource.url: jdbc:mysql://${C2S_DB_HOST}:3311/audit?autoReconnect=true)
-      audit.listen.port: 9630
+      CATALINA_OPTS: -Daudit.datasource.url=jdbc:mysql://${C2S_DB_HOST}:3311/audit?autoReconnect=true -Daudit.datasource.username=root -Daudit.datasource.password=${AUDIT_DB_PASSWORD} -Daudit.listen.port=9630
     mem_limit: 1000m
     restart: always
 
@@ -298,14 +297,16 @@ services:
 
 # Database setup
 
+version: '2'
+services:
   logback-audit-db.c2s.com:
     image: mysql:5.7
     volumes_from:
       - logback-audit-db-data.c2s.com
     environment:
-      audit.datasource.username: audit
-      audit.datasource.password: ${AUDIT_DB_PASSWORD}
-     ports:
+      MYSQL_ROOT_PASSWORD: ${AUDIT_DB_PASSWORD}
+      MYSQL_DATABASE: audit
+    ports:
       - "3311:3306"
 
   logback-audit-db-data.c2s.com:
@@ -333,7 +334,7 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PATIENT_USER_DB_PASSWORD}
         MYSQL_DATABASE: patient-user
-     ports:
+    ports:
       - "3310:3306"
     restart: always
 
@@ -406,6 +407,3 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
-
-
-
