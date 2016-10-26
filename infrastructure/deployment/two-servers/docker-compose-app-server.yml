@@ -45,7 +45,7 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
     environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m9
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1500m
     volumes:
       - ${C2S_BASE_PATH}/java:/java
@@ -68,6 +68,8 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+      c2s.dss.documentSegmentationImpl.defaultIsAudited: true
+      c2s.dss.documentSegmentationImpl.defaultIsAuditFailureByPass: true
     links:
       - discovery-server.c2s.com
       - guvnor.c2s.com
