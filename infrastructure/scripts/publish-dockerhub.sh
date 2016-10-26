@@ -16,7 +16,7 @@ docker tag bhits/phr bhits/phr:1.18.0;
 docker tag bhits/pls bhits/pls:1.11.0;
 docker tag bhits/pp-ui bhits/pp-ui:0.20.0;
 docker tag bhits/try-policy bhits/try-policy:1.13.0;
-docker tag bhits/uaa bhits/uaa:3.4.1;
+docker tag bhits/uaa bhits/uaa:3.4.1-01;
 
 
 docker push bhits/admin-portal-ui bhits/admin-portal-ui:0.14.0;
@@ -36,7 +36,7 @@ docker push bhits/phr bhits/phr:1.18.0;
 docker push bhits/pls bhits/pls:1.11.0;
 docker push bhits/pp-ui bhits/pp-ui:0.20.0;
 docker push bhits/try-policy bhits/try-policy:1.13.0;
-docker push bhits/uaa bhits/uaa:3.4.1;
+docker push bhits/uaa bhits/uaa:3.4.1-01;
 
 
 

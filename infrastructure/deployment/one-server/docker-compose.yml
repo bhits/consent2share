@@ -277,7 +277,7 @@ services:
     restart: always
 
   uaa.c2s.com:
-    image: bhits/uaa:3.4.1
+    image: bhits/uaa:3.4.1-01
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/uaa:/java/C2S_LOGS/uaa
       - ${C2S_BASE_PATH}/java/C2S_PROPS/uaa/uaa.yml:/java/C2S_PROPS/uaa/uaa.yml
@@ -297,8 +297,6 @@ services:
 
 # Database setup
 
-version: '2'
-services:
   logback-audit-db.c2s.com:
     image: mysql:5.7
     volumes_from:

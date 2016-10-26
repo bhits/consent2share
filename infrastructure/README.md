@@ -20,6 +20,16 @@ Add the following lines in `c2s-docker.sh` by replacing `***` with customized pa
 `export PATIENT_USER_DB_PASSWORD=***`		
 `export AUDIT_DB_PASSWORD=***`		
 `export C2S_BASE_PATH=/usr/local`
+`export C2S_APP_HOST=***`
+`export C2S_APP_PORT=80`
+`export UAA_SMTP_HOST=mail.feisystems.com`
+`export UAA_SMTP_PORT=***`
+`export UAA_SMTP_USER=***`
+`export UAA_SMTP_PASSWORD=***`
+`export UAA_PUBLIC_KEY=***`
+`export HIE_CONNECTION_ENABLE=false`
+`export AUTO_SCAN=false`
+`export SCAN_PERIOD="30 seconds"`
 
 Update pls and audit-service APIs database properties using customized password.
 
