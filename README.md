@@ -44,13 +44,13 @@ C2S currently offers two user interfaces: the Patient Portal UI and the Admin Po
 
 #### Patient Portal UI
 
-The Patient Portal UI (patient-portal-ui) is a patient user interface component of C2S used by the patient to manage his or her health information and consent. Patients can use this application to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions they have made.
+The Patient Portal UI (patient-portal-ui) is a patient user interface component of Consent2share (C2S) used by the patient to manage his or her health information and consent. Patients can use this application to register, log in, visit their home page, review their health records, conduct consent management activities, and view prior consent decisions.
 
 Source Code Repository: [https://github.com/bhits/patient-portal-ui](https://github.com/bhits/patient-portal-ui)
 
 #### Admin Portal UI
 
-The Admin Portal UI (admin-portal-ui) is an administrative user interface component of C2S used to create and manage patient accounts. Administrative staff can use this to log in, visit their home page, create patient accounts, and manage patient information.
+The Admin Portal UI (admin-portal-ui) is an administrative user interface component of Consent2Share (C2S) used to create and manage patient accounts. Administrative staff can use this to log in, visit their home page, create patient accounts, and manage patient information.
 
 Source Code Repository: [https://github.com/bhits/admin-portal-ui](https://github.com/bhits/admin-portal-ui)
 
@@ -60,59 +60,67 @@ The backend of C2S consists of many microservices that are small yet focused on 
 
 #### Patient Registration API
 
-The Patient Registration (registration) API is a component of C2S that manages the patient account creation process and persists patient demographics in Patient Health Record (PHR) API domain. If it is configured, it also registers the patient demographics to Health Information Exchange (HIE) via Information Exchange Hub (IExHub).
+The Patient Registration (patient-registration) API is a component of Consent2Share (C2S) that manages the patient account creation process and persists patient demographics in Patient Health Record (PHR) API domain. If it is configured, it also registers the patient demographics to Health Information Exchange (HIE) via Information Exchange Hub (IExHub).
 
 Source Code Repository: [https://github.com/bhits/registration-api](https://github.com/bhits/registration-api)
 
 #### Patient User API
 
-The Patient User (patient-user) API is responsible for managing the patient user creation process, including user creation and activation, user scope management, email token generation, and extracting existing user profile from the Patient Health Record API (PHR) in the C2S application.
+The Patient User API is responsible for managing the patient user creation process, including user creation and activation, user scope management, email token generation, and extracting existing user profile from the Patient Health Record API (PHR) in the Consent2Share (C2S) application.
 
 Source Code Repository: [https://github.com/bhits/patient-user-api](https://github.com/bhits/patient-user-api)
 
 #### Patient Consent Management API
 
+The Patient Consent Management (PCM) API is one of the core components of the Consent2Share (C2S) application. The PCM provides APIs for patients to manage their electronic consents including consent creation, consent audit, consent eSignature, consent export, and patient provider list management. 
+
 Source Code Repository: [https://github.com/bhits/pcm-api](https://github.com/bhits/pcm-api)
 
 #### Provider Lookup Service API
 
-The Provider Lookup Service (PLS) API is responsible for storing provider information as a provider directory. PLS also provides a RESTful API for querying providers by using several query parameters including *first name, last name, gender, address, and phone number* for individual providers, and *organization name, address, and phone number* for organizational providers.
+The Provider Lookup Service (PLS) API is responsible for storing provider information as a provider directory. PLS also provides a RESTful API for querying providers by using several query parameters including first name, last name, gender, address, and phone number for individual providers, and organization name, address, and phone number for organizational providers.
 
 Source Code Repository: [https://github.com/bhits/pls-api](https://github.com/bhits/pls-api)
 
 #### Try My Policy API
 
-Try My Policy (try-policy) API is a service that enables patients to preview the redacted version of their uploaded clinical document based on the privacy preferences of the consent. Try My Policy calls the [Document Segmentation Service (DSS) API](https://github.com/bhits/dss-api) to (1) segment the patient's clinical document, in the template prescribed by C-CDA-R1, C-CDA-R2, and HITSP C32, and (2) highlight the sections that will be removed in accordance to the patient's consent. Try My Policy transforms the response from DSS into a full XHTML file and provides the Base 64 encoded file in the response JSON. This API is currently utilized in the Patient Portal UI for patients to try their policies on their uploaded documents.
+Try My Policy is a service that enables patients to preview the redacted version of their uploaded clinical document based on the privacy preferences of the consent. Try My Policy calls the [Document Segmentation Service (DSS) API](https://github.com/bhits/dss-api) to (1) segment the patient's clinical document, in the template prescribed by C-CDA-R1, C-CDA-R2, and HITSP C32, and (2) highlight the sections that will be removed in accordance to the patient's consent. Try My Policy transforms the response from DSS into a full XHTML file and provides the Base 64 encoded file in the response JSON. This API is currently utilized in the Patient Portal UI for patients to try their policies on their uploaded documents.
 
 Source Code Repository: [https://github.com/bhits/try-policy-api](https://github.com/bhits/try-policy-api)
 
 #### Patient Health Record API
 
-The Patient Health Record (PHR) API is responsible for storing patient identities in the C2S domain, and for serving patient health records from an HIE via an Information Exchange Hub (IExHub). Currently, only patient demographics and C2S Medical Record Numbers (MRN) are persisted in PHR domain.
+The Patient Health Record (PHR) API is responsible for storing patient identities in the Consent2Share (C2S) domain, and for serving patient health records from the health information exchange (HIE) via the Information Exchange Hub (IExHub). Currently, only patient demographics and C2S Medical Record Numbers (MRN) are persisted in PHR domain.
 
 Source Code Repository: [https://github.com/bhits/phr-api](https://github.com/bhits/phr-api)
 
 #### Policy Enforcement Point API
 
-The Policy Enforcement Point (PEP) API is a RESTful web service for the Access Control Service (ACS) entry point. PEP delegates the access decision to the Context Handler API, and it utilizes the Document Segmentation Service (DSS) for segmenting CCD documents according to a patient's granular consent. PEP gives the same response for both *"No applicable consents"* and *"No documents found"* cases to avoid exposing the existence of a patient's consent.
+The Policy Enforcement Point (PEP) API is a RESTful web service for the Access Control Service (ACS) entry point. PEP delegates the access decision to the Context Handler API, and it utilizes the Document Segmentation Service (DSS) for segmenting CCD documents according to a patient's granular consent. PEP gives the same response for both "No applicable consents" and "No documents found" cases to avoid exposing the existence of a patient's consent.
 
 Source Code Repository: [https://github.com/bhits/pep-api](https://github.com/bhits/pep-api)
 
 #### Context Handler API
 
-The Context Handler (CTX) API is a RESTful web service responsible for making the access decisions (PERMIT/DENY) based on the given request contexts. It uses a Policy Decision Point (PDP) to evaluate access requests against authorization policies before issuing access decisions. The PDP uses [HERAS-AF](https://bitbucket.org/herasaf/herasaf-xacml-core/overview), an open source XACML 2.0 implementation, for XACML evaluation and uses Patient Consent Management (PCM) database as a local policy repository to retrieve XACML policies that are generated from patients’ consents.
+The Context Handler API is a RESTful web service responsible for making the access decisions (PERMIT/DENY) based on the given request contexts. It uses a Policy Decision Point (PDP) to evaluate access requests against authorization policies before issuing access decisions. The PDP uses [HERAS-AF](https://bitbucket.org/herasaf/herasaf-xacml-core/overview), an open source XACML 2.0 implementation, for XACML evaluation and uses Patient Consent Management (PCM) database as a local policy repository to retrieve XACML policies that are generated from patients’ consents.
 
 Source Code Repository: [https://github.com/bhits/context-handler](https://github.com/bhits/context-handler)
 
 #### Document Segmentation Service API
 
+The Document Segmentation Service (DSS) API is responsible for the segmentation of the patient's sensitive health information using the privacy settings selected in the patient's consent. 
+
 Source Code Repository: [https://github.com/bhits/dss-api](https://github.com/bhits/dss-api)
 
 #### Document Validator API
 
+The Document Validator API is responsible for validating C-CDA R1 and C-CDA R2 clinical documents. It is a RESTful Web Service wrapper around [MDHT](https://www.projects.openhealthtools.org/sf/projects/mdht/) (Model Driven Health Tools) libraries. It does both schema and schematron validation and returns the validation results from MDHT in the response. Document Validator API is used directly by [DSS](https://github.com/bhits/dss-api) (Document Segmentation Service) to validate the document before and after the segmentation.
+
 Source Code Repository: [https://github.com/bhits/document-validator](https://github.com/bhits/document-validator)
 
 #### Information Exchange Hub
+
+Information Exchange Hub consists of connectors, services, and transformation components intended to allow applications to interoperate with standards-based Health Information Exchange (HIE) organizations.
 
 Source Code Repository: [https://github.com/bhits/iexhub](https://github.com/bhits/iexhub)
 
@@ -122,39 +130,45 @@ C2S uses [Eureka](https://github.com/Netflix/eureka) and [Zuul](https://github.c
 
 #### Edge Server
 
-The Edge Server acts as a gatekeeper to the outside world. It keeps unauthorized external requests from passing through. It uses *[Spring Cloud Zuul](https://spring.io/guides/gs/routing-and-filtering/)* as a routing framework, which serves as an entry point to the C2S microservices landscape. Zuul uses *[Spring Cloud Ribbon](https://spring.io/guides/gs/client-side-load-balancing/)* to lookup available services, and routes the external request to an appropriate service instance, facilitating Dynamic Routing and Load Balancing.
+The Edge Server acts as a gatekeeper to the outside world. It keeps unauthorized external requests from passing through. It uses Spring Cloud Zuul as a routing framework, which serves as an entry point to the Consent2Share (C2S) microservices landscape. Zuul uses Spring Cloud Ribbon to lookup available services, and routes the external request to an appropriate service instance, facilitating Dynamic Routing and Load Balancing.
 
 Source Code Repository: [https://github.com/bhits/edge-server](https://github.com/bhits/edge-server)
 
 #### Discovery Server
 
-The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates the C2S microservices to dynamically discover each other and promotes the scalability of C2S system. It provides the following:
+The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates the Consent2Share (C2S) microservices to dynamically discover each other and promotes the scalability of the C2S system. It provides the following:
 
-+ Registry of C2S service instances,
-+ Provides means for C2S service instances to register, de-register and query instances with the registry,
-+ Registry propagation to other C2S microservice (Eureka client) and Discovery Server (Eureka server cluster) instances
+ + Registry of C2S service instances
+ + Provides means for C2S service instances to register, de-register and query instances with the registry
+ + Registry propagation to other C2S microservice (Eureka client) and Discovery Server (Eureka server cluster) instances
 
 Source Code Repository: [https://github.com/bhits/discovery-server](https://github.com/bhits/discovery-server)
 
 ### Third-party Services
 
-C2S uses several third-party open source services for authentication, authorization, business rules management, and auditing.
+C2S uses several third-party open source services for authentication, authorization, business rules management, auditing and detecting viruses.
 
 #### CloudFoundry User Account and Authentication (UAA) Server
 
-C2S uses UAA for authentication, authorization, issuing tokens for client applications, and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
+The Consent2Share (C2S) application uses UAA for authentication, authorization, issuing tokens for client applications, and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
 
 C2S currently uses a fork of UAA project. This fork is fundamentally the same as the original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes, and a few test users including an admin user in UAA. This fork can be found at [https://github.com/bhits/uaa](https://github.com/bhits/uaa).
 
 #### Logback Audit
 
-C2S uses [Logback Audit](http://audit.qos.ch/) as a centralized audit repository in backend services, particularly in Access Control Service components. Logback Audit can be configured to use relational databases for persistence.
+The Consent2Share (C2S) application uses [Logback Audit](http://audit.qos.ch/) as a centralized audit repository in backend services, particularly in the Access Control Service components. Logback Audit can be configured to use relational databases for persistence.
 
-C2S currently uses a fork of Logback Audit project. This fork is fundamentally the same asthe  original Logback Audit implementation, but it has some dependency version updates and column size modifications in the database tables. It also includes a SQL script for database creation and a generated Audit Service project that can be built and deployed on an application server such as [Apache Tomcat](http://tomcat.apache.org/). This fork can be found at [https://github.com/bhits/logback-audit](https://github.com/bhits/logback-audit).
+C2S currently uses a fork of the [Logback Audit project](https://github.com/qos-ch/logback-audit). This fork is fundamentally the same as the  original Logback Audit implementation. However, it has some dependency version updates and column size modifications in the database tables. It also includes an SQL script for database creation and a generated *Logback Audit Server* project that can be built and deployed on an application server such as [Apache Tomcat](http://tomcat.apache.org/). This fork can be found at [https://github.com/bhits/logback-audit](https://github.com/bhits/logback-audit).
 
 #### JBoss Drools Guvnor
 
-C2S uses [JBoss Drools Guvnor](https://docs.jboss.org/drools/release/5.5.0.Final/drools-guvnor-docs/html_single/) as a user interface and a versioned repository for business rules of its Business Rule Management System (BRMS). Guvnor also offers a guided editor while creating/editing rules, versioning, and Quality Assurance (QA) support for testing and validating the changes to the business rules. The [Document Segmentation Service (DSS) API](#document-segmentation-service-api) uses the [JBoss Drools Expert](https://docs.jboss.org/drools/release/5.4.0.Final/drools-expert-docs/html_single/) to run the business rules that are retrieved from the Guvnor instance with given arguments in a *Document Segmentation* request context. These rules and the execution result are used as *Tagging Directives* and they drive the *Document Tagging* phase of *Document Segmentation Service*.
+The Consent2Share (C2S) application uses [JBoss Drools Guvnor](https://docs.jboss.org/drools/release/5.5.0.Final/drools-guvnor-docs/html_single/) as a user interface and a versioned repository for business rules of its Business Rule Management System (BRMS). Guvnor also offers a guided editor while creating/editing rules, versioning, and Quality Assurance (QA) support for testing and validating the changes to the business rules. The [Document Segmentation Service (DSS) API](#document-segmentation-service-api) uses the [JBoss Drools Expert](https://docs.jboss.org/drools/release/5.4.0.Final/drools-expert-docs/html_single/) to run the business rules that are retrieved from the Guvnor instance with given arguments in a *Document Segmentation* request context. These rules and the execution result are used as *Tagging Directives* and they drive the *Document Tagging* phase of *Document Segmentation Service*.
+
+Source Code Repository for Dockerized JBoss Drools Guvnor: [https://github.com/bhits/dockerized-drools-guvnor](https://github.com/bhits/dockerized-drools-guvnor)
+
+#### ClamAV
+
+The Consent2Share (C2S) application uses [ClamAV](http://http://www.clamav.net/) to scan clinical documents uploaded by patients.
 
 ## Security
 
@@ -193,7 +207,7 @@ Consent2Share is an umbrella project which has several sub-projects.
 
 In [User Interfaces](#user-interfaces), [Microservices](#microservices) and [Supporting Infrastructure Services](#supporting-infrastructure-services) sections, we listed services/UIs used in Consent2Share. Each of these services is a sub-project and has its own Git repository. 
 
-Also UAA and Logback Audit listed in [Third-party Services](#third-party-services) section are sub-projects as well and have their own Git repositories.  
+Also Forked UAA, Forcked Logback Audit and Dockerized JBoss Drools Guvnor listed in [Third-party Services](#third-party-services) section are sub-projects as well and have their own Git repositories.  
 
 Additionally,  there are other sub-projects listed in the below:
 
@@ -225,11 +239,17 @@ Source Code Repository: [https://github.com/bhits/spring-boot-app-runner](https:
 
 **NOTE: This application can be used for development and testing purposes, but it is NOT meant for and MUST NOT be used in production environments.**
 
+### Dockerized OpenEMPI
+
+This project contains a `Dockerfile` and OpenEMPI artifacts to build a Docker image OpenEMPI.
+
+Source Code Repository: [https://github.com/bhits/dockerized-openempi](https://github.com/bhits/dockerized-openempi)
+
 ## Releases
 
-As mentioned in the previous sections, C2S is an umbrella project that consists of many microservices. Each microservice and infrastructure component has its own independent source code repository, version, and release cycle. The release of Consent2Share as a whole system is basically a set of tested and compatible microservice releases and the supporting documentation.
+As mentioned in the previous sections, Consent2Share is an umbrella project that consists of many microservices. Each microservice and infrastructure component has its own independent source code repository, version, and release cycle. The release of Consent2Share as a whole system is basically a set of tested and compatible microservice releases and the supporting documentation.
 
-The versions that can be found at Git tags in `<MajorVersion>.<MinorVersion>.<IncrementalVersion>` format represents the independent version of that specific component. The C2S system version is also tagged in each repository with `c2s-` prefix *(Example: `c2s-<MajorVersion>.<MinorVersion>.<IncrementalVersion>`)*.
+The release version numbers are usually specified in `<MajorVersion>.<MinorVersion>.<IncrementalVersion>` format. 
 
 Please see the [release page](../../releases) for current releases.
 
