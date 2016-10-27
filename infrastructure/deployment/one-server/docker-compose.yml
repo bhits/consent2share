@@ -68,8 +68,8 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
-      c2s.dss.documentSegmentationImpl.defaultIsAudited: true
-      c2s.dss.documentSegmentationImpl.defaultIsAuditFailureByPass: true
+      c2s.dss.documentSegmentationImpl.defaultIsAudited: "true"
+      c2s.dss.documentSegmentationImpl.defaultIsAuditFailureByPass: "true"
     links:
       - discovery-server.c2s.com
       - guvnor.c2s.com
@@ -136,7 +136,7 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/config-template:/java/C2S_PROPS/logback-audit/config-template
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      CATALINA_OPTS: -Daudit.datasource.url=jdbc:mysql://${C2S_DB_HOST}:3311/audit?autoReconnect=true -Daudit.datasource.username=root -Daudit.datasource.password=${AUDIT_DB_PASSWORD} -Daudit.listen.port=9630
+      CATALINA_OPTS: -Daudit.datasource.url=jdbc\:mysql\://logback-audit-db.c2s.com\:3311/audit?autoReconnect=true -Daudit.datasource.username=root -Daudit.datasource.password=${AUDIT_DB_PASSWORD} -Daudit.listen.port=9630
     mem_limit: 1000m
     restart: always
 
@@ -145,7 +145,7 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/openempi:/java/C2S_LOGS/openempi
     environment:
-      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m -Djdbc.url=jdbc\:postgresql\://${C2S_DB_HOST}\:5432/openempi
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m -Djdbc.url=jdbc\:postgresql\://openempi-db.c2s.com\:5432/openempi
     mem_limit: 1000m
     restart: always
 
@@ -172,8 +172,6 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PATIENT_USER_DB_PASSWORD}
-      C2S_DB_HOST: ${C2S_DB_HOST}
-      C2S_DB_PORT: 3310
       C2S_APP_HOST: ${C2S_APP_HOST}
       spring.mail.host: ${UAA_SMTP_HOST}
       spring.mail.port: ${UAA_SMTP_PORT}
@@ -194,8 +192,6 @@ services:
       TZ: "US/Eastern"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PCM_DB_PASSWORD}
-      C2S_DB_HOST: ${C2S_DB_HOST}
-      C2S_DB_PORT: 3307
       spring.mail.host: ${UAA_SMTP_HOST}
       spring.mail.port: ${UAA_SMTP_PORT}
       spring.mail.username: ${UAA_SMTP_USER}
@@ -230,8 +226,6 @@ services:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       logging.level.org.springframework.security: "debug"
       spring.datasource.password: ${PHR_DB_PASSWORD}
-      C2S_DB_HOST: ${C2S_DB_HOST}
-      C2S_DB_PORT: 3309
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1500m
     links:
@@ -242,13 +236,12 @@ services:
 
   pls.c2s.com:
     image: bhits/pls:1.11.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1200m
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls-api/config-template:/java/C2S_PROPS/pls-api/config-template
     restart: always
 
   pp-ui.c2s.com:
@@ -288,8 +281,6 @@ services:
       UAA_DB_PASSSWORD: ${UAA_DB_PASSWORD}
       C2S_APP_HOST: ${C2S_APP_HOST}
       C2S_APP_PORT: 80
-      C2S_DB_HOST: ${C2S_DB_HOST}
-      C2S_DB_PORT: 3306
       UAA_SMTP_HOST: ${UAA_SMTP_HOST}
       UAA_SMTP_PORT: ${UAA_SMTP_PORT}
       UAA_SMTP_USER: ${UAA_SMTP_USER}
@@ -390,7 +381,7 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/docker-entrypoint-initdb.d
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls-api/init-db:/docker-entrypoint-initdb.d
 
   uaa-db.c2s.com:
     image: mysql:5.7

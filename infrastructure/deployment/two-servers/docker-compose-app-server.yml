@@ -68,8 +68,8 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
-      c2s.dss.documentSegmentationImpl.defaultIsAudited: true
-      c2s.dss.documentSegmentationImpl.defaultIsAuditFailureByPass: true
+      c2s.dss.documentSegmentationImpl.defaultIsAudited: "true"
+      c2s.dss.documentSegmentationImpl.defaultIsAuditFailureByPass: "true"
     links:
       - discovery-server.c2s.com
       - guvnor.c2s.com
@@ -136,7 +136,7 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/config-template:/java/C2S_PROPS/logback-audit/config-template
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      CATALINA_OPTS: -Daudit.datasource.url=jdbc:mysql://${C2S_DB_HOST}:3311/audit?autoReconnect=true -Daudit.datasource.username=root -Daudit.datasource.password=${AUDIT_DB_PASSWORD} -Daudit.listen.port=9630
+      CATALINA_OPTS: -Daudit.datasource.url=jdbc\:mysql\://${C2S_DB_HOST}\:3311/audit?autoReconnect=true -Daudit.datasource.username=root -Daudit.datasource.password=${AUDIT_DB_PASSWORD} -Daudit.listen.port=9630
     mem_limit: 1000m
     restart: always
 
@@ -242,13 +242,12 @@ services:
 
   pls.c2s.com:
     image: bhits/pls:1.11.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1200m
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls-api/config-template:/java/C2S_PROPS/pls-api/config-template
     restart: always
 
   pp-ui.c2s.com:

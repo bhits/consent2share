@@ -91,7 +91,7 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/docker-entrypoint-initdb.d
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls-api/init-db:/docker-entrypoint-initdb.d
 
   uaa-db.c2s.com:
     image: mysql:5.7
@@ -108,6 +108,3 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
-
-
-
