@@ -239,12 +239,6 @@ Source Code Repository: [https://github.com/bhits/spring-boot-app-runner](https:
 
 **NOTE: This application can be used for development and testing purposes, but it is NOT meant for and MUST NOT be used in production environments.**
 
-### Dockerized OpenEMPI
-
-This project contains a `Dockerfile` and OpenEMPI artifacts to build a Docker image OpenEMPI.
-
-Source Code Repository: [https://github.com/bhits/dockerized-openempi](https://github.com/bhits/dockerized-openempi)
-
 ## Releases
 
 As mentioned in the previous sections, Consent2Share is an umbrella project that consists of many microservices. Each microservice and infrastructure component has its own independent source code repository, version, and release cycle. The release of Consent2Share as a whole system is basically a set of tested and compatible microservice releases and the supporting documentation.
