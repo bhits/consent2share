@@ -35,7 +35,7 @@ Consent2Share 2.0.0 release includes:
 * CloudFoundry User Account and Authentication (UAA) Server 3.4.1-01: [https://github.com/bhits/uaa/releases/tag/3.4.1-01](https://github.com/bhits/uaa/releases/tag/3.4.1-01)
 * Logback Audit 0.6.1: [https://github.com/bhits/logback-audit/releases/tag/v_0.6.1](https://github.com/bhits/logback-audit/releases/tag/v_0.6.1)
 * Common Libraries 1.7.0: [https://github.com/bhits/common-libraries/releases/tag/1.7.0](https://github.com/bhits/common-libraries/releases/tag/1.7.0)
-* Java Jar Runner 8u102-jre: [https://github.com/bhits/java-jar-runner/releases/tag/1.7.0](https://github.com/bhits/java-jar-runner/releases/tag/1.7.0)
+* Java Jar Runner 8u102-jre: [https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre](https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre)
 * Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
 * Spring Boot Application Runner 1.8.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/2.2.9](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.8.0)
 
