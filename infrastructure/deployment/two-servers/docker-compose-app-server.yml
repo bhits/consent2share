@@ -9,8 +9,6 @@ services:
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1000m
-    links:
-      - discovery-server.c2s.com
     restart: always
   clamd.c2s.com:
     image: dinkel/clamavd
@@ -21,9 +19,6 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/context-handler:/java/C2S_LOGS/context-handler
     mem_limit: 1000m
-    links:
-      - discovery-server.c2s.com
-      - logback-audit-server.c2s.com
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       spring.datasource.password: ${PCM_DB_PASSWORD}
@@ -70,12 +65,6 @@ services:
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
       c2s.dss.documentSegmentationImpl.defaultIsAudited: "true"
       c2s.dss.documentSegmentationImpl.defaultIsAuditFailureByPass: "true"
-    links:
-      - discovery-server.c2s.com
-      - guvnor.c2s.com
-      - document-validator-ccda-r1.c2s.com
-      - document-validator-ccda-r2.c2s.com
-      - logback-audit-server.c2s.com
     restart: always
 
   edge-server.c2s.com:
@@ -93,14 +82,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    links:
-      - discovery-server.c2s.com
-      - pls.c2s.com
-      - guvnor.c2s.com
-      - openempi.c2s.com
-      - uaa.c2s.com
-      - document-validator-ccda-r1.c2s.com
-      - document-validator-ccda-r2.c2s.com
     restart: always
 
   guvnor.c2s.com:
@@ -117,8 +98,6 @@ services:
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 4000m
-    links:
-      - openempi.c2s.com
     volumes:
       - ${C2S_BASE_PATH}/java:/java
       - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/usr/local/tomcat/bin/test
@@ -140,15 +119,6 @@ services:
     mem_limit: 1000m
     restart: always
 
-  openempi.c2s.com:
-    image: bhits/openempi:2.2.9
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/openempi:/java/C2S_LOGS/openempi
-    environment:
-      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m -Djdbc.url=jdbc\:postgresql\://${C2S_DB_HOST}\:5432/openempi
-    mem_limit: 1000m
-    restart: always
-
   patient-registration.c2s.com:
     image: bhits/patient-registration:1.15.0
     environment:
@@ -158,10 +128,6 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-registration:/java/C2S_LOGS/patient-registration
     mem_limit: 1500m
-    links:
-      - discovery-server.c2s.com
-      - uaa.c2s.com
-      - iexhub.c2s.com
     restart: always
 
   patient-user.c2s.com:
@@ -181,9 +147,6 @@ services:
       spring.mail.password: ${UAA_SMTP_PASSWORD}
       spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
-    links:
-      - discovery-server.c2s.com
-      - uaa.c2s.com
     restart: always
 
   pcm.c2s.com:
@@ -203,11 +166,6 @@ services:
       spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 2000m
-    links:
-      - uaa.c2s.com
-      - pls.c2s.com
-      - discovery-server.c2s.com
-      - clamd.c2s.com
     restart: always
 
   pep.c2s.com:
@@ -215,8 +173,6 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pep:/java/C2S_LOGS/pep
     mem_limit: 1000m
-    links:
-      - discovery-server.c2s.com
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
@@ -234,10 +190,6 @@ services:
       C2S_DB_PORT: 3309
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1500m
-    links:
-      - redis.c2s.com
-      - discovery-server.c2s.com
-      - iexhub.c2s.com
     restart: always
 
   pls.c2s.com:
@@ -257,8 +209,6 @@ services:
     environment:
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1000m
-    links:
-      - discovery-server.c2s.com
     restart: always
 
   redis.c2s.com:
@@ -273,8 +223,6 @@ services:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1000m
-    links:
-      - discovery-server.c2s.com
     restart: always
 
   uaa.c2s.com:

@@ -16,18 +16,6 @@ services:
       - ${C2S_BASE_PATH}/java/mysql/logback-audit:/var/lib/mysql
       - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/init-db:/docker-entrypoint-initdb.d
 
-  openempi-db.c2s.com:
-    image: postgres:9.6.0
-    environment:
-      POSTGRES_USER: openempi
-      POSTGRES_PASSWORD: openempi
-      POSTGRES_DB: openempi
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/openempi/init-db:/docker-entrypoint-initdb.d
-    ports:
-      - "5432:5432"
-    restart: always
-
   patient-user-db.c2s.com:
     image: mysql:5.7
     volumes_from:
