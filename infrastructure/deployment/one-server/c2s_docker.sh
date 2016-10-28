@@ -1,6 +1,5 @@
 #!/bin/bash
-#Db server details
-#export C2S_DB_HOST=bhitsqadblnx01
+#Db  details
 export UAA_DB_PASSWORD=admin
 export PCM_DB_PASSWORD=admin
 export PLS_DB_PASSWORD=admin
