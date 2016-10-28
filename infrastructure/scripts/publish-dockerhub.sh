@@ -1,5 +1,5 @@
 #! /bin/bash
-docker tag bhits/admin-portal-ui bhits/admin-portal-ui:0.14.0;
+docker tag bhits/admin-portal-ui bhits/admin-portal-ui:0.13.0;
 docker tag bhits/context-handler bhits/context-handler:1.8.0;
 docker tag bhits/discovery-server bhits/discovery-server:0.8.0;
 docker tag bhits/document-validator-ccda-r1 bhits/document-validator-ccda-r1:0.9.0;
@@ -19,7 +19,7 @@ docker tag bhits/try-policy bhits/try-policy:1.13.0;
 docker tag bhits/uaa bhits/uaa:3.4.1-01;
 
 
-docker push bhits/admin-portal-ui:0.14.0;
+docker push bhits/admin-portal-ui:0.13.0;
 docker push bhits/context-handler:1.8.0;
 docker push bhits/discovery-server:0.8.0;
 docker push bhits/document-validator-ccda-r1:0.9.0;
