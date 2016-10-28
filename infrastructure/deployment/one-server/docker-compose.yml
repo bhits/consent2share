@@ -85,7 +85,7 @@ services:
     restart: always
 
   guvnor.c2s.com:
-    image: bhits/c2s-guvnor:5.5.0
+    image: bhits/guvnor:5.5.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/guvnor:/java/C2S_LOGS/guvnor
     environment:
