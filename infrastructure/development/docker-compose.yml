@@ -150,7 +150,7 @@ services:
 
 
   phr.c2s.com:
-    image: bhits/phr:1.18.0
+    image: bhits/phr:1.19.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/phr:/java/C2S_LOGS/phr
     environment:

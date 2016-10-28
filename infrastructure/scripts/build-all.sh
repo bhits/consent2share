@@ -8,7 +8,6 @@ cd document-validator/document-validator/document-validator-ccda-r1;           m
 cd document-validator/document-validator/document-validator-ccda-r2;           mvn clean package docker:build; cd -;
 cd dss-api/dss;                             		mvn clean package docker:build; cd -;
 cd edge-server/edge-server;                  		mvn clean package docker:build; cd -;
-#cd iexhub-fork/iexhub;                              mvn clean package docker:build; cd -;
 cd iexhub/iexhub;                                   mvn clean package docker:build; cd -;
 cd logback-audit;                                   mvn clean install; cd -;cd logback-audit/audit-server-generator/logback-audit-server;mvn clean package docker:build;cd -;
 cd patient-portal-ui/server;                        mvn clean package -Pdocker docker:build; cd -;
