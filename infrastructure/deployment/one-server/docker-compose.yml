@@ -1,7 +1,7 @@
 version: '2'
 services:
   admin-portal-ui.c2s.com:
-    image: bhits/admin-portal-ui:0.14.0
+    image: bhits/admin-portal-ui:0.13.0
     volumes:
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
@@ -94,7 +94,7 @@ services:
     restart: always
 
   iexhub.c2s.com:
-    image: bhits/iexhub-fork:0.3.0
+    image: bhits/iexhub:0.3.0
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 4000m
