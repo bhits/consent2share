@@ -245,8 +245,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${AUDIT_DB_PASSWORD}
       MYSQL_DATABASE: audit
-    ports:
-      - "3311:3306"
 
   logback-audit-db-data.c2s.com:
     image: busybox
@@ -261,8 +259,6 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PATIENT_USER_DB_PASSWORD}
         MYSQL_DATABASE: patient-user
-    ports:
-      - "3310:3306"
     restart: always
 
   patient-user-data.c2s.com:
@@ -277,8 +273,6 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
         MYSQL_DATABASE: pcm
-    ports:
-      - "3307:3306"
     restart: always
 
   pcm-db-data.c2s.com:
@@ -293,8 +287,6 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
         MYSQL_DATABASE: phr
-    ports:
-      - "3309:3306"
     restart: always
 
   phr-db-data.c2s.com:
@@ -309,8 +301,6 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
         MYSQL_DATABASE: npi
-    ports:
-      - "3308:3306"
     restart: always
 
   pls-db-data.c2s.com:
@@ -326,8 +316,6 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${UAA_DB_PASSWORD}
         MYSQL_DATABASE: uaa
-    ports:
-      - "3306:3306"
     restart: always
 
   uaa-db-data.c2s.com:
