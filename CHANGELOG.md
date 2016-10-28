@@ -1,5 +1,5 @@
 <a name="2.0.0"></a>
-# Consent2Share v2.0.0 (2016-10-31)
+# Consent2Share 2.0.0 (2016-10-31)
 
 ### Features
 
