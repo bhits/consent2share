@@ -24,7 +24,7 @@ Consent2Share 2.0.0 release includes:
 * Patient Consent Management API 1.18.0: [https://github.com/bhits/pcm-api/releases/tag/1.18.0](https://github.com/bhits/pcm-api/releases/tag/1.18.0)
 * Provider Lookup Service API 1.11.0: [https://github.com/bhits/pls-api/releases/tag/1.11.0](https://github.com/bhits/pls-api/releases/tag/1.11.0)
 * Try My Policy API 1.13.0: [https://github.com/bhits/try-policy-api/releases/tag/1.13.0](https://github.com/bhits/try-policy-api/releases/tag/1.13.0)
-* Patient Health Record API 1.18.0: [https://github.com/bhits/phr-api/releases/tag/1.18.0](https://github.com/bhits/phr-api/releases/tag/1.18.0)
+* Patient Health Record API 1.19.0: [https://github.com/bhits/phr-api/releases/tag/1.19.0](https://github.com/bhits/phr-api/releases/tag/1.19.0)
 * Policy Enforcement Point API 1.7.0: [https://github.com/bhits/pep-api/releases/tag/1.7.0](https://github.com/bhits/pep-api/releases/tag/1.7.0)
 * Context Handler API 1.8.0: [https://github.com/bhits/context-handler/releases/tag/1.8.0](https://github.com/bhits/context-handler/releases/tag/1.8.0)
 * Document Segmentation Service API 1.13.0: [https://github.com/bhits/dss-api/releases/tag/1.13.0](https://github.com/bhits/dss-api/releases/tag/1.13.0)
