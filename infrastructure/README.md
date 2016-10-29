@@ -1,13 +1,13 @@
-# C2S Runner
-C2S runner is used to deploy consent2share application using docker and docker-compose.
+# Infrastructure as Code
+We treat Infrastructure as Code. Here code is used to deploy Consent2Share application in Docker containers.
 
 ## Prerequisites
 
--	[docker](https://docs.docker.com/engine/installation/)
--	[docker compose](https://docs.docker.com/compose/install/)
+-	[Docker](https://docs.docker.com/engine/installation/)
+-	[Docker Compose](https://docs.docker.com/compose/install/)
 
-## Environment variable 
-Following environment variable are required.
+## Environment Variables 
+The following environment variables are required.
 
 On LINUX server, you can create c2s-docker.sh under /etc/profile.d and set it executable using `chmod 755 c2s-docker.sh`.
 
@@ -35,18 +35,18 @@ Update pls and audit-service APIs database properties using customized password.
 
 ## Deployment	
 
-There are two options to run consent2share application on a CentOS 7.X server. 
+There are two options to run Consent2Share application on a CentOS 7.X server. 
 	
-### one-server
+### One Server Setup
 
-This option is designed to run all consent2share APIs and databases on single server.
+This option is designed to run all Consent2Share services, UIs and databases on a single server.
 
 -	Copy docker-compose.yml to server.
 -	run `docker-compose up -d`
 
-### two-servers
+### Two Servers Setup
 
-This option is separated APIs on application server and database on database server. 
+This option is to run Consent2Share services, UIs on an application server and databases on a separated database server. 
 
 -	Copy docker-compose-db-server.yml to database server.
 -	run `docker-compose up -d` after rename to docker-compose.yml
@@ -56,11 +56,11 @@ This option is separated APIs on application server and database on database ser
 
 ## Development
 
-This docker compose file is designed to run consent2share application on developer machine. 	
+This docker compose file is designed to run Consent2Share application on developer machine. 	
 
-Compared to the deployment one-server option, this one doesn't set any memory constraints on docker containers because developer's machine may has limited memory on docker-machine. 
+Compared to the deployment one-server option, this one doesn't set any memory constraints on Docker containers because developer's machine may has limited memory on docker-machine. 
 
-## scripts
+## Scripts
 
 ### build-all.sh
 This script is used to build all consent2share APIs' docker images on local machine.
@@ -72,14 +72,6 @@ Run `docker images` to check all created docker images.
 This script is used to tag docker images and publish to the dockerhub. Image tag is same as pom.xml version number in each APIs.
 
 ## Reference 
-For more detail, please refer `C2S deployment guide` and APIs' `README.md` file in each repository. 
-
-## Contact
-
-If you have any questions, comments, or concerns please see [Consent2Share]() project site.
-
-## Report Issues
-
-Please use [GitHub Issues](https://github.com/bhits/phr-api/issues) page to report issues.
+For more detail, please refer to `README.md` file in each repository for Consent2Share.
 
 
