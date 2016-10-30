@@ -204,6 +204,16 @@ This option is to run Consent2Share services, UIs on an application server and d
 This docker compose file in Development fodler is designed to run Consent2Share application on developer machine. 	
 Compared to the deployment one-server option, this one doesn't set any memory constraints on Docker containers because developer's machine may has limited memory on docker-machine. 
 
+## UI Urls
+
++ Consent2Share Admin UI: `https://<application_server>/admin-ui`
+
+  * By default, Consent2Share comes with a provider staff admin user
+
+  * Login to Consent2Share Admin UI as an admin using username `consent2share@gmail.com` and password `admin` to create a patient account
+
++ Consent2Share Patient Portal UI: `https://<application_server>/pp-ui`
+
 ## Scripts
 
 ### build-all.sh
