@@ -58,7 +58,7 @@ This option is designed to run all Consent2Share services, UIs and databases on 
   
   * Copy all [pls-api config-temlate](https://github.com/bhits/pls-api/tree/master/config-template) files to `pls-api/config-template` sub folder
   
-  * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db' sub folder
+  * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db` sub folder
   
   * Copy the [logback-audit config-template](https://github.com/bhits/logback-audit/tree/master/config-template) file to `logback-audit/config-template` sub folder  
   
@@ -101,7 +101,7 @@ This option is to run Consent2Share services, UIs on an application server and d
     `mkdir /usr/local/java/`  
     `mkdir /usr/local/java/C2S_PROPS`  
 
-+ If SELinux is enabled, run the following command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
++ If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
 
@@ -124,7 +124,7 @@ This option is to run Consent2Share services, UIs on an application server and d
   
 + Get the following files under the `/usr/local/java/C2S_PROPS`
 
-  * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db`
+  * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db` sub folder
 
   * Copy the [database schema sql](https://github.com/bhits/logback-audit/tree/master/audit-db) file to `logback-audit/init-db` sub folder
 
@@ -137,7 +137,7 @@ This option is to run Consent2Share services, UIs on an application server and d
     `mkdir /usr/local/java/`  
     `mkdir /usr/local/java/C2S_PROPS`  
 
-+ If SELinux is enabled, run the following command to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
++ If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
 
@@ -145,7 +145,7 @@ This option is to run Consent2Share services, UIs on an application server and d
 
   * Uncomment the `C2S_DB_HOST` variable
 
-  * Modify the `C2S_APP_HOST` and `SMTP` variables according to the server environment
+  * Modify the `C2S_APP_HOST`, `C2S_DB_HOST` and `SMTP` variables according to the server environment
 
   * Re-login to the server in order for the file `c2s_docker.sh` to run automatically during the login
 
