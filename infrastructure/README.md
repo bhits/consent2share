@@ -8,7 +8,9 @@ We treat Infrastructure as Code. Here code is used to deploy Consent2Share appli
 
 ## Deployment	
 
-Two deployment options are provided to run Consent2Share application on Linux. Here we use CentOS 7.X as an example to describe the setups. 
+Two server deployment options are provided to run Consent2Share application on Linux. Here we use CentOS 7.X as an example to describe the setups. 
+
+Consent2Share Docker images will be downloaded from [Dockerhub BHITS public registry](https://hub.docker.com/r/bhits/).
 	
 ### One Server Setup
 
@@ -21,11 +23,11 @@ This option is designed to run all Consent2Share services, UIs and databases on 
     `mkdir /usr/local/java/`  
     `mkdir /usr/local/java/C2S_PROPS`  
 
-+ If SELinux is enabled, run the following command to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
++ If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
 
-+ Get the [c2s_docker.sh](../scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
++ Get the [c2s_docker.sh](./scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
 
   * Modify the `C2S_APP_HOST` and `SMTP` variables according to the server environment
 
@@ -50,7 +52,7 @@ This option is designed to run all Consent2Share services, UIs and databases on 
 
   * `iexhub/test`
 
-+ Copy the following configuration files and place them under  the `/usr/local/java/ C2S_PROPS`:  
++ Copy the following configuration files and other files, place them under the `/usr/local/java/C2S_PROPS`:  
   
   * Copy the [uaa.yml](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) to `uaa` sub folder
   
@@ -96,13 +98,18 @@ This option is to run Consent2Share services, UIs on an application server and d
 #### Configure Database Server
 + Create a new directory `/usr/local/java/C2S_PROPS`
 
+    `mkdir /usr/local/java/`  
+    `mkdir /usr/local/java/C2S_PROPS`  
+
 + If SELinux is enabled, run the following command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
 
-+ Get the [c2s_docker.sh](../scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
++ Get the [c2s_docker.sh](./scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
 
-  * Uncomment the `C2S_DB_HOST` variable and modify the `C2S_APP_HOST`, `C2S_DB_HOST` and `SMTP` variables according to the server environment
+  * Uncomment the `C2S_DB_HOST` variable
+ 
+  * Modify the `C2S_APP_HOST`, `C2S_DB_HOST` and `SMTP` variables according to the server environment
   
   * Re-login to the server in order for the file `c2s_docker.sh` to run automatically during the login
   
@@ -115,13 +122,13 @@ This option is to run Consent2Share services, UIs on an application server and d
   
   * `logback-audit/init-db`
   
-+ Get the following configuration files under the `/usr/local/java/C2S_PROPS`
++ Get the following files under the `/usr/local/java/C2S_PROPS`
 
-  * Copy the [initial database](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db`
+  * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db`
 
   * Copy the [database schema sql](https://github.com/bhits/logback-audit/tree/master/audit-db) file to `logback-audit/init-db` sub folder
 
-+ Get the [docker-compose-db-server.yml](../deployment/two-servers/docker-compose-db-server.yml) file as `docker-compose.yml` under the `/usr/local/java` folder
++ Get the [docker-compose-db-server.yml](./deployment/two-servers/docker-compose-db-server.yml) file as `docker-compose.yml` under the `/usr/local/java` folder
 
 #### Configure Application Server
 
@@ -134,7 +141,7 @@ This option is to run Consent2Share services, UIs on an application server and d
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
 
-+ Get the [c2s_docker.sh](../scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
++ Get the [c2s_docker.sh](./scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
 
   * Uncomment the `C2S_DB_HOST` variable
 
@@ -157,7 +164,7 @@ This option is to run Consent2Share services, UIs on an application server and d
 
   * `iexhub/test`
 
-+ Copy the following configuration files and place them under  the `/usr/local/java/ C2S_PROPS`:  
++ Copy the following configuration files and place them under the `/usr/local/java/C2S_PROPS`:  
   
   * Copy the [uaa.yml](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) to `uaa` sub folder
   
@@ -175,7 +182,7 @@ This option is to run Consent2Share services, UIs on an application server and d
   
   * In `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file, replace `localhost` with `C2S_DB_HOST` in the variable `database.url`
 
-+ Get the [docker-compose-app-server.yml](../deployment/two-servers/docker-compose-app-server.yml) file as `docker-compose.yml` under the `/usr/local/java` folder
++ Get the [docker-compose-app-server.yml](./deployment/two-servers/docker-compose-app-server.yml) file as `docker-compose.yml` under the `/usr/local/java` folder
 
 + Edge-server security:
 
@@ -190,12 +197,12 @@ This option is to run Consent2Share services, UIs on an application server and d
   * Modify the value of the `server.ssl.key-store-password` property in the `docker-compose.yml` file located in the `/usr/local/java` folder to match the password used when exporting/creating the SSL certificate
   
 #### Compose Containers on Database Server
-+ Run `docker-compose up -d` from the ‘`usr/local/java` folder to start up all databases
++ Run `docker-compose up -d` from the `usr/local/java` folder to start up all databases
 
 + Run `docker ps -a` to verify all the containers are up running except data-only containers
 
 #### Compose Containers on Application Server
-+ Run `docker-compose up -d` from the ‘`usr/local/java` folder to start up all Consent2Share services, UIs
++ Run `docker-compose up -d` from the `usr/local/java` folder to start up all Consent2Share services, UIs
 
 + Run `docker ps -a` to verify all the containers are up running
 
