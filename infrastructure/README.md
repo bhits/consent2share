@@ -201,22 +201,26 @@ This option is to run Consent2Share services, UIs on an application server and d
 
 ## Development
 
-This docker compose file is designed to run Consent2Share application on developer machine. 	
-
+This docker compose file in Development fodler is designed to run Consent2Share application on developer machine. 	
 Compared to the deployment one-server option, this one doesn't set any memory constraints on Docker containers because developer's machine may has limited memory on docker-machine. 
 
 ## Scripts
 
 ### build-all.sh
 This script is used to build all consent2share APIs' docker images on local machine.
-After clone the c2s-runner repository under the same workspace with other consent2share APIs repositories. Run `build-all.sh` in `git bash` or `terminal/command line` after navigate to `scripts` folder.
+
+After clone the this repository under the same parent folder as other Consent2Share project repositories. Run `build-all.sh` in `git bash` or `terminal/command line` after navigate to `scripts` folder.
+
 Run `docker images` to check all created docker images.
 
 ### publish-dockerhub.sh
 
-This script is used to tag docker images and publish to the dockerhub. Image tag is same as pom.xml version number in each APIs.
+This script is used to tag Docker images and publish to the Dockerhub. Docker image tag is same as the version number of the corresponding Consent2Share project.
 
 ## Reference 
 For more detail, please refer to `README.md` file in each repository for Consent2Share.
+
+## Report Issues
+Please use [GitHub Issues](https://github.com/bhits/consent2share/issues) page to report issues.
 
 
