@@ -6,43 +6,88 @@ We treat Infrastructure as Code. Here code is used to deploy Consent2Share appli
 -	[Docker](https://docs.docker.com/engine/installation/)
 -	[Docker Compose](https://docs.docker.com/compose/install/)
 
-## Environment Variables 
-The following environment variables are required.
-
-On LINUX server, you can create c2s-docker.sh under /etc/profile.d and set it executable using `chmod 755 c2s-docker.sh`.
-
-Add the following lines in `c2s-docker.sh` by replacing `***` with customized passwords and path.
-
-`export UAA_DB_PASSWORD=***`	
-`export PCM_DB_PASSWORD=***`	
-`export PLS_DB_PASSWORD=***`	
-`export PHR_DB_PASSWORD=***`	
-`export PATIENT_USER_DB_PASSWORD=***`		
-`export AUDIT_DB_PASSWORD=***`		
-`export C2S_BASE_PATH=/usr/local`
-`export C2S_APP_HOST=***`
-`export C2S_APP_PORT=80`
-`export UAA_SMTP_HOST=mail.feisystems.com`
-`export UAA_SMTP_PORT=***`
-`export UAA_SMTP_USER=***`
-`export UAA_SMTP_PASSWORD=***`
-`export UAA_PUBLIC_KEY=***`
-`export HIE_CONNECTION_ENABLE=false`
-`export AUTO_SCAN=false`
-`export SCAN_PERIOD="30 seconds"`
-
-Update pls and audit-service APIs database properties using customized password.
-
 ## Deployment	
 
-There are two options to run Consent2Share application on a CentOS 7.X server. 
+Two deployment options are provided to run Consent2Share application on Linux. Here we use CentOS 7.X as an example to describe the setups. 
 	
 ### One Server Setup
 
 This option is designed to run all Consent2Share services, UIs and databases on a single server.
 
--	Copy docker-compose.yml to server.
--	run `docker-compose up -d`
+#### Configure
+
++ Create a new directory `/usr/local/java/C2S_PROPS`
+
+    `mkdir /usr/local/java/`  
+    `mkdir /usr/local/java/C2S_PROPS`  
+
++ If SELinux is enabled, run the following command to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
+
+    `chcon -Rt svirt_sandbox_file_t /usr/local/java`
+
++ Get the [c2s_docker.sh](../scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
+
+  * Modify the `C2S_APP_HOST` and `SMTP` variables according to the server environment
+
+  * Re-login to the server in order for the file `c2s_docker.sh` to run automatically during the login
+
+  * Verify by checking any variable mentioned in the file  
+  Example: `echo ${C2S_BASE_PATH}` should show the value set in the file
+
++ Create the following sub folders under `/usr/local/java/C2S_PROPS` folder:
+
+  * `uaa`
+
+  * `pls-api/config-template`
+
+  * `pls-api/init-db`
+
+  * `logback-audit/config-template`
+
+  * `logback-audit/init-db`
+
+  * `iexhub/temp`
+
+  * `iexhub/test`
+
++ Copy the following configuration files and place them under  the `/usr/local/java/ C2S_PROPS`:  
+  
+  * Copy all [IExHub resource](https://github.com/bhits/iexhub/tree/master/iexhub/src/main/resources) folder files to `iexhub/temp` sub folder
+  
+  * Copy the [uaa.yml](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) to `uaa` sub folder
+  
+  * Copy all pls-api [config-temlate](https://github.com/bhits/pls-api/tree/master/config-template) files to `pls-api/config-template` sub folder
+  
+  * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db' sub folder
+  
+  * Copy the logback-audit [config-template](https://github.com/bhits/logback-audit/tree/master/config-template) file to `logback-audit/config-template` sub folder  
+  
+  * Copy the [database schema sql](https://github.com/bhits/logback-audit/tree/master/audit-db) file to `logback-audit/init-db` sub folder
+
++ Get the [docker-compose.yml](../deployment/one-server/docker-compose.yml) file and place it in the `/usr/local/java` folder
+  
++ Modify the following configuration files
+
+  * In `/usr/local/java/C2S_PROPS/pls-api/config-template/pls-config.properties` file, replace `localhost` with `pls-db.c2s.com` in the variable `database.url`
+  
+  * In `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file, replace `localhost` with `uaa-db.c2s.com` in the variable `database.url`
+  
++ Edge-server security:
+
+  * Create a new directory named `keystore` under `/usr/local/java` folder
+  
+  * Create/Obtain a valid SSL certificate
+  
+  * Export the public and private keys from the SSL certificate to a JKS formatted keystore file named `edge-server.keystore`
+  
+  * Put the `edge-server.keystore` file into `/usr/local/java/keystore` folder
+  
+  * Modify the value of the `server.ssl.key-store-password` property in the `docker-compose.yml` file located in the `/usr/local/java` folder to match the password used when exporting/creating the SSL certificate
+  
+#### Compose Containers
++ Run `docker-compose up -d` from the ‘`usr/local/java` folder to start up all Consent2Share services, UIs and databases
+
++ Run `docker ps -a` to verify all the containers is up running except data-only containers.
 
 ### Two Servers Setup
 
