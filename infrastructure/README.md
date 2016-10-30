@@ -206,8 +206,26 @@ This option is to run Consent2Share services, UIs on an application server and d
 
 ## Development
 
-This docker compose file in Development fodler is designed to run Consent2Share application on developer machine. 	
+The docker compose file in Development folder is designed to run Consent2Share application on developer machine. 	
 Compared to the deployment one-server option, this one doesn't set any memory constraints on Docker containers because developer's machine may has limited memory on docker-machine. 
+
+## Resolve Deployment Error
+If you encounter an error in the deployment:  
+`ERROR: for dss.c2s.com  UnixHTTPConnectionPool(host='localhost', port=None): Read timed out. (read timeout=60)
+
+Follow the steps below to resolve the error:
+
+1. Restart the Docker service: `sudo service docker restart`  
+
+2. Check for all Docker containers that are running: `docker ps -a`   
+   If you notice any containers that are exited or down except the data-only containers based on `busybox` image, follow the next steps
+
+3. For instance, if mysql containers are not running  
+    a. Go to /usr/local/java and then remove all containers : `docker-compose down`  
+    b. Go to /usr/local/java and then remove mysql folder : `sudo rm -rf mysql/`
+
+4. Start up all containers: Re-run from `/usr/local/java` folder: `docker-compose up -d` 
+
 
 ## UI Urls
 
