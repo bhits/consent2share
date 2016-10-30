@@ -56,17 +56,17 @@ This option is designed to run all Consent2Share services, UIs and databases on 
   
   * Copy the [uaa.yml](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) to `uaa` sub folder
   
-  * Copy all pls-api [config-temlate](https://github.com/bhits/pls-api/tree/master/config-template) files to `pls-api/config-template` sub folder
+  * Copy all [pls-api config-temlate](https://github.com/bhits/pls-api/tree/master/config-template) files to `pls-api/config-template` sub folder
   
   * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db' sub folder
   
-  * Copy the logback-audit [config-template](https://github.com/bhits/logback-audit/tree/master/config-template) file to `logback-audit/config-template` sub folder  
+  * Copy the [logback-audit config-template](https://github.com/bhits/logback-audit/tree/master/config-template) file to `logback-audit/config-template` sub folder  
   
   * Copy the [database schema sql](https://github.com/bhits/logback-audit/tree/master/audit-db) file to `logback-audit/init-db` sub folder
 
-  * Copy all [IExHub resource](https://github.com/bhits/iexhub/tree/master/iexhub/src/main/resources) folder files to `iexhub/temp` sub folder
+  * Copy all [IExHub resource folder](https://github.com/bhits/iexhub/tree/master/iexhub/src/main/resources) files to `iexhub/temp` sub folder
 
-+ Get the [docker-compose.yml](../deployment/one-server/docker-compose.yml) file and place it in the `/usr/local/java` folder
++ Get the [docker-compose.yml](./deployment/one-server/docker-compose.yml) file and place it in the `/usr/local/java` folder
   
 + Modify the following configuration files
 
@@ -168,21 +168,19 @@ This option is to run Consent2Share services, UIs on an application server and d
   
   * Copy the [uaa.yml](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) to `uaa` sub folder
   
-  * Copy all pls-api [config-temlate](https://github.com/bhits/pls-api/tree/master/config-template) files to `pls-api/config-template` sub folder
+  * Copy all [pls-api config-temlate](https://github.com/bhits/pls-api/tree/master/config-template) files to `pls-api/config-template` sub folder
   
-  * Copy the logback-audit [config-template](https://github.com/bhits/logback-audit/tree/master/config-template) file to `logback-audit/config-template` sub folder  
+  * Copy the [logback-audit config-template](https://github.com/bhits/logback-audit/tree/master/config-template) file to `logback-audit/config-template` sub folder  
 
-  * Copy all [IExHub resource](https://github.com/bhits/iexhub/tree/master/iexhub/src/main/resources) folder files to `iexhub/temp` sub folder
+  * Copy all [IExHub resource folder](https://github.com/bhits/iexhub/tree/master/iexhub/src/main/resources) files to `iexhub/temp` sub folder
 
-+ Get the [docker-compose.yml](../deployment/one-server/docker-compose.yml) file and place it in the `/usr/local/java` folder
++ Get the [docker-compose-app-server.yml](./deployment/two-servers/docker-compose-app-server.yml) file as `docker-compose.yml` under the `/usr/local/java` folder
   
 + Modify the following configuration files
 
   * In `/usr/local/java/C2S_PROPS/pls-api/config-template/pls-config.properties` file, replace `localhost` with `C2S_DB_HOST` in the variable `database.url`
   
   * In `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file, replace `localhost` with `C2S_DB_HOST` in the variable `database.url`
-
-+ Get the [docker-compose-app-server.yml](./deployment/two-servers/docker-compose-app-server.yml) file as `docker-compose.yml` under the `/usr/local/java` folder
 
 + Edge-server security:
 
