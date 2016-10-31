@@ -9,7 +9,7 @@ export PHR_DB_PASSWORD=admin
 export PATIENT_USER_DB_PASSWORD=admin
 export AUDIT_DB_PASSWORD=admin
 export C2S_BASE_PATH=/usr/local
-# Edge Server details
+# Edge Server configuraiton
 export C2S_APP_HOST=your_app_server_host
 export C2S_APP_PORT=80
 # SMTP details

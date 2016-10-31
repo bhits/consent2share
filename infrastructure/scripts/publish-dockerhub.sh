@@ -18,7 +18,7 @@ docker tag bhits/pp-ui bhits/pp-ui:0.20.0;
 docker tag bhits/try-policy bhits/try-policy:1.13.0;
 docker tag bhits/uaa bhits/uaa:3.4.1-01;
 
-
+#Push docker images to dockerhub
 docker push bhits/admin-portal-ui:0.13.0;
 docker push bhits/context-handler:1.8.0;
 docker push bhits/discovery-server:0.8.0;
