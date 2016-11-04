@@ -6,9 +6,22 @@ Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) wh
 
 ## Table of Contents
 
-[Technology Stack](#Technology Stack) | [Architecture](#Architecture)
+## Table of Contents
 
-[User Interfaces](#User Interfaces) | [Patient Portal UI](#Patient Portal UI)
+[Technology Stack](#Technology-Stack)  &nbsp; | &nbsp; [Architecture](#architecture) &nbsp; | &nbsp; [User Interfaces](#User-Interfaces) &nbsp; | &nbsp; [Microservices](#Microservices)
+
+[Supporting Infrastructure Services](#Supporting-Infrastructure-Services) &nbsp; | &nbsp; [Third-party Services](#Third-party-Services)
+
+[Security](#Security) &nbsp; | &nbsp; [SSL](#SSL) &nbsp; | &nbsp; [UAA Private and Public Keys](#UAA-Private-and-Public-Keys) &nbsp; | &nbsp; [DISCLAIMER](#DISCLAIMER)
+
+[Sub Projects and Git Repositories](#Sub-Projects-and-Git-Repositories) &nbsp; | &nbsp; [Common Libraries](#Common-Libraries)
+
+[Java Jar Runner](#Java-Jar-Runner) &nbsp; | &nbsp; [Spring Boot App Runner](#Spring-Boot-App-Runner) &nbsp; | &nbsp; [Releases](#Releases)
+
+[Development Guide](#Development-Guide) &nbsp; | &nbsp; [Deployment Guide](#Deployment-Guide)
+
+[Infrastructure Using Docker](#Infrastructure-Using-Docker)
+
 
 ## Technology Stack
 
