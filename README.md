@@ -5,8 +5,9 @@ Consent2Share (C2S) is an open source software application sponsored by the U.S.
 Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) which was sponsored and defined by the U.S. Office of the National Coordinator for Health Information Technology (ONC). The implementation of DS4P concepts and standards will allow patients receiving behavioral health treatment to share their health information through the nation’s HIEs while providing improved protection of their privacy.
 
 ## Table of Contents
-+ Technology Stack
-+ [Architecture](#architecture)
+
+[Technology Stack](#Technology Stack) | [Architecture](#architecture)
+[User Interfaces](#User Interfaces) | [Patient Portal UI](#Patient Portal UI)
 
 ## Technology Stack
 
