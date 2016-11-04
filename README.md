@@ -6,7 +6,8 @@ Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) wh
 
 ## Table of Contents
 
-[Technology Stack](#Technology Stack) | [Architecture](#architecture)
+[Technology Stack](#Technology Stack) | [Architecture](#Architecture)
+
 [User Interfaces](#User Interfaces) | [Patient Portal UI](#Patient Portal UI)
 
 ## Technology Stack
