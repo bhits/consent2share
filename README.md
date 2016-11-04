@@ -8,19 +8,19 @@ Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) wh
 
 ## Table of Contents
 
-[Technology Stack](#Technology-Stack)  &nbsp; | &nbsp; [Architecture](#architecture) &nbsp; | &nbsp; [User Interfaces](#User-Interfaces) &nbsp; | &nbsp; [Microservices](#Microservices)
+[Technology Stack](#user-content-technology-stack)  &nbsp; | &nbsp; [Architecture](#user-content-architecture) &nbsp; | &nbsp; [User Interfaces](#User-Interfaces) &nbsp; | &nbsp; [Microservices](#Microservices)
 
-[Supporting Infrastructure Services](#Supporting-Infrastructure-Services) &nbsp; | &nbsp; [Third-party Services](#Third-party-Services)
+[Supporting Infrastructure Services](#user-content-supporting-infrastructure-services) &nbsp; | &nbsp; [Third-party Services](#user-content-third-party-services)
 
-[Security](#Security) &nbsp; | &nbsp; [SSL](#SSL) &nbsp; | &nbsp; [UAA Private and Public Keys](#UAA-Private-and-Public-Keys) &nbsp; | &nbsp; [DISCLAIMER](#DISCLAIMER)
+[Security](#user-content-security) &nbsp; | &nbsp; [SSL](#SSL) &nbsp; | &nbsp; [UAA Private and Public Keys](#user-content-uaa-private-and-public-keys) &nbsp; | &nbsp; [DISCLAIMER](#user-content-disclaimer)
 
-[Sub Projects and Git Repositories](#Sub-Projects-and-Git-Repositories) &nbsp; | &nbsp; [Common Libraries](#Common-Libraries)
+[Sub Projects and Git Repositories](#user-content-sub-projects-and-git-repositories) &nbsp; | &nbsp; [Common Libraries](#user-content-common-libraries)
 
-[Java Jar Runner](#Java-Jar-Runner) &nbsp; | &nbsp; [Spring Boot App Runner](#Spring-Boot-App-Runner) &nbsp; | &nbsp; [Releases](#Releases)
+[Java Jar Runner](#user-content-java-jar-runner) &nbsp; | &nbsp; [Spring Boot App Runner](#user-content-spring-boot-app-runner) &nbsp; | &nbsp; [Releases](#user-content-releases)
 
-[Development Guide](#Development-Guide) &nbsp; | &nbsp; [Deployment Guide](#Deployment-Guide)
+[Development Guide](#user-content-development-guide) &nbsp; | &nbsp; [Deployment Guide](#user-content-deployment-guide)
 
-[Infrastructure Using Docker](#Infrastructure-Using-Docker)
+[Infrastructure Using Docker](#user-content-infrastructure-using-docker)
 
 
 ## Technology Stack
