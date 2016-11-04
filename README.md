@@ -6,13 +6,11 @@ Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) wh
 
 ## Table of Contents
 
-## Table of Contents
-
-[Technology Stack](#user-content-technology-stack)  &nbsp; | &nbsp; [Architecture](#user-content-architecture) &nbsp; | &nbsp; [User Interfaces](#User-Interfaces) &nbsp; | &nbsp; [Microservices](#Microservices)
+[Technology Stack](#user-content-technology-stack)  &nbsp; | &nbsp; [Architecture](#user-content-architecture) &nbsp; | &nbsp; [User Interfaces](#user-content-user-interfaces) &nbsp; | &nbsp; [Microservices](#user-content-microservices)
 
 [Supporting Infrastructure Services](#user-content-supporting-infrastructure-services) &nbsp; | &nbsp; [Third-party Services](#user-content-third-party-services)
 
-[Security](#user-content-security) &nbsp; | &nbsp; [SSL](#SSL) &nbsp; | &nbsp; [UAA Private and Public Keys](#user-content-uaa-private-and-public-keys) &nbsp; | &nbsp; [DISCLAIMER](#user-content-disclaimer)
+[Security](#user-content-security) &nbsp; | &nbsp; [SSL](#user-content-ssl) &nbsp; | &nbsp; [UAA Private and Public Keys](#user-content-uaa-private-and-public-keys) &nbsp; | &nbsp; [DISCLAIMER](#user-content-disclaimer)
 
 [Sub Projects and Git Repositories](#user-content-sub-projects-and-git-repositories) &nbsp; | &nbsp; [Common Libraries](#user-content-common-libraries)
 
