@@ -893,6 +893,11 @@ body {
     font-size: 26px !important;
   }
 }
+.dockerlogo {
+  height: 17px;
+  margin-bottom: 3px;
+  opacity: .5;
+}
 a {
   text-decoration: none;
   color: black;
@@ -942,6 +947,9 @@ a:hover .quicklink {
 }
 a:hover .medGrayBorder-thin {
   border-color: #cccccc;
+}
+a:hover .dockerlogo {
+  opacity: 1;
 }
 .row-striped {
   border-radius: 4px;
