@@ -139,7 +139,7 @@ Source Code Repository: [https://github.com/bhits/document-validator](https://gi
 
 #### Information Exchange Hub
 
-Information Exchange Hub consists of connectors, services, and transformation components intended to allow applications to interoperate with standards-based Health Information Exchange (HIE) organizations.
+The Information Exchange Hub consists of connectors, services, and transformation components intended to allow applications to interoperate with standards-based Health Information Exchange (HIE) organizations.
 
 Source Code Repository: [https://github.com/bhits/iexhub](https://github.com/bhits/iexhub)
 
@@ -155,7 +155,7 @@ Source Code Repository: [https://github.com/bhits/edge-server](https://github.co
 
 #### Discovery Server
 
-The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates the Consent2Share (C2S) microservices to dynamically discover each other and promotes the scalability of the C2S system. It provides the following:
+The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates C2S microservices to dynamically discover each other and promotes the scalability of the C2S system. It provides the following:
 
  + Registry of C2S service instances
  + Provides means for C2S service instances to register, de-register and query instances with the registry
@@ -169,7 +169,7 @@ C2S uses several third-party open source services for authentication, authorizat
 
 #### CloudFoundry User Account and Authentication (UAA) Server
 
-The Consent2Share (C2S) application uses UAA for authentication, authorization, issuing tokens for client applications, and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
+C2S uses UAA for authentication, authorization, issuing tokens for client applications, and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
 
 C2S currently uses a fork of UAA project. This fork is fundamentally the same as the original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes, and a few test users including an admin user in UAA. This fork can be found at [https://github.com/bhits/uaa](https://github.com/bhits/uaa).
 
@@ -181,13 +181,13 @@ C2S currently uses a fork of the [Logback Audit project](https://github.com/qos-
 
 #### JBoss Drools Guvnor
 
-The Consent2Share (C2S) application uses [JBoss Drools Guvnor](https://docs.jboss.org/drools/release/5.5.0.Final/drools-guvnor-docs/html_single/) as a user interface and a versioned repository for business rules of its Business Rule Management System (BRMS). Guvnor also offers a guided editor while creating/editing rules, versioning, and Quality Assurance (QA) support for testing and validating the changes to the business rules. The [Document Segmentation Service (DSS) API](#document-segmentation-service-api) uses the [JBoss Drools Expert](https://docs.jboss.org/drools/release/5.4.0.Final/drools-expert-docs/html_single/) to run the business rules that are retrieved from the Guvnor instance with given arguments in a *Document Segmentation* request context. These rules and the execution result are used as *Tagging Directives* and they drive the *Document Tagging* phase of *Document Segmentation Service*.
+C2S uses [JBoss Drools Guvnor](https://docs.jboss.org/drools/release/5.5.0.Final/drools-guvnor-docs/html_single/) as a user interface and a versioned repository for business rules of its Business Rule Management System (BRMS). Guvnor also offers a guided editor while creating/editing rules, versioning, and Quality Assurance (QA) support for testing and validating the changes to the business rules. The [Document Segmentation Service (DSS) API](#document-segmentation-service-api) uses the [JBoss Drools Expert](https://docs.jboss.org/drools/release/5.4.0.Final/drools-expert-docs/html_single/) to run the business rules that are retrieved from the Guvnor instance with given arguments in a *Document Segmentation* request context. These rules and the execution result are used as *Tagging Directives* and they drive the *Document Tagging* phase of *Document Segmentation Service*.
 
 Source Code Repository for Dockerized JBoss Drools Guvnor: [https://github.com/bhits/dockerized-drools-guvnor](https://github.com/bhits/dockerized-drools-guvnor)
 
 #### ClamAV
 
-The Consent2Share (C2S) application uses [ClamAV](http://http://www.clamav.net/) to scan clinical documents uploaded by patients.
+C2S uses [ClamAV](http://http://www.clamav.net/) to scan clinical documents uploaded by patients.
 
 ## Security
 
@@ -222,7 +222,7 @@ Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and
 
 ## Sub Projects and Git Repositories
 
-Consent2Share is an umbrella project which has several sub-projects. 
+C2S is an umbrella project which has several sub-projects.
 
 In [User Interfaces](#user-interfaces), [Microservices](#microservices) and [Supporting Infrastructure Services](#supporting-infrastructure-services) sections, we listed services/UIs used in Consent2Share. Each of these services is a sub-project and has its own Git repository. 
 
@@ -260,7 +260,7 @@ Source Code Repository: [https://github.com/bhits/spring-boot-app-runner](https:
 
 ## Releases
 
-As mentioned in the previous sections, Consent2Share is an umbrella project that consists of many microservices. Each microservice and infrastructure component has its own independent source code repository, version, and release cycle. The release of Consent2Share as a whole system is basically a set of tested and compatible microservice releases and the supporting documentation.
+As mentioned in the previous sections, C2S is an umbrella project that consists of many microservices. Each microservice and infrastructure component has its own independent source code repository, version, and release cycle. The release of C2S as a whole system is basically a set of tested and compatible microservice releases and the supporting documentation.
 
 The release version numbers are usually specified in `<MajorVersion>.<MinorVersion>.<IncrementalVersion>` format. 
 
