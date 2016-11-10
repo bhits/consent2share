@@ -8,7 +8,7 @@ Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) wh
 
 ## Table of Contents
 
-[Technology Stack](#user-content-technology-stack)  &nbsp; | &nbsp; [Architecture](#user-content-architecture) &nbsp; | &nbsp; [User Interfaces](#user-content-user-interfaces) &nbsp; | &nbsp; [Microservices](#user-content-microservices)
+[Technology Stack](#technology-stack)  &nbsp; | &nbsp; [Architecture](#user-content-architecture) &nbsp; | &nbsp; [User Interfaces](#user-content-user-interfaces) &nbsp; | &nbsp; [Microservices](#user-content-microservices)
 
 [Supporting Infrastructure Services](#user-content-supporting-infrastructure-services) &nbsp; | &nbsp; [Third-party Services](#user-content-third-party-services)
 
@@ -276,7 +276,7 @@ Please see [release page](../../releases) to download the document.
 
 ## Infrastructure Using Docker
 
-BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a C2S running instance and related infrastructure using *Docker* and *Docker Compose*.
+The BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a C2S running instance and related infrastructure using *Docker* and *Docker Compose*.
 
 Additionally, each source code repository also contains `README.md` instructions and a `Dockerfile` for building Docker images from the source code.
 
