@@ -18,7 +18,7 @@ Consent2Share implements the concepts of Data Segmentation for Privacy (DS4P) wh
 
 [Java Jar Runner](#java-jar-runner) &nbsp; | &nbsp; [Spring Boot App Runner](#spring-boot-app-runner) &nbsp; | &nbsp; [**Releases**](#releases)
 
-[Development Guide](#development-guide) &nbsp; | &nbsp; [**Deployment Guide**](#deployment-guide)
+[**Development Guide**](#development-guide) &nbsp; | &nbsp; [**Deployment Guide**](#deployment-guide)
 
 [**Infrastructure Using Docker**](#infrastructure-using-docker)
 
