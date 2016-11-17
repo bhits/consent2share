@@ -3,11 +3,11 @@ services:
   admin-portal-ui.c2s.com:
     image: bhits/admin-portal-ui:0.13.0
     volumes:
-    volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
     environment:
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      c2s.admin-ui.oauth2.client.secret: ${UAA_ADMIN_UI_SECRET}
     mem_limit: 1000m
     restart: always
   clamd.c2s.com:
@@ -208,6 +208,7 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pp-ui:/java/C2S_LOGS/pp-ui
     environment:
       security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+      c2s.pp-ui.oauth2.client.secret: ${UAA_PP_UI_SECRET}
     mem_limit: 1000m
     restart: always
 

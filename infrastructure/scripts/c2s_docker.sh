@@ -22,3 +22,6 @@ export HIE_CONNECTION_ENABLE=false
 #logback-audit variables
 export AUTO_SCAN=true
 export SCAN_PERIOD="30 seconds"
+#uaa client id keys
+export UAA_ADMIN_UI_SECRET=changeit
+export UAA_PP_UI_SECRET=changeit

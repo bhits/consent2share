@@ -145,7 +145,7 @@ This option is to run Consent2Share services, UIs on an application server and d
 
   * Uncomment the `C2S_DB_HOST` variable
 
-  * Modify the `C2S_APP_HOST`, `C2S_DB_HOST` and `SMTP` variables according to the server environment
+  * Modify the `C2S_APP_HOST`, `C2S_DB_HOST` , `SMTP` and other environment specific variables according to the server environment
 
   * Re-login to the server in order for the file `c2s_docker.sh` to run automatically during the login
 
