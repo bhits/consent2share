@@ -42,8 +42,6 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1500m
-    volumes:
-      - ${C2S_BASE_PATH}/java:/java
     restart: always
 
   document-validator-ccda-r2.c2s.com:
