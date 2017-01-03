@@ -35,8 +35,6 @@ services:
     image: bhits/document-validator-ccda-r1:0.9.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
-    volumes:
-      - ${C2S_BASE_PATH}/java:/java
     restart: always
 
   document-validator-ccda-r2.c2s.com:
