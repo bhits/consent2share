@@ -42,22 +42,22 @@ docker push bhits/uaa:3.4.1-01;
 
 
 
-#docker push bhits/admin-portal-ui;
-#docker push bhits/config-server;
-#docker push bhits/context-handler;
-#docker push bhits/discovery-server;
-#docker push bhits/document-validator-ccda-r1;
-#docker push bhits/document-validator-ccda-r2;
-#docker push bhits/dss;
-#docker push bhits/edge-server;
-#docker push bhits/iexhub;
-#docker push bhits/logback-audit-server
-#docker push bhits/patient-user;
-#docker push bhits/patient-registration;
-#docker push bhits/pcm;
-#docker push bhits/pep;
-#docker push bhits/phr;
-#docker push bhits/pls;
-#docker push bhits/pp-ui;
-#docker push bhits/try-policy;
-#docker push bhits/uaa;
+docker push bhits/admin-portal-ui;
+docker push bhits/config-server;
+docker push bhits/context-handler;
+docker push bhits/discovery-server;
+docker push bhits/document-validator-ccda-r1;
+docker push bhits/document-validator-ccda-r2;
+docker push bhits/dss;
+docker push bhits/edge-server;
+docker push bhits/iexhub;
+docker push bhits/logback-audit-server
+docker push bhits/patient-user;
+docker push bhits/patient-registration;
+docker push bhits/pcm;
+docker push bhits/pep;
+docker push bhits/phr;
+docker push bhits/pls;
+docker push bhits/pp-ui;
+docker push bhits/try-policy;
+docker push bhits/uaa;
