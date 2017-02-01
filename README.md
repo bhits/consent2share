@@ -163,6 +163,12 @@ The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eure
 
 Source Code Repository: [https://github.com/bhits/discovery-server](https://github.com/bhits/discovery-server)
 
+#### Configuration Server
+
+The Configuration Server (config-server) provides support for externalized configuration in the Consent2Share (C2S) application, including the following C2S components: Admin Portal UI, Patient Portal UI, Context Handler API, Document Segmentation Service API, Edge Server, Patient User API, Patient Consent Management API, Policy Enforcement Point API, Patient Health Record API, Provider Lookup Service API, Patient Registration API and Try My Policy API
+
+Source Code Repository: [https://github.com/bhits/config-server](https://github.com/bhits/config-server)
+
 ### Third-party Services
 
 C2S uses several third-party open source services for authentication, authorization, business rules management, auditing and detecting viruses.
