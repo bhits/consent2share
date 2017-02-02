@@ -6,6 +6,8 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     mem_limit: 1000m
     restart: always
   clamd.c2s.com:
@@ -30,14 +32,16 @@ services:
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.profiles.active: application-lnx-qa
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     restart: always
 
   discovery-server.c2s.com:
     image: bhits/discovery-server:0.10.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/discovery-server:/java/C2S_LOGS/discovery-server
     mem_limit: 1500m
@@ -70,6 +74,7 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     restart: always
 
   edge-server.c2s.com:
@@ -80,8 +85,8 @@ services:
     mem_limit: 1500m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.profiles.active: ssl-lnx-qa
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     ports:
       - "80:80"
       - "443:443"
@@ -97,17 +102,16 @@ services:
     restart: always
 
   iexhub.c2s.com:
-    image: bhits/iexhub:0.5.0
+    image: bhits/iexhub:0.6.0
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+      CATALINA_OPTS: -Diexhub.logging.file=/java/C2S_LOGS/iexhub/InfoExchangeHub.log
     mem_limit: 4000m
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/java/iexhub/test
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/temp:/java/iexhub/config
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/temp/output:/java/iexhub/config/output
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/test:/usr/local/tomcat/test
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results:/results
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config:/java/iexhub/config
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config/output:/java/iexhub/config/output
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub:/java/C2S_LOGS/iexhub
     restart: always
 
   logback-audit-server.c2s.com:
@@ -125,8 +129,8 @@ services:
     image: bhits/patient-registration:1.18.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.profiles.active: application-lnx-qa
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-registration:/java/C2S_LOGS/patient-registration
     mem_limit: 1500m
@@ -139,8 +143,8 @@ services:
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.profiles.active: application-lnx-qa
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     restart: always
 
   pcm.c2s.com:
@@ -150,8 +154,8 @@ services:
     environment:
       TZ: "US/Eastern"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.profiles.active: application-lnx-qa
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     mem_limit: 2000m
     restart: always
 
@@ -163,6 +167,7 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     restart: always
 
   phr.c2s.com:
@@ -171,9 +176,9 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/phr:/java/C2S_LOGS/phr
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      logging.level.org.springframework.security: "debug"
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
-      mem_limit: 1500m
+    command: --spring.profiles.active=application-lnx-qa
+    mem_limit: 1500m
     restart: always
 
   pls.c2s.com:
@@ -195,6 +200,7 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     mem_limit: 1000m
     restart: always
 
@@ -209,6 +215,7 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=application-lnx-qa
     mem_limit: 1000m
     restart: always
 
