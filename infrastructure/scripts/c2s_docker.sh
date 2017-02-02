@@ -28,3 +28,6 @@ export BASIC_AUTH_USER=your_basic_auth_user
 export BASIC_AUTH_PASSWORD=your_basic_auth_password
 #conofig data variables
 export CONFIG_DATA_ENCRYPT_KEY=your_config_data_encrypt
+# This variable is only required to give server environment specific profile
+# data added in config-data repository
+#export ENV_APP_PROFILE=your_app_Server_specific_profile
