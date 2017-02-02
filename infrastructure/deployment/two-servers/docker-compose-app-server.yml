@@ -40,8 +40,6 @@ services:
     image: bhits/discovery-server:0.10.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
-    command: --spring.profiles.active=application-lnx-qa
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/discovery-server:/java/C2S_LOGS/discovery-server
     mem_limit: 1500m
@@ -53,7 +51,6 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
     mem_limit: 1500m
     restart: always
 
@@ -214,8 +211,6 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/try-policy:/java/C2S_LOGS/try-policy
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
-    command: --spring.profiles.active=application-lnx-qa
     mem_limit: 1000m
     restart: always
 
