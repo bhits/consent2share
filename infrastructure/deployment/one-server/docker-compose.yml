@@ -1,42 +1,50 @@
 version: '2'
 services:
   admin-portal-ui.c2s.com:
-    image: bhits/admin-portal-ui:0.13.0
+    image: bhits/admin-portal-ui:0.17.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
     environment:
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      c2s.admin-ui.oauth2.client.secret: ${UAA_ADMIN_UI_SECRET}
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     mem_limit: 1000m
     restart: always
   clamd.c2s.com:
     image: dinkel/clamavd
     restart: always
-
+  config-server.c2s.com:
+    image: bhits/config-server:0.1.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/config-server:/java/C2S_LOGS/config-server
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/c2s-config-data-private:/java/c2s-config-data-private
+    mem_limit: 1000m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      spring.cloud.config.server.git.uri: file:/java/c2s-config-data-private
+      security.user.name: ${BASIC_AUTH_USER}
+      security.user.password: ${BASIC_AUTH_PASSWORD}
+    restart: always
   context-handler.c2s.com:
-    image: bhits/context-handler:1.8.0
+    image: bhits/context-handler:1.10.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/context-handler:/java/C2S_LOGS/context-handler
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.datasource.password: ${PCM_DB_PASSWORD}
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     restart: always
 
   discovery-server.c2s.com:
-    image: bhits/discovery-server:0.8.0
+    image: bhits/discovery-server:0.10.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/discovery-server:/java/C2S_LOGS/discovery-server
     mem_limit: 1500m
     restart: always
 
   document-validator-ccda-r1.c2s.com:
-    image: bhits/document-validator-ccda-r1:0.9.0
+    image: bhits/document-validator-ccda-r1:0.11.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
     environment:
@@ -45,7 +53,7 @@ services:
     restart: always
 
   document-validator-ccda-r2.c2s.com:
-    image: bhits/document-validator-ccda-r2:0.9.0
+    image: bhits/document-validator-ccda-r2:0.11.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1500m
@@ -54,29 +62,26 @@ services:
     restart: always
 
   dss.c2s.com:
-    image: bhits/dss:1.13.0
+    image: bhits/dss:1.15.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/dss:/java/C2S_LOGS/dss
     mem_limit: 1500m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
-      c2s.dss.documentSegmentationImpl.defaultIsAudited: "true"
-      c2s.dss.documentSegmentationImpl.defaultIsAuditFailureByPass: "true"
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   edge-server.c2s.com:
-    image: bhits/edge-server:0.11.0
+    image: bhits/edge-server:0.13.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/edge-server:/java/C2S_LOGS/edge-server
       - ${C2S_BASE_PATH}/java/keystore/edge-server.keystore:/java/keystore/edge-server.keystore
     mem_limit: 1500m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      server.ssl.key-store: /java/keystore/edge-server.keystore
-      server.ssl.key-store-password: changeit
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
-    command: --spring.profiles.active=ssl
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     ports:
       - "80:80"
       - "443:443"
@@ -92,18 +97,16 @@ services:
     restart: always
 
   iexhub.c2s.com:
-    image: bhits/iexhub:0.3.0
+    image: bhits/iexhub:0.6.0
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+      CATALINA_OPTS: -Diexhub.logging.file=/java/C2S_LOGS/iexhub/InfoExchangeHub.log
     mem_limit: 4000m
     volumes:
-      - ${C2S_BASE_PATH}/java:/java
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/usr/local/tomcat/bin/test
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/temp:/temp
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/temp/output:/temp/output
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/test:/usr/local/tomcat/test
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results:/results
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub/results/DebugLogs:/results/DebugLogs
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/java/iexhub/test
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config:/java/iexhub/config
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config/output:/java/iexhub/config/output
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub:/java/C2S_LOGS/iexhub
     restart: always
 
   logback-audit-server.c2s.com:
@@ -118,89 +121,74 @@ services:
     restart: always
 
   patient-registration.c2s.com:
-    image: bhits/patient-registration:1.15.0
+    image: bhits/patient-registration:1.18.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
-      hie-connection.fhir.enabled: ${HIE_CONNECTION_ENABLE}
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-registration:/java/C2S_LOGS/patient-registration
     mem_limit: 1500m
     restart: always
 
   patient-user.c2s.com:
-    image: bhits/patient-user:0.12.0
+    image: bhits/patient-user:0.14.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-user:/java/C2S_LOGS/patient-user
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.datasource.password: ${PATIENT_USER_DB_PASSWORD}
-      C2S_APP_HOST: ${C2S_APP_HOST}
-      spring.mail.host: ${UAA_SMTP_HOST}
-      spring.mail.port: ${UAA_SMTP_PORT}
-      spring.mail.username: ${UAA_SMTP_USER}
-      spring.mail.password: ${UAA_SMTP_PASSWORD}
-      spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   pcm.c2s.com:
-    image: bhits/pcm:1.18.0
+    image: bhits/pcm:1.21.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pcm:/java/C2S_LOGS/pcm
     environment:
       TZ: "US/Eastern"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.datasource.password: ${PCM_DB_PASSWORD}
-      spring.mail.host: ${UAA_SMTP_HOST}
-      spring.mail.port: ${UAA_SMTP_PORT}
-      spring.mail.username: ${UAA_SMTP_USER}
-      spring.mail.password: ${UAA_SMTP_PASSWORD}
-      spring.mail.properties.mail.smtp.ssl.trust: ${UAA_SMTP_HOST}
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     mem_limit: 2000m
     restart: always
 
   pep.c2s.com:
-    image: bhits/pep:1.7.0
+    image: bhits/pep:1.9.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pep:/java/C2S_LOGS/pep
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     restart: always
 
   phr.c2s.com:
-    image: bhits/phr:1.19.0
+    image: bhits/phr:1.21.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/phr:/java/C2S_LOGS/phr
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      logging.level.org.springframework.security: "debug"
-      spring.datasource.password: ${PHR_DB_PASSWORD}
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1500m
     restart: always
 
   pls.c2s.com:
-    image: bhits/pls:1.11.0
+    image: bhits/pls:2.0.0
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
     mem_limit: 1200m
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls-api/config-template:/java/C2S_PROPS/pls-api/config-template
     restart: always
 
   pp-ui.c2s.com:
-    image: bhits/pp-ui:0.20.0
+    image: bhits/pp-ui:0.23.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pp-ui:/java/C2S_LOGS/pp-ui
     environment:
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
-      c2s.pp-ui.oauth2.client.secret: ${UAA_PP_UI_SECRET}
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     mem_limit: 1000m
     restart: always
 
@@ -209,12 +197,11 @@ services:
     restart: always
 
   try-policy.c2s.com:
-    image: bhits/try-policy:1.13.0
+    image: bhits/try-policy:1.15.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/try-policy:/java/C2S_LOGS/try-policy
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      security.oauth2.resource.jwt.keyValue: ${UAA_PUBLIC_KEY}
     mem_limit: 1000m
     restart: always
 
@@ -299,14 +286,14 @@ services:
       - pls-db-data.c2s.com
     environment:
         MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
-        MYSQL_DATABASE: npi
+        MYSQL_DATABASE: pls
     restart: always
 
   pls-db-data.c2s.com:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls-api/init-db:/docker-entrypoint-initdb.d
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/java/C2S_PROPS/pls
 
   uaa-db.c2s.com:
     image: mysql:5.7
