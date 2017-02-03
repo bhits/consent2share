@@ -176,6 +176,8 @@ services:
     image: bhits/pls:2.0.0
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     mem_limit: 1200m
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
@@ -287,13 +289,14 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
         MYSQL_DATABASE: pls
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/java/C2S_PROPS/pls
     restart: always
 
   pls-db-data.c2s.com:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/java/C2S_PROPS/pls
 
   uaa-db.c2s.com:
     image: mysql:5.7
