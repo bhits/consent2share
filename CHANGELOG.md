@@ -48,7 +48,7 @@ Consent2Share 2.1.0 release includes:
 * Common Libraries 1.9.0: [https://github.com/bhits/common-libraries/releases/tag/1.9.0](https://github.com/bhits/common-libraries/releases/tag/1.9.0)
 * Java Jar Runner 8u102-jre: [https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre](https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre)
 * Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
-* Spring Boot Application Runner 1.10.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/2.2.9](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.8.0)
+* Spring Boot Application Runner 1.10.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0)
 
 <a name="2.0.0"></a>
 # Consent2Share 2.0.0 (2016-10-31)
