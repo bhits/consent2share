@@ -28,15 +28,14 @@ This option is designed to run all Consent2Share services, UIs and databases on 
 
 + Edge-server security:
 
-  * Create a new directory named `keystore` under `/usr/local/java` folder
-  
   * Create/Obtain a valid SSL certificate
   
   * Export the public and private keys from the SSL certificate to a JKS formatted keystore file named `edge-server.keystore`
   
-  * Put the `edge-server.keystore` file into `/usr/local/java/keystore` folder
+  * upload the  `edge-server.keystore` file into `/usr/local/java/keystore` folder
   
-  * Add the following in edge-server.yml in ‘/usr/local/java/C2S_PROPS/c2s-config-data‘ folder
+  * Add the following in the `/usr/local/java/C2S_PROPS/c2s-config-data/edge-server.yml` file.
+
       ```yml
       spring.profiles: your_app_Server_specific_profile
       server:
@@ -45,14 +44,14 @@ This option is designed to run all Consent2Share services, UIs and databases on 
           key-store-password: "keystore password"
       ```
 
-  * Modify the `ENV_APP_PROFILE= your_app_Server_specific_profile` in oneServerConfig() function in `c2s_env.sh` under `/etc/profile.d` folder.
+  * Modify the `ENV_APP_PROFILE= your_app_Server_specific_profile` in oneServerConfig() function in the `/etc/profile.d/c2s_env.sh` file.
 
 
 + Modify the following configuration files
 
-  * Set `edge server`, `config server`, `SMTP variables` to the server specific values in `c2s_env.sh` file in ‘/etc/profile.d’ folder. 
+  * Set `edge server`, `config server`, `SMTP variables` to the server specific values in the ` file in ‘/etc/profile.d/c2s_env.sh’ folder. 
   
-  * Replace `localhost` with `uaa-db.c2s.com` for `database.url` variable in `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file  in `/usr/local/java` folder.
+  * Replace `localhost` with `uaa-db.c2s.com` for `database.url` variable in the `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file.
   
   * Re-login to the server in order for the file `c2s_env.sh` to run automatically during the login
 
@@ -91,18 +90,16 @@ This option is to run Consent2Share services, UIs on an application server and d
 + If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
-
 + Edge-server security:
 
-  * Create a new directory named `keystore` under `/usr/local/java` folder
-  
   * Create/Obtain a valid SSL certificate
   
   * Export the public and private keys from the SSL certificate to a JKS formatted keystore file named `edge-server.keystore`
   
-  * Put the `edge-server.keystore` file into `/usr/local/java/keystore` folder
+  * upload the  `edge-server.keystore` file into `/usr/local/java/keystore` folder
   
-  * Add the following in edge-server.yml in ‘/usr/local/java/C2S_PROPS/c2s-config-data‘ folder
+  * Add the following in the `/usr/local/java/C2S_PROPS/c2s-config-data/edge-server.yml` file.
+
       ```yml
       spring.profiles: your_app_Server_specific_profile
       server:
@@ -111,18 +108,18 @@ This option is to run Consent2Share services, UIs on an application server and d
           key-store-password: "keystore password"
       ```
 
-  * Modify the `ENV_APP_PROFILE= your_app_Server_specific_profile` in twoServerAppConfig() function in `c2s_env.sh` under `/etc/profile.d` folder.
+  * Modify the `ENV_APP_PROFILE= your_app_Server_specific_profile` in twoServerAppConfig() function in the `/etc/profile.d/c2s_env.sh` file.
 
-  
+
 + Modify the following configuration files
 
-  * Set edge server, config server, SMTP variables to the server specific values in `c2s_env.sh` file in `/etc/profile.d` folder
+  * Set `edge server`, `config server`, `SMTP variables` to the server specific values in the ` file in ‘/etc/profile.d/c2s_env.sh’ folder. 
   
-+ Re-login to the server in order for the file `c2s_env.sh` to run automatically during the login
-     
+  * Re-login to the server in order for the file `c2s_env.sh` to run automatically during the login
+
   * Verify by checking any variable mentioned in the file  
-  
-  Example: `echo ${C2S_BASE_PATH}` should show the value set in the file    
+  Example: `echo ${C2S_BASE_PATH}` should show the value set in the file
+
 #### Compose Containers on Database Server
 + Run `docker-compose up -d` from the `usr/local/java` folder to start up all databases
 
