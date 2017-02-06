@@ -42,9 +42,10 @@ The technology stack used for Consent2Share includes, but not limited to:
 + [Flyway](https://flywaydb.org/)
 + [Redis](http://redis.io/)
 + [JavaScript - ES5](https://es5.github.io/)
++ [TypeScript](https://www.typescriptlang.org/)
 + [HTML5](https://www.w3.org/TR/html5/)
 + [CSS3](https://www.w3.org/TR/CSS/)
-+ [AngularJS](https://angularjs.org/)
++ [AngularJS](https://angularjs.org/)/[Angular](https://angular.io/)
 + [Bootstrap](http://getbootstrap.com/)
 + [Grunt](http://gruntjs.com/)
 + [Docker and Docker Compose](https://www.docker.com/)
@@ -162,6 +163,12 @@ The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eure
  + Registry propagation to other C2S microservice (Eureka client) and Discovery Server (Eureka server cluster) instances
 
 Source Code Repository: [https://github.com/bhits/discovery-server](https://github.com/bhits/discovery-server)
+
+#### Configuration Server
+
+The Configuration Server (config-server) provides support for externalized configuration in the Consent2Share (C2S) application, including the following C2S components: Admin Portal UI, Patient Portal UI, Context Handler API, Document Segmentation Service API, Edge Server, Patient User API, Patient Consent Management API, Policy Enforcement Point API, Patient Health Record API, Provider Lookup Service API, Patient Registration API and Try My Policy API
+
+Source Code Repository: [https://github.com/bhits/config-server](https://github.com/bhits/config-server)
 
 ### Third-party Services
 
