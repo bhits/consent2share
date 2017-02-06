@@ -17,11 +17,11 @@ services:
     image: bhits/config-server:0.2.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/config-server:/java/C2S_LOGS/config-server
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/c2s-config-data-private:/java/c2s-config-data-private
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/${CONFIG_DATA_GIT_DIR}:/java/${CONFIG_DATA_GIT_DIR}
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      spring.cloud.config.server.git.uri: file:/java/c2s-config-data-private
+      spring.cloud.config.server.git.uri: file:/java/${CONFIG_DATA_GIT_DIR}
       security.user.name: ${BASIC_AUTH_USER}
       security.user.password: ${BASIC_AUTH_PASSWORD}
     restart: always
@@ -68,8 +68,6 @@ services:
     mem_limit: 1500m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
-    command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   edge-server.c2s.com:
