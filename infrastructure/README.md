@@ -18,74 +18,46 @@ This option is designed to run all Consent2Share services, UIs and databases on 
 
 #### Configure
 
-+ Create a new directory `/usr/local/java/C2S_PROPS`
-
-    `mkdir /usr/local/java/`  
-    `mkdir /usr/local/java/C2S_PROPS`  
++ Get the [c2s_config.sh](./scripts/c2s_config.sh) file and run the file.
+    `curl https://raw.githubusercontent.com/bhits/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
+    `sh c2s_config.sh oneServerConfig`  
 
 + If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
 
-+ Get the [c2s_docker.sh](./scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
-
-  * Modify the `C2S_APP_HOST` and `SMTP` variables according to the server environment
-
-  * Re-login to the server in order for the file `c2s_docker.sh` to run automatically during the login
-
-  * Verify by checking any variable mentioned in the file  
-  Example: `echo ${C2S_BASE_PATH}` should show the value set in the file
-
-+ Create the following sub folders under `/usr/local/java/C2S_PROPS` folder:
-
-  * `uaa`
-
-  * `pls-api/config-template`
-
-  * `pls-api/init-db`
-
-  * `logback-audit/config-template`
-
-  * `logback-audit/init-db`
-
-  * `iexhub/temp`
-
-  * `iexhub/test`
-
-+ Copy the following configuration files and other files, place them under the `/usr/local/java/C2S_PROPS`:  
-  
-  * Copy the [uaa.yml](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) to `uaa` sub folder
-  
-  * Copy all [pls-api config-temlate](https://github.com/bhits/pls-api/tree/master/config-template) files to `pls-api/config-template` sub folder
-  
-  * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db` sub folder
-  
-  * Copy the [logback-audit config-template](https://github.com/bhits/logback-audit/tree/master/config-template) file to `logback-audit/config-template` sub folder  
-  
-  * Copy the [database schema sql](https://github.com/bhits/logback-audit/tree/master/audit-db) file to `logback-audit/init-db` sub folder
-
-  * Copy all [IExHub resource folder](https://github.com/bhits/iexhub/tree/master/iexhub/src/main/resources) files to `iexhub/temp` sub folder
-
-+ Get the [docker-compose.yml](./deployment/one-server/docker-compose.yml) file and place it in the `/usr/local/java` folder
-  
-+ Modify the following configuration files
-
-  * In `/usr/local/java/C2S_PROPS/pls-api/config-template/pls-config.properties` file, replace `localhost` with `pls-db.c2s.com` in the variable `database.url`
-  
-  * In `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file, replace `localhost` with `uaa-db.c2s.com` in the variable `database.url`
-  
 + Edge-server security:
 
-  * Create a new directory named `keystore` under `/usr/local/java` folder
-  
   * Create/Obtain a valid SSL certificate
   
   * Export the public and private keys from the SSL certificate to a JKS formatted keystore file named `edge-server.keystore`
   
-  * Put the `edge-server.keystore` file into `/usr/local/java/keystore` folder
+  * upload the  `edge-server.keystore` file into `/usr/local/java/keystore` folder
   
-  * Modify the value of the `server.ssl.key-store-password` property in the `docker-compose.yml` file located in the `/usr/local/java` folder to match the password used when exporting/creating the SSL certificate
+  * Add the following in the `/usr/local/java/C2S_PROPS/c2s-config-data/edge-server.yml` file.
+
+      ```yml
+      spring.profiles: your_app_Server_specific_profile
+      server:
+        ssl:
+          key-store: /java/keystore/edge-server.keystore
+          key-store-password: "keystore password"
+      ```
+
+  * Modify the `ENV_APP_PROFILE= your_app_Server_specific_profile` in oneServerConfig() function in the `/etc/profile.d/c2s_env.sh` file.
+
+
++ Modify the following configuration files
+
+  * Set `edge server`, `config server`, `SMTP variables` to the server specific values in the ` file in ‘/etc/profile.d/c2s_env.sh’ folder. 
   
+  * Replace `localhost` with `uaa-db.c2s.com` for `database.url` variable in the `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file.
+  
+  * Re-login to the server in order for the file `c2s_env.sh` to run automatically during the login
+
+  * Verify by checking any variable mentioned in the file  
+  Example: `echo ${C2S_BASE_PATH}` should show the value set in the file
+
 #### Compose Containers
 + Run `docker-compose up -d` from the ‘`usr/local/java` folder to start up all Consent2Share services, UIs and databases
 
@@ -96,104 +68,58 @@ This option is designed to run all Consent2Share services, UIs and databases on 
 This option is to run Consent2Share services, UIs on an application server and databases on a separated database server. 
 
 #### Configure Database Server
-+ Create a new directory `/usr/local/java/C2S_PROPS`
-
-    `mkdir /usr/local/java/`  
-    `mkdir /usr/local/java/C2S_PROPS`  
++ Get the [c2s_config.sh](./scripts/c2s_config.sh) file and run the file.
+    `curl https://raw.githubusercontent.com/bhits/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
+    `sh c2s_config.sh twoServerDbConfig`   
 
 + If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
 
-+ Get the [c2s_docker.sh](./scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
-
-  * Uncomment the `C2S_DB_HOST` variable
- 
-  * Modify the `C2S_APP_HOST`, `C2S_DB_HOST` and `SMTP` variables according to the server environment
-  
-  * Re-login to the server in order for the file `c2s_docker.sh` to run automatically during the login
-  
++ Re-login to the server in order for the file `c2s_env.sh` to run automatically during the login
+     
   * Verify by checking any variable mentioned in the file  
   Example: `echo ${C2S_BASE_PATH}` should show the value set in the file  
 
-+ Create the following sub folders under `/usr/local/java/C2S_PROPS` folder
-  
-  * `pls-api/init-db`
-  
-  * `logback-audit/init-db`
-  
-+ Get the following files under the `/usr/local/java/C2S_PROPS`
-
-  * Copy the [sample provider data sql](https://github.com/bhits/pls-api/tree/master/npi-db-sample) file to `pls-api/init-db` sub folder
-
-  * Copy the [database schema sql](https://github.com/bhits/logback-audit/tree/master/audit-db) file to `logback-audit/init-db` sub folder
-
-+ Get the [docker-compose-db-server.yml](./deployment/two-servers/docker-compose-db-server.yml) file as `docker-compose.yml` under the `/usr/local/java` folder
-
 #### Configure Application Server
 
-+ Create a new directory `/usr/local/java/C2S_PROPS`
-
-    `mkdir /usr/local/java/`  
-    `mkdir /usr/local/java/C2S_PROPS`  
++ Get the [c2s_config.sh](./scripts/c2s_config.sh) file and run the file.
+    `curl https://raw.githubusercontent.com/bhits/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
+    `sh c2s_config.sh twoServerAppConfig`  
 
 + If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
 
     `chcon -Rt svirt_sandbox_file_t /usr/local/java`
-
-+ Get the [c2s_docker.sh](./scripts/c2s_docker.sh) file and place it in the `/etc/profile.d/` folder
-
-  * Uncomment the `C2S_DB_HOST` variable
-
-  * Modify the `C2S_APP_HOST`, `C2S_DB_HOST` , `SMTP` and other environment specific variables according to the server environment
-
-  * Re-login to the server in order for the file `c2s_docker.sh` to run automatically during the login
-
-  * Verify by checking any variable mentioned in the file  
-  Example: `echo ${C2S_BASE_PATH}` should show the value set in the file
-
-+ Create the following sub folders under `/usr/local/java/C2S_PROPS` folder:
-
-  * `uaa`
-
-  * `pls-api/config-template`
-
-  * `logback-audit/config-template`
-
-  * `iexhub/temp`
-
-  * `iexhub/test`
-
-+ Copy the following configuration files and place them under the `/usr/local/java/C2S_PROPS`:  
-  
-  * Copy the [uaa.yml](https://github.com/bhits/uaa/blob/master/config-template/uaa.yml) to `uaa` sub folder
-  
-  * Copy all [pls-api config-temlate](https://github.com/bhits/pls-api/tree/master/config-template) files to `pls-api/config-template` sub folder
-  
-  * Copy the [logback-audit config-template](https://github.com/bhits/logback-audit/tree/master/config-template) file to `logback-audit/config-template` sub folder  
-
-  * Copy all [IExHub resource folder](https://github.com/bhits/iexhub/tree/master/iexhub/src/main/resources) files to `iexhub/temp` sub folder
-
-+ Get the [docker-compose-app-server.yml](./deployment/two-servers/docker-compose-app-server.yml) file as `docker-compose.yml` under the `/usr/local/java` folder
-  
-+ Modify the following configuration files
-
-  * In `/usr/local/java/C2S_PROPS/pls-api/config-template/pls-config.properties` file, replace `localhost` with `C2S_DB_HOST` in the variable `database.url`
-  
-  * In `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file, replace `localhost` with `C2S_DB_HOST` in the variable `database.url`
-
 + Edge-server security:
 
-  * Create a new directory named `keystore` under `/usr/local/java` folder
-  
   * Create/Obtain a valid SSL certificate
   
   * Export the public and private keys from the SSL certificate to a JKS formatted keystore file named `edge-server.keystore`
   
-  * Put the `edge-server.keystore` file into `/usr/local/java/keystore` folder
+  * upload the  `edge-server.keystore` file into `/usr/local/java/keystore` folder
   
-  * Modify the value of the `server.ssl.key-store-password` property in the `docker-compose.yml` file located in the `/usr/local/java` folder to match the password used when exporting/creating the SSL certificate
+  * Add the following in the `/usr/local/java/C2S_PROPS/c2s-config-data/edge-server.yml` file.
+
+      ```yml
+      spring.profiles: your_app_Server_specific_profile
+      server:
+        ssl:
+          key-store: /java/keystore/edge-server.keystore
+          key-store-password: "keystore password"
+      ```
+
+  * Modify the `ENV_APP_PROFILE= your_app_Server_specific_profile` in twoServerAppConfig() function in the `/etc/profile.d/c2s_env.sh` file.
+
+
++ Modify the following configuration files
+
+  * Set `edge server`, `config server`, `SMTP variables` to the server specific values in the ` file in ‘/etc/profile.d/c2s_env.sh’ folder. 
   
+  * Re-login to the server in order for the file `c2s_env.sh` to run automatically during the login
+
+  * Verify by checking any variable mentioned in the file  
+  Example: `echo ${C2S_BASE_PATH}` should show the value set in the file
+
 #### Compose Containers on Database Server
 + Run `docker-compose up -d` from the `usr/local/java` folder to start up all databases
 
@@ -204,10 +130,24 @@ This option is to run Consent2Share services, UIs on an application server and d
 
 + Run `docker ps -a` to verify all the containers are up running
 
+### Populate sample providers
++ Login to docker pls database container
+    `docker ps  | grep pls-db`
+    `docker exec -it  <<pls-db container id>> bash`
+
+
++ Run `pls_db_sample.sql` from container directory `/java/C2S_PROPS/pls`.
+    `cd  /java/C2S_PROPS/pls`
+    `mysql -p`
+    
+    enter root pwd(default is admin)
+    
+    `source pls_db_sample.sql`
+
 ## Development
 
 The docker compose file in Development folder is designed to run Consent2Share application on developer machine. 	
-Compared to the deployment one-server option, this one doesn't set any memory constraints on Docker containers because developer's machine may has limited memory on docker-machine. 
+Compared to the deployment one-server option, this one doesn't set any memory constraints on Docker containers because developer's machine may has limited memory on docker-machine. Also, this one uses default `c2s-config-data` without any addtional setup. 
 
 ## Resolve Deployment Error
 If you encounter an error in the deployment:  
