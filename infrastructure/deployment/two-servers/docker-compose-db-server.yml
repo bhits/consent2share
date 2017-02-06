@@ -70,7 +70,9 @@ services:
       - pls-db-data.c2s.com
     environment:
         MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
-        MYSQL_DATABASE: npi
+        MYSQL_DATABASE: pls
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/java/C2S_PROPS/pls
     ports:
       - "3308:3306"
     restart: always
@@ -79,7 +81,6 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls-api/init-db:/docker-entrypoint-initdb.d
 
   uaa-db.c2s.com:
     image: mysql:5.7
