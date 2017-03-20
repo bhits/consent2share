@@ -1,4 +1,58 @@
 <a name="2.1.0"></a>
+# Consent2Share 2.1.1 (2017-03-22)
+
+### Features
+
+The following projects have been enhanced to support internationalization (i18n):
+
+* **Patient Portal UI**
+* **Admin Portal UI** 
+* **Patient User API**
+* **Patient Consent Management API**
+* **Patient Health Record API**
+* **Try My Policy API**
+
+
+The supported languages in Consent2Share Release 2.1.1 are **English (en_US)** and **Spanish (es_AR)**.
+### Documentation Updates
+
+The following documents have been updated:
+
+* C2S Admin User Guide
+* C2S Patient user Guide
+
+Also, the README.md files in the repositories for the APIs listed above and the latest tag in Docker image descriptions are updated as well.
+
+### NOTES:
+
+Consent2Share 2.1.1 release includes:
+
+* Admin Portal UI 0.20.0: [https://github.com/bhits/admin-portal-ui/releases/tag/0.20.0](https://github.com/bhits/admin-portal-ui/releases/tag/0.20.0)
+* Patient Portal UI 0.25.0: [https://github.com/bhits/patient-portal-ui/releases/tag/0.25.0](https://github.com/bhits/patient-portal-ui/releases/tag/0.25.0)
+* Patient User API 0.16.0: [https://github.com/bhits/patient-user-api/releases/tag/0.16.0](https://github.com/bhits/patient-user-api/releases/tag/0.16.0)
+* Patient Consent Management API 1.23.0: [https://github.com/bhits/pcm-api/releases/tag/1.23.0](https://github.com/bhits/pcm-api/releases/tag/1.23.0)
+* Patient Health Record API 1.24.0: [https://github.com/bhits/phr-api/releases/tag/1.24.0](https://github.com/bhits/phr-api/releases/tag/1.24.0)
+* Try My Policy API 1.17.0: [https://github.com/bhits/try-policy-api/releases/tag/1.17.0](https://github.com/bhits/try-policy-api/releases/tag/1.17.0)
+* Patient Registration API 1.19.0: [https://github.com/bhits/registration-api/releases/tag/1.19.0](https://github.com/bhits/registration-api/releases/tag/1.19.0)
+* Provider Lookup Service API 2.1.0: [https://github.com/bhits/pls-api/releases/tag/2.1.0](https://github.com/bhits/pls-api/releases/tag/2.1.0)
+* Policy Enforcement Point API 1.10.0: [https://github.com/bhits/pep-api/releases/tag/1.10.0](https://github.com/bhits/pep-api/releases/tag/1.10.0)
+* Context Handler API 1.11.0: [https://github.com/bhits/context-handler/releases/tag/1.11.0](https://github.com/bhits/context-handler/releases/tag/1.11.0)
+* Document Segmentation Service API 1.16.0: [https://github.com/bhits/dss-api/releases/tag/1.16.0](https://github.com/bhits/dss-api/releases/tag/1.16.0)
+* Document Validator API 0.11.0: [https://github.com/bhits/document-validator/releases/tag/0.11.0](https://github.com/bhits/document-validator/releases/tag/0.11.0)
+* Information Exchange Hub 0.6.0: [https://github.com/bhits/iexhub/releases/tag/0.6.0](https://github.com/bhits/iexhub/releases/tag/0.6.0)
+* Information Exchange Hub Generated Code Library 1.0.0: [https://github.com/bhits/iexhub-generated/releases/tag/1.0.0](https://github.com/bhits/iexhub-generated/releases/tag/1.0.0)
+* Edge Server 0.14.0: [https://github.com/bhits/edge-server/releases/tag/0.14.0](https://github.com/bhits/edge-server/releases/tag/0.14.0)
+* Discovery Server 0.10.0: [https://github.com/bhits/discovery-server/releases/tag/0.10.0](https://github.com/bhits/discovery-server/releases/tag/0.10.0)
+* Configuration Server 0.2.0: [https://github.com/bhits/config-server/releases/tag/0.2.0](https://github.com/bhits/config-server/releases/tag/0.2.0)
+* Configuration Data 2.1.0: [https://github.com/bhits/c2s-config-data/releases/tag/2.1.0](https://github.com/bhits/c2s-config-data/releases/tag/2.1.0)
+* CloudFoundry User Account and Authentication (UAA) Server 3.4.1-02: [https://github.com/bhits/uaa/releases/tag/3.4.1-02](https://github.com/bhits/uaa/releases/tag/3.4.1-02)
+* Logback Audit 0.6.1: [https://github.com/bhits/logback-audit/releases/tag/v_0.6.1](https://github.com/bhits/logback-audit/releases/tag/v_0.6.1)
+* Common Libraries 1.9.0: [https://github.com/bhits/common-libraries/releases/tag/1.9.0](https://github.com/bhits/common-libraries/releases/tag/1.9.0)
+* Java Jar Runner 8u102-jre: [https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre](https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre)
+* Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
+* Spring Boot Application Runner 1.10.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0)
+
+<a name="2.1.0"></a>
 # Consent2Share 2.1.0 (2017-02-06)
 
 ### Features
