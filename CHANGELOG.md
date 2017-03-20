@@ -13,7 +13,7 @@ The following projects have been enhanced to support internationalization (i18n)
 * **Try My Policy API**
 
 
-The supported languages in Consent2Share Release 2.1.1 are **English (en_US)** and **Spanish (es_AR)**.
+The supported languages in Consent2Share Release 2.1.1 are **English (en_US)** and **Spanish (es_ES)**.
 ### Documentation Updates
 
 The following documents have been updated:
@@ -79,7 +79,7 @@ Also README.md files in repositories and Docker image descriptions are updated a
 
 Consent2Share 2.1.0 release includes:
 
-1. Patient Portal UI 0.24.0: [https://github.com/bhits/patient-portal-ui/releases/tag/0.24.0](https://github.com/bhits/patient-portal-ui/releases/tag/0.24.0)
+* Patient Portal UI 0.24.0: [https://github.com/bhits/patient-portal-ui/releases/tag/0.24.0](https://github.com/bhits/patient-portal-ui/releases/tag/0.24.0)
 * Admin Portal UI 0.18.0: [https://github.com/bhits/admin-portal-ui/releases/tag/0.18.0](https://github.com/bhits/admin-portal-ui/releases/tag/0.18.0)
 * Patient Registration API 1.19.0: [https://github.com/bhits/registration-api/releases/tag/1.19.0](https://github.com/bhits/registration-api/releases/tag/1.19.0)
 * Patient User API 0.15.0: [https://github.com/bhits/patient-user-api/releases/tag/0.15.0](https://github.com/bhits/patient-user-api/releases/tag/0.15.0)
@@ -123,7 +123,7 @@ Consent2Share 2.1.0 release includes:
 
 Consent2Share 2.0.0 release includes:
 
-1. Patient Portal UI 0.20.0: [https://github.com/bhits/patient-portal-ui/releases/tag/0.20.0](https://github.com/bhits/patient-portal-ui/releases/tag/0.20.0)
+* Patient Portal UI 0.20.0: [https://github.com/bhits/patient-portal-ui/releases/tag/0.20.0](https://github.com/bhits/patient-portal-ui/releases/tag/0.20.0)
 * Admin Portal UI 0.13.0: [https://github.com/bhits/admin-portal-ui/releases/tag/0.13.0](https://github.com/bhits/admin-portal-ui/releases/tag/0.13.0)
 * Patient Registration API 1.15.0: [https://github.com/bhits/registration-api/releases/tag/1.15.0](https://github.com/bhits/registration-api/releases/tag/1.15.0)
 * Patient User API 0.12.0: [https://github.com/bhits/patient-user-api/releases/tag/0.12.0](https://github.com/bhits/patient-user-api/releases/tag/0.12.0)
