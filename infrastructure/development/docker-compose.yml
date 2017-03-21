@@ -1,7 +1,7 @@
 version: '2'
 services:
   admin-portal-ui.c2s.com:
-    image: bhits/admin-portal-ui:0.18.0
+    image: bhits/admin-portal-ui:0.20.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
     restart: always
@@ -86,13 +86,13 @@ services:
     restart: always
 
   patient-user.c2s.com:
-    image: bhits/patient-user:0.15.0
+    image: bhits/patient-user:0.16.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-user:/java/C2S_LOGS/patient-user
     restart: always
 
   pcm.c2s.com:
-    image: bhits/pcm:1.22.0
+    image: bhits/pcm:1.24.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pcm:/java/C2S_LOGS/pcm
     environment:
@@ -106,7 +106,7 @@ services:
     restart: always
 
   phr.c2s.com:
-    image: bhits/phr:1.22.0
+    image: bhits/phr:1.24.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/phr:/java/C2S_LOGS/phr
     restart: always
@@ -118,7 +118,7 @@ services:
     restart: always
 
   pp-ui.c2s.com:
-    image: bhits/pp-ui:0.24.0
+    image: bhits/pp-ui:0.26.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pp-ui:/java/C2S_LOGS/pp-ui
     restart: always
@@ -128,7 +128,7 @@ services:
     restart: always
 
   try-policy.c2s.com:
-    image: bhits/try-policy:1.16.0
+    image: bhits/try-policy:1.17.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/try-policy:/java/C2S_LOGS/try-policy
     restart: always
