@@ -28,9 +28,9 @@ Also, the README.md files in the repositories for the APIs listed above and the 
 Consent2Share 2.1.1 release includes:
 
 * Admin Portal UI 0.20.0: [https://github.com/bhits/admin-portal-ui/releases/tag/0.20.0](https://github.com/bhits/admin-portal-ui/releases/tag/0.20.0)
-* Patient Portal UI 0.25.0: [https://github.com/bhits/patient-portal-ui/releases/tag/0.25.0](https://github.com/bhits/patient-portal-ui/releases/tag/0.25.0)
+* Patient Portal UI 0.26.0: [https://github.com/bhits/patient-portal-ui/releases/tag/0.26.0](https://github.com/bhits/patient-portal-ui/releases/tag/0.26.0)
 * Patient User API 0.16.0: [https://github.com/bhits/patient-user-api/releases/tag/0.16.0](https://github.com/bhits/patient-user-api/releases/tag/0.16.0)
-* Patient Consent Management API 1.23.0: [https://github.com/bhits/pcm-api/releases/tag/1.23.0](https://github.com/bhits/pcm-api/releases/tag/1.23.0)
+* Patient Consent Management API 1.24.0: [https://github.com/bhits/pcm-api/releases/tag/1.24.0](https://github.com/bhits/pcm-api/releases/tag/1.24.0)
 * Patient Health Record API 1.24.0: [https://github.com/bhits/phr-api/releases/tag/1.24.0](https://github.com/bhits/phr-api/releases/tag/1.24.0)
 * Try My Policy API 1.17.0: [https://github.com/bhits/try-policy-api/releases/tag/1.17.0](https://github.com/bhits/try-policy-api/releases/tag/1.17.0)
 * Patient Registration API 1.19.0: [https://github.com/bhits/registration-api/releases/tag/1.19.0](https://github.com/bhits/registration-api/releases/tag/1.19.0)
