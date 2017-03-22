@@ -1,20 +1,28 @@
 version: '2'
 services:
-  admin-portal-ui.c2s.com:
-    image: bhits/admin-portal-ui:0.18.0
+  c2s-ui.c2s.com:
+    image: bhits/c2s-ui:0.1.0
     volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/admin-ui:/java/C2S_LOGS/admin-ui
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/c2s-ui:/java/C2S_LOGS/c2s-ui
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     mem_limit: 1000m
     restart: always
-  clamd.c2s.com:
-    image: dinkel/clamavd
+
+  c2s-ui-api.c2s.com:
+    image: bhits/c2s-ui-api:0.1.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/c2s-ui-api:/java/C2S_LOGS/c2s-ui-api
+    mem_limit: 1000m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      spring.cloud.config.server.git.uri: file:/java/${CONFIG_DATA_GIT_DIR}
     restart: always
+
   config-server.c2s.com:
-    image: bhits/config-server:0.2.0
+    image: bhits/config-server:0.3.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/config-server:/java/C2S_LOGS/config-server
       - ${C2S_BASE_PATH}/java/C2S_PROPS/${CONFIG_DATA_GIT_DIR}:/java/${CONFIG_DATA_GIT_DIR}
@@ -25,17 +33,9 @@ services:
       security.user.name: ${BASIC_AUTH_USER}
       security.user.password: ${BASIC_AUTH_PASSWORD}
     restart: always
-  context-handler.c2s.com:
-    image: bhits/context-handler:1.11.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/context-handler:/java/C2S_LOGS/context-handler
-    mem_limit: 1000m
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    restart: always
 
   discovery-server.c2s.com:
-    image: bhits/discovery-server:0.10.0
+    image: bhits/discovery-server:0.11.0
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     volumes:
@@ -43,35 +43,8 @@ services:
     mem_limit: 1500m
     restart: always
 
-  document-validator-ccda-r1.c2s.com:
-    image: bhits/document-validator-ccda-r1:0.11.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1500m
-    restart: always
-
-  document-validator-ccda-r2.c2s.com:
-    image: bhits/document-validator-ccda-r2:0.11.0
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1500m
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r2:/java/C2S_LOGS/document-validator-ccda-r2
-    restart: always
-
-  dss.c2s.com:
-    image: bhits/dss:1.16.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/dss:/java/C2S_LOGS/dss
-    mem_limit: 1500m
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    restart: always
-
   edge-server.c2s.com:
-    image: bhits/edge-server:0.14.0
+    image: bhits/edge-server:0.15.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/edge-server:/java/C2S_LOGS/edge-server
       - ${C2S_BASE_PATH}/java/keystore/edge-server.keystore:/java/keystore/edge-server.keystore
@@ -85,63 +58,8 @@ services:
       - "443:443"
     restart: always
 
-  guvnor.c2s.com:
-    image: bhits/guvnor:5.5.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/guvnor:/java/C2S_LOGS/guvnor
-    environment:
-      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1000m
-    restart: always
-
-  iexhub.c2s.com:
-    image: bhits/iexhub:0.6.0
-    environment:
-      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
-      CATALINA_OPTS: -Diexhub.logging.file=/java/C2S_LOGS/iexhub/InfoExchangeHub.log
-    mem_limit: 4000m
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/java/iexhub/test
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config:/java/iexhub/config
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config/output:/java/iexhub/config/output
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub:/java/C2S_LOGS/iexhub
-    restart: always
-
-  logback-audit-server.c2s.com:
-    image: bhits/logback-audit-server:0.6.1
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/logback-audit:/java/C2S_LOGS/logback-audit
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/config-template:/java/C2S_PROPS/logback-audit/config-template
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      CATALINA_OPTS: -Daudit.datasource.url=jdbc\:mysql\://logback-audit-db.c2s.com\:3311/audit?autoReconnect=true -Daudit.datasource.username=root -Daudit.datasource.password=${AUDIT_DB_PASSWORD} -Daudit.listen.port=9630
-    mem_limit: 1000m
-    restart: always
-
-  patient-registration.c2s.com:
-    image: bhits/patient-registration:1.19.0
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
-    command: --spring.profiles.active=${ENV_APP_PROFILE}
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-registration:/java/C2S_LOGS/patient-registration
-    mem_limit: 1500m
-    restart: always
-
-  patient-user.c2s.com:
-    image: bhits/patient-user:0.15.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/patient-user:/java/C2S_LOGS/patient-user
-    mem_limit: 1000m
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
-    command: --spring.profiles.active=${ENV_APP_PROFILE}
-    restart: always
-
   pcm.c2s.com:
-    image: bhits/pcm:1.22.0
+    image: bhits/pcm:2.0.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pcm:/java/C2S_LOGS/pcm
     environment:
@@ -152,26 +70,8 @@ services:
     mem_limit: 2000m
     restart: always
 
-  pep.c2s.com:
-    image: bhits/pep:1.10.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/pep:/java/C2S_LOGS/pep
-    mem_limit: 1000m
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    restart: always
-
-  phr.c2s.com:
-    image: bhits/phr:1.22.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/phr:/java/C2S_LOGS/phr
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1500m
-    restart: always
-
   pls.c2s.com:
-    image: bhits/pls:2.1.0
+    image: bhits/pls:3.0.0
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
@@ -181,32 +81,8 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
     restart: always
 
-  pp-ui.c2s.com:
-    image: bhits/pp-ui:0.24.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/pp-ui:/java/C2S_LOGS/pp-ui
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
-    command: --spring.profiles.active=${ENV_APP_PROFILE}
-    mem_limit: 1000m
-    restart: always
-
-  redis.c2s.com:
-    image: redis
-    restart: always
-
-  try-policy.c2s.com:
-    image: bhits/try-policy:1.16.0
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/try-policy:/java/C2S_LOGS/try-policy
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1000m
-    restart: always
-
   uaa.c2s.com:
-    image: bhits/uaa:3.4.1-02
+    image: bhits/uaa:3.4.1-04
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/uaa:/java/C2S_LOGS/uaa
       - ${C2S_BASE_PATH}/java/C2S_PROPS/uaa/uaa.yml:/java/C2S_PROPS/uaa/uaa.yml
@@ -224,34 +100,6 @@ services:
 
 # Database setup
 
-  logback-audit-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - logback-audit-db-data.c2s.com
-    environment:
-      MYSQL_ROOT_PASSWORD: ${AUDIT_DB_PASSWORD}
-      MYSQL_DATABASE: audit
-
-  logback-audit-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/logback-audit:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/init-db:/docker-entrypoint-initdb.d
-
-  patient-user-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - patient-user-data.c2s.com
-    environment:
-        MYSQL_ROOT_PASSWORD: ${PATIENT_USER_DB_PASSWORD}
-        MYSQL_DATABASE: patient-user
-    restart: always
-
-  patient-user-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/patient-user:/var/lib/mysql
-
   pcm-db.c2s.com:
     image: mysql:5.7
     volumes_from:
@@ -265,20 +113,6 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pcm:/var/lib/mysql
-
-  phr-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - phr-db-data.c2s.com
-    environment:
-        MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
-        MYSQL_DATABASE: phr
-    restart: always
-
-  phr-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/phr:/var/lib/mysql
 
   pls-db.c2s.com:
     image: mysql:5.7
