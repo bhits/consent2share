@@ -1,37 +1,5 @@
 version: '2'
 services:
-  logback-audit-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - logback-audit-db-data.c2s.com
-    environment:
-      MYSQL_ROOT_PASSWORD: ${AUDIT_DB_PASSWORD}
-      MYSQL_DATABASE: audit
-    ports:
-      - "3311:3306"
-
-  logback-audit-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/logback-audit:/var/lib/mysql
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/logback-audit/init-db:/docker-entrypoint-initdb.d
-
-  patient-user-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - patient-user-data.c2s.com
-    environment:
-        MYSQL_ROOT_PASSWORD: ${PATIENT_USER_DB_PASSWORD}
-        MYSQL_DATABASE: patient-user
-    ports:
-      - "3310:3306"
-    restart: always
-
-  patient-user-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/patient-user:/var/lib/mysql
-
   pcm-db.c2s.com:
     image: mysql:5.7
     volumes_from:
@@ -47,22 +15,6 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pcm:/var/lib/mysql
-
-  phr-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - phr-db-data.c2s.com
-    environment:
-        MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
-        MYSQL_DATABASE: phr
-    ports:
-      - "3309:3306"
-    restart: always
-
-  phr-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/phr:/var/lib/mysql
 
   pls-db.c2s.com:
     image: mysql:5.7
