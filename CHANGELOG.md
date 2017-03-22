@@ -55,7 +55,7 @@ The supported languages in Consent2Share Release 2.1.1 are **English (en_US)** a
 The following documents have been updated:
 
 * C2S Admin User Guide
-* C2S Patient user Guide
+* C2S Patient User Guide
 
 Also, the README.md files in the repositories for the APIs listed above and the latest tag in Docker image descriptions are updated as well.
 
