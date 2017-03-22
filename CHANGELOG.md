@@ -1,17 +1,12 @@
 <a name="3.0.0"></a>
-# Consent2Share 3.0.0 (2017-03-27)
+# Consent2Share 3.0.0 (2017-03-28)
 
 ### Features
 
-* **Consent2Share User Interface:** 
-* **Consent2Share User Interface API:** 
-* **Configuration Server:** 
-* **discovery Server:** 
-* **Edge Server:** 
-* **Patient Consent Management Service:** 
-* **Provider Lookup Service:** 
-* **Value Set Service:**
-* **CloudFoundry User Account and Authentication (UAA) Server :**
+* **Consent2Share UI** Rewritten in Angular 2.0  
+* **Consent2Share UI API** It is a Backend For Frontends(BFF) component of Consent2Share (C2S)
+* **Consent Management** Rewritten to support only consent features.
+* **Value Set Service** Its Value Set Management.
 
 ### Documentation Updates
 
@@ -19,7 +14,6 @@ The following documents have been updated:
 
 * C2S Development Guide
 * C2S Deployment Guide
-* C2S Technical Blueprint
 
 Also README.md files in repositories and Docker image descriptions are updated as well.
 
