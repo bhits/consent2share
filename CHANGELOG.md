@@ -1,3 +1,39 @@
+<a name="3.0.0"></a>
+# Consent2Share 3.0.0 (2017-03-28)
+
+### Features
+
+* **Consent2Share UI** Rewritten in Angular 2.0  
+* **Consent2Share UI API** It is a Backend For Frontends(BFF) component of Consent2Share (C2S)
+* **Consent Management** Rewritten to support only consent features.
+* **Value Set Service** Its Value Set Management.
+
+### Documentation Updates
+
+The following documents have been updated:
+
+* C2S Development Guide
+* C2S Deployment Guide
+
+Also README.md files in repositories and Docker image descriptions are updated as well.
+
+### NOTES:
+
+Consent2Share 3.0.0 release includes:
+
+* Consent2Share UI 0.1.0: [https://github.com/bhits/c2s-ui/releases/tag/0.1.0](https://github.com/bhits/c2s-ui/releases/tag/0.1.0)
+* Consent2Share UI API 0.1.0: [https://github.com/bhits/c2s-ui-api/releases/tag/0.1.0](https://github.com/bhits/c2s-ui-api/releases/tag/0.1.0)
+* Configuration Server 0.3.0: [https://github.com/bhits/config-server/releases/tag/0.3.0](https://github.com/bhits/config-server/releases/tag/0.3.0)
+* Discovery Server 0.11.0: [https://github.com/bhits/discovery-server/releases/tag/0.11.0](https://github.com/bhits/discovery-server/releases/tag/0.11.0)
+* Edge Server 0.15.0: [https://github.com/bhits/edge-server/releases/tag/0.15.0](https://github.com/bhits/edge-server/releases/tag/0.15.0)
+* Patient Consent Management Service 2.0.0: [https://github.com/bhits/pcm/releases/tag/2.0.0](https://github.com/bhits/pcm/releases/tag/2.0.0)
+* Provider Lookup Service 3.0.0: [https://github.com/bhits/pls/releases/tag/3.0.0](https://github.com/bhits/pls/releases/tag/3.0.0)
+* Value Set Service 0.2.0: [https://github.com/bhits/vss/releases/tag/0.2.0](https://github.com/bhits/vss/releases/tag/0.2.0)
+* CloudFoundry User Account and Authentication (UAA) Server 3.4.1-04: [https://github.com/bhits/uaa/releases/tag/3.4.1-04](https://github.com/bhits/uaa/releases/tag/3.4.1-04)
+* Common Libraries 1.10.0: [https://github.com/bhits/common-libraries/releases/tag/1.10.0](https://github.com/bhits/common-libraries/releases/tag/1.10.0)
+* Configuration Data 3.0.0: [https://github.com/bhits/c2s-config-data/releases/tag/3.0.0](https://github.com/bhits/c2s-config-data/releases/tag/3.0.0)
+
+
 <a name="2.1.0"></a>
 # Consent2Share 2.1.1 (2017-03-22)
 
@@ -19,7 +55,7 @@ The supported languages in Consent2Share Release 2.1.1 are **English (en_US)** a
 The following documents have been updated:
 
 * C2S Admin User Guide
-* C2S Patient user Guide
+* C2S Patient User Guide
 
 Also, the README.md files in the repositories for the APIs listed above and the latest tag in Docker image descriptions are updated as well.
 

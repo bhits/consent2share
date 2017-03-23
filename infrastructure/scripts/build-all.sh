@@ -1,22 +1,11 @@
 #! /bin/bash
 cd ../../..;
-cd admin-portal-ui/server;                          mvn clean package -Pdocker docker:build; cd -;
+cd c2s-ui/server;                                   mvn clean package -Pdocker docker:build; cd -;
+cd c2s-ui-api/c2s-ui-api;                           mvn clean package docker:build; cd -;
 cd config-server/config-server;                     mvn clean package docker:build; cd -;
-cd context-handler/context-handler;                 mvn clean package docker:build; cd -;
 cd discovery-server/discovery-server;               mvn clean package docker:build; cd -;
-cd document-validator/document-validator;           mvn clean install; cd -;
-cd document-validator/document-validator/document-validator-ccda-r1;           mvn clean package docker:build; cd -;
-cd document-validator/document-validator/document-validator-ccda-r2;           mvn clean package docker:build; cd -;
-cd dss-api/dss;                             		mvn clean package docker:build; cd -;
 cd edge-server/edge-server;                  		mvn clean package docker:build; cd -;
-cd iexhub/iexhub;                                   mvn clean package docker:build; cd -;
-cd logback-audit;                                   mvn clean install; cd -;cd logback-audit/audit-server-generator/logback-audit-server;mvn clean package docker:build;cd -;
-cd patient-portal-ui/server;                        mvn clean package -Pdocker docker:build; cd -;
-cd patient-user-api/patient-user;                   mvn clean package docker:build; cd -;
-cd pcm-api/pcm;                             		mvn clean package docker:build; cd -;
-cd pep-api/pep;                                     mvn clean package docker:build; cd -;
-cd phr-api/phr;                  					mvn clean package docker:build; cd -;
-cd pls-api/pls;                             	    mvn clean package docker:build; cd -;
-cd registration-api/registration;                  	mvn clean package docker:build; cd -;
-cd try-policy-api/tryPolicy;                        mvn clean package docker:build; cd -;
+cd pcm/pcm;                             		    mvn clean package docker:build; cd -;
+cd pls/pls;                             	        mvn clean package docker:build; cd -;
+cd vss/vss;                  	                    mvn clean package docker:build; cd -;
 cd uaa;											    ./gradlew clean install; cp uaa/build/libs/*.war docker/uaa.war; cp config-template/uaa.yml docker/uaa.yml;cd docker; docker build -t bhits/uaa .; rm uaa.war; rm uaa.yml; cd ../..;
