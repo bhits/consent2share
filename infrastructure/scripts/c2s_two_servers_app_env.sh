@@ -6,6 +6,7 @@ function defaultConfig() {
     export UAA_DB_PASSWORD=admin
     export PCM_DB_PASSWORD=admin
     export PLS_DB_PASSWORD=admin
+    export VSS_DB_PASSWORD=admin
     export C2S_BASE_PATH=/usr/local
     export CONFIG_DATA_GIT_DIR=c2s-config-data
     # Edge Server configuraiton

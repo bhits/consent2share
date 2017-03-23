@@ -64,6 +64,14 @@ services:
       UAA_SMTP_PASSWORD: ${UAA_SMTP_PASSWORD}
     restart: always
 
+  vss.c2s.com:
+    image: bhits/vss:0.2.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/vss:/java/C2S_LOGS/vss
+    environment:
+      TZ: "US/Eastern"
+    restart: always
+
 # Database setup
   pcm-db.c2s.com:
     image: mysql:5.7
@@ -108,3 +116,17 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
+
+  vss-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - vss-db-data.c2s.com
+    environment:
+        MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
+        MYSQL_DATABASE: vss
+    restart: always
+
+  vss-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/vss:/var/lib/mysql

@@ -49,3 +49,19 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
+
+  vss-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - vss-db-data.c2s.com
+    environment:
+        MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
+        MYSQL_DATABASE: vss
+    ports:
+      - "3307:3306"
+    restart: always
+
+  vss-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/vss:/var/lib/mysql
