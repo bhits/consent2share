@@ -186,10 +186,6 @@ After clone the this repository under the same parent folder as other Consent2Sh
 
 Run `docker images` to check all created docker images.
 
-### publish-dockerhub.sh
-
-This script is used to tag Docker images and publish to the Dockerhub. Docker image tag is same as the version number of the corresponding Consent2Share project.
-
 ## Reference 
 For more detail, please refer to `README.md` file in each repository for Consent2Share.
 
