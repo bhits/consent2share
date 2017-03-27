@@ -49,7 +49,8 @@ The following projects have been enhanced to support internationalization (i18n)
 * **Try My Policy API**
 
 
-The supported languages in Consent2Share Release 2.1.1 are **English (en_US)** and **Spanish (es_ES)**.
+The supported languages in Consent2Share Release 2.1.1 are **English (en_US)** and **Spanish (es_ES)**. This work was done in collaboration with Adela Grando, Assistant Professor, Biomedical Informatics, **Arizona State University**, and her student Wentao Zhou.
+
 ### Documentation Updates
 
 The following documents have been updated:
