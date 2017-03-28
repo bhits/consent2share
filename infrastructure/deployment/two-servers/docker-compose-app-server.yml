@@ -79,7 +79,6 @@ services:
     mem_limit: 1200m
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls-api/config-template:/java/C2S_PROPS/pls-api/config-template
     restart: always
 
   uaa.c2s.com:
