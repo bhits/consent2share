@@ -58,7 +58,7 @@ services:
         MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
         MYSQL_DATABASE: vss
     ports:
-      - "3307:3306"
+      - "3309:3306"
     restart: always
 
   vss-db-data.c2s.com:
