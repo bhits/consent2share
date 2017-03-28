@@ -33,8 +33,14 @@ sudo su << SudoUser
         defaultConfig
 
         # C2S_PROPS Directories
+        mkdir /usr/local/java/C2S_PROPS/pcm
         mkdir /usr/local/java/C2S_PROPS/pls
         mkdir /usr/local/java/C2S_PROPS/vss
+
+        ## Copy the sample provider data sql file to pcm sub folder
+        curl https://raw.githubusercontent.com/bhits/pcm/master/pcm-db-sample/insert_consent_attestation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_attestation_term.sql
+        curl https://raw.githubusercontent.com/bhits/pcm/master/pcm-db-sample/insert_consent_revocation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_revocation_term.sql
+        curl https://raw.githubusercontent.com/bhits/pcm/master/pcm-db-sample/insert_purposes.sql > /usr/local/java/C2S_PROPS/pcm/insert_purposes.sql
 
         ## Copy the sample provider data sql file to pls sub folder
         curl https://raw.githubusercontent.com/bhits/pls/master/pls-db-sample/pls_db_sample.sql > /usr/local/java/C2S_PROPS/pls/pls_db_sample.sql
@@ -44,8 +50,14 @@ sudo su << SudoUser
 
     function defaultOneDbServerConfig() {
         # C2S_PROPS Directories
+        mkdir /usr/local/java/C2S_PROPS/pcm
         mkdir /usr/local/java/C2S_PROPS/pls
         mkdir /usr/local/java/C2S_PROPS/vss
+
+        ## Copy the sample provider data sql file to pcm sub folder
+        curl https://raw.githubusercontent.com/bhits/pcm/master/pcm-db-sample/insert_consent_attestation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_attestation_term.sql
+        curl https://raw.githubusercontent.com/bhits/pcm/master/pcm-db-sample/insert_consent_revocation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_revocation_term.sql
+        curl https://raw.githubusercontent.com/bhits/pcm/master/pcm-db-sample/insert_purposes.sql > /usr/local/java/C2S_PROPS/pcm/insert_purposes.sql
 
         ## Copy the sample provider data sql file to pls sub folder
         curl https://raw.githubusercontent.com/FEISystems/pls/master/pls-db-sample/pls_db_sample.sql > /usr/local/java/C2S_PROPS/pls/pls_db_sample.sql
