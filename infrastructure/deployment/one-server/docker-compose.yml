@@ -119,6 +119,8 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
         MYSQL_DATABASE: pcm
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pcm:/java/C2S_PROPS/pcm
     restart: always
 
   pcm-db-data.c2s.com:
@@ -163,6 +165,8 @@ services:
     environment:
         MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
         MYSQL_DATABASE: vss
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/vss:/java/C2S_PROPS/vss
     restart: always
 
   vss-db-data.c2s.com:
