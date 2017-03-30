@@ -1,11 +1,11 @@
 <a name="3.0.0"></a>
-# Consent2Share 3.0.0 (2017-03-28)
+# Consent2Share 3.0.0 (2017-03-30)
 
 ### Features
 
 * **Consent2Share UI** Rewritten in Angular 2.0  
 * **Consent2Share UI API** It is a Backend For Frontends(BFF) component of Consent2Share (C2S)
-* **Consent Management** Rewritten to support only consent features.
+* **Consent Management** Redesign the domain to support only consent features.
 * **Value Set Service** Its Value Set Management.
 
 ### Documentation Updates
@@ -14,6 +14,7 @@ The following documents have been updated:
 
 * C2S Development Guide
 * C2S Deployment Guide
+* C2S Patient User Guide
 
 Also README.md files in repositories and Docker image descriptions are updated as well.
 
@@ -89,6 +90,11 @@ Consent2Share 2.1.1 release includes:
 * Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
 * Spring Boot Application Runner 1.10.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0)
 
+ - Configuration Data 2.1.1-- 
+       - Clone the [master branch](https://github.com/bhits/c2s-config-data.git)
+       - Reset the code to Release 2.1.1 commit
+       - It will run only with **master** branch.
+       
 <a name="2.1.0"></a>
 # Consent2Share 2.1.0 (2017-02-06)
 
@@ -140,7 +146,12 @@ Consent2Share 2.1.0 release includes:
 * Java Jar Runner 8u102-jre: [https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre](https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre)
 * Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
 * Spring Boot Application Runner 1.10.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0)
-
+ 
+ - Configuration Data 2.1.0-- 
+       - Clone the [master branch](https://github.com/bhits/c2s-config-data.git)
+       - Reset the code to Release 2.1.0 commit
+       - It will run only with **master** branch.
+       
 <a name="2.0.0"></a>
 # Consent2Share 2.0.0 (2016-10-31)
 
