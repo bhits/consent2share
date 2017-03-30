@@ -27,8 +27,6 @@ sudo su << SudoUser
         cd /usr/local/java/C2S_PROPS
         git clone https://github.com/bhits/c2s-config-data.git
      }
-
-
     function defaultDbServerConfig() {
         defaultConfig
 
