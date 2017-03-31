@@ -1,5 +1,5 @@
 <a name="3.0.0"></a>
-# Consent2Share 3.0.0 (2017-03-30)
+# Consent2Share 3.0.0 (2017-03-31)
 
 ### Features
 
@@ -89,7 +89,7 @@ Consent2Share 2.1.1 release includes:
 * Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
 * Spring Boot Application Runner 1.10.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0)
 
- - Configuration Data 2.1.1-- 
+ - Configuration Data 2.1.1
        - Clone the [master branch](https://github.com/bhits/c2s-config-data.git)
        - Reset the code to Release 2.1.1 commit
        - It will run only with **master** branch.
@@ -146,7 +146,7 @@ Consent2Share 2.1.0 release includes:
 * Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
 * Spring Boot Application Runner 1.10.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0)
  
- - Configuration Data 2.1.0-- 
+ - Configuration Data 2.1.0
        - Clone the [master branch](https://github.com/bhits/c2s-config-data.git)
        - Reset the code to Release 2.1.0 commit
        - It will run only with **master** branch.
