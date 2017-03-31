@@ -1,12 +1,23 @@
 <a name="3.0.0"></a>
 # Consent2Share 3.0.0 (2017-03-31)
 
+Consent2Share 3.0.0 is the first release of Consent2Share V3.
+The work on Consent2Share V3 is based on Consent2Share V2. 
+Version 3 is still in progress and more releases will come over the next 6 months.
+
+The overarching goal for Consent2Share V3 is to build a FHIR-centric, componentized, and cloud-based (cloud native) application.
+
 ### Features
 
-* **Consent2Share UI** Rewritten in Angular 2.0  
-* **Consent2Share UI API** It is a Backend For Frontends(BFF) component of Consent2Share (C2S)
-* **Consent Management** Redesign the domain to support only consent features.
-* **Value Set Service** Its Value Set Management.
+* The patient user can login to a card-based, componentized UI.
+* The patient user can add his or her providers by looking up providers using the card-based, componentized UI.
+* The patient user can create, sign, revoke, and delete his or her consent using the card-based, componentized UI.
+* When creating a consent, the patient user can chose “Share” instead of “Not Share”.
+* The consent created by the patient user is stored in FHIR STU3 format in the FHIR server.
+* The patient user UI is redesigned and rewritten in Angular.
+* Core services are decoupled from the UIs by using backend for frontends (BFF) pattern.
+* The domain for patient consent management is redesigned to focus only and focus well on consent.
+
 
 ### Documentation Updates
 
