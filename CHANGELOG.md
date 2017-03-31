@@ -12,7 +12,6 @@
 
 The following documents have been updated:
 
-* C2S Development Guide
 * C2S Deployment Guide
 * C2S Patient User Guide
 
