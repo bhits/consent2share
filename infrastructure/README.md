@@ -169,13 +169,13 @@ Follow the steps below to resolve the error:
 
 ## UI Urls
 
-+ Consent2Share Admin UI: `https://<application_server>/admin-ui`
++ Consent2Share Staff Admin UI: `https://<application_server>/staff-ui`
 
-  * By default, Consent2Share comes with a provider staff admin user
+  * By default, Consent2Share comes with a staff admin user
 
-  * Login to Consent2Share Admin UI as an admin using username `consent2share@gmail.com` and password `admin` to create a patient account
+  * Login to Consent2Share Admin UI as an admin using username `c2s-admin@mailinator.com` and password `AAA#aaa1` to create a user patient account
 
-+ Consent2Share Patient Portal UI: `https://<application_server>/pp-ui`
++ Consent2Share Patient Portal UI: `https://<application_server>/c2s-ui`
 
 ## Scripts
 

@@ -1,5 +1,22 @@
 version: '2'
+
 services:
+  hapi-fhir-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - hapi-fhir-db-data.c2s.com
+    environment:
+        MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}
+        MYSQL_DATABASE: hapi-fhir
+    ports:
+      - "3311:3306"
+    restart: always
+
+  hapi-fhir-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/hapi-fhir:/var/lib/mysql
+      
   pcm-db.c2s.com:
     image: mysql:5.7
     volumes_from:
@@ -51,6 +68,24 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
+
+  ums-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - ums-db-data.c2s.com
+    environment:
+        MYSQL_ROOT_PASSWORD: ${UMS_DB_PASSWORD}
+        MYSQL_DATABASE: ums
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/ums:/java/C2S_PROPS/ums
+    ports:
+      - "3310:3306"
+    restart: always
+
+  ums-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/ums:/var/lib/mysql
 
   vss-db.c2s.com:
     image: mysql:5.7

@@ -34,6 +34,7 @@ sudo su << SudoUser
         mkdir /usr/local/java/C2S_PROPS/pcm
         mkdir /usr/local/java/C2S_PROPS/pls
         mkdir /usr/local/java/C2S_PROPS/vss
+        mkdir /usr/local/java/C2S_PROPS/ums
 
         ## Copy the sample provider data sql file to pcm sub folder
         curl https://raw.githubusercontent.com/bhits/pcm/master/pcm-db-sample/insert_consent_attestation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_attestation_term.sql
@@ -42,8 +43,17 @@ sudo su << SudoUser
 
         ## Copy the sample provider data sql file to pls sub folder
         curl https://raw.githubusercontent.com/bhits/pls/master/pls-db-sample/pls_db_sample.sql > /usr/local/java/C2S_PROPS/pls/pls_db_sample.sql
+
         ## Copy the sample vss data sql file to vss sub folder
         curl https://raw.githubusercontent.com/bhits/vss/master/vss-db-sample/vss_db_sample.sql > /usr/local/java/C2S_PROPS/vss/vss_db_sample.sql
+
+        ## Copy the sample provider data sql file to ums sub folder
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_administrative_gender_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_administrative_gender_code_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_country_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_country_code_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_locale_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_locale_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_role_scopes_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_role_scopes_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_state_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_state_code_lookup_data.sql
+
       }
 
     function defaultOneDbServerConfig() {
@@ -51,6 +61,7 @@ sudo su << SudoUser
         mkdir /usr/local/java/C2S_PROPS/pcm
         mkdir /usr/local/java/C2S_PROPS/pls
         mkdir /usr/local/java/C2S_PROPS/vss
+        mkdir /usr/local/java/C2S_PROPS/ums
 
         ## Copy the sample provider data sql file to pcm sub folder
         curl https://raw.githubusercontent.com/bhits/pcm/master/pcm-db-sample/insert_consent_attestation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_attestation_term.sql
@@ -59,8 +70,16 @@ sudo su << SudoUser
 
         ## Copy the sample provider data sql file to pls sub folder
         curl https://raw.githubusercontent.com/FEISystems/pls/master/pls-db-sample/pls_db_sample.sql > /usr/local/java/C2S_PROPS/pls/pls_db_sample.sql
+
         ## Copy the sample vss data sql file to vss sub folder
         curl https://raw.githubusercontent.com/bhits/vss/master/vss-db-sample/vss_db_sample.sql > /usr/local/java/C2S_PROPS/vss/vss_db_sample.sql
+
+        ## Copy the sample provider data sql file to ums sub folder
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_administrative_gender_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_administrative_gender_code_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_country_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_country_code_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_locale_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_locale_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_role_scopes_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_role_scopes_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits/ums/master/ums-db-sample/insert_state_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_state_code_lookup_data.sql
      }
 
     function oneServerConfig() {
