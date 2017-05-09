@@ -107,10 +107,8 @@ services:
   hapi-fhir.c2s.com:
     image: bhits/hapi-fhir-jpaserver:2.3-01
     environment:
-      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:${C2S_DB_PORT}/hapi-fhir?autoReconnect=true -Djdbc.password={HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
+      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:${HAPI_FHIR_DB_PORT}/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
     mem_limit: 1000m
-    ports:
-      - "8080:8080"
     restart: always
       
   pcm.c2s.com:
@@ -145,6 +143,23 @@ services:
     mem_limit: 1200m
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
+    restart: always
+  staff-ui.c2s.com:
+    image: bhits/staff-ui:0.1.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui:/java/C2S_LOGS/staff-ui
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    restart: always
+
+  staff-ui-api.c2s.com:
+    image: bhits/staff-ui-api:0.1.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui-api:/java/C2S_LOGS/staff-ui-api
+    mem_limit: 1000m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     restart: always
 
   uaa.c2s.com:

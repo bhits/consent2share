@@ -8,6 +8,8 @@ function defaultConfig() {
     export PLS_DB_PASSWORD=admin
     export VSS_DB_PASSWORD=admin
     export UMS_DB_PASSWORD=admin
+    export HAPI_FHIR_DB_PASSWORD=admin
+    export HAPI_FHIR_DB_PORT=3311
 
     export C2S_BASE_PATH=/usr/local
     export CONFIG_DATA_GIT_DIR=c2s-config-data

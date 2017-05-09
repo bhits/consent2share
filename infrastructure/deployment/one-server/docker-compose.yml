@@ -31,7 +31,7 @@ services:
       security.user.password: ${BASIC_AUTH_PASSWORD}
     restart: always
 
- context-handler.c2s.com:
+  context-handler.c2s.com:
     image: bhits/context-handler:2.0.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/context-handler:/java/C2S_LOGS/context-handler
@@ -104,6 +104,13 @@ services:
     mem_limit: 1000m
     restart: always
 
+  hapi-fhir.c2s.com:
+    image: bhits/hapi-fhir-jpaserver:2.3-01
+    environment:
+      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:${HAPI_FHIR_DB_PORT}/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    restart: always
+
   pcm.c2s.com:
     image: bhits/pcm:2.1.0
     volumes:
@@ -116,7 +123,7 @@ services:
     mem_limit: 2000m
     restart: always
 
- pep.c2s.com:
+  pep.c2s.com:
     image: bhits/pep:1.10.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pep:/java/C2S_LOGS/pep
@@ -136,6 +143,23 @@ services:
     mem_limit: 1200m
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
+    restart: always
+  staff-ui.c2s.com:
+    image: bhits/staff-ui:0.1.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui:/java/C2S_LOGS/staff-ui
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    restart: always
+
+  staff-ui-api.c2s.com:
+    image: bhits/staff-ui-api:0.1.0
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui-api:/java/C2S_LOGS/staff-ui-api
+    mem_limit: 1000m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
     restart: always
 
   uaa.c2s.com:
@@ -183,6 +207,20 @@ services:
 
 # Database setup
 
+  hapi-fhir-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - hapi-fhir-db-data.c2s.com
+    environment:
+        MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}
+        MYSQL_DATABASE: hapi-fhir
+    restart: always
+
+  hapi-fhir-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/hapi-fhir:/var/lib/mysql
+
   pcm-db.c2s.com:
     image: mysql:5.7
     volumes_from:
@@ -229,12 +267,12 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
 
- ums-db.c2s.com:
+  ums-db.c2s.com:
     image: mysql:5.7
     volumes_from:
       - ums-db-data.c2s.com
     environment:
-        MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
+        MYSQL_ROOT_PASSWORD: ${UMS_DB_PASSWORD}
         MYSQL_DATABASE: ums
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_PROPS/ums:/java/C2S_PROPS/ums
