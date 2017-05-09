@@ -1,13 +1,13 @@
 version: '2'
 services:
   c2s-ui.c2s.com:
-    image: bhits/c2s-ui:0.3.0
+    image: bhitsdev/c2s-ui:0.3.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/c2s-ui:/java/C2S_LOGS/c2s-ui
     restart: always
 
   c2s-ui-api.c2s.com:
-    image: bhits/c2s-ui-api:0.3.0
+    image: bhitsdev/c2s-ui-api:0.3.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/c2s-ui-api:/java/C2S_LOGS/c2s-ui-api
     restart: always
@@ -24,7 +24,7 @@ services:
     restart: always
 
   context-handler.c2s.com:
-    image: bhits/context-handler:2.0.0
+    image: bhitsdev/context-handler:2.0.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/context-handler:/java/C2S_LOGS/context-handler
     environment:
@@ -51,7 +51,7 @@ services:
     restart: always
 
   dss.c2s.com:
-    image: bhits/dss:2.1.0
+    image: bhitsdev/dss:2.1.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/dss:/java/C2S_LOGS/dss
     environment:
@@ -60,7 +60,7 @@ services:
     restart: always
 
   edge-server.c2s.com:
-    image: bhits/edge-server:0.17.0
+    image: bhitsdev/edge-server:0.17.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/edge-server:/java/C2S_LOGS/edge-server
       - ${C2S_BASE_PATH}/java/keystore/edge-server.keystore:/java/keystore/edge-server.keystore
@@ -79,13 +79,13 @@ services:
     restart: always
 
   hapi-fhir.c2s.com:
-    image: bhits/hapi-fhir-jpaserver:2.3-01
+    image: bhitsdev/hapi-fhir-jpaserver:2.3-01
     environment:
       CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:${HAPI_FHIR_DB_PORT}/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD}
     restart: always
 
   pcm.c2s.com:
-    image: bhits/pcm:2.1.0
+    image: bhitsdev/pcm:2.1.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pcm:/java/C2S_LOGS/pcm
     environment:
@@ -104,7 +104,7 @@ services:
     restart: always
 
   pls.c2s.com:
-    image: bhits/pls:3.1.0
+    image: bhitsdev/pls:3.1.0
     environment:
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
     command: --spring.profiles.active=${ENV_APP_PROFILE}
@@ -112,19 +112,19 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
     restart: always
   staff-ui.c2s.com:
-    image: bhits/staff-ui:0.1.0
+    image: bhitsdev/staff-ui:0.1.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui:/java/C2S_LOGS/staff-ui
     restart: always
 
   staff-ui-api.c2s.com:
-    image: bhits/staff-ui-api:0.1.0
+    image: bhitsdev/staff-ui-api:0.1.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui-api:/java/C2S_LOGS/staff-ui-api
     restart: always
 
   uaa.c2s.com:
-    image: bhits/uaa:3.4.1-06
+    image: bhitsdev/uaa:3.4.1-06
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/uaa:/java/C2S_LOGS/uaa
       - ${C2S_BASE_PATH}/java/C2S_PROPS/uaa/uaa.yml:/java/C2S_PROPS/uaa/uaa.yml
@@ -141,7 +141,7 @@ services:
     restart: always
 
   vss.c2s.com:
-    image: bhits/vss:0.3.0
+    image: bhitsdev/vss:0.3.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/vss:/java/C2S_LOGS/vss
     environment:
@@ -151,7 +151,7 @@ services:
     restart: always
 
   ums.c2s.com:
-    image: bhits/ums:0.1.0
+    image: bhitsdev/ums:0.1.0
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/ums:/java/C2S_LOGS/ums
     environment:
