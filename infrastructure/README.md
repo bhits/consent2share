@@ -10,7 +10,7 @@ We treat Infrastructure as Code. Here code is used to deploy Consent2Share appli
 
 Two server deployment options are provided to run Consent2Share application on Linux. Here we use CentOS 7.X as an example to describe the setups. 
 
-Consent2Share Docker images will be downloaded from [Dockerhub BHITS public registry](https://hub.docker.com/r/bhits/).
+Consent2Share Docker images will be downloaded from [Dockerhub BHITS public registry](https://hub.docker.com/r/bhits-dev/).
 	
 ### One Server Setup
 
@@ -19,7 +19,7 @@ This option is designed to run all Consent2Share services, UIs and databases on 
 #### Configure
 
 + Get the [c2s_config.sh](./scripts/c2s_config.sh) file and run the file.
-    `curl https://raw.githubusercontent.com/bhits/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
+    `curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
     `sh c2s_config.sh oneServerConfig`  
 
 + If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
@@ -69,7 +69,7 @@ This option is to run Consent2Share services, UIs on an application server and d
 
 #### Configure Database Server
 + Get the [c2s_config.sh](./scripts/c2s_config.sh) file and run the file.
-    `curl https://raw.githubusercontent.com/bhits/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
+    `curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
     `sh c2s_config.sh twoServerDbConfig`   
 
 + If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
@@ -84,7 +84,7 @@ This option is to run Consent2Share services, UIs on an application server and d
 #### Configure Application Server
 
 + Get the [c2s_config.sh](./scripts/c2s_config.sh) file and run the file.
-    `curl https://raw.githubusercontent.com/bhits/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
+    `curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
     `sh c2s_config.sh twoServerAppConfig`  
 
 + If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
@@ -169,13 +169,13 @@ Follow the steps below to resolve the error:
 
 ## UI Urls
 
-+ Consent2Share Admin UI: `https://<application_server>/admin-ui`
++ Consent2Share Staff Admin UI: `https://<application_server>/staff-ui`
 
-  * By default, Consent2Share comes with a provider staff admin user
+  * By default, Consent2Share comes with a staff admin user
 
-  * Login to Consent2Share Admin UI as an admin using username `consent2share@gmail.com` and password `admin` to create a patient account
+  * Login to Consent2Share Admin UI as an admin using username `c2s-admin@mailinator.com` and password `AAA#aaa1` to create a user patient account
 
-+ Consent2Share Patient Portal UI: `https://<application_server>/pp-ui`
++ Consent2Share Patient Portal UI: `https://<application_server>/c2s-ui`
 
 ## Scripts
 
@@ -190,6 +190,6 @@ Run `docker images` to check all created docker images.
 For more detail, please refer to `README.md` file in each repository for Consent2Share.
 
 ## Report Issues
-Please use [GitHub Issues](https://github.com/bhits/consent2share/issues) page to report issues.
+Please use [GitHub Issues](https://github.com/bhits-dev/consent2share/issues) page to report issues.
 
 
