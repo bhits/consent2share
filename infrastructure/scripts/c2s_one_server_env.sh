@@ -15,6 +15,7 @@ function defaultConfig() {
     export CONFIG_DATA_GIT_DIR=c2s-config-data
     # Edge Server configuraiton
     export C2S_APP_PORT=80
+
     # SMTP details
     export UAA_SMTP_HOST=your_mail_host
     export UAA_SMTP_PORT=your_mail_port
@@ -26,9 +27,11 @@ function oneServerConfig() {
     defaultConfig
     # Edge Server configuraiton
     export C2S_APP_HOST=your_app_server_host
+
     # Config Server Configuration
     export BASIC_AUTH_USER=your_basic_auth_user
     export BASIC_AUTH_PASSWORD=your_basic_auth_password
+
     # This variable is only required to give server environment specific profile
     # data added in config-data repository
     # export ENV_APP_PROFILE=your_app_Server_specific_profile
