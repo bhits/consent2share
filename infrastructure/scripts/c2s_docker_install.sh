@@ -20,14 +20,6 @@ sudo su << SudoUser
         rm -rf /etc/docker
     }
     function installDocker() {
-        # Remove old package name docker if exists
-        yum -y remove docker
-        yum -y remove docker \
-                      docker-common \
-                      container-selinux \
-                      docker-selinux \
-                      docker-engine
-        rm -rf /var/lib/docker
 
         # Set up the repository
         #Install yum-utils, which provides the yum-config-manager utility
@@ -48,6 +40,7 @@ sudo su << SudoUser
         yum -y install docker-ce-$dockerVersion
 
         # create device mapper storage
+        mkdir -p /etc/docker
         touch  /etc/docker/daemon.json
         echo '{ "storage-driver": "devicemapper" } ' > /etc/docker/daemon.json
 
@@ -76,5 +69,6 @@ sudo su << SudoUser
     installDockerCompose
     exit
     verifyInstall
+
 SudoUser
 
