@@ -12,11 +12,12 @@ sudo su << SudoUser
                   container-selinux \
                   docker-selinux \
                   docker-engine
+
         rm -rf /var/lib/docker
+
         rm /usr/local/bin/docker-compose
-        yum -y remove docker
-        yum -y remove docker-engine
-        rm -rf /var/lib/docker
+
+        rm -rf /etc/docker
     }
     function installDocker() {
         # Remove old package name docker if exists
