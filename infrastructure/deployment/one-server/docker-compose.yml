@@ -1,118 +1,119 @@
 version: '2'
 services:
   c2s-ui.c2s.com:
-    image: bhitsdev/c2s-ui:0.3.0
+    image: bhitsdev/c2s-ui:${C2S_UI_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/c2s-ui:/java/C2S_LOGS/c2s-ui
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
     mem_limit: 1000m
     restart: always
 
   c2s-ui-api.c2s.com:
-    image: bhitsdev/c2s-ui-api:0.3.0
+    image: bhitsdev/c2s-ui-api:${C2S_UI_API_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/c2s-ui-api:/java/C2S_LOGS/c2s-ui-api
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
     restart: always
 
   config-server.c2s.com:
-    image: bhits/config-server:0.3.0
+    image: bhits/config-server:${CONFIG_SERVER_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/config-server:/java/C2S_LOGS/config-server
       - ${C2S_BASE_PATH}/java/C2S_PROPS/c2s-config-data-private:/java/c2s-config-data-private
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
       spring.cloud.config.server.git.uri: file:/java/c2s-config-data-private
       security.user.name: ${BASIC_AUTH_USER}
       security.user.password: ${BASIC_AUTH_PASSWORD}
     restart: always
 
   context-handler.c2s.com:
-    image: bhitsdev/context-handler:2.0.0
+    image: bhitsdev/context-handler:${CONTEXT_HANDLER_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/context-handler:/java/C2S_LOGS/context-handler
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   discovery-server.c2s.com:
-    image: bhits/discovery-server:0.11.0
+    image: bhits/discovery-server:${DISCOVERY_SERVER_VERSION}
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/discovery-server:/java/C2S_LOGS/discovery-server
     mem_limit: 1500m
     restart: always
 
-  document-validator-ccda-r1.c2s.com:
-    image: bhits/document-validator-ccda-r1:0.11.0
+  document-validator.c2s.com:
+    image: bhitsdev/document-validator:${DOCUMENT_VALIDATOR_VERSION}
     volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r1:/java/C2S_LOGS/document-validator-ccda-r1
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator:/java/C2S_LOGS/document-validator
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
+      CATALINA_OPTS: -Dspring.profiles.active=docker
     mem_limit: 1500m
-    restart: always
-
-  document-validator-ccda-r2.c2s.com:
-    image: bhits/document-validator-ccda-r2:0.11.0
-    environment:
-      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1500m
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/document-validator-ccda-r2:/java/C2S_LOGS/document-validator-ccda-r2
     restart: always
 
   dss.c2s.com:
-    image: bhitsdev/dss:2.1.0
+    image: bhitsdev/dss:${DSS_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/dss:/java/C2S_LOGS/dss
     mem_limit: 1500m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   edge-server.c2s.com:
-    image: bhitsdev/edge-server:0.17.0
+    image: bhitsdev/edge-server:${EDGE_SERVER_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/edge-server:/java/C2S_LOGS/edge-server
       - ${C2S_BASE_PATH}/java/keystore/edge-server.keystore:/java/keystore/edge-server.keystore
     mem_limit: 1500m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     ports:
       - "80:80"
-      - "443:443"
     restart: always
 
   guvnor.c2s.com:
-    image: bhits/guvnor:5.5.0
+    image: bhits/guvnor:${GUVNOR_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/guvnor:/java/C2S_LOGS/guvnor
     environment:
       CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
     mem_limit: 1000m
     restart: always
 
   hapi-fhir.c2s.com:
-    image: bhitsdev/hapi-fhir-jpaserver:2.3-01
+    image: bhitsdev/hapi-fhir-jpaserver:${HAPI_FHIR_VERSION}
     environment:
+      TZ: "US/Eastern"
       CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:${HAPI_FHIR_DB_PORT}/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
     mem_limit: 1000m
     restart: always
 
   pcm.c2s.com:
-    image: bhitsdev/pcm:2.1.0
+    image: bhitsdev/pcm:${PCM_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pcm:/java/C2S_LOGS/pcm
     environment:
@@ -124,51 +125,113 @@ services:
     restart: always
 
   pep.c2s.com:
-    image: bhits/pep:1.10.0
+    image: bhitsdev/pep:${PEP_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pep:/java/C2S_LOGS/pep
     mem_limit: 1000m
     environment:
+      TZ: "US/Eastern"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
+    restart: always
+
+  pep-api.c2s.com:
+    image: bhitsdev/pep-api:${PEP_API_VERSION}
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/pep-api:/java/C2S_LOGS/pep-api
+    mem_limit: 1000m
+    environment:
+      TZ: "US/Eastern"
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
+    restart: always
+
+  phr.c2s.com:
+    image: bhitsdev/phr:${PHR_VERSION}
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/phr:/java/C2S_LOGS/phr
+    mem_limit: 1500m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   pls.c2s.com:
-    image: bhitsdev/pls:3.1.0
+    image: bhitsdev/pls:${PLS_VERSION}
     environment:
       CATALINA_OPTS: -Xms512m -Xmx2000m -Xss1m
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+      TZ: "US/Eastern"
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     mem_limit: 2000m
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/pls:/java/C2S_LOGS/pls
     restart: always
+
+  provider-ui.c2s.com:
+     image: bhitsdev/provider-ui:${PROVIDER_UI_VERSION}
+     volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/provider-ui:/java/C2S_LOGS/provider-ui
+     environment:
+       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+       TZ: "US/Eastern"
+     mem_limit: 1000m
+     restart: always
+
+  provider-ui-api.c2s.com:
+     image: bhitsdev/provider-ui-api:${PROVIDER_UI_API_VERSION}
+     volumes:
+       - ${C2S_BASE_PATH}/java/C2S_LOGS/provider-ui-api:/java/C2S_LOGS/provider-ui-api
+     mem_limit: 1000m
+     environment:
+       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+       TZ: "US/Eastern"
+     restart: always
+
   staff-ui.c2s.com:
-    image: bhitsdev/staff-ui:0.1.0
+    image: bhitsdev/staff-ui:${STAFF_UI_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui:/java/C2S_LOGS/staff-ui
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
     mem_limit: 1000m
     restart: always
 
   staff-ui-api.c2s.com:
-    image: bhitsdev/staff-ui-api:0.1.0
+    image: bhitsdev/staff-ui-api:${STAFF_UI_API_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui-api:/java/C2S_LOGS/staff-ui-api
     mem_limit: 1000m
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
+    restart: always
+
+  try-policy.c2s.com:
+    image: bhitsdev/try-policy:${TRY_POLICY_VERSION}
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/try-policy:/java/C2S_LOGS/try-policy
+    mem_limit: 1500m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+      TZ: "US/Eastern"
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   uaa.c2s.com:
-    image: bhitsdev/uaa:3.4.1-06
+    image: bhitsdev/uaa:${UAA_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/uaa:/java/C2S_LOGS/uaa
       - ${C2S_BASE_PATH}/java/C2S_PROPS/uaa/uaa.yml:/java/C2S_PROPS/uaa/uaa.yml
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
       UAA_DB_PASSSWORD: ${UAA_DB_PASSWORD}
       C2S_APP_HOST: ${C2S_APP_HOST}
       C2S_APP_PORT: 80
@@ -182,7 +245,7 @@ services:
     restart: always
 
   ums.c2s.com:
-    image: bhitsdev/ums:0.1.0
+    image: bhitsdev/ums:${UMS_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/ums:/java/C2S_LOGS/ums
     environment:
@@ -194,7 +257,7 @@ services:
     restart: always
 
   vss.c2s.com:
-    image: bhitsdev/vss:0.3.0
+    image: bhitsdev/vss:${VSS_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/vss:/java/C2S_LOGS/vss
     environment:
@@ -204,7 +267,6 @@ services:
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     mem_limit: 2000m
     restart: always
-    
 
 # Database setup
 
@@ -213,6 +275,7 @@ services:
     volumes_from:
       - hapi-fhir-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}
         MYSQL_DATABASE: hapi-fhir
     restart: always
@@ -227,6 +290,7 @@ services:
     volumes_from:
       - pcm-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
         MYSQL_DATABASE: pcm
     volumes:
@@ -238,11 +302,29 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pcm:/var/lib/mysql
 
+  phr-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - phr-db-data.c2s.com
+    environment:
+        TZ: "US/Eastern"
+        MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
+        MYSQL_DATABASE: phr
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/phr:/java/C2S_PROPS/phr
+    restart: always
+
+  phr-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/phr:/var/lib/mysql
+
   pls-db.c2s.com:
     image: mysql:5.7
     volumes_from:
       - pls-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
         MYSQL_DATABASE: pls
     volumes:
@@ -259,6 +341,7 @@ services:
     volumes_from:
       - uaa-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${UAA_DB_PASSWORD}
         MYSQL_DATABASE: uaa
     restart: always
@@ -273,6 +356,7 @@ services:
     volumes_from:
       - ums-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${UMS_DB_PASSWORD}
         MYSQL_DATABASE: ums
     volumes:
@@ -289,6 +373,7 @@ services:
     volumes_from:
       - vss-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
         MYSQL_DATABASE: vss
     volumes:
