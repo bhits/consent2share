@@ -1,11 +1,11 @@
 version: '2'
-
 services:
   hapi-fhir-db.c2s.com:
     image: mysql:5.7
     volumes_from:
       - hapi-fhir-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}
         MYSQL_DATABASE: hapi-fhir
     ports:
@@ -16,12 +16,13 @@ services:
     image: busybox
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/hapi-fhir:/var/lib/mysql
-      
+
   pcm-db.c2s.com:
     image: mysql:5.7
     volumes_from:
       - pcm-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
         MYSQL_DATABASE: pcm
     volumes:
@@ -35,11 +36,31 @@ services:
     volumes:
       - ${C2S_BASE_PATH}/java/mysql/pcm:/var/lib/mysql
 
+  phr-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - phr-db-data.c2s.com
+    environment:
+        TZ: "US/Eastern"
+        MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
+        MYSQL_DATABASE: phr
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/phr:/java/C2S_PROPS/phr
+    ports:
+      - "3312:3306"
+    restart: always
+
+  phr-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/phr:/var/lib/mysql
+
   pls-db.c2s.com:
     image: mysql:5.7
     volumes_from:
       - pls-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
         MYSQL_DATABASE: pls
     volumes:
@@ -58,6 +79,7 @@ services:
     volumes_from:
       - uaa-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${UAA_DB_PASSWORD}
         MYSQL_DATABASE: uaa
     ports:
@@ -74,6 +96,7 @@ services:
     volumes_from:
       - ums-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${UMS_DB_PASSWORD}
         MYSQL_DATABASE: ums
     volumes:
@@ -92,6 +115,7 @@ services:
     volumes_from:
       - vss-db-data.c2s.com
     environment:
+        TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
         MYSQL_DATABASE: vss
     volumes:
