@@ -23,7 +23,7 @@ function defaultConfig() {
     export UAA_SMTP_PASSWORD=your_mail_password
    }
 
- function c2sRl3.2.0Versions(){
+function c2sRl3.2.0Versions(){
     export C2S_UI_VERSION=0.4.0
     export C2S_UI_API_VERSION=0.4.0
     export CONFIG_SERVER_VERSION=0.3.0
@@ -38,7 +38,7 @@ function defaultConfig() {
     export PEP_VERSION=2.0.0
     export PEP_API_VERSION=2.0.0
     export PHR_VERSION=2.0.0
-    export PLS_VERSION=3.2.0
+    export PLS_VERSION=3.1.0
     export PROVIDER_UI_VERSION=0.1.0
     export PROVIDER_UI_API_VERSION=0.1.0
     export STAFF_UI_VERSION=0.2.0
@@ -47,7 +47,8 @@ function defaultConfig() {
     export UAA_VERSION=3.4.1-07
     export UMS_VERSION=0.2.0
     export VSS_VERSION=0.4.0
- }
+}
+
 function twoServerAppConfig() {
     defaultConfig
     c2sRl3.2.0Versions

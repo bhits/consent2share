@@ -38,7 +38,7 @@ function c2sRl3.2.0Versions(){
     export PEP_VERSION=2.0.0
     export PEP_API_VERSION=2.0.0
     export PHR_VERSION=2.0.0
-    export PLS_VERSION=3.2.0
+    export PLS_VERSION=3.1.0
     export PROVIDER_UI_VERSION=0.1.0
     export PROVIDER_UI_API_VERSION=0.1.0
     export STAFF_UI_VERSION=0.2.0

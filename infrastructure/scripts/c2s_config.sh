@@ -32,9 +32,11 @@ sudo su << SudoUser
 
         # C2S_PROPS Directories
         mkdir /usr/local/java/C2S_PROPS/pcm
+        mkdir /usr/local/java/C2S_PROPS/phr
         mkdir /usr/local/java/C2S_PROPS/pls
-        mkdir /usr/local/java/C2S_PROPS/vss
         mkdir /usr/local/java/C2S_PROPS/ums
+        mkdir /usr/local/java/C2S_PROPS/vss
+
 
         ## Copy the sample provider data sql file to pcm sub folder
         curl https://raw.githubusercontent.com/bhits-dev/pcm/master/pcm-db-sample/insert_consent_attestation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_attestation_term.sql
@@ -51,40 +53,18 @@ sudo su << SudoUser
         curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_administrative_gender_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_administrative_gender_code_lookup_data.sql
         curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_country_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_country_code_lookup_data.sql
         curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_locale_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_locale_lookup_data.sql
+        curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_npi_identifier_system.sql > /usr/local/java/C2S_PROPS/ums/insert_npi_identifier_system.sql
         curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_role_scopes_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_role_scopes_lookup_data.sql
         curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_state_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_state_code_lookup_data.sql
+
+        ## Copy the sample phr data sql file to phr sub folder
+         curl https://raw.githubusercontent.com/bhits-dev/phr/master/phr-db-sample/insert_document_type_codes.sql > /usr/local/java/C2S_PROPS/phr/insert_document_type_codes.sql
 
       }
 
-    function defaultOneDbServerConfig() {
-        # C2S_PROPS Directories
-        mkdir /usr/local/java/C2S_PROPS/pcm
-        mkdir /usr/local/java/C2S_PROPS/pls
-        mkdir /usr/local/java/C2S_PROPS/vss
-        mkdir /usr/local/java/C2S_PROPS/ums
-
-        ## Copy the sample provider data sql file to pcm sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/pcm/master/pcm-db-sample/insert_consent_attestation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_attestation_term.sql
-        curl https://raw.githubusercontent.com/bhits-dev/pcm/master/pcm-db-sample/insert_consent_revocation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_revocation_term.sql
-        curl https://raw.githubusercontent.com/bhits-dev/pcm/master/pcm-db-sample/insert_purposes.sql > /usr/local/java/C2S_PROPS/pcm/insert_purposes.sql
-
-        ## Copy the sample provider data sql file to pls sub folder
-        curl https://raw.githubusercontent.com/FEISystems/pls/master/pls-db-sample/pls_db_sample.sql > /usr/local/java/C2S_PROPS/pls/pls_db_sample.sql
-
-        ## Copy the sample vss data sql file to vss sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/vss/master/vss-db-sample/vss_db_sample.sql > /usr/local/java/C2S_PROPS/vss/vss_db_sample.sql
-
-        ## Copy the sample provider data sql file to ums sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_administrative_gender_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_administrative_gender_code_lookup_data.sql
-        curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_country_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_country_code_lookup_data.sql
-        curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_locale_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_locale_lookup_data.sql
-        curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_role_scopes_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_role_scopes_lookup_data.sql
-        curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_state_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_state_code_lookup_data.sql
-     }
-
     function oneServerConfig() {
         defaultAppServerConfig
-        defaultOneDbServerConfig
+        defaultDbServerConfig
 
         ## Copy the docker compose file to ‘/usr/local/java’ sub folder
         curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/one-server/docker-compose.yml > /usr/local/java/docker-compose.yml
