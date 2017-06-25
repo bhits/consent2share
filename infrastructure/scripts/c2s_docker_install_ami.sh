@@ -52,6 +52,7 @@ sudo su << SudoUser
        # Test docker compose installation
        docker-compose --version
      }
+
     # Start running script
     unInstallDocker
     installDocker

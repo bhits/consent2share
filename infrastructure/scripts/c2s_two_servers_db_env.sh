@@ -14,6 +14,7 @@ function defaultConfig() {
     export C2S_BASE_PATH=/usr/local
  }
 
+# start method
  function twoServerDbConfig() {
     defaultConfig
  }

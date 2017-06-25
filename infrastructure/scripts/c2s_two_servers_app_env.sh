@@ -14,6 +14,7 @@ function defaultConfig() {
 
     export C2S_BASE_PATH=/usr/local
     export CONFIG_DATA_GIT_DIR=c2s-config-data
+    
     # Edge Server configuraiton
     export C2S_APP_PORT=80
 
@@ -50,6 +51,7 @@ function c2sRl3.2.0Versions(){
     export VSS_VERSION=0.4.0
 }
 
+# Start Method
 function twoServerAppConfig() {
     defaultConfig
     c2sRl3.2.0Versions
