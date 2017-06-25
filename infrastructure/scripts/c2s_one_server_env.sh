@@ -5,11 +5,17 @@ function defaultConfig() {
     # Database details
     export UAA_DB_PASSWORD=admin
     export PCM_DB_PASSWORD=admin
+    export PHR_DB_PASSWORD=admin
     export PLS_DB_PASSWORD=admin
     export VSS_DB_PASSWORD=admin
     export UMS_DB_PASSWORD=admin
     export HAPI_FHIR_DB_PASSWORD=admin
-    export HAPI_FHIR_DB_PORT=3311
+    export HAPI_FHIR_DB_PORT=3306
+
+    export C2S_BASE_PATH=/usr/local
+
+    # Edge Server configuraiton
+    export C2S_APP_PORT=80
 
     export C2S_BASE_PATH=/usr/local
     export CONFIG_DATA_GIT_DIR=c2s-config-data
@@ -21,7 +27,7 @@ function defaultConfig() {
     export UAA_SMTP_PORT=your_mail_port
     export UAA_SMTP_USER=your_mail_username
     export UAA_SMTP_PASSWORD=your_mail_password
-   }
+}
 
 function c2sRl3.2.0Versions(){
     export C2S_UI_VERSION=0.4.0
@@ -50,8 +56,10 @@ function c2sRl3.2.0Versions(){
 }
 
 function oneServerConfig() {
+
     defaultConfig
     c2sRl3.2.0Versions
+
     # Edge Server configuraiton
     export C2S_APP_HOST=your_app_server_host
 
@@ -62,7 +70,7 @@ function oneServerConfig() {
     # This variable is only required to give server environment specific profile
     # data added in config-data repository
     # export ENV_APP_PROFILE=your_app_Server_specific_profile
-    
+
     # This variable is only required if encrypted values are available in the server environment specific profile
     # conofig data variables
     #export CONFIG_DATA_ENCRYPT_KEY=your_config_data_encrypt

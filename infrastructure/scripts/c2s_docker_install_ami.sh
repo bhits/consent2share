@@ -1,11 +1,9 @@
 #!/bin/bash -x
-dockerVersion=17.03.1.ce-1.el7.centos
+dockerVersion=17.03.1ce-1.50.amzn1
 dockerComposeVersion=1.13.0
 
 sudo su << SudoUser
     #Install 1.13.0-1.el7.centos docker version
-    #https://docs.docker.com/engine/installation/linux/centos/
-
     function unInstallDocker(){
         yum -y remove docker \
                   docker-common \
@@ -21,15 +19,8 @@ sudo su << SudoUser
     }
     function installDocker() {
 
-        # Set up the repository
-        #Install yum-utils, which provides the yum-config-manager utility
-        # device-mapper-persistent-data and lvm2 are required by the devicemapper storage driver
-        yum install -y yum-utils device-mapper-persistent-data lvm2
-
-        #set up the stable repository17.03.1ce-1.50.amzn1
-        yum-config-manager \
-            --add-repo \
-            https://download.docker.com/linux/centos/docker-ce.repo
+        #Update the installed packages and package cache on your instance
+        yum update -y
 
         #Install Docker
 
@@ -37,15 +28,13 @@ sudo su << SudoUser
         yum makecache fast
 
         #install a specific version of Docker
-        yum -y install docker-ce-$dockerVersion
+        sudo yum install -y docker-$dockerVersion
 
-        # create device mapper storage
-        mkdir -p /etc/docker
-        touch  /etc/docker/daemon.json
-        echo '{ "storage-driver": "devicemapper" } ' > /etc/docker/daemon.json
-
-        # Start Docker
+        # Start the Docker service.
         service docker start
+
+        #Add the ec2-user to the docker group so you can execute Docker commands without using sudo.
+        sudo usermod -a -G docker ec2-user
      }
 
 
