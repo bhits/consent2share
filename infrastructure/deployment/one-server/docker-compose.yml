@@ -108,7 +108,7 @@ services:
     image: bhitsdev/hapi-fhir-jpaserver:${HAPI_FHIR_VERSION}
     environment:
       TZ: "US/Eastern"
-      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:${HAPI_FHIR_DB_PORT}/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
+      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://hapi-fhir-db.c2s.com:3306/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
     mem_limit: 1000m
     restart: always
 
@@ -235,7 +235,6 @@ services:
       UAA_DB_PASSSWORD: ${UAA_DB_PASSWORD}
       C2S_APP_HOST: ${C2S_APP_HOST}
       C2S_APP_PORT: 80
-      C2S_DB_HOST: ${C2S_DB_HOST}
       C2S_DB_PORT: 3306
       UAA_SMTP_HOST: ${UAA_SMTP_HOST}
       UAA_SMTP_PORT: ${UAA_SMTP_PORT}

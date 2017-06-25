@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   hapi-fhir-db.c2s.com:
     image: mysql:5.7
