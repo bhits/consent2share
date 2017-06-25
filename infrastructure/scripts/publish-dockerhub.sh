@@ -40,7 +40,7 @@ docker push bhitsdev/uaa:${UAA_VERSION};
 docker push bhitsdev/ums:${UMS_VERSION};
 docker push bhitsdev/vss:${VSS_VERSION};
 
-
+#push the latest verions
 docker push bhitsdev/c2s-ui;
 docker push bhitsdev/c2s-ui-api;
 docker push bhitsdev/context-handler;
