@@ -1,9 +1,9 @@
 <a name="3.2.0"></a>
-# Consent2Share 3.2.0 (2017-06-26)
+# Consent2Share 3.2.0 (2017-06-27)
 
 Consent2Share 3.2.0 is the Third release of Consent2Share V3.
 The work on Consent2Share V3 is based on Consent2Share V2. 
-Version 3 is still in progress and more releases will come over the next 6 months.
+Version 3 is still in progress and more releases will come over the next 3 months.
 
 The overarching goal for Consent2Share V3 is to build a FHIR-centric, componentized, and cloud-based (cloud native) application.
 
