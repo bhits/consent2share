@@ -1,4 +1,49 @@
-<a name="2.1.0"></a>
+<a name="2.1.2"></a>
+# Consent2Share 2.1.2 (2017-07-25)
+
+### Features
+
+Node.js released a [security update]( https://nodejs.org/en/blog/vulnerability/july-2017-security-releases/) on July 11, 2017. Node.js stated that updates are now available for all active Node.js release lines. These include the fix for the high severity vulnerability identified in a previous announcement, one additional lower priority Node.js vulnerability in the 4.x release line, as well as some lower priority fixes for Node.js dependencies across the current release lines. 
+
+The following Consent2Share projects have been enhanced to accommodate the most recent LTS version of Node.js (6.11.1), which includes the security updates:
+
+* **Patient Portal UI**
+* **Admin Portal UI** 
+
+Consent2Share V2.1.2 does not affect build artifacts such as JARs and Docker images which were made available during release V2.1.1. You can continue to use the latest Docker images from the Docker Hub. However, if you are currently coding, contributing to our code base, and building your own binary artifacts from the Consent2Share source code, make certain to use Consent2Share V2.1.2, which accommodates the Node.js 6.11.1 security update.
+
+
+### NOTES:
+
+Consent2Share 2.1.2 release includes:
+
+* Admin Portal UI 0.20.1: [https://github.com/bhits/admin-portal-ui/releases/tag/0.20.1](https://github.com/bhits/admin-portal-ui/releases/tag/0.20.1)
+* Patient Portal UI 0.26.1: [https://github.com/bhits/patient-portal-ui/releases/tag/0.26.1](https://github.com/bhits/patient-portal-ui/releases/tag/0.26.1)
+* Patient User API 0.16.0: [https://github.com/bhits/patient-user-api/releases/tag/0.16.0](https://github.com/bhits/patient-user-api/releases/tag/0.16.0)
+* Patient Consent Management API 1.24.0: [https://github.com/bhits/pcm-api/releases/tag/1.24.0](https://github.com/bhits/pcm-api/releases/tag/1.24.0)
+* Patient Health Record API 1.24.0: [https://github.com/bhits/phr-api/releases/tag/1.24.0](https://github.com/bhits/phr-api/releases/tag/1.24.0)
+* Try My Policy API 1.17.0: [https://github.com/bhits/try-policy-api/releases/tag/1.17.0](https://github.com/bhits/try-policy-api/releases/tag/1.17.0)
+* Patient Registration API 1.19.0: [https://github.com/bhits/registration-api/releases/tag/1.19.0](https://github.com/bhits/registration-api/releases/tag/1.19.0)
+* Provider Lookup Service API 2.1.0: [https://github.com/bhits/pls-api/releases/tag/2.1.0](https://github.com/bhits/pls-api/releases/tag/2.1.0)
+* Policy Enforcement Point API 1.10.0: [https://github.com/bhits/pep-api/releases/tag/1.10.0](https://github.com/bhits/pep-api/releases/tag/1.10.0)
+* Context Handler API 1.11.0: [https://github.com/bhits/context-handler/releases/tag/1.11.0](https://github.com/bhits/context-handler/releases/tag/1.11.0)
+* Document Segmentation Service API 1.16.0: [https://github.com/bhits/dss-api/releases/tag/1.16.0](https://github.com/bhits/dss-api/releases/tag/1.16.0)
+* Document Validator API 0.11.0: [https://github.com/bhits/document-validator/releases/tag/0.11.0](https://github.com/bhits/document-validator/releases/tag/0.11.0)
+* Information Exchange Hub 0.6.0: [https://github.com/bhits/iexhub/releases/tag/0.6.0](https://github.com/bhits/iexhub/releases/tag/0.6.0)
+* Information Exchange Hub Generated Code Library 1.0.0: [https://github.com/bhits/iexhub-generated/releases/tag/1.0.0](https://github.com/bhits/iexhub-generated/releases/tag/1.0.0)
+* Edge Server 0.14.0: [https://github.com/bhits/edge-server/releases/tag/0.14.0](https://github.com/bhits/edge-server/releases/tag/0.14.0)
+* Discovery Server 0.10.0: [https://github.com/bhits/discovery-server/releases/tag/0.10.0](https://github.com/bhits/discovery-server/releases/tag/0.10.0)
+* Configuration Server 0.2.0: [https://github.com/bhits/config-server/releases/tag/0.2.0](https://github.com/bhits/config-server/releases/tag/0.2.0)
+* Configuration Data 2.1.0: [https://github.com/bhits/c2s-config-data/releases/tag/2.1.0](https://github.com/bhits/c2s-config-data/releases/tag/2.1.0)
+     - Note: After you checkout this repository from the tag mentioned above, use only the master branch. 
+* CloudFoundry User Account and Authentication (UAA) Server 3.4.1-02: [https://github.com/bhits/uaa/releases/tag/3.4.1-02](https://github.com/bhits/uaa/releases/tag/3.4.1-02)
+* Logback Audit 0.6.1: [https://github.com/bhits/logback-audit/releases/tag/v_0.6.1](https://github.com/bhits/logback-audit/releases/tag/v_0.6.1)
+* Common Libraries 1.9.0: [https://github.com/bhits/common-libraries/releases/tag/1.9.0](https://github.com/bhits/common-libraries/releases/tag/1.9.0)
+* Java Jar Runner 8u102-jre: [https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre](https://github.com/bhits/java-jar-runner/releases/tag/8u102-jre)
+* Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
+* Spring Boot Application Runner 1.10.0: [https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0](https://github.com/bhits/spring-boot-app-runner/releases/tag/1.10.0)
+
+<a name="2.1.1"></a>
 # Consent2Share 2.1.1 (2017-03-22)
 
 ### Features
