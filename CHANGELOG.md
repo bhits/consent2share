@@ -1,3 +1,66 @@
+<a name="3.3.0"></a>
+# Consent2Share 3.3.0 (2017-08-07)
+
+Consent2Share 3.3.0 is the Fourth release of Consent2Share V3.
+The work on Consent2Share V3 is based on Consent2Share V2. 
+Version 3 is still in progress and one more release will come over the next month.
+
+The overarching goal for Consent2Share V3 is to build a FHIR-centric, componentized, and cloud-based (cloud native) application.
+
+### Features
+
+* Single login UI 
+* Consent activity history
+* Trying my policy sample document update
+* Configurable patent search fields
+* UI styling update
+* Patient Registration/Update in HIE
+* New PIX Client
+* Update Patient profile (with  Avatar) 
+* Try my policy for provider
+* Multiple identifier support for patient 
+
+
+### Documentation Updates
+
+The following documents have been updated:
+
+* C2S Deployment Guide
+* C2S Provider User Guide
+* C2S Patient User Guide
+
+Also README.md files in repositories and Docker image descriptions are updated as well.
+
+### NOTES:
+
+Consent2Share 3.3.0 release includes:
+
+* Consent2Share UI 0.5.0: [https://github.com/bhits-dev/c2s-ui/releases/tag/0.5.0](https://github.com/bhits-dev/c2s-ui/releases/tag/0.5.0)
+* Consent2Share UI API 0.5.0: [https://github.com/bhits-dev/c2s-ui-api/releases/tag/0.5.0](https://github.com/bhits-dev/c2s-ui-api/releases/tag/0.5.0)
+* Configuration Server 0.3.0: [https://github.com/bhits/config-server/releases/tag/0.3.0](https://github.com/bhits/config-server/releases/tag/0.3.0)
+* Context Handler 2.2.0: [https://github.com/bhits-dev/context-handler/releases/tag/2.2.0](https://github.com/bhits-dev/context-handler/releases/tag/2.2.0)
+* Discovery Server 0.11.0: [https://github.com/bhits/discovery-server/releases/tag/0.11.0](https://github.com/bhits/discovery-server/releases/tag/0.11.0)
+* Document Validator API 1.0.0: [https://github.com/bhits/document-validator/releases/tag/1.0.0](https://github.com/bhits/document-validator/releases/tag/1.0.0)
+* Document Segmentation Service 2.3.0: [https://github.com/bhits-dev/dss/releases/tag/2.3.0](https://github.com/bhits-dev/dss/releases/tag/2.3.0)
+* Edge Server 0.19.0: [https://github.com/bhits-dev/edge-server/releases/tag/0.19.0](https://github.com/bhits-dev/edge-server/releases/tag/0.19.0)
+* Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
+* HAPI FHIR 2.3-01 : [https://github.com/bhits-dev/hapi-fhir/releases/tag/2.3-01](https://github.com/bhits-dev/hapi-fhir/releases/tag/2.3-01)
+* Patient Consent Management Service 2.3.0: [https://github.com/bhits-dev/pcm/releases/tag/2.3.0](https://github.com/bhits-dev/pcm/releases/tag/2.3.0)
+* Policy Enforcement Point 2.0.0: [https://github.com/bhits-dev/pep/releases/tag/2.0.0](https://github.com/bhits-dev/pep/releases/tag/2.0.0)
+* Patient Health Record 2.1.0: [https://github.com/bhits-dev/phr/releases/tag/2.1.0](https://github.com/bhits-dev/phr/releases/tag/2.1.0)
+* Provider Lookup Service 3.2.0: [https://github.com/bhits-dev/pls/releases/tag/3.2.0](https://github.com/bhits-dev/pls/releases/tag/3.2.0)
+* Provider UI 0.2.0: [https://github.com/bhits-dev/provider-ui/releases/tag/0.2.0](https://github.com/bhits-dev/provider-ui/releases/tag/0.2.0)
+* Provider UI API 0.2.0: [https://github.com/bhits-dev/provider-ui-api/releases/tag/0.2.0](https://github.com/bhits-dev/provider-ui-api/releases/tag/0.2.0)
+* Staff UI 0.3.0: [https://github.com/bhits-dev/staff-ui/releases/tag/0.3.0](https://github.com/bhits-dev/staff-ui/releases/tag/0.3.0)
+* Staff  API 0.3.0: [https://github.com/bhits-dev/staff-ui-api/releases/tag/0.3.0](https://github.com/bhits-dev/staff-ui-api/releases/tag/0.3.0)
+* Try Policy 2.1.0: [https://github.com/bhits-dev/try-policy/releases/tag/2.1.0](https://github.com/bhits-dev/try-policy/releases/tag/2.1.0)
+* ClouUIdFoundry User Account and Authentication (UAA) Server 3.4.1-08: [https://github.com/bhits-dev/uaa/releases/tag/3.4.1-08](https://github.com/bhits-dev/uaa/releases/tag/3.4.1-08)
+* User Management Service 0.3.0: [https://github.com/bhits-dev/ums/releases/tag/0.3.0](https://github.com/bhits-dev/ums/releases/tag/0.3.0)
+* Value Set Service 0.4.0: [https://github.com/bhits-dev/vss/releases/tag/0.4.0](https://github.com/bhits-dev/vss/releases/tag/0.4.0)
+* Common Libraries 1.13.0: [https://github.com/bhits-dev/common-libraries/releases/tag/1.13.0](https://github.com/bhits-dev/common-libraries/releases/tag/1.13.0)
+* Configuration Data 3.3.0: [https://github.com/bhits-dev/c2s-config-data/releases/tag/3.3.0](https://github.com/bhits-dev/c2s-config-data/releases/tag/3.3.0)
+
+
 <a name="3.2.0"></a>
 # Consent2Share 3.2.0 (2017-06-27)
 
