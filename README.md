@@ -106,6 +106,22 @@ The Document Segmentation Service (DSS) is responsible for the segmentation of t
 
 Source Code Repository: [https://github.com/bhits-dev/dss](https://github.com/bhits-dev/dss)
 
+#### Master User Interface(MASTER-UI)
+
+The Master User Interface (master-ui) is a single UI interface to login to Consent2Share(C2S) as patient, provider or staff user account.
+
+Source Code Repository: [https://github.com/bhits-dev/master-ui](https://github.com/bhits-dev/master-ui)
+
+### Microservices
+
+The backend of C2S consists of many microservices that are small yet focused on certain domain areas. These microservices provide RESTful API for external access. Some of these microservices also have persistence using [MySQL](https://www.mysql.com/).
+
+#### Master User Interface API(MASTER-UI-API)
+
+The Master User Interface API (master-ui-api) is a Backend For Frontends(BFF) component of Consent2Share (C2S)
+
+Source Code Repository: [https://github.com/bhits-dev/master-ui-api](https://github.com/bhits-dev/master-ui-api)
+
 #### Patient Consent Management Service(PCM)
 
 The Patient Consent Management (PCM) Service is one of the core components of the Consent2Share (C2S) application. The PCM provides APIs for patients to manage their electronic consents including consent create, consent edit, consent delete, consent eSignature and patient provider list management.
@@ -135,33 +151,33 @@ The Provider Lookup Service (PLS) is responsible for storing provider informatio
 Source Code Repository: [https://github.com/bhits-dev/pls](https://github.com/bhits-dev/pls)
 
 
-#### Provider User Interface
+#### Provider User Interface(PROVIDER-UI)
 
 The Provider User Interface (provider-ui) is a provider user interface component of Consent2Share used to create and manage patient accounts. Provider can use this to log in, visit their home page, create patient accounts, and manage patient consents.
 
 Source Code Repository: [https://github.com/bhits-dev/provider-ui](https://github.com/bhits-dev/provider-ui)
 
-#### Provider User Interface API
+#### Provider User Interface API(PROVIDER-UI-API)
 
 The Provider User Interface API (provider-ui-api) is a Backend For Frontend (BFF) component of Consent2Share
 
 Source Code Repository: [https://github.com/bhits-dev/provider-ui-api](https://github.com/bhits-dev/provider-ui-api)
 
-#### Staff User Interface
+#### Staff User Interface(STAFF-UI)
 
 The Staff User Interface (staff-ui) is an administrative user interface component of Consent2Share (C2S) used to create and manage user accounts. Administrative staff can use this to log in, visit their home page, create user accounts, and manage user information.
 
 Source Code Repository: [https://github.com/bhits-dev/staff-ui](https://github.com/bhits-dev/staff-ui)
 
-#### Staff User Interface API
+#### Staff User Interface API(STAFF-UI-API)
 
 The Staff User Interface API (staff-ui-api) is a Backend For Frontend(BFF) component of Consent2Share
 
 Source Code Repository: [https://github.com/bhits-dev/staff-ui-api](https://github.com/bhits-dev/staff-ui-api)
 
-#### Try My Policy(TRY POLICY)
+#### Try My Policy(TRY-POLICY)
 
-The Try My Policy (TRY POLICY) is a service that enables patients to preview the redacted version of their uploaded clinical document based on the privacy preferences of the consent. It calls the [Document Segmentation Service (DSS)](https://github
+The Try My Policy (TRY-POLICY) is a service that enables patients to preview the redacted version of their uploaded clinical document based on the privacy preferences of the consent. It calls the [Document Segmentation Service (DSS)](https://github
 .com/bhits/dss) to (1) segment the patient's clinical document, in the template prescribed by C-CDA-R1, C-CDA-R2, and HITSP C32, and (2) highlight the sections that will be removed in accordance to the patient's consent. Try My Policy transforms the response from DSS into a full XHTML file and provides the Base 64 encoded file in the response JSON. This service is currently utilized in the Consent2Share UI (c2s-ui) for patients to try their policies on their uploaded documents.
 
 Source Code Repository: [https://github.com/bhits-dev/try-policy](https://github.com/bhits-dev/try-policy)
@@ -183,13 +199,13 @@ Source Code Repository: [https://github.com/bhits-dev/vss](https://github.com/bh
 
 C2S uses [Eureka](https://github.com/Netflix/eureka) and [Zuul](https://github.com/Netflix/zuul) via [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) project to facilitate microservice orchestration, dynamic service discovery, load balancing, security, and server side routing. There are two major supporting infrastructure services in C2S based on these projects: Edge Server (Zuul) and Discovery Server (Eureka).
 
-#### Configuration Server
+#### Configuration Server(CONFIG-SERVER)
 
 The Configuration Server (config-server) provides support for externalized configuration in the Consent2Share (C2S) application, including the following C2S components: Consent2Share UI,Consent2Share UI API, Edge Server,Patient Consent Management Service(PCM), Provider Lookup Service(PLS) and Value Set Service(VSS).
 
 Source Code Repository: [https://github.com/bhits-dev/config-server](https://github.com/bhits-dev/config-server)
 
-#### Discovery Server
+#### Discovery Server(DSS)
 
 The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eureka))* is one of the key tenets of a microservice based architecture. It facilitates C2S microservices to dynamically discover each other and promotes the scalability of the C2S system. It provides the following:
 
@@ -199,7 +215,7 @@ The Discovery Server *([Eureka from Netflix OSS](https://github.com/Netflix/eure
 
 Source Code Repository: [https://github.com/bhits/discovery-server](https://github.com/bhits/discovery-server)
 
-#### Edge Server
+#### Edge Server(EDGE-SERVER)
 
 The Edge Server acts as a gatekeeper to the outside world. It keeps unauthorized external requests from passing through. It uses Spring Cloud Zuul as a routing framework, which serves as an entry point to the Consent2Share (C2S) microservices landscape. Zuul uses Spring Cloud Ribbon to lookup available services, and routes the external request to an appropriate service instance, facilitating Dynamic Routing and Load Balancing.
 
@@ -209,13 +225,13 @@ Source Code Repository: [https://github.com/bhits-dev/edge-server](https://githu
 
 C2S uses third-party open source service for authentication and authorization service.
 
-#### CloudFoundry User Account and Authentication (UAA) Server
+#### CloudFoundry User Account and Authentication (UAA) Server(UAA)
 
 C2S uses UAA for authentication, authorization, issuing tokens for client applications, and user account management. Please see [UAA Source Code Repository](https://github.com/cloudfoundry/uaa) and [UAA API Documentation](http://docs.cloudfoundry.org/api/uaa/) for more detailed information about UAA.
 
 C2S currently uses a fork of UAA project. This fork is fundamentally the same as the original UAA implementation, but it has some minor styling changes and customization to run behind the [Edge Server](#edge-server). It also includes a template [`uaa.yml`](https://github.com/bhits-dev/uaa/blob/master/config-template/uaa.yml) configuration file to setup C2S clients, OAuth2 scopes, and a few test users including an admin user in UAA. This fork can be found at [https://github.com/bhits-dev/uaa](https://github.com/bhits-dev/uaa).
 
-#### HAPI FHIR (hapi-fhir)
+#### HAPI FHIR (HAPI-FHIR)
 
 HAPI FHIR - Java API for HL7 FHIR Clients and Servers
 
@@ -262,7 +278,7 @@ Also Forked UAA mentioned in [Third-party Services](#third-party-services) secti
 
 Additionally,  there are other sub-projects listed in the below:
 
-### Common Libraries
+### Common Libraries(COMMON-LIBRARIES)
 
 The C2S application has a set of common libraries that are being used across the microservices. These libraries mostly contain basic utility functions.
 

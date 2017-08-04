@@ -112,6 +112,28 @@ services:
     mem_limit: 1000m
     restart: always
 
+  master-ui.c2s.com:
+    image: bhitsdev/master-ui:${MASTER_UI_VERSION}
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/master-ui:/java/C2S_LOGS/master-ui
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
+    mem_limit: 1000m
+    restart: always
+
+  master-ui-api.c2s.com:
+    image: bhitsdev/master-ui-api:${MASTER_UI_API_VERSION}
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/master-ui-api:/java/C2S_LOGS/master-ui-api
+    mem_limit: 1000m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
+    restart: always
+
   pcm.c2s.com:
     image: bhitsdev/pcm:${PCM_VERSION}
     volumes:

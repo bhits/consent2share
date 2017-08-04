@@ -25,36 +25,38 @@ function defaultConfig() {
     export UAA_SMTP_PASSWORD=your_mail_password
    }
 
-function c2sRl3.2.0Versions(){
-    export C2S_UI_VERSION=0.4.0
-    export C2S_UI_API_VERSION=0.4.0
+function c2sRl3.3.0Versions(){
+    export C2S_UI_VERSION=0.5.0
+    export C2S_UI_API_VERSION=0.5.0
     export CONFIG_SERVER_VERSION=0.3.0
-    export CONTEXT_HANDLER_VERSION=2.1.0
+    export CONTEXT_HANDLER_VERSION=2.2.0
     export DISCOVERY_SERVER_VERSION=0.11.0
     export DOCUMENT_VALIDATOR_VERSION=1.0.0
-    export DSS_VERSION=2.2.0
-    export EDGE_SERVER_VERSION=0.18.0
+    export DSS_VERSION=2.3.0
+    export EDGE_SERVER_VERSION=0.19.0
     export GUVNOR_VERSION=5.5.0
     export HAPI_FHIR_VERSION=2.3-01
-    export PCM_VERSION=2.2.0
+    export MASTER_UI_VERSION=0.1.0
+    export MASTER_UI_API_VERSION=0.1.0
+    export PCM_VERSION=2.3.0
     export PEP_VERSION=2.0.0
     export PEP_API_VERSION=2.0.0
-    export PHR_VERSION=2.0.0
-    export PLS_VERSION=3.1.0
-    export PROVIDER_UI_VERSION=0.1.0
-    export PROVIDER_UI_API_VERSION=0.1.0
-    export STAFF_UI_VERSION=0.2.0
-    export STAFF_UI_API_VERSION=0.2.0
-    export TRY_POLICY_VERSION=2.0.0
-    export UAA_VERSION=3.4.1-07
-    export UMS_VERSION=0.2.0
+    export PHR_VERSION=2.1.0
+    export PLS_VERSION=3.2.0
+    export PROVIDER_UI_VERSION=0.2.0
+    export PROVIDER_UI_API_VERSION=0.2.0
+    export STAFF_UI_VERSION=0.3.0
+    export STAFF_UI_API_VERSION=0.3.0
+    export TRY_POLICY_VERSION=2.1.0
+    export UAA_VERSION=3.4.1-08
+    export UMS_VERSION=0.3.0
     export VSS_VERSION=0.4.0
 }
 
 # Start Method
 function twoServerAppConfig() {
     defaultConfig
-    c2sRl3.2.0Versions
+    c2sRl3.3.0Versions
     # This variable is only required in 'two-servers' deployment scenario, so it MUST be uncommented and configured accordingly in 'two-servers' deployment.
     export C2S_DB_HOST=your_db_server_host
 

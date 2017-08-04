@@ -45,6 +45,7 @@ sudo su << SudoUser
 
         ## Copy the sample provider data sql file to pls sub folder
         curl https://raw.githubusercontent.com/bhits-dev/pls/master/pls-db-sample/pls_db_sample.sql > /usr/local/java/C2S_PROPS/pls/pls_db_sample.sql
+        curl https://raw.githubusercontent.com/bhits-dev/pls/master/pls-db-sample/insert_state_code_lookup_data.sql > /usr/local/java/C2S_PROPS/pls/insert_state_code_lookup_data.sql
 
         ## Copy the sample vss data sql file to vss sub folder
         curl https://raw.githubusercontent.com/bhits-dev/vss/master/vss-db-sample/vss_db_sample.sql > /usr/local/java/C2S_PROPS/vss/vss_db_sample.sql
