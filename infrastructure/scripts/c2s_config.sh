@@ -19,9 +19,15 @@ sudo su << SudoUser
         # C2S_PROPS Directories
         mkdir /usr/local/java/C2S_PROPS/uaa
         mkdir /usr/local/java/keystore
+        mkdir /usr/local/java/C2S_PROPS/ums
 
         ## Fetch uaa.yml from bhits-dev uaa repo and place it under uaa directory
         curl https://raw.githubusercontent.com/bhits-dev/uaa/master/config-template/uaa.yml > /usr/local/java/C2S_PROPS/uaa/uaa.yml
+
+        ## Fetch scripts files from bhits-dev uaa repo and place it under uaa directory
+        curl https://raw.githubusercontent.com/bhits-dev/ums/master/scripts/activate_user_account.sh > /usr/local/java/C2S_PROPS/ums/activate_user_account.sh
+        curl https://raw.githubusercontent.com/bhits-dev/ums/master/scripts/create_activate_provider_user.sh > /usr/local/java/C2S_PROPS/ums/create_activate_provider_user.sh
+
 
         ## Clone the c2s configuration data rep to '/usr/local/java' sub folder.
         cd /usr/local/java/C2S_PROPS

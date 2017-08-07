@@ -223,6 +223,7 @@ services:
     image: bhitsdev/ums:${UMS_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/ums:/java/C2S_LOGS/ums
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/ums:/java/C2S_PROPS/ums
     environment:
       TZ: "US/Eastern"
       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}

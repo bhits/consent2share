@@ -269,6 +269,7 @@ services:
     image: bhitsdev/ums:${UMS_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/ums:/java/C2S_LOGS/ums
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/ums:/java/C2S_PROPS/ums
     environment:
       TZ: "US/Eastern"
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
