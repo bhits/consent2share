@@ -9,8 +9,6 @@ function defaultConfig() {
     export PLS_DB_PASSWORD=admin
     export VSS_DB_PASSWORD=admin
     export UMS_DB_PASSWORD=admin
-    export HAPI_FHIR_DB_PASSWORD=admin
-    export HAPI_FHIR_DB_PORT=3311
 
     export C2S_BASE_PATH=/usr/local
     export CONFIG_DATA_GIT_DIR=c2s-config-data
@@ -35,7 +33,6 @@ function c2sRl3.3.0Versions(){
     export DSS_VERSION=2.3.0
     export EDGE_SERVER_VERSION=0.19.0
     export GUVNOR_VERSION=5.5.0
-    export HAPI_FHIR_VERSION=2.3-01
     export MASTER_UI_VERSION=0.1.0
     export MASTER_UI_API_VERSION=0.1.0
     export PCM_VERSION=2.3.0

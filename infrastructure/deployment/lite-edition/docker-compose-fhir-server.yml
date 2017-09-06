@@ -1,0 +1,26 @@
+version: '2'
+services:
+  hapi-fhir.c2s.com:
+    image: bhits/hapi-fhir-jpaserver:2.3-01
+    environment:
+      TZ: "US/Eastern"
+      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://hapi-fhir-db.c2s.com:3306/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx1024m -Xss1m
+    ports:
+      - "80:8080"
+    mem_limit: 1024m
+    restart: always
+    
+  hapi-fhir-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - hapi-fhir-db-data.c2s.com
+    environment:
+      TZ: "US/Eastern"
+      MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}
+      MYSQL_DATABASE: hapi-fhir
+    restart: always
+
+  hapi-fhir-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/hapi-fhir:/var/lib/mysql

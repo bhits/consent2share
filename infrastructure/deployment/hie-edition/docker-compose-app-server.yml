@@ -104,12 +104,17 @@ services:
     mem_limit: 1000m
     restart: always
 
-  hapi-fhir.c2s.com:
-    image: bhitsdev/hapi-fhir-jpaserver:${HAPI_FHIR_VERSION}
+  iexhub.c2s.com:
+    image: bhits/iexhub:${IEXHUB_VERSION}
     environment:
-      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:${HAPI_FHIR_DB_PORT}/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1000m
-    restart: always
+      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
+      CATALINA_OPTS: -Diexhub.logging.file=/java/C2S_LOGS/iexhub/InfoExchangeHub.log
+    mem_limit: 2000m
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/java/iexhub/test
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config:/java/iexhub/config
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config/output:/java/iexhub/config/output
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub:/java/C2S_LOGS/iexhub  
 
   master-ui.c2s.com:
     image: bhitsdev/master-ui:${MASTER_UI_VERSION}
