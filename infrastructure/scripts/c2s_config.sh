@@ -120,7 +120,7 @@ sudo su << SudoUser
 
     function liteEditionFhirServerConfig() {
 
-        defaultDbServerConfig
+        defaultConfig
 
         ## Copy the docker compose db file to ‘/usr/local/java’ sub folder
         curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/lite-edition/docker-compose-fhir-server.yml > /usr/local/java/docker-compose.yml
@@ -131,6 +131,10 @@ sudo su << SudoUser
 
     function hieEditionAppServerConfig() {
         defaultAppServerConfig
+
+        mkdir /usr/local/java/C2S_PROPS/iexhub/config
+
+        curl https://raw.githubusercontent.com/bhits-dev/iexhub/master/iexhub/src/main/resources/IExHub.properties > /usr/local/java/C2S_PROPS/iexhub/config/IExHub.properties
 
         ## Copy the docker compose file to ‘/usr/local/java’ sub folder
         curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/hie-edition/docker-compose-app-server.yml > /usr/local/java/docker-compose.yml

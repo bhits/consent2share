@@ -14,8 +14,8 @@ function defaultConfig() {
  }
 
 # start method
- function twoServerDbConfig() {
+ function dbServerConfig() {
     defaultConfig
  }
 
-twoServerDbConfig
+dbServerConfig

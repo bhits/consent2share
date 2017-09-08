@@ -12,9 +12,9 @@ function defaultConfig() {
    }
 
 # start method
- function hieEditionHIEOSConfig() {
+ function hieosServerConfig() {
     defaultConfig
  }
  
- hieEditionHIEOSConfig
+hieosServerConfig
 

@@ -51,7 +51,7 @@ function c2sRl3.3.0Versions(){
 }
 
 # Start Method
-function twoServerAppConfig() {
+function appServerConfig() {
     defaultConfig
     c2sRl3.3.0Versions
     # This variable is only required in 'two-servers' deployment scenario, so it MUST be uncommented and configured accordingly in 'two-servers' deployment.
@@ -73,6 +73,6 @@ function twoServerAppConfig() {
     #export CONFIG_DATA_ENCRYPT_KEY=your_config_data_encrypt
  }
 
-twoServerAppConfig
+appServerConfig
 
 

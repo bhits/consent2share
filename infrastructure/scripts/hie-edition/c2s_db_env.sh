@@ -14,8 +14,8 @@ function defaultConfig() {
  }
 
 # start method
- function hieEditionDbConfig() {
+ function dbServerConfig() {
     defaultConfig
  }
 
-hieEditionDbConfig
+dbServerConfig
