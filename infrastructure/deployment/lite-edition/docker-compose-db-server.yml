@@ -1,0 +1,114 @@
+version: '2'
+
+services:
+  pcm-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - pcm-db-data.c2s.com
+    environment:
+        TZ: "US/Eastern"
+        MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
+        MYSQL_DATABASE: pcm
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pcm:/java/C2S_PROPS/pcm
+    ports:
+      - "3307:3306"
+    restart: always
+
+  pcm-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/pcm:/var/lib/mysql
+
+  phr-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - phr-db-data.c2s.com
+    environment:
+        TZ: "US/Eastern"
+        MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
+        MYSQL_DATABASE: phr
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/phr:/java/C2S_PROPS/phr
+    ports:
+      - "3312:3306"
+    restart: always
+
+  phr-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/phr:/var/lib/mysql
+
+  pls-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - pls-db-data.c2s.com
+    environment:
+        TZ: "US/Eastern"
+        MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
+        MYSQL_DATABASE: pls
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/java/C2S_PROPS/pls
+    ports:
+      - "3308:3306"
+    restart: always
+
+  pls-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
+
+  uaa-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - uaa-db-data.c2s.com
+    environment:
+        TZ: "US/Eastern"
+        MYSQL_ROOT_PASSWORD: ${UAA_DB_PASSWORD}
+        MYSQL_DATABASE: uaa
+    ports:
+      - "3306:3306"
+    restart: always
+
+  uaa-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
+
+  ums-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - ums-db-data.c2s.com
+    environment:
+        TZ: "US/Eastern"
+        MYSQL_ROOT_PASSWORD: ${UMS_DB_PASSWORD}
+        MYSQL_DATABASE: ums
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/ums:/java/C2S_PROPS/ums
+    ports:
+      - "3310:3306"
+    restart: always
+
+  ums-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/ums:/var/lib/mysql
+
+  vss-db.c2s.com:
+    image: mysql:5.7
+    volumes_from:
+      - vss-db-data.c2s.com
+    environment:
+        TZ: "US/Eastern"
+        MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
+        MYSQL_DATABASE: vss
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/vss:/java/C2S_PROPS/vss
+    ports:
+      - "3309:3306"
+    restart: always
+
+  vss-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/vss:/var/lib/mysql

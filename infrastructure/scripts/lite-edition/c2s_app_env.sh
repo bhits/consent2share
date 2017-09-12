@@ -9,15 +9,10 @@ function defaultConfig() {
     export PLS_DB_PASSWORD=admin
     export VSS_DB_PASSWORD=admin
     export UMS_DB_PASSWORD=admin
-    export HAPI_FHIR_DB_PASSWORD=admin
-    export HAPI_FHIR_DB_PORT=3306
-
-    # Edge Server configuraiton
-    export C2S_APP_PORT=80
 
     export C2S_BASE_PATH=/usr/local
     export CONFIG_DATA_GIT_DIR=c2s-config-data
-
+    
     # Edge Server configuraiton
     export C2S_APP_PORT=80
 
@@ -26,7 +21,7 @@ function defaultConfig() {
     export UAA_SMTP_PORT=your_mail_port
     export UAA_SMTP_USER=your_mail_username
     export UAA_SMTP_PASSWORD=your_mail_password
-}
+   }
 
 function c2sRl3.3.0Versions(){
     export C2S_UI_VERSION=0.5.0
@@ -38,7 +33,6 @@ function c2sRl3.3.0Versions(){
     export DSS_VERSION=2.3.0
     export EDGE_SERVER_VERSION=0.19.0
     export GUVNOR_VERSION=5.5.0
-    export HAPI_FHIR_VERSION=2.3-01
     export MASTER_UI_VERSION=0.1.0
     export MASTER_UI_API_VERSION=0.1.0
     export PCM_VERSION=2.3.0
@@ -57,12 +51,13 @@ function c2sRl3.3.0Versions(){
 }
 
 # Start Method
-function oneServerConfig() {
-
+function appServerConfig() {
     defaultConfig
     c2sRl3.3.0Versions
+    # This variable is only required in 'two-servers' deployment scenario, so it MUST be uncommented and configured accordingly in 'two-servers' deployment.
+    export C2S_DB_HOST=your_db_server_host
 
-    # Edge Server configuration
+    # Edge Server configuraiton
     export C2S_APP_HOST=your_app_server_host
 
     # Config Server Configuration
@@ -74,10 +69,10 @@ function oneServerConfig() {
     # export ENV_APP_PROFILE=your_app_Server_specific_profile
 
     # This variable is only required if encrypted values are available in the server environment specific profile
-    # config data variables
+    # conofig data variables
     #export CONFIG_DATA_ENCRYPT_KEY=your_config_data_encrypt
-}
+ }
+
+appServerConfig
 
 
-
-oneServerConfig

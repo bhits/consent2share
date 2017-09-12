@@ -104,14 +104,6 @@ services:
     mem_limit: 1000m
     restart: always
 
-  hapi-fhir.c2s.com:
-    image: bhitsdev/hapi-fhir-jpaserver:${HAPI_FHIR_VERSION}
-    environment:
-      TZ: "US/Eastern"
-      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://hapi-fhir-db.c2s.com:3306/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
-    mem_limit: 1000m
-    restart: always
-
   master-ui.c2s.com:
     image: bhitsdev/master-ui:${MASTER_UI_VERSION}
     volumes:
@@ -257,6 +249,7 @@ services:
       UAA_DB_PASSSWORD: ${UAA_DB_PASSWORD}
       C2S_APP_HOST: ${C2S_APP_HOST}
       C2S_APP_PORT: 80
+      C2S_DB_HOST: ${C2S_DB_HOST}
       C2S_DB_PORT: 3306
       UAA_SMTP_HOST: ${UAA_SMTP_HOST}
       UAA_SMTP_PORT: ${UAA_SMTP_PORT}
@@ -289,120 +282,3 @@ services:
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     mem_limit: 2000m
     restart: always
-
-# Database setup
-
-  hapi-fhir-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - hapi-fhir-db-data.c2s.com
-    environment:
-        TZ: "US/Eastern"
-        MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}
-        MYSQL_DATABASE: hapi-fhir
-    restart: always
-
-  hapi-fhir-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/hapi-fhir:/var/lib/mysql
-
-  pcm-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - pcm-db-data.c2s.com
-    environment:
-        TZ: "US/Eastern"
-        MYSQL_ROOT_PASSWORD: ${PCM_DB_PASSWORD}
-        MYSQL_DATABASE: pcm
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pcm:/java/C2S_PROPS/pcm
-    restart: always
-
-  pcm-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/pcm:/var/lib/mysql
-
-  phr-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - phr-db-data.c2s.com
-    environment:
-        TZ: "US/Eastern"
-        MYSQL_ROOT_PASSWORD: ${PHR_DB_PASSWORD}
-        MYSQL_DATABASE: phr
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/phr:/java/C2S_PROPS/phr
-    restart: always
-
-  phr-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/phr:/var/lib/mysql
-
-  pls-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - pls-db-data.c2s.com
-    environment:
-        TZ: "US/Eastern"
-        MYSQL_ROOT_PASSWORD: ${PLS_DB_PASSWORD}
-        MYSQL_DATABASE: pls
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/pls:/java/C2S_PROPS/pls
-    restart: always
-
-  pls-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/pls:/var/lib/mysql
-
-  uaa-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - uaa-db-data.c2s.com
-    environment:
-        TZ: "US/Eastern"
-        MYSQL_ROOT_PASSWORD: ${UAA_DB_PASSWORD}
-        MYSQL_DATABASE: uaa
-    restart: always
-
-  uaa-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/uaa:/var/lib/mysql
-
-  ums-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - ums-db-data.c2s.com
-    environment:
-        TZ: "US/Eastern"
-        MYSQL_ROOT_PASSWORD: ${UMS_DB_PASSWORD}
-        MYSQL_DATABASE: ums
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/ums:/java/C2S_PROPS/ums
-    restart: always
-
-  ums-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/ums:/var/lib/mysql
-
-  vss-db.c2s.com:
-    image: mysql:5.7
-    volumes_from:
-      - vss-db-data.c2s.com
-    environment:
-        TZ: "US/Eastern"
-        MYSQL_ROOT_PASSWORD: ${VSS_DB_PASSWORD}
-        MYSQL_DATABASE: vss
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/vss:/java/C2S_PROPS/vss
-    restart: always
-
-  vss-db-data.c2s.com:
-    image: busybox
-    volumes:
-      - ${C2S_BASE_PATH}/java/mysql/vss:/var/lib/mysql

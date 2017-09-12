@@ -1,0 +1,98 @@
+version: '2'
+services:
+# OPENEMPI 
+  openempi.c2s.com:
+    image: bhits/openempi:2.2.9
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx1024m -Xss1m
+      TZ: "US/Eastern"
+    mem_limit: 1024m
+    ports:
+      - "80:8080"
+    restart: always
+
+  openempi-db.c2s.com:
+    image: postgres:9.6.3
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/openempi-db:/docker-entrypoint-initdb.d
+      - ${C2S_BASE_PATH}/java/postgresql/openempi/pgdata:/var/lib/postgresql/data/pgdata
+    environment:
+      POSTGRES_DB: openempi
+      POSTGRES_USER: openempi
+      POSTGRES_PASSWORD: openempi
+      PGDATA: /var/lib/postgresql/data/pgdata
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+    mem_limit: 1000m
+    restart: always
+    
+# HIEOS
+  hieos.c2s.com:
+    image: bhits/hieos:1.2.1
+    mem_limit: 2000m
+    ports:
+      - "81:4848"
+      - "82:8080"
+    restart: always
+  adt-db.c2s.com:
+    image: mysql:5.7.19
+    volumes_from:
+      - adt-db-data.c2s.com
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: adt
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/hieos-db/adt:/docker-entrypoint-initdb.d
+    command: mysqld --lower_case_table_names=1 --skip-ssl
+    restart: always
+  adt-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/adt:/var/lib/mysql
+  log-db.c2s.com:
+    image: mysql:5.7.19
+    volumes_from:
+      - log-db-data.c2s.com
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: log
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/hieos-db/log:/docker-entrypoint-initdb.d
+    command: mysqld --lower_case_table_names=1 --skip-ssl
+    restart: always
+  log-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/log:/var/lib/mysql
+  repo-db.c2s.com:
+    image: mysql:5.7.19
+    volumes_from:
+      - repo-db-data.c2s.com
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: repo
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/hieos-db/repository:/docker-entrypoint-initdb.d
+    command: mysqld --lower_case_table_names=1 --skip-ssl
+    restart: always
+  repo-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/repo:/var/lib/mysql
+  registry-db.c2s.com:
+    image: mysql:5.7.19
+    volumes_from:
+      - registry-db-data.c2s.com
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: omar
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_PROPS/hieos-db/registry:/docker-entrypoint-initdb.d
+    command: mysqld --lower_case_table_names=1 --skip-ssl
+    restart: always
+  registry-db-data.c2s.com:
+    image: busybox
+    volumes:
+      - ${C2S_BASE_PATH}/java/mysql/registry:/var/lib/mysql
+
+  
+  

@@ -1,10 +1,36 @@
-#!/bin/bash -x
-serverEnv=$1;
-if [ "$#" -eq "0" ];
+#!/bin/bash
+echo "This script is used to setup server configuration for Consent2Share."
+
+# server option to setup
+serverOption[1]="1. Lite Edition App Server"
+serverOption[2]="2. Lite Edition DB Server"
+serverOption[3]="3. Lite Edition FHIR Server"
+serverOption[4]="4. HIE Edition App Server"
+serverOption[5]="5. HIE Edition Db Server"
+serverOption[6]="6. HIE Edition Hieos Server"
+
+#function will be executed based on choice
+serverConfig[1]=liteEditionAppServerConfig
+serverConfig[2]=liteEditionDbServerConfig
+serverConfig[3]=liteEditionFhirServerConfig
+serverConfig[4]=hieEditionAppServerConfig
+serverConfig[5]=hieEditionDbServerConfig
+serverConfig[6]=hieEditionHieosServerConfig
+
+for each in "${serverOption[@]}"
+do
+  echo "$each"
+done
+
+echo -n "Please select a server to setup:"
+read serverEnv
+
+if [[ -z "$serverEnv" ]]
   then
-    echo "No arguments supplied. It should be either oneServerConfig or twoServerAppConfig or twoServerDbConfig. "
+    echo "No server option selected. "
     exit 1
 fi
+
 sudo su << SudoUser
     # Declare methods start
 
@@ -69,52 +95,109 @@ sudo su << SudoUser
 
       }
 
-    function oneServerConfig() {
-        defaultAppServerConfig
-        defaultDbServerConfig
-
-        ## Copy the docker compose file to ‘/usr/local/java’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/one-server/docker-compose.yml > /usr/local/java/docker-compose.yml
-
-        ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/c2s_one_server_env.sh > /etc/profile.d/c2s_env.sh
-     }
-
-
-    function twoServerAppConfig() {
+    function liteEditionAppServerConfig() {
         defaultAppServerConfig
 
         ## Copy the docker compose file to ‘/usr/local/java’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/two-servers/docker-compose-app-server.yml > /usr/local/java/docker-compose.yml
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/lite-edition/docker-compose-app-server.yml > /usr/local/java/docker-compose.yml
 
         ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/c2s_two_servers_app_env.sh > /etc/profile.d/c2s_env.sh
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/lite-edition/c2s_app_env.sh > /etc/profile.d/c2s_env.sh
 
      }
 
-    function twoServerDbConfig() {
+    function liteEditionDbServerConfig() {
 
         defaultDbServerConfig
 
         ## Copy the docker compose db file to ‘/usr/local/java’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/two-servers/docker-compose-db-server.yml > /usr/local/java/docker-compose.yml
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/lite-edition/docker-compose-db-server.yml > /usr/local/java/docker-compose.yml
 
         ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/c2s_two_servers_db_env.sh > /etc/profile.d/c2s_env.sh
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/lite-edition/c2s__db_env.sh > /etc/profile.d/c2s_env.sh
 
      }
+
+    function liteEditionFhirServerConfig() {
+
+        defaultConfig
+
+        ## Copy the docker compose db file to ‘/usr/local/java’ sub folder
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/lite-edition/docker-compose-fhir-server.yml > /usr/local/java/docker-compose.yml
+
+        ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/lite-edition/c2s_fhir_env.sh > /etc/profile.d/c2s_env.sh
+     }
+
+    function hieEditionAppServerConfig() {
+        defaultAppServerConfig
+
+        mkdir /usr/local/java/C2S_PROPS/iexhub/config
+
+        curl https://raw.githubusercontent.com/bhits-dev/iexhub/master/iexhub/src/main/resources/IExHub.properties > /usr/local/java/C2S_PROPS/iexhub/config/IExHub.properties
+
+        ## Copy the docker compose file to ‘/usr/local/java’ sub folder
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/hie-edition/docker-compose-app-server.yml > /usr/local/java/docker-compose.yml
+
+        ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/hie-edition/c2s_app_env.sh > /etc/profile.d/c2s_env.sh
+
+     }
+
+    function hieEditionDbServerConfig() {
+
+        defaultDbServerConfig
+
+        ## Copy the docker compose db file to ‘/usr/local/java’ sub folder
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/hie-edition/docker-compose-db-server.yml > /usr/local/java/docker-compose.yml
+
+        ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/hie-edition/c2s_db_env.sh > /etc/profile.d/c2s_env.sh
+
+     }
+
+    function hieEditionHieosServerConfig() {
+
+        defaultConfig
+
+        # OpenEMPI initial DB Directories
+        mkdir /usr/local/java/C2S_PROPS/openempi-db
+
+        # HIEOS initial DB Directories
+        mkdir /usr/local/java/C2S_PROPS/hieos-db
+        mkdir /usr/local/java/C2S_PROPS/hieos-db/adt
+        mkdir /usr/local/java/C2S_PROPS/hieos-db/log
+        mkdir /usr/local/java/C2S_PROPS/hieos-db/registry
+        mkdir /usr/local/java/C2S_PROPS/hieos-db/repository
+
+
+        # Copy OpenEMPI SQL scripts
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-openempi/master/openempi-db/create_new_database_schema-2.2.0.sql > /usr/local/java/C2S_PROPS/openempi-db/create_new_database_schema-2.2.0.sql
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-openempi/master/openempi-db/update_database_schema-2.2.1.sql > /usr/local/java/C2S_PROPS/openempi-db/update_database_schema-2.2.1.sql
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-openempi/master/openempi-db/update_database_schema-2.2.3.sql > /usr/local/java/C2S_PROPS/openempi-db/update_database_schema-2.2.3.sql
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-openempi/master/openempi-db/update_database_schema-2.2.4.sql > /usr/local/java/C2S_PROPS/openempi-db/update_database_schema-2.2.4.sql
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-openempi/master/openempi-db/update_database_schema-2.2.6.sql > /usr/local/java/C2S_PROPS/openempi-db/update_database_schema-2.2.6.sql
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-openempi/master/openempi-db/update_database_schema-2.2.7.sql > /usr/local/java/C2S_PROPS/openempi-db/update_database_schema-2.2.7.sql
+
+        # Copy HIEOS SQL scripts
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-hieos/master/hieos-db/adt/createadtddl.sql > /usr/local/java/C2S_PROPS/hieos-db/adt/createadtddl.sql
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-hieos/master/hieos-db/log/createlogddl.sql > /usr/local/java/C2S_PROPS/hieos-db/log/createlogddl.sql
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-hieos/master/hieos-db/registry/createregistryddl.sql > /usr/local/java/C2S_PROPS/hieos-db/registry/createregistryddl.sql
+        curl https://raw.githubusercontent.com/bhits-dev/dockerized-hieos/master/hieos-db/repository/createrepoddl.sql.sql > /usr/local/java/C2S_PROPS/hieos-db/repository/createrepoddl.sql.sql
+
+
+        ## Copy the docker compose db file to ‘/usr/local/java’ sub folder
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/hie-edition/docker-compose-hieos-server.yml > /usr/local/java/docker-compose.yml
+
+        ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/hie-edition/c2s_hieos_env.sh > /etc/profile.d/c2s_env.sh
+
+     }
+
+
     # Declare methods end
 
     # Start running script
-    echo "server env " : $serverEnv
-    if [ $serverEnv == "oneServerConfig" ];
-    then
-       oneServerConfig
-    elif [ $serverEnv == "twoServerAppConfig" ];
-    then
-        twoServerAppConfig
-    elif [ $serverEnv == "twoServerDbConfig" ];
-    then
-        twoServerDbConfig
-    fi
+    echo "Server env " : ${serverOption[$serverEnv]}
+    ${serverConfig[$serverEnv]}
 SudoUser
