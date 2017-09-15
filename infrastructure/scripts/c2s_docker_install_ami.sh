@@ -1,5 +1,5 @@
 #!/bin/bash -x
-dockerVersion=17.03.1ce-1.50.amzn1
+dockerVersion=17.03.2ce-1.59.amzn1
 dockerComposeVersion=1.13.0
 
 sudo su << SudoUser

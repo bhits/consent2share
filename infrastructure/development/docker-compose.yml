@@ -149,16 +149,6 @@ services:
     command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
-  pep-api.c2s.com:
-    image: bhitsdev/pep-api:${PEP_API_VERSION}
-    volumes:
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/pep-api:/java/C2S_LOGS/pep-api
-    environment:
-      TZ: "US/Eastern"
-      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
-    command: --spring.profiles.active=${ENV_APP_PROFILE}
-    restart: always
-
   phr.c2s.com:
     image: bhitsdev/phr:${PHR_VERSION}
     volumes:
