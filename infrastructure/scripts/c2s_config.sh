@@ -2,17 +2,17 @@
 echo "This script is used to setup server configuration for Consent2Share."
 
 # server option to setup
-serverOption[1]="1. Lite Edition App Server"
-serverOption[2]="2. Lite Edition DB Server"
-serverOption[3]="3. Lite Edition FHIR Server"
+serverOption[1]="1. EHR Edition App Server"
+serverOption[2]="2. EHR Edition DB Server"
+serverOption[3]="3. EHR Edition FHIR Server"
 serverOption[4]="4. HIE Edition App Server"
 serverOption[5]="5. HIE Edition Db Server"
 serverOption[6]="6. HIE Edition Hieos Server"
 
 #function will be executed based on choice
-serverConfig[1]=liteEditionAppServerConfig
-serverConfig[2]=liteEditionDbServerConfig
-serverConfig[3]=liteEditionFhirServerConfig
+serverConfig[1]=ehrEditionAppServerConfig
+serverConfig[2]=ehrEditionDbServerConfig
+serverConfig[3]=ehrEditionFhirServerConfig
 serverConfig[4]=hieEditionAppServerConfig
 serverConfig[5]=hieEditionDbServerConfig
 serverConfig[6]=hieEditionHieosServerConfig
@@ -70,19 +70,19 @@ sudo su << SudoUser
         mkdir /usr/local/java/C2S_PROPS/vss
 
 
-        ## Copy the sample provider data sql file to pcm sub folder
+        ## Copy the sample consent config data sql files to pcm sub folder
         curl https://raw.githubusercontent.com/bhits-dev/pcm/master/pcm-db-sample/insert_consent_attestation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_attestation_term.sql
         curl https://raw.githubusercontent.com/bhits-dev/pcm/master/pcm-db-sample/insert_consent_revocation_term.sql > /usr/local/java/C2S_PROPS/pcm/insert_consent_revocation_term.sql
         curl https://raw.githubusercontent.com/bhits-dev/pcm/master/pcm-db-sample/insert_purposes.sql > /usr/local/java/C2S_PROPS/pcm/insert_purposes.sql
 
-        ## Copy the sample provider data sql file to pls sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/pls/master/pls-db-sample/pls_db_sample.sql > /usr/local/java/C2S_PROPS/pls/pls_db_sample.sql
-        curl https://raw.githubusercontent.com/bhits-dev/pls/master/pls-db-sample/insert_state_code_lookup_data.sql > /usr/local/java/C2S_PROPS/pls/insert_state_code_lookup_data.sql
+        ## Copy the sample provider config data sql files to pls sub folder
+         curl https://raw.githubusercontent.com/bhits-dev/pls/master/pls-db-sample/insert_state_code_lookup_data.sql > /usr/local/java/C2S_PROPS/pls/insert_state_code_lookup_data.sql
+         curl https://raw.githubusercontent.com/bhits-dev/pls/master/pls-db-sample/pls_db_sample.sql > /usr/local/java/C2S_PROPS/pls/pls_db_sample.sql
 
-        ## Copy the sample vss data sql file to vss sub folder
+        ## Copy the sample vss config data sql file to vss sub folder
         curl https://raw.githubusercontent.com/bhits-dev/vss/master/vss-db-sample/vss_db_sample.sql > /usr/local/java/C2S_PROPS/vss/vss_db_sample.sql
 
-        ## Copy the sample provider data sql file to ums sub folder
+        ## Copy the sample user managaement config data sql files to ums sub folder
         curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_administrative_gender_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_administrative_gender_code_lookup_data.sql
         curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_country_code_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_country_code_lookup_data.sql
         curl https://raw.githubusercontent.com/bhits-dev/ums/master/ums-db-sample/insert_locale_lookup_data.sql > /usr/local/java/C2S_PROPS/ums/insert_locale_lookup_data.sql
@@ -95,38 +95,38 @@ sudo su << SudoUser
 
       }
 
-    function liteEditionAppServerConfig() {
+    function ehrEditionAppServerConfig() {
         defaultAppServerConfig
 
         ## Copy the docker compose file to ‘/usr/local/java’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/lite-edition/docker-compose-app-server.yml > /usr/local/java/docker-compose.yml
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/ehr-edition/docker-compose-app-server.yml > /usr/local/java/docker-compose.yml
 
         ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/lite-edition/c2s_app_env.sh > /etc/profile.d/c2s_env.sh
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/ehr-edition/c2s_app_env.sh > /etc/profile.d/c2s_env.sh
 
      }
 
-    function liteEditionDbServerConfig() {
+    function ehrEditionDbServerConfig() {
 
         defaultDbServerConfig
 
         ## Copy the docker compose db file to ‘/usr/local/java’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/lite-edition/docker-compose-db-server.yml > /usr/local/java/docker-compose.yml
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/ehr-edition/docker-compose-db-server.yml > /usr/local/java/docker-compose.yml
 
         ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/lite-edition/c2s__db_env.sh > /etc/profile.d/c2s_env.sh
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/ehr-edition/c2s__db_env.sh > /etc/profile.d/c2s_env.sh
 
      }
 
-    function liteEditionFhirServerConfig() {
+    function ehrEditionFhirServerConfig() {
 
         defaultConfig
 
         ## Copy the docker compose db file to ‘/usr/local/java’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/lite-edition/docker-compose-fhir-server.yml > /usr/local/java/docker-compose.yml
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/ehr-edition/docker-compose-fhir-server.yml > /usr/local/java/docker-compose.yml
 
         ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/lite-edition/c2s_fhir_env.sh > /etc/profile.d/c2s_env.sh
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/ehr-edition/c2s_fhir_env.sh > /etc/profile.d/c2s_env.sh
      }
 
     function hieEditionAppServerConfig() {
