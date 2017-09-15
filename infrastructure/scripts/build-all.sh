@@ -9,7 +9,7 @@ cd document-validator/document-validator;           mvn clean package docker:bui
 cd dss/dss;                             		    mvn clean package docker:build; cd -;
 cd edge-server/edge-server;                  		mvn clean package docker:build; cd -;
 cd iexhub-pix-pdq/iexhub-pix-pdq;                  	mvn clean package docker:build; cd -;
-cd iexhub-xdsb/edge-serveriexhub-xdsb;         		mvn clean package docker:build; cd -;
+cd iexhub-xdsb/iexhub-xdsb;         		        mvn clean package docker:build; cd -;
 cd master-ui/server;                                mvn clean package -Pdocker docker:build; cd -;
 cd master-ui-api/master-ui-api;                     mvn clean package docker:build; cd -;
 cd pcm/pcm;                             		    mvn clean package docker:build; cd -;
