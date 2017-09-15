@@ -104,17 +104,39 @@ services:
     mem_limit: 1000m
     restart: always
 
-  iexhub.c2s.com:
-    image: bhits/iexhub:${IEXHUB_VERSION}
+  hapi-fhir.c2s.com:
+    image: bhits/hapi-fhir-jpaserver:2.3-01
     environment:
-      CATALINA_OPTS: -Xms512m -Xmx700m -Xss1m
-      CATALINA_OPTS: -Diexhub.logging.file=/java/C2S_LOGS/iexhub/InfoExchangeHub.log
-    mem_limit: 2000m
+      TZ: "US/Eastern"
+      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://hapi-fhir-db.c2s.com:3306/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx1024m -Xss1m
+    ports:
+      - "80:8080"
+    mem_limit: 1024m
+    restart: always
+
+  iexhub-pix-pdq.c2s.com:
+    image: bhitsdev/iexhub-pix-pdq:${IEXHUB_PIX_PDQ_VERSION}
     volumes:
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/test:/java/iexhub/test
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config:/java/iexhub/config
-      - ${C2S_BASE_PATH}/java/C2S_PROPS/iexhub/config/output:/java/iexhub/config/output
-      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub:/java/C2S_LOGS/iexhub  
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub-pix-pdq:/java/C2S_LOGS/iexhub-pix-pdq
+    mem_limit: 1000m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
+    restart: always
+
+  iexhub-xdsb.c2s.com:
+    image: bhitsdev/iexhub-xdsb:${IEXHUB_XDSB_VERSION}
+    volumes:
+      - ${C2S_BASE_PATH}/java/C2S_LOGS/iexhub-xdsb:/java/C2S_LOGS/iexhub-xdsb
+    mem_limit: 1000m
+    environment:
+      JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
+      TZ: "US/Eastern"
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
+    restart: always
 
   master-ui.c2s.com:
     image: bhitsdev/master-ui:${MASTER_UI_VERSION}

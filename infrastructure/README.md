@@ -11,57 +11,6 @@ We treat Infrastructure as Code. Here code is used to deploy Consent2Share appli
 Two server deployment options are provided to run Consent2Share application on Linux. Here we use CentOS 7.X as an example to describe the setups. 
 
 Consent2Share Docker images will be downloaded from [Dockerhub BHITS public registry](https://hub.docker.com/r/bhits-dev/).
-	
-### One Server Setup
-
-This option is designed to run all Consent2Share services, UIs and databases on a single server.
-
-#### Configure
-
-+ Get the [c2s_config.sh](./scripts/c2s_config.sh) file and run the file.
-    `curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/c2s_config.sh > c2s_config.sh`
-    `sh c2s_config.sh oneServerConfig`  
-
-+ If SELinux is enabled, run the command below to assign the relevant SELinux policy type as a workaround to prevent issues while mounting volumes to the containers from `/usr/local/java`
-
-    `chcon -Rt svirt_sandbox_file_t /usr/local/java`
-
-+ Edge-server security:
-
-  * Create/Obtain a valid SSL certificate
-  
-  * Export the public and private keys from the SSL certificate to a JKS formatted keystore file named `edge-server.keystore`
-  
-  * upload the  `edge-server.keystore` file into `/usr/local/java/keystore` folder
-  
-  * Add the following in the `/usr/local/java/C2S_PROPS/c2s-config-data/edge-server.yml` file.
-
-      ```yml
-      spring.profiles: your_app_Server_specific_profile
-      server:
-        ssl:
-          key-store: /java/keystore/edge-server.keystore
-          key-store-password: "keystore password"
-      ```
-
-  * Modify the `ENV_APP_PROFILE= your_app_Server_specific_profile` in oneServerConfig() function in the `/etc/profile.d/c2s_env.sh` file.
-
-
-+ Modify the following configuration files
-
-  * Set `edge server`, `config server`, `SMTP variables` to the server specific values in the ` file in ‘/etc/profile.d/c2s_env.sh’ folder. 
-  
-  * Replace `localhost` with `uaa-db.c2s.com` for `database.url` variable in the `/usr/local/java/C2S_PROPS/uaa/uaa.yml` file.
-  
-  * Re-login to the server in order for the file `c2s_env.sh` to run automatically during the login
-
-  * Verify by checking any variable mentioned in the file  
-  Example: `echo ${C2S_BASE_PATH}` should show the value set in the file
-
-#### Compose Containers
-+ Run `docker-compose up -d` from the ‘`usr/local/java` folder to start up all Consent2Share services, UIs and databases
-
-+ Run `docker ps -a` to verify all the containers are up running except data-only containers.
 
 ### Two Servers Setup
 
