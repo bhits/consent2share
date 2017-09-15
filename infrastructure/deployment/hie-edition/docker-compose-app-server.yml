@@ -21,7 +21,7 @@ services:
     restart: always
 
   config-server.c2s.com:
-    image: bhits/config-server:${CONFIG_SERVER_VERSION}
+    image: bhitsdev/config-server:${CONFIG_SERVER_VERSION}
     volumes:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/config-server:/java/C2S_LOGS/config-server
       - ${C2S_BASE_PATH}/java/C2S_PROPS/c2s-config-data-private:/java/c2s-config-data-private
@@ -47,7 +47,7 @@ services:
     restart: always
 
   discovery-server.c2s.com:
-    image: bhits/discovery-server:${DISCOVERY_SERVER_VERSION}
+    image: bhitsdev/discovery-server:${DISCOVERY_SERVER_VERSION}
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       TZ: "US/Eastern"
