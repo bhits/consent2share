@@ -9,6 +9,8 @@ services:
       TZ: "US/Eastern"
       MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}
       MYSQL_DATABASE: hapi-fhir
+    ports:
+      - "3311:3306"
     restart: always
 
   pcm-db.c2s.com:

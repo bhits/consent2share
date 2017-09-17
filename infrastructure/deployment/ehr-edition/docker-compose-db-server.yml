@@ -5,6 +5,8 @@ services:
     image: mysql:5.7
     volumes_from:
       - hapi-fhir-db-data.c2s.com
+    ports:
+      - "3311:3306"
     environment:
       TZ: "US/Eastern"
       MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}

@@ -18,6 +18,8 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       TZ: "US/Eastern"
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   config-server.c2s.com:
@@ -109,9 +111,9 @@ services:
     image: bhits/hapi-fhir-jpaserver:2.3-01
     environment:
       TZ: "US/Eastern"
-      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://hapi-fhir-db.c2s.com:3306/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx1024m -Xss1m
+      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:3311/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx1024m -Xss1m
     ports:
-      - "80:8080"
+      - "8080:8080"
     mem_limit: 1024m
     restart: always
     
@@ -203,6 +205,8 @@ services:
      environment:
        JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
        TZ: "US/Eastern"
+       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+     command: --spring.profiles.active=${ENV_APP_PROFILE}
      restart: always
 
   staff-ui.c2s.com:
@@ -223,6 +227,8 @@ services:
     environment:
       JAVA_OPTS: -Xms512m -Xmx700m -Xss1m
       TZ: "US/Eastern"
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   try-policy.c2s.com:
