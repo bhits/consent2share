@@ -14,6 +14,8 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/c2s-ui-api:/java/C2S_LOGS/c2s-ui-api
     environment:
       TZ: "US/Eastern"
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   config-server.c2s.com:
@@ -89,7 +91,7 @@ services:
     image: bhitsdev/hapi-fhir-jpaserver:${HAPI_FHIR_VERSION}
     environment:
       TZ: "US/Eastern"
-      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://hapi-fhir-db.c2s.com:3306/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
+      CATALINA_OPTS: -Djdbc.url=jdbc:mysql://${C2S_DB_HOST}:3311/hapi-fhir?autoReconnect=true -Djdbc.password=${HAPI_FHIR_DB_PASSWORD} -Xms512m -Xmx700m -Xss1m
     restart: always
 
   master-ui-api.c2s.com:
@@ -156,6 +158,8 @@ services:
        - ${C2S_BASE_PATH}/java/C2S_LOGS/provider-ui-api:/java/C2S_LOGS/provider-ui-api
      environment:
        TZ: "US/Eastern"
+       encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+     command: --spring.profiles.active=${ENV_APP_PROFILE}
      restart: always
 
   staff-ui.c2s.com:
@@ -172,6 +176,8 @@ services:
       - ${C2S_BASE_PATH}/java/C2S_LOGS/staff-ui-api:/java/C2S_LOGS/staff-ui-api
     environment:
       TZ: "US/Eastern"
+      encrypt.key: ${CONFIG_DATA_ENCRYPT_KEY}
+    command: --spring.profiles.active=${ENV_APP_PROFILE}
     restart: always
 
   try-policy.c2s.com:
@@ -232,6 +238,8 @@ services:
         TZ: "US/Eastern"
         MYSQL_ROOT_PASSWORD: ${HAPI_FHIR_DB_PASSWORD}
         MYSQL_DATABASE: hapi-fhir
+    ports:
+      - "3311:3306"
     restart: always
 
   hapi-fhir-db-data.c2s.com:
