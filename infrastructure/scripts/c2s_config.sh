@@ -114,7 +114,7 @@ sudo su << SudoUser
         curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/deployment/ehr-edition/docker-compose-db-server.yml > /usr/local/java/docker-compose.yml
 
         ## Copy the environment variables file to ‘/etc/profile.d’ sub folder
-        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/ehr-edition/c2s__db_env.sh > /etc/profile.d/c2s_env.sh
+        curl https://raw.githubusercontent.com/bhits-dev/consent2share/master/infrastructure/scripts/ehr-edition/c2s_db_env.sh > /etc/profile.d/c2s_env.sh
 
      }
 
