@@ -1,5 +1,5 @@
 <a name="3.4.0"></a>
-# Consent2Share 3.4.0 (2017-09-15)
+# Consent2Share 3.4.0 (2017-09-18)
 
 Consent2Share 3.4.0 is the Fifth release of Consent2Share V3.
 The work on Consent2Share V3 is based on Consent2Share V2. 
@@ -23,10 +23,12 @@ The overarching goal for Consent2Share V3 is to build a FHIR-centric, componenti
 
 The following documents have been updated:
 
+* C2S Master User Guide
 * C2S Provider User Guide
+* C2S Staff User Guide
 * C2S Patient User Guide
-* C2S Staff Admin User Guide
 * C2S Deployment Guide
+* C2S Development Guide
 
 Also README.md files in repositories and Docker image descriptions are updated as well.
 
@@ -46,6 +48,8 @@ Consent2Share 3.4.0 release includes:
 * IExHub PIX PDQ 0.1.0: [https://github.com/bhits-dev/iexhub-pix-pdq/releases/tag/0.1.0](https://github.com/bhits-dev/iexhub-pix-pdq/releases/tag/0.1.0)
 * IExHub XDSB 0.1.0: [https://github.com/bhits-dev/iexhub-xdsdb/releases/tag/0.1.0](https://github.com/bhits-dev/iexhub-xdsb/releases/tag/0.1.0)
 * HAPI FHIR 2.3-01 : [https://github.com/bhits-dev/hapi-fhir/releases/tag/2.3-01](https://github.com/bhits-dev/hapi-fhir/releases/tag/2.3-01)
+* Master UI 0.2.0: [https://github.com/bhits-dev/master-ui/releases/tag/0.2.0](https://github.com/bhits-dev/master-ui/releases/tag/0.2.0)
+* Master UI API 0.2.0: [https://github.com/bhits-dev/master-ui-api/releases/tag/0.2.0](https://github.com/bhits-dev/master-ui-api/releases/tag/0.2.0)
 * Patient Consent Management Service 2.4.0: [https://github.com/bhits-dev/pcm/releases/tag/2.4.0](https://github.com/bhits-dev/pcm/releases/tag/2.4.0)
 * Policy Enforcement Point 2.1.0: [https://github.com/bhits-dev/pep/releases/tag/2.1.0](https://github.com/bhits-dev/pep/releases/tag/2.1.0)
 * Patient Health Record 2.2.0: [https://github.com/bhits-dev/phr/releases/tag/2.2.0](https://github.com/bhits-dev/phr/releases/tag/2.2.0)
@@ -110,6 +114,8 @@ Consent2Share 3.3.0 release includes:
 * Edge Server 0.19.0: [https://github.com/bhits-dev/edge-server/releases/tag/0.19.0](https://github.com/bhits-dev/edge-server/releases/tag/0.19.0)
 * Dockerized JBoss Drools Guvnor 5.5.0: [https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0](https://github.com/bhits/dockerized-drools-guvnor/releases/tag/5.5.0)
 * HAPI FHIR 2.3-01 : [https://github.com/bhits-dev/hapi-fhir/releases/tag/2.3-01](https://github.com/bhits-dev/hapi-fhir/releases/tag/2.3-01)
+* Master UI 0.1.0: [https://github.com/bhits-dev/master-ui/releases/tag/0.1.0](https://github.com/bhits-dev/master-ui/releases/tag/0.1.0)
+* Master UI API 0.1.0: [https://github.com/bhits-dev/master-ui-api/releases/tag/0.1.0](https://github.com/bhits-dev/master-ui-api/releases/tag/0.1.0)
 * Patient Consent Management Service 2.3.0: [https://github.com/bhits-dev/pcm/releases/tag/2.3.0](https://github.com/bhits-dev/pcm/releases/tag/2.3.0)
 * Policy Enforcement Point 2.0.0: [https://github.com/bhits-dev/pep/releases/tag/2.0.0](https://github.com/bhits-dev/pep/releases/tag/2.0.0)
 * Patient Health Record 2.1.0: [https://github.com/bhits-dev/phr/releases/tag/2.1.0](https://github.com/bhits-dev/phr/releases/tag/2.1.0)
