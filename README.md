@@ -106,15 +106,19 @@ The Document Segmentation Service (DSS) is responsible for the segmentation of t
 
 Source Code Repository: [https://github.com/bhits-dev/dss](https://github.com/bhits-dev/dss)
 
+#### FHIR Integration Service(FIS)
+
+The FHIR Integration Service (fis) Spring Boot project provides RESTful endpoints to allow applications to publish and retrieve FHIR resources.
+
+Source Code Repository: [https://github.com/bhits/fis](https://github.com/bhits/fis)
+
+
 #### Master User Interface(MASTER-UI)
 
 The Master User Interface (master-ui) is a single UI interface to login to Consent2Share(C2S) as patient, provider or staff user account.
 
 Source Code Repository: [https://github.com/bhits-dev/master-ui](https://github.com/bhits-dev/master-ui)
 
-### Microservices
-
-The backend of C2S consists of many microservices that are small yet focused on certain domain areas. These microservices provide RESTful API for external access. Some of these microservices also have persistence using [MySQL](https://www.mysql.com/).
 
 #### Master User Interface API(MASTER-UI-API)
 
