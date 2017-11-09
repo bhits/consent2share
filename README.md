@@ -1,6 +1,6 @@
 # Consent2Share
 
-For additional information not contained on this site, please visit the [**Consent2Share on GitHub**](https://bhits-dev.github.io/consent2share/) website.
+For additional information not contained on this site, please visit the [**Consent2Share on GitHub**](https://bhits.github.io/consent2share/) website.
 
 Consent2Share (C2S) is an open source software application sponsored by the U.S. Substance Abuse and Mental Health Administration (SAMHSA) which is designed to support behavioral health integration with Fast Healthcare Interoperability Resources (FHIR) Servers. Behavioral healthcare, which includes substance abuse and mental health treatment services and providers, faces special privacy regulations that can make the exchange of health care information with other providers more strict than in other areas of healthcare.
 
@@ -66,19 +66,19 @@ C2S currently offers the following user interfaces: MASTER-UI, C2S UI, PROVIDER-
 
 The Master User Interface (master-ui) is a single UI interface to login to Consent2Share(C2S) as patient, provider or staff user account.
 
-Source Code Repository: [https://github.com/bhits-dev/master-ui](https://github.com/bhits-dev/master-ui)
+Source Code Repository: [https://github.com/bhits/master-ui](https://github.com/bhits/master-ui)
 
 #### Consent2Share User Interface(C2S-UI)
 
 The C2S UI (c2s-ui) is a user interface component of Consent2share (C2S) used by the patient to manage his or her consents.
 
-Source Code Repository: [https://github.com/bhits-dev/c2s-ui](https://github.com/bhits-dev/c2s-ui)
+Source Code Repository: [https://github.com/bhits/c2s-ui](https://github.com/bhits/c2s-ui)
 
 #### Provider User Interface(PROVIDER-UI)
 
 The Provider User Interface (provider-ui) is a provider user interface component of Consent2Share used to create and manage patient accounts. Provider can use this to log in, visit their home page, create patient accounts, and manage patient consents.
 
-Source Code Repository: [https://github.com/bhits-dev/provider-ui](https://github.com/bhits-dev/provider-ui)
+Source Code Repository: [https://github.com/bhits/provider-ui](https://github.com/bhits/provider-ui)
 
 #### Staff User Interface(STAFF-UI)
 
