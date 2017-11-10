@@ -10,6 +10,7 @@ The work on Consent2Share V3 is based on Consent2Share V2.
 *  User is reminded of PII constraints with a notice of disclosure when working in a demo system.
 *  Provider can view the segmented CCD document as a HTML page in a new window, in addition to download it as a XML document.
 *  IExHub API is implemented to support FHIR to update patient profile and to get health data by Patient ID.
+*  Angular UI Component Library is created for C2S Shared Components.
 *  Values set data is synchronized with VSAC.
 *  UI link is decoupled from edge server configuration.
 *  Log is aggregated and correlated across microservices.
@@ -51,6 +52,7 @@ Consent2Share 3.5.0 release includes:
 * User Management Service 0.6.0: [https://github.com/bhits/ums/releases/tag/0.6.0](https://github.com/bhits/ums/releases/tag/0.6.0)
 * Value Set Service 0.7.0: [https://github.com/bhits/vss/releases/tag/0.7.0](https://github.com/bhits/vss/releases/tag/0.7.0)
 * Common Libraries 1.18.0: [https://github.com/bhits/common-libraries/releases/tag/1.18.0](https://github.com/bhits/common-libraries/releases/tag/1.18.0)
+* C2S NG Shared Component Libraries v0.1.0: [https://github.com/bhits/c2s-ng-shared/releases/tag/v0.1.0](https://github.com/bhits/c2s-ng-shared/releases/tag/v0.1.0)
 * Configuration Data 3.4.0: [https://github.com/bhits/c2s-config-data/releases/tag/3.4.0](https://github.com/bhits/c2s-config-data/releases/tag/3.4.0)
 
 
