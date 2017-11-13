@@ -1,20 +1,20 @@
 <a name="3.5.0"></a>
 # Consent2Share 3.5.0 (2017-11-09)
 
-Consent2Share 3.5.0 is the Sixth release of Consent2Share V3.
+Consent2Share 3.5.0 is the sixth release of Consent2Share V3.
 The work on Consent2Share V3 is based on Consent2Share V2. 
 
 ### Features
 
-*  User can select multiple providers as "FROM" or "TO" for sharing data by creating one consent.
-*  User is reminded of PII constraints with a notice of disclosure when working in a demo system.
-*  Provider can view the segmented CCD document as a HTML page in a new window, in addition to download it as a XML document.
-*  IExHub API is implemented to support FHIR to update patient profile and to get health data by Patient ID.
-*  Angular UI Component Library is created for C2S Shared Components.
-*  Values set data is synchronized with VSAC.
-*  UI link is decoupled from edge server configuration.
-*  Log is aggregated and correlated across microservices.
-*  Third party libraries are upgraded to fix critical security issues.
+*  The user can select multiple providers as "FROM" or "TO" to share data by creating one consent.
+*  The user is reminded of PII constraints with a notice of disclosure when working in the demo system.
+*  The provider can view the segmented CCD document as an HTML page in a new window, in addition to download it as a XML document.
+*  The IExHub API is implemented to support FHIR to update the patient profile and to get health data by Patient ID.
+*  An Angular UI Component Library is created for Consent2Share Shared Components.
+*  Values set data are synchronized with VSAC.
+*  The UI link is decoupled from edge server configuration.
+*  The log is aggregated and correlated across microservices.
+*  Third-party libraries are upgraded to fix critical security issues.
 *  CloudFoundry User Account and Authentication (UAA) Server is upgraded to version 4.6.0.
 
 ### Documentation Updates
@@ -67,14 +67,14 @@ The overarching goal for Consent2Share V3 is to build a FHIR-centric, componenti
 
 ### Features
 
-* i18n (Internationalization) support is added for database lookup values.
+*  i18n (Internationalization) support is added for database lookup values.
 *  Document segmentation service configuration support is improved to handle multiple document template configurations.
 *  C-CDA R2.1 Care Plan document segmentation is added to the document segmentation service.
-* Notification is given when account locked because of failed login attempts.
-*  Patient can get health data from HIE XDS.b repository.
-*  IExHub is separated into two spring boot services iexhub-xdsb and iexhub-pix-pdq with clean and generated IHE Soap clients.
+*  A Notification is given when the account is locked because of failed login attempts.
+*  A patient can get health data from the HIE XDS.b repository.
+*  The IExHub is separated into two Spring Boot services iexhub-xdsb and iexhub-pix-pdq, with clean and generated IHE Soap clients.
 *  Apache PDFBox is used to generate PDF.
-*  Fixed critical security vulnerabilities found in the static scan.  
+*  Fixed critical security vulnerabilities that were found in the static scan.  
 *  Fixed bugs.
 
 
@@ -157,7 +157,7 @@ The following documents have been updated:
 * C2S Provider User Guide
 * C2S Patient User Guide
 
-Also README.md files in repositories and Docker image descriptions are updated as well.
+Also README.md files in repositories and Docker image descriptions are updated.
 
 ### NOTES:
 
@@ -203,7 +203,7 @@ The overarching goal for Consent2Share V3 is to build a FHIR-centric, componenti
 ### Features
 
 * EHR integration push model
-    - provider manages patient, provider creates consent for patient to sign, provider segment C-CDA for downloading.
+    - Provider manages patient, provider creates consent for patient to sign, provider segment C-CDA for downloading.
 * Try My Policy Feature.
 * Auditing upate.
 * Update document validator.
@@ -212,11 +212,11 @@ The overarching goal for Consent2Share V3 is to build a FHIR-centric, componenti
 
 The following documents have been updated:
 
-* C2S Deployment Guide
-* C2S Provider User Guide
-* C2S Patient User Guide
+* Consent2Share Deployment Guide
+* Consent2Share Provider User Guide
+* Consent2Share Patient User Guide
 
-Also README.md files in repositories and Docker image descriptions are updated as well.
+Also README.md files in repositories and Docker image descriptions are updated.
 
 ### NOTES:
 
@@ -268,10 +268,10 @@ The overarching goal for Consent2Share V3 is to build a FHIR-centric, componenti
 
 The following documents have been updated:
 
-* C2S Deployment Guide
-* C2S Patient User Guide
+* Consent2Share Deployment Guide
+* Consent2Share Patient User Guide
 
-Also README.md files in repositories and Docker image descriptions are updated as well.
+Also README.md files in repositories and Docker image descriptions are updated.
 
 ### NOTES:
 
@@ -324,10 +324,10 @@ The overarching goal for Consent2Share V3 is to build a FHIR-centric, componenti
 
 The following documents have been updated:
 
-* C2S Deployment Guide
-* C2S Patient User Guide
+* Consent2Share Deployment Guide
+* Consent2Share Patient User Guide
 
-Also README.md files in repositories and Docker image descriptions are updated as well.
+Also README.md files in repositories and Docker image descriptions are updated.
 
 ### NOTES:
 
@@ -412,8 +412,8 @@ The supported languages in Consent2Share Release 2.1.1 are **English (en_US)** a
 
 The following documents have been updated:
 
-* C2S Admin User Guide
-* C2S Patient User Guide
+* Consent2Share Admin User Guide
+* Consent2Share Patient User Guide
 
 Also, the README.md files in the repositories for the APIs listed above and the latest tag in Docker image descriptions are updated as well.
 
@@ -468,11 +468,11 @@ Consent2Share 2.1.1 release includes:
 
 The following documents have been updated:
 
-* C2S Development Guide
-* C2S Deployment Guide
-* C2S Technical Blueprint
+* Consent2Share Development Guide
+* Consent2Share Deployment Guide
+* Consent2Share Technical Blueprint
 
-Also README.md files in repositories and Docker image descriptions are updated as well.
+Also README.md files in repositories and Docker image descriptions are updated.
 
 ### NOTES:
 
