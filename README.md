@@ -318,7 +318,7 @@ Please see [release page](../../releases) to download the document.
 
 ## Infrastructure Using Docker
 
-The BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits-dev/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a Consent2Share running instance and related infrastructure using *Docker* and *Docker Compose*.
+The BHITS project also has a [Docker Hub account](https://hub.docker.com/u/bhits/) to house the Docker images built from the public release versions. Please see the [Deployment Guide](#deployment-guide) and the [infrastructure](/infrastructure) folder for standing up a Consent2Share running instance and related infrastructure using *Docker* and *Docker Compose*.
 
 Additionally, each source code repository also contains `README.md` instructions and a `Dockerfile` for building Docker images from the source code.
 
